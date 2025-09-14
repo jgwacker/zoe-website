@@ -1,0 +1,9 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { travelTrips } from '@links/registry';
+---
+<Layout title="Travel">
+  <LinkList slot="sidebar" items={travelTrips} orientation="vertical" />
+  <p class="intro">Choose a subsection.</p>
+</Layout>

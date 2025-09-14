@@ -1,0 +1,9 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { photographyAwards } from '@links/registry';
+---
+<Layout title="Photography — Awards">
+  <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+  <p class="intro">Choose a subsection.</p>
+</Layout>

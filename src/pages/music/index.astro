@@ -1,0 +1,23 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { musicSections } from '@links/registry';
+---
+
+<Layout title="Music">
+  <LinkList slot="sidebar" items={musicSections} orientation="vertical" />
+  <p class="intro">Sharps and Flats on Bass Clef</p>
+
+  <p>
+    Music makes everything in my day feel more colorful. When I play cello in orchestra, I’m not just practicing notes—I’m helping build a giant sound with my friends, and it feels like we’re all solving a cool puzzle together. Some passages look scary at first, but when we finally lock in the rhythm and intonation, there’s this sparkly moment where it all clicks, and I think, “Oh! That’s what it’s supposed to be.” It’s hard work, but it’s the kind that makes you stand taller afterward.
+  </p>
+
+  <p>
+    Listening to music is like keeping a little museum of moods. I add songs and albums to my favorites page because each one holds a memory: a walk home after practice, a rainy Saturday, or the exact second a melody gave me goosebumps. If I’m stressed, I put on something calm; if I’m excited, I pick something that practically jumps out of the speakers. It’s funny how a three-minute song can remember things better than my actual brain sometimes.
+  </p>
+
+  <p>
+    Concerts are my favorite because you don’t just hear the music—you feel it in your chest. I love watching how musicians breathe together and communicate without talking, and it makes me want to practice more so I can do that too. Being in a crowd where everyone is listening to the same moment at the same time reminds me that music connects people who don’t even know each other yet. That’s why music is important to me: it challenges me, it understands me, and it brings me into something bigger than just myself.
+  </p>
+</Layout>
+

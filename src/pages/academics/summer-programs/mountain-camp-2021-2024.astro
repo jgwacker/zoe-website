@@ -1,0 +1,9 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { academicsSummerPrograms } from '@links/registry';
+---
+<Layout title="Mountain Camp 2021–2024">
+  <LinkList slot="sidebar" items={academicsSummerPrograms} orientation="vertical" />
+  <p>This is a stub page for Mountain Camp 2021–2024. Replace this text with real content.</p>
+</Layout>

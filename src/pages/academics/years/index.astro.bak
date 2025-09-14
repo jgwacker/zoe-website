@@ -1,0 +1,9 @@
+---
+import Layout from '../../../layouts/Site.astro';
+---
+<Layout title="Academic Years">
+  <ul>
+    <li><a href="/academics/years/7th-grade">7th Grade</a></li>
+    <li><a href="/academics/years/6th-grade">6th Grade</a></li>
+  </ul>
+</Layout>

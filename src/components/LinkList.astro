@@ -1,0 +1,23 @@
+---
+const { items = [], orientation = 'grid' } = Astro.props;
+const klass = orientation === 'vertical' ? 'vlist' : 'grid';
+---
+<ul class={klass} role="list">
+  {items.map((it) => (
+    <li>
+      <a href={it.href}>{it.label}</a>
+      {it.desc && <p class="desc">{it.desc}</p>}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .grid { list-style: none; margin:.5rem 0 1.5rem; padding:0; display:grid; gap:.75rem 1.25rem;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .grid a { text-decoration: none; }
+  .grid a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .grid a:visited { color: var(--accent); }
+  .desc { margin:.2rem 0 0; color: var(--theme-text-light, #6b7280); font-size:.95rem; }
+  /* .vlist styles come from Page.astro */
+</style>
+

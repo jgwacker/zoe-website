@@ -1,0 +1,6 @@
+---
+import Layout from '../../../layouts/Site.astro';
+---
+<Layout title="Molly Tuttle — So Long Little Miss Sunshine">
+  <p>This is a stub page for Molly Tuttle — So Long Little Miss Sunshine. Replace this text with real content.</p>
+</Layout>

@@ -1,0 +1,11 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { academicsYears } from '@links/registry';
+---
+<Layout title="Academic Years">
+  <LinkList slot="sidebar" items={academicsYears} orientation="vertical" />
+  <p class="intro">Choose a subsection.</p>
+  <p>I'm currently a 7th grader at Hillview Middle School in Menlo Park. I went to Oak Knoll Elementary
+  School for Kindergarden through 5th grade and then started Hillview.</p>
+</Layout>

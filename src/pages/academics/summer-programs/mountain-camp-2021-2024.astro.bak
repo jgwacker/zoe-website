@@ -1,0 +1,6 @@
+---
+import Layout from '../../../layouts/Site.astro';
+---
+<Layout title="Mountain Camp 2021–2024">
+  <p>This is a stub page for Mountain Camp 2021–2024. Replace this text with real content.</p>
+</Layout>

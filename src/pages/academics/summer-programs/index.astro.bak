@@ -1,0 +1,9 @@
+---
+import Layout from '../../../layouts/Site.astro';
+---
+<Layout title="Summer Programs">
+  <ul>
+    <li><a href="/academics/summer-programs/johns-hopkins-cty-2025">Johns Hopkins Center for Talented Youth 2025</a></li>
+    <li><a href="/academics/summer-programs/mountain-camp-2021-2024">Mountain Camp 2021–2024</a></li>
+  </ul>
+</Layout>

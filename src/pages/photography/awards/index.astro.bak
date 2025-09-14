@@ -1,0 +1,8 @@
+---
+import Layout from '../../../layouts/Site.astro';
+---
+<Layout title="Photography Awards">
+  <ul>
+    <li><a href="/photography/awards/peninsula-photo-competition-2025">Peninsula Photo Competition 2025</a></li>
+  </ul>
+</Layout>

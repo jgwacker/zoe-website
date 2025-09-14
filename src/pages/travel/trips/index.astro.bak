@@ -1,0 +1,10 @@
+---
+import Layout from '../../../layouts/Site.astro';
+---
+<Layout title="Trips">
+  <ul>
+    <li><a href="/travel/trips/amsterdam-2025">Amsterdam 2025</a></li>
+    <li><a href="/travel/trips/egypt-2025">Egypt 2025</a></li>
+    <li><a href="/travel/trips/chile-2025">Chile 2025</a></li>
+  </ul>
+</Layout>

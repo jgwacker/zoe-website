@@ -1,0 +1,6 @@
+---
+import Layout from '../../../layouts/Site.astro';
+---
+<Layout title="7th Grade">
+  <p>This is a stub page for 7th Grade. Replace this text with real content.</p>
+</Layout>

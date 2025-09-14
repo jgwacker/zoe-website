@@ -1,0 +1,9 @@
+---
+import Layout from '../../../layouts/Site.astro';
+---
+<Layout title="Favorite Songs">
+  <ul>
+    <li><a href="/music/favorites/laufey-matter-of-time">Laufey — Matter of Time</a></li>
+    <li><a href="/music/favorites/molly-tuttle-so-long-little-miss-sunshine">Molly Tuttle — So Long Little Miss Sunshine</a></li>
+  </ul>
+</Layout>

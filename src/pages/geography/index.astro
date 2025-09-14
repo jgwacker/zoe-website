@@ -1,0 +1,9 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { geographyLinks } from '@links/registry';
+---
+<Layout title="Geography">
+  <LinkList slot="sidebar" items={geographyLinks} orientation="vertical" />
+  <p class="intro">Choose a subsection.</p>
+</Layout>

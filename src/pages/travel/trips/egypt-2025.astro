@@ -1,0 +1,9 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { travelTrips } from '@links/registry';
+---
+<Layout title="Egypt 2025">
+  <LinkList slot="sidebar" items={travelTrips} orientation="vertical" />
+  <p>This is a stub page for Egypt 2025. Replace this text with real content.</p>
+</Layout>

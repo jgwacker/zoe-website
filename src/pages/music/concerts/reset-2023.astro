@@ -1,0 +1,9 @@
+---
+import Layout   from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { musicConcerts } from '@links/registry';
+---
+<Layout title='Re:Set 2023' description=''>
+  <LinkList slot="sidebar" items={musicConcerts} orientation="vertical" />
+  <p>Stub page for Re:Set 2023. Replace with real content.</p>
+</Layout>

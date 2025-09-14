@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Site.astro';
+---
+
+<Layout title="Zoe Wacker — Portfolio">
+  <p>Welcome. This site documents Zoe’s projects and interests over time.</p>
+
+  <h2>Sections</h2>
+  <ul>
+    <li><a href="/travel">Travel</a></li>
+    <li><a href="/photography">Photography</a></li>
+    <li><a href="/music">Music</a></li>
+    <li><a href="/geography">Geography</a></li>
+    <li><a href="/guardian-arts">Guardian Arts</a></li>
+    <li><a href="/academics">Academics</a></li>
+  </ul>
+</Layout>

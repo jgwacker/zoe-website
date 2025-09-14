@@ -1,0 +1,6 @@
+---
+import Layout from '../../../layouts/Site.astro';
+---
+<Layout title="Photography Portfolio">
+  <p>Curate selected works here. Add galleries or per-project pages as needed.</p>
+</Layout>

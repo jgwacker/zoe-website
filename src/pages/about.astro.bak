@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Site.astro';
+import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
+import Layout from '../layouts/BlogPost.astro';
+---
+<Layout
+  title="About Zoe Wacker"
+  description="Student profile and achievements"
+  pubDate={new Date('September 13 2025')}
+  heroImage={AboutHeroImage}
+>
+  <p>
+    Zoe is a middle school student with a growing interest in science, writing, and photography. This
+    site is meant to document her projects, achievements, and reflections as she moves toward high school
+    and, eventually, college.
+  </p>
+
+  <p>
+    Her current interests include robotics, creative writing, and community service. She also enjoys
+    exploring history and culture through travel and photography.
+  </p>
+
+  <p>
+    Over time, this page will evolve into a comprehensive portfolio showcasing academic work, extracurricular
+    activities, and personal projects.
+  </p>
+</Layout>

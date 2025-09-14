@@ -1,0 +1,9 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { photographyAwards } from '@links/registry';
+---
+<Layout title="Peninsula Photo Competition 2025">
+  <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+  <p>This is a stub page for Peninsula Photo Competition 2025. Replace this text with real content.</p>
+</Layout>

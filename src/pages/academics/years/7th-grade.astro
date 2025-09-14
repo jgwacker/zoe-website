@@ -1,0 +1,9 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { academicsYears } from '@links/registry';
+---
+<Layout title="7th Grade">
+  <LinkList slot="sidebar" items={academicsYears} orientation="vertical" />
+  <p>This is a stub page for 7th Grade. Replace this text with real content.</p>
+</Layout>

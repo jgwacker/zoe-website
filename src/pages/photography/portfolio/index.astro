@@ -1,0 +1,320 @@
+---
+import Layout from '@layouts/Page.astro';
+import photos from '/src/data/portfolio.json';
+
+/** Formats YYYY-MM-DD, YYYY-MM, or "Month YYYY". Falls back to raw string. */
+const formatDate = (raw: string | undefined | null) => {
+  if (!raw) return '';
+  const t = String(raw).trim();
+  if (/^[A-Za-z]+ \d{4}$/.test(t)) return t; // "February 2025"
+  if (/^\d{4}-\d{2}$/.test(t)) {             // "2025-02"
+    const [y, m] = t.split('-').map(Number);
+    const d = new Date(y, (m || 1) - 1, 1);
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+  }
+  if (/^\d{4}-\d{2}-\d{2}$/.test(t)) {        // "2025-02-01"
+    const d = new Date(t);
+    return isNaN(d.getTime()) ? t : d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+  const d = new Date(t);
+  return isNaN(d.getTime()) ? t : d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+};
+---
+
+<Layout title="Portfolio">
+  <p class="intro">
+    Use the arrows to cycle, or click a photo to open a larger view.
+  </p>
+
+  <!-- Inline carousel -->
+  <section class="carousel" aria-label="Portfolio carousel">
+    <button class="nav prev" type="button" aria-label="Previous photo">‹</button>
+
+    <div class="slide-wrapper">
+      {photos.map((p, i) => {
+        const pretty = formatDate(p.date as string);
+        const showDot = !!(pretty && p.location);
+        return (
+          <figure class="slide" data-index={i}>
+            {p.src ? (
+              <img class="slide-img" src={p.src} alt={p.title} loading="lazy" />
+            ) : (
+              <div class="placeholder" aria-hidden="true">No image</div>
+            )}
+            <figcaption>
+              <h3 class="title">{p.title}</h3>
+              <p class="desc">{p.description}</p>
+              <p class="meta">
+                {pretty && <time datetime={p.date}>{pretty}</time>}
+                {showDot && <span class="sep" aria-hidden="true">•</span>}
+                {p.location && <span class="loc">{p.location}</span>}
+              </p>
+            </figcaption>
+          </figure>
+        );
+      })}
+    </div>
+
+    <button class="nav next" type="button" aria-label="Next photo">›</button>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" data-state="hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image viewer" tabindex="-1">
+    <button class="lb-close" type="button" aria-label="Close">×</button>
+    <button class="lb-nav lb-prev" type="button" aria-label="Previous photo">‹</button>
+
+    <figure class="lb-content">
+      <img class="lb-img" alt="" />
+      <figcaption class="lb-caption" aria-live="polite">
+        <h3 class="lb-title"></h3>
+        <p class="lb-desc"></p>
+
+        <!-- Detailed fields -->
+        <dl class="lb-details">
+          <div class="row row-date">
+            <dt>Date</dt>
+            <dd><time class="lb-time"></time></dd>
+          </div>
+          <div class="row row-loc">
+            <dt>Location</dt>
+            <dd class="lb-loc"></dd>
+          </div>
+        </dl>
+      </figcaption>
+    </figure>
+
+    <button class="lb-nav lb-next" type="button" aria-label="Next photo">›</button>
+    <div class="lb-backdrop" aria-hidden="true"></div>
+  </div>
+
+  <!-- JSON BEFORE logic -->
+  <script type="application/json" id="portfolio-data">
+    {JSON.stringify(photos)}
+  </script>
+
+  <style>
+    .intro { margin-bottom: 1rem; font-size: 1rem; }
+
+    /* Carousel */
+    .carousel { position: relative; display: flex; align-items: center; justify-content: center; }
+    .slide-wrapper { width: 100%; max-width: 800px; overflow: hidden; position: relative; }
+    .slide { display: none; margin: 0; text-align: center; }
+    .slide img, .slide .placeholder {
+      width: 100%; max-height: 480px; object-fit: cover; border-radius: 6px;
+      background: #f4f4f4; cursor: zoom-in;
+    }
+    .placeholder { display: grid; place-items: center; color: #888; font-size: 0.9rem; }
+    figcaption { margin-top: 0.5rem; }
+    .nav {
+      background: none; border: none; font-size: 2rem; cursor: pointer; color: #333;
+      padding: 0 0.5rem; line-height: 1; user-select: none;
+    }
+    .meta { display: flex; align-items: center; gap: 0.35rem; justify-content: center; flex-wrap: wrap; }
+    .sep { opacity: 0.7; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0;
+      display: none;
+      align-items: flex-start;         /* top start so caption is reachable */
+      justify-content: center;
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 3vh 1rem;
+    }
+    .lightbox[data-state="visible"] { display: flex; }
+    /* Darker backdrop */
+    .lb-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.92); z-index: 1; }
+
+    .lb-content {
+      position: relative; z-index: 3;
+      max-width: min(96vw, 1100px);
+      display: flex; flex-direction: column; align-items: stretch;
+      margin: 0; color: #fff; text-align: center;
+      gap: 0.75rem;
+    }
+    .lb-img {
+      display: block;
+      max-width: 100%;
+      max-height: 60vh;               /* leave obvious space for caption */
+      width: auto; height: auto;
+      object-fit: contain;
+      border-radius: 12px; background: #111; margin: 0 auto;
+      opacity: 0; transition: opacity .15s;
+      flex: 0 0 auto;
+    }
+    .lb-img[data-ready="1"] { opacity: 1; }
+
+    /* Caption: forced visible, with min height */
+    .lightbox .lb-caption { display: block !important; }
+    .lb-caption {
+      text-align: left;
+      max-width: 960px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.55);
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      min-height: 3.25rem;            /* always some visible panel */
+    }
+    .lb-title { margin: 0 0 0.25rem 0; font-size: 1.25rem; line-height: 1.25; }
+    .lb-desc  { margin: 0 0 0.5rem 0; font-size: 1rem; color: #ddd; line-height: 1.5; }
+
+    /* Labeled fields for Date + Location */
+    .lb-details { margin: 0; padding: 0.25rem 0 0; display: grid; gap: 0.25rem; }
+    .lb-details .row { display: grid; grid-template-columns: 6.5rem 1fr; align-items: baseline; column-gap: 0.5rem; }
+    .lb-details dt { margin: 0; font-weight: 600; color: #eee; }
+    .lb-details dd { margin: 0; color: #ccc; }
+
+    .lb-close, .lb-nav {
+      position: absolute; z-index: 4;
+      background: rgba(0,0,0,0.45); color: #fff; border: none; border-radius: 6px;
+      cursor: pointer; font-size: 1.6rem; line-height: 1; padding: 0.4rem 0.6rem; transition: background 0.15s;
+    }
+    .lb-close:hover, .lb-nav:hover { background: rgba(0,0,0,0.6); }
+    .lb-close { top: 1rem; right: 1rem; }
+    .lb-prev  { left: 1rem; }
+    .lb-next  { right: 1rem; }
+    .lb-nav   { top: 50%; transform: translateY(-50%); }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ----- Data -----
+      const dataEl = document.getElementById('portfolio-data');
+      let data = [];
+      try { data = dataEl ? JSON.parse(dataEl.textContent || '[]') : []; } catch { data = []; }
+
+      // ----- Carousel (inline) -----
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const imgEls = slides.map(s => s.querySelector('.slide-img'));
+      const imgSrcs = imgEls.map(el => el ? (el.currentSrc || el.getAttribute('src') || '') : '');
+      let current = 0;
+      function showSlide(idx) { slides.forEach((s, i) => s.style.display = i === idx ? 'block' : 'none'); }
+      document.querySelector('.prev')?.addEventListener('click', () => { current = (current - 1 + slides.length) % slides.length; showSlide(current); });
+      document.querySelector('.next')?.addEventListener('click', () => { current = (current + 1) % slides.length; showSlide(current); });
+      showSlide(current);
+
+      // ----- Build list of indices that actually have images -----
+      const imageIndices = imgSrcs.map((src, i) => (src ? i : -1)).filter(i => i !== -1);
+      if (!imageIndices.length) { console.warn('Lightbox: no items with images found.'); return; }
+
+      // ----- Lightbox -----
+      const lb = document.querySelector('.lightbox');
+      const lbImg = lb?.querySelector('.lb-img');
+      const lbTitle = lb?.querySelector('.lb-title');
+      const lbDesc = lb?.querySelector('.lb-desc');
+      const lbTime = lb?.querySelector('.lb-time');
+      const lbLoc = lb?.querySelector('.lb-loc');
+      const rowDate = lb?.querySelector('.row-date');
+      const rowLoc  = lb?.querySelector('.row-loc');
+      const lbClose = lb?.querySelector('.lb-close');
+      const lbPrev  = lb?.querySelector('.lb-prev');
+      const lbNext  = lb?.querySelector('.lb-next');
+      const lbBackdrop = lb?.querySelector('.lb-backdrop');
+
+      let pos = 0;
+      let lastFocus = null;
+
+      function setImage(src) {
+        if (!lbImg) return;
+        lbImg.dataset.ready = '0';
+        lbImg.onload = () => { lbImg.dataset.ready = '1'; };
+        lbImg.onerror = () => { lbImg.dataset.ready = '0'; };
+        lbImg.src = src || '';
+        if (lbImg.complete && lbImg.naturalWidth) { lbImg.dataset.ready = '1'; }
+      }
+
+      function prettyDate(t) {
+        if (!t) return '';
+        t = String(t).trim();
+        if (/^[A-Za-z]+ \d{4}$/.test(t)) return t;
+        if (/^\d{4}-\d{2}$/.test(t)) { const [y,m]=t.split('-').map(Number); const d=new Date(y,(m||1)-1,1); return d.toLocaleDateString('en-US',{year:'numeric',month:'long'}); }
+        if (/^\d{4}-\d{2}-\d{2}$/.test(t)) { const d=new Date(t); return isNaN(d.getTime())?t:d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}); }
+        const d=new Date(t); return isNaN(d.getTime())?t:d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+      }
+
+      // Pull text from the DOM slide as a fallback if JSON fields are empty
+      function slideTextFallback(idx) {
+        const slide = slides[idx];
+        return {
+          title: slide?.querySelector('.title')?.textContent?.trim() || '',
+          desc:  slide?.querySelector('.desc')?.textContent?.trim() || '',
+          date:  slide?.querySelector('time')?.textContent?.trim() || '',
+          loc:   slide?.querySelector('.loc')?.textContent?.trim() || '',
+        };
+      }
+
+      function openByPos(p) {
+        if (!lb || !lbImg || !lbTitle || !lbDesc || !lbTime || !lbLoc) return;
+        pos = ((p % imageIndices.length) + imageIndices.length) % imageIndices.length;
+        const idx = imageIndices[pos];
+        const item = data[idx] || {};
+        const src = data[idx]?.src || imgSrcs[idx] || '';
+
+        const fb = slideTextFallback(idx);
+
+        setImage(src);
+        // ✅ Fill caption with JSON, falling back to DOM caption, then a sane default
+        lbTitle.textContent = (item.title || fb.title || 'Untitled');
+        lbDesc.textContent  = (item.description || fb.desc || '');
+
+        let dateText = prettyDate(item.date) || fb.date;
+        lbTime.textContent = dateText || '';
+        let locationText = (item.location || fb.loc || '');
+        lbLoc.textContent = locationText;
+
+        if (rowDate) rowDate.style.display = dateText ? '' : 'none';
+        if (rowLoc)  rowLoc.style.display  = locationText ? '' : 'none';
+
+        lb.dataset.state = 'visible';
+        lb.setAttribute('aria-hidden', 'false');
+        lastFocus = document.activeElement;
+        lbClose?.focus();
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        if (!lb) return;
+        lb.dataset.state = 'hidden';
+        lb.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      function move(delta) { openByPos(pos + delta); }
+
+      // Open from click, mapping current slide to its position in imageIndices
+      imgEls.forEach((el) => {
+        if (!el) return;
+        el.addEventListener('click', () => {
+          const startPos = Math.max(0, imageIndices.indexOf(current));
+          openByPos(startPos);
+        });
+      });
+
+      lbPrev?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); move(-1); }, { passive: false });
+      lbNext?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); move(1); }, { passive: false });
+      lbClose?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeLightbox(); }, { passive: false });
+      lbBackdrop?.addEventListener('click', closeLightbox);
+
+      // Keyboard when lightbox is open
+      window.addEventListener('keydown', (e) => {
+        const visible = lb?.dataset.state === 'visible';
+        if (!visible) {
+          if (e.key === 'ArrowLeft') { current = (current - 1 + slides.length) % slides.length; showSlide(current); }
+          if (e.key === 'ArrowRight') { current = (current + 1) % slides.length; showSlide(current); }
+          if (e.key === 'Enter' || e.key === ' ') {
+            const startPos = Math.max(0, imageIndices.indexOf(current));
+            openByPos(startPos);
+          }
+          return;
+        }
+        if (['ArrowLeft','ArrowRight','Escape'].includes(e.key)) e.preventDefault();
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') move(-1);
+        if (e.key === 'ArrowRight') move(1);
+      }, { passive: false });
+    });
+  </script>
+</Layout>
+

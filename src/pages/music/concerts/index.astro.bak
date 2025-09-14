@@ -1,0 +1,10 @@
+---
+import Layout from '../../../layouts/Site.astro';
+---
+<Layout title="Concerts">
+  <ul>
+    <li><a href="/music/concerts/laufey-2025">Laufey 2025</a></li>
+    <li><a href="/music/concerts/sabrina-carpenter-2025">Sabrina Carpenter 2025</a></li>
+    <li><a href="/music/concerts/laufey-2024">Laufey 2024</a></li>
+  </ul>
+</Layout>

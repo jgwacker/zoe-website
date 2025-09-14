@@ -1,0 +1,9 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { guardianArtsLinks } from '@links/registry';
+---
+<Layout title="Guardian Arts">
+  <LinkList slot="sidebar" items={guardianArtsLinks} orientation="vertical" />
+  <p class="intro">Choose a subsection.</p>
+</Layout>

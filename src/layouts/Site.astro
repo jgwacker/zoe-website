@@ -1,0 +1,26 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header   from '../components/Header.astro';
+import Footer   from '../components/Footer.astro';
+
+const { title = 'Untitled', description = '' } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+    <!-- Small global tweaks: keep visited links same color, prevent nav wrap -->
+    <style is:global>
+      a:visited { color: var(--accent); }        /* same color as normal links in the starter */
+      header nav { white-space: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      header nav a { text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main class="container">
+      <h1 class="post-title">{title}</h1>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
