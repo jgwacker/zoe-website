@@ -115,7 +115,7 @@ const photos: PhotoRow[] = data
 
   <section class="masonry" aria-label="Masonry photo gallery">
     {photos.map(({ filename, title, description, date, location }) => {
-      const src = `/photos/${filename}`;
+      const src = `/images/${filename}`;
       const alt = title || description || `${filename}`;
       const hasMeta = Boolean(date || location);
       return (
