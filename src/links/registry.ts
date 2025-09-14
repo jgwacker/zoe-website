@@ -18,6 +18,7 @@ export const travelTrips = [
 
 // Photography
 export const photographySections = [
+  { href: '/photography/masonry', label: 'Overview Gallery' },
   { href: '/photography/awards',    label: 'Awards' },
   { href: '/photography/portfolio', label: 'Portfolio' },
 ];

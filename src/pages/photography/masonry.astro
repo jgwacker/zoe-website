@@ -1,0 +1,176 @@
+---
+import Layout   from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { photographySections } from '@links/registry';
+import fs from 'node:fs';
+
+/**
+ * Minimal CSV parser that supports:
+ * - Commas inside double-quoted fields
+ * - Escaped quotes as "" inside quoted fields
+ * - Newlines within quoted fields
+ * It’s intentionally lightweight to avoid adding a dependency.
+ */
+function parseCSV(input: string) {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = '';
+  let i = 0;
+  const n = input.length;
+  let inQuotes = false;
+
+  while (i < n) {
+    const ch = input[i];
+
+    if (inQuotes) {
+      if (ch === '"') {
+        const next = input[i + 1];
+        if (next === '"') {
+          field += '"';
+          i += 2;
+          continue;
+        } else {
+          inQuotes = false;
+          i += 1;
+          continue;
+        }
+      } else {
+        field += ch;
+        i += 1;
+        continue;
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;
+        i += 1;
+        continue;
+      }
+      if (ch === ',') {
+        row.push(field);
+        field = '';
+        i += 1;
+        continue;
+      }
+      if (ch === '\n') {
+        row.push(field);
+        rows.push(row);
+        row = [];
+        field = '';
+        i += 1;
+        continue;
+      }
+      if (ch === '\r') { // handle CRLF
+        i += 1;
+        continue;
+      }
+      field += ch;
+      i += 1;
+    }
+  }
+  // push final field/row
+  row.push(field);
+  rows.push(row);
+
+  // trim trailing empty line (common if file ends with newline)
+  if (rows.length && rows[rows.length - 1].length === 1 && rows[rows.length - 1][0] === '') {
+    rows.pop();
+  }
+  return rows;
+}
+
+// Load CSV at build time
+const csvRaw = fs.readFileSync(new URL('../../../data/photography-masonry.csv', import.meta.url), 'utf-8');
+const table = parseCSV(csvRaw);
+
+// Expect header: filename,title,description,date,location
+const [header, ...data] = table;
+const idx = Object.fromEntries(header.map((h, i) => [h.trim().toLowerCase(), i]));
+
+type PhotoRow = {
+  filename: string;
+  title?: string;
+  description?: string;
+  date?: string;
+  location?: string;
+};
+
+const photos: PhotoRow[] = data
+  .filter(r => r && r.length > 0 && r[idx.filename]?.trim())
+  .map(r => ({
+    filename: r[idx.filename]?.trim(),
+    title: r[idx.title]?.trim() || '',
+    description: r[idx.description]?.trim() || '',
+    date: r[idx.date]?.trim() || '',
+    location: r[idx.location]?.trim() || '',
+  }));
+---
+
+<Layout title="Masonry Gallery">
+  <LinkList slot="sidebar" items={photographySections} orientation="vertical" />
+
+  <p class="intro">
+    This gallery reads <code>src/data/photography-masonry.csv</code> with columns:
+    <code>filename, title, description, date, location</code>. Place images in <code>public/photos/</code>.
+  </p>
+
+  <section class="masonry" aria-label="Masonry photo gallery">
+    {photos.map(({ filename, title, description, date, location }) => {
+      const src = `/photos/${filename}`;
+      const alt = title || description || `${filename}`;
+      const hasMeta = Boolean(date || location);
+      return (
+        <figure class="masonry-item">
+          <img src={src} alt={alt} loading="lazy" decoding="async" />
+          {(title || description || hasMeta) && (
+            <figcaption>
+              {title && <strong class="title">{title}</strong>}
+              {description && <div class="desc">{description}</div>}
+              {hasMeta && <div class="meta">
+                {date}{date && location ? ' — ' : ''}{location}
+              </div>}
+            </figcaption>
+          )}
+        </figure>
+      );
+    })}
+  </section>
+
+  <style>
+    .intro {
+      margin: 0 0 1rem 0;
+      line-height: 1.6;
+    }
+
+    /* Masonry via CSS columns (no JS) */
+    .masonry {
+      column-gap: 1rem;
+      column-count: 1;
+    }
+    @media (min-width: 560px) { .masonry { column-count: 2; } }
+    @media (min-width: 900px) { .masonry { column-count: 3; } }
+    @media (min-width: 1200px) { .masonry { column-count: 4; } }
+
+    .masonry-item {
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      margin: 0 0 1rem 0;
+    }
+
+    .masonry-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+
+    figcaption {
+      font-size: 0.95rem;
+      line-height: 1.45;
+      margin-top: 0.45rem;
+    }
+    .title { display: block; }
+    .desc  { margin-top: 0.25rem; opacity: 0.95; }
+    .meta  { margin-top: 0.2rem; font-size: 0.85rem; opacity: 0.8; }
+  </style>
+</Layout>
+
