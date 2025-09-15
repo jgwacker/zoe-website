@@ -105,12 +105,11 @@ const photos: PhotoRow[] = data
   }));
 ---
 
-<Layout title="Masonry Gallery">
+<Layout title="Photo Gallery">
   <LinkList slot="sidebar" items={photographySections} orientation="vertical" />
 
   <p class="intro">
-    This gallery reads <code>src/data/photography-masonry.csv</code> with columns:
-    <code>filename, title, description, date, location</code>. Place images in <code>public/photos/</code>.
+  Gallery of photos.
   </p>
 
   <section class="masonry" aria-label="Masonry photo gallery">
