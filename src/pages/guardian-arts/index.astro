@@ -3,7 +3,94 @@ import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
 import { guardianArtsLinks } from '@links/registry';
 ---
+
 <Layout title="Guardian Arts">
   <LinkList slot="sidebar" items={guardianArtsLinks} orientation="vertical" />
-  <p class="intro">Choose a subsection.</p>
+
+  <p class="intro">
+    Guardian Arts is a discipline that weaves together parkour, mixed martial arts, yoga, 
+    and mindfulness into a single practice rooted in the protection of community.
+  </p>
+
+  <section>
+    <h2>My Journey</h2>
+    <p>
+      I started Guardian Arts when I was four years old as a Ling. Over the years I advanced through 
+      Halflings and Younglings, and in November 2022 I completed the Dawn Trial, joining the Sun Clan. 
+      Since May 2024 I have served as a Shadow Instructor, teaching the Lings on Sundays. I am 
+      currently training toward Shadow 2 Instructor certification, which will allow me to run courses 
+      independently.
+    </p>
+  </section>
+
+   <section>
+    <h2>About Guardian Arts</h2>
+    <p>
+      Guardian Arts is more than just a martial arts program — it blends parkour,
+      mixed martial arts, yoga, and mindfulness into a single practice that emphasizes
+      resilience, adaptability, and service. Instead of training only for sport or
+      competition, the focus is on building the strength and calm needed to
+      <em>protect and support the community</em>.
+    </p>
+
+    <p>
+      The system replaces traditional belts with a clan-based structure. Advancement
+      is not only about skill but also about how well students care for others,
+      contribute to their peers’ growth, and demonstrate readiness in real-world
+      environments. Training includes playful but challenging “shatter matches,”
+      cooperative games, and sparring that emphasize learning and safety while still
+      pushing students outside their comfort zones.
+    </p>
+
+    <p>
+      As students progress, they face increasingly realistic scenarios — moving from
+      padded gyms into unpredictable environments, and combining disciplines in ways
+      that teach both physical mastery and mental focus. The practice encourages
+      students to connect with movement in its most natural form, to face fear and
+      discomfort directly, and to embody care as the guiding principle of self-discipline.
+    </p>
+
+    <p>
+      Guardian Arts also has a strong social mission: preserving Indigenous traditions,
+      creating inclusive spaces for youth and adults alike, and offering programs for
+      people with special needs. At its core, it is about cultivating people who are
+      both strong and compassionate — ready to serve their community with courage,
+      creativity, and care.
+    </p>
+  </section>
+
+  <section>
+    <h2>Media</h2>
+    <p>Here are two videos from Josh Beam's Brazillian Jiu Jitsu channel when he came to try out Guardian Arts:</p>
+
+    <!-- YouTube embeds -->
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/BZf3GbDg6w4"
+      title="Guardian Arts Overview"
+      frameborder="0"
+      allowfullscreen></iframe>
+
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/jztSgw1E8pI"
+      title="Guardian Arts Versus Other Non-Traditional Martial Arts"
+      frameborder="0"
+      allowfullscreen></iframe>
+
+    <!-- Placeholders for your own photos/videos -->
+    <figure>
+      <img src="/images/guardian-arts/placeholder1.jpg" alt="Guardian Arts training session" />
+      <figcaption>Placeholder for early training photo</figcaption>
+    </figure>
+
+    <figure>
+      <img src="/images/guardian-arts/placeholder2.jpg" alt="Guardian Arts event" />
+      <figcaption>Placeholder for Sun Clan event</figcaption>
+    </figure>
+
+    <video width="560" height="315" controls>
+      <source src="/videos/guardian-arts/placeholder1.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </section>
 </Layout>
+
