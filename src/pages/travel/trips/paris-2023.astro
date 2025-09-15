@@ -1,0 +1,11 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { travelTrips } from '@links/registry';
+---
+<Layout title="Paris 2023">
+  <LinkList slot="sidebar" items={travelTrips} orientation="vertical" />
+<p>
+Paris March 2023
+</p>
+</Layout>

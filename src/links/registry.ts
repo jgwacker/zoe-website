@@ -11,9 +11,15 @@ export const sections = [
 
 // Travel
 export const travelTrips = [
-  { href: '/travel/trips/amsterdam-2025', label: 'Amsterdam 2025' },
+  { href: '/travel/trips/amsterdam-2025',  label: 'Amsterdam 2025' },
   { href: '/travel/trips/egypt-2025',      label: 'Egypt 2025' },
   { href: '/travel/trips/chile-2025',      label: 'Chile 2025' },
+  { href: '/travel/trips/rome-2024',       label: 'Rome 2024' },
+  { href: '/travel/trips/london-2024',     label: 'London 2024' },
+  { href: '/travel/trips/paris-2023',      label: 'Paris 2023' },
+  { href: '/travel/trips/israel-2023',     label: 'Israel 2023' },
+  { href: '/travel/trips/greece-2022',     label: 'Greece 2022' },
+  { href: '/travel/trips/norway-2019',     label: 'Norway 2019' },
 ];
 
 // Photography

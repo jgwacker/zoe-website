@@ -1,0 +1,12 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { travelTrips } from '@links/registry';
+---
+<Layout title="Rome 2024">
+  <LinkList slot="sidebar" items={travelTrips} orientation="vertical" />
+<p>
+Rome August 2024
+</p>
+
+</Layout>
