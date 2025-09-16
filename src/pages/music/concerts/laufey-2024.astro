@@ -1,9 +1,47 @@
 ---
 import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
+import YouTube from '@components/YouTube.astro';
 import { musicConcerts } from '@links/registry';
 ---
 <Layout title="Laufey 2024">
   <LinkList slot="sidebar" items={musicConcerts} orientation="vertical" />
-  <p>This is a stub page for Laufey 2024. Replace this text with real content.</p>
+<p>
+Laufey was my first concert in San Francisco! It was at the Masonic Auditorium on Nob Hill, right across from Grace Cathedral—very dramatic for a first show. I’d discovered her about six months earlier and had Bewitched and Everything I Know About Love on repeat. I think it’s the mix of jazz and pop (and the cello!) that pulled me in—hearing those songs live made them feel bigger and warmer.
+</p>
+<figure class="photo">
+    <img
+      src="/images/concerts/laufey_2024/laufey_stage_2024.jpeg"
+      alt="Laufey on stage at the Masonic"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>Laufey on stage at the Masonic in San Francisco</figcaption>
+  </figure>
+
+<p>
+The middle of the set totally swept me up. The energy kept building through songs I love and then landed on “Goddess,” which blew my mind—the whole room felt like it was holding its breath and then cheering at the same time. Later, her twin sister <em>Junia</em> came out to play violin on “From the Start,” and it was such a sweet moment. You could feel the crowd melt.
+</p>
+<YouTube
+  id="fq91YCzZMpE"
+  title="Promise/Movies/Nocturne/Break/California/Goddess"
+  caption="Part of the second half othe concert that ended with Goddess"
+/>
+
+
+<p>
+She opened with “While You Were Sleeping,” rolled through favorites like “Valentine,” “Second Best,” and “Dreamer,” and saved “From the Start” for near the end. For the encore she sang “Letter to My 13 Year Old Self” and then surprised everyone with “I Left My Heart in San Francisco,” which felt perfect for the city and that venue. 
+</p>
+<YouTube
+  id="qVNfa4uF208"
+  title="Fragile/Bewitched/bored/Lovesick/Start"
+  caption="The end of the main concert finishing with From the Start featuring Junia."
+/>
+
+<p>
+The crowd was awesome—lots of people only a bit older than me, all singing softly and soaking it in. For a first SF concert, it felt like the right kind of magic: a beautiful room, musicians who really play, and songs that make you feel seen. I left wanting to practice cello more and learn every harmony.
+</p>
+
 </Layout>
