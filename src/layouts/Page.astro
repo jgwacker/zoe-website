@@ -8,11 +8,31 @@ const { title = 'Untitled', description = '' } = Astro.props;
   <head>
     <BaseHead title={title} description={description} />
     <style is:global>
+      /* Global link/nav tweaks */
       a:visited { color: var(--accent); }
       header nav { white-space: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
       header nav a { text-decoration: none; }
+
+      /* Global figure captions + media (must be global to style slotted content) */
+      figcaption {
+        font-size: 0.8rem;
+        color: var(--theme-text-light);
+        margin-top: 0.25rem;
+        text-align: center;
+        line-height: 1.3;
+      }
+      figure > img,
+      figure > video {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
     </style>
+
     <style>
+      /* Layout-scoped styles (safe to keep scoped) */
       .layout { display: grid; grid-template-columns: minmax(220px,260px) 1fr; gap: 1.5rem; }
       .layout:has(.sidebar:empty) { grid-template-columns: 1fr; } /* collapse if no sidebar */
       .sidebar:empty { display: none; }

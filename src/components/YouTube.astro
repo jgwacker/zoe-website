@@ -1,0 +1,53 @@
+---
+/** Props:
+ *  - id      (string)   YouTube video ID, e.g. "BZf3GbDg6w4"
+ *  - title   (string)   Accessible title for the iframe
+ *  - caption (string)   Visible caption under the video
+ *  - start   (number?)  Optional start time (seconds)
+ */
+interface Props {
+  id: string;
+  title: string;
+  caption?: string;
+  start?: number;
+}
+const { id, title, caption = '', start } = Astro.props;
+const params = new URLSearchParams({
+  rel: '0',
+  modestbranding: '1',
+  playsinline: '1',
+  ...(start ? { start: String(start) } : {})
+});
+const embedUrl = `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
+const captionId = `yt-${id}-caption`;
+---
+<figure class="yt-embed">
+  <div class="frame">
+    <iframe
+      src={embedUrl}
+      title={title}
+      aria-describedby={caption ? captionId : undefined}
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+  {caption && <figcaption id={captionId}>{caption}</figcaption>}
+</figure>
+
+<style>
+  .yt-embed .frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+  .yt-embed .frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+</style>
+

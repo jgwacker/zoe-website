@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
+import YouTube from '@components/YouTube.astro';
 import { guardianArtsLinks } from '@links/registry';
 ---
 
@@ -12,14 +13,29 @@ import { guardianArtsLinks } from '@links/registry';
     and mindfulness into a single practice rooted in the protection of community.
   </p>
 
+    <figure>
+    <video width="560" height="315" controls>
+      <source src="/videos/guardian-arts/blindfold_headstands_2024.mov" type="video/quicktime" />
+      Your browser does not support the video tag.
+    </video>
+      <figcaption> The animating session at the start of each training ception. These change each week. This video is from 2024 of blindfold head stands where the goal is to control the body and begin a mindful meditation on the role of control in our lives.</figcaption>
+   </figure> 
+
   <section>
     <h2>My Journey</h2>
+
+    <h3>Watchers</h3>
+    <p> The start of Guardian Arts for all ages is with a group of classes for "Watchers" where we are learning basic skills. These are organized by skill and age. I started at 4 years old in late 2017 with the youngest group "Lings".</p>
     <p>
-      I started Guardian Arts when I was four years old as a Ling. Over the years I advanced through 
-      Halflings and Younglings, and in November 2022 I completed the Dawn Trial, joining the Sun Clan. 
+      Over the years I advanced through Halflings and Younglings, working my way up in skill as well. I loved the parkour aspects the training initially. I would spend hours after class practicing courses.  But over time as they strated to bring in the fighting, I began to really enjoy that. I became really good at a choke hold and they started to call me the "Zoe-Constrictor" because I could quickly get my opponents into a headlock causing them to submit.</p>
+     <h3>Journey Track</h3>
+      <p>
+      In November 2022 I completed the Dawn Trial, joining the Sun Clan. In the Sun Clan, learning happens through independent study -- each clan member learns at their own pace, teaching us self-direction.  During my time in Sun Clan, I continued to develop my fighting skills and my aerial work. 
+      </p>
+      <h3> Shadow Training</h3>
+      <p>
       Since May 2024 I have served as a Shadow Instructor, teaching the Lings on Sundays. I am 
-      currently training toward Shadow 2 Instructor certification, which will allow me to run courses 
-      independently.
+      currently training toward Shadow 2 Instructor certification, which will allow me to run courses independently. I love working with the 3 to 5 year olds, helping them through the courses, just like the shadows at the time did for me. It realy brings me around full circle.
     </p>
   </section>
 
@@ -33,9 +49,17 @@ import { guardianArtsLinks } from '@links/registry';
       <em>protect and support the community</em>.
     </p>
 
+    <figure>
+    <video width="560" height="315" controls>
+      <source src="/videos/guardian-arts/back_takedown_2024.mov" type="video/quicktime" />
+      Your browser does not support the video tag.
+    </video>
+      <figcaption> This is a video of a back takedown from 2024.</figcaption>
+      </figure>
+
     <p>
       The system replaces traditional belts with a clan-based structure. Advancement
-      is not only about skill but also about how well students care for others,
+      is not only about skill but also about how well clan members care for others,
       contribute to their peers’ growth, and demonstrate readiness in real-world
       environments. Training includes playful but challenging “shatter matches,”
       cooperative games, and sparring that emphasize learning and safety while still
@@ -61,36 +85,19 @@ import { guardianArtsLinks } from '@links/registry';
 
   <section>
     <h2>Media</h2>
-    <p>Here are two videos from Josh Beam's Brazillian Jiu Jitsu channel when he came to try out Guardian Arts:</p>
+    <p>Here are two videos from renowned Brazillian Jiu Jitsu fighter  Josh Beam when he came to try out Guardian Arts:</p>
 
-    <!-- YouTube embeds -->
-    <iframe width="560" height="315"
-      src="https://www.youtube.com/embed/BZf3GbDg6w4"
-      title="Guardian Arts Overview"
-      frameborder="0"
-      allowfullscreen></iframe>
+<YouTube
+  id="BZf3GbDg6w4"
+  title="Josh Beam BJJ: The Strangest Combat Sport Nobody Knows About"
+  caption="This is a 20 minute video where he describes his impressions of training with the Sun Clan."
+/>
 
-    <iframe width="560" height="315"
-      src="https://www.youtube.com/embed/jztSgw1E8pI"
-      title="Guardian Arts Versus Other Non-Traditional Martial Arts"
-      frameborder="0"
-      allowfullscreen></iframe>
-
-    <!-- Placeholders for your own photos/videos -->
-    <figure>
-      <img src="/images/guardian-arts/placeholder1.jpg" alt="Guardian Arts training session" />
-      <figcaption>Placeholder for early training photo</figcaption>
-    </figure>
-
-    <figure>
-      <img src="/images/guardian-arts/placeholder2.jpg" alt="Guardian Arts event" />
-      <figcaption>Placeholder for Sun Clan event</figcaption>
-    </figure>
-
-    <video width="560" height="315" controls>
-      <source src="/videos/guardian-arts/placeholder1.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+<YouTube
+  id="jztSgw1E8pI"
+  title="Josh Beam BJJ: These 5 Weird Martial Arts Will Blow Your Mind"
+  caption="Josh Beam covered five different martial arts sports including Guardian Arts and ultimately ranks Guardian Arts as the best for real-world defense since it involves sparring around obstacles and using them for your advantage."
+/>
   </section>
 </Layout>
 
