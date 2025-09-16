@@ -1,9 +1,62 @@
 ---
-import Layout   from '@layouts/Page.astro';
+import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
+import YouTube from '@components/YouTube.astro';
 import { musicConcerts } from '@links/registry';
 ---
-<Layout title='Re:Set 2023' description=''>
+
+<Layout title="Re:SET Bay Area 2023">
   <LinkList slot="sidebar" items={musicConcerts} orientation="vertical" />
-  <p>Stub page for Re:Set 2023. Replace with real content.</p>
+
+  <p>
+    Re:SET Bay Area at Stanford’s Frost Amphitheater was my first mini-festival—and it was only about two miles from home! The open-air bowl was packed with thousands of people spread out across the grass, all there for four sets: Bartees Strange, Dijon, Clairo, and boygenius. I’m a longtime boygenius (and Phoebe <em>Bridgers</em>) fan, so I was basically vibrating with excitement before they even went on.
+ 
+  <p> It was also the first concert where I picked the bands myself, which made it feel extra personal. The atmosphere at Frost—trees, summer light, and a stage that seems to float—made it easy to just be in the music.  </p>
+
+  <figure class="photo">
+    <img
+      src="/images/concerts/reset_2023/reset_2023.jpg"
+      alt="Me and Kate at Frost Amphitheater during Re:SET Bay Area"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>Me and Kate at Frost Amphitheater during Re:SET Bay Area in June 2023.</figcaption>
+  </figure>
+   </p>
+
+  <p>
+    Clairo’s set won me over right away. She has this quiet, shy vibe on stage, but the songs land big in a crowd. When she played “4EVER” and “Amoeba,” the whole place lit up—people stood, danced, and sang along like it was a shared secret we all knew. It felt intimate even with thousands of people around.
+  </p>
+ 
+  <figure class="photo">
+    <img
+      src="/images/concerts/reset_2023/boygenius_2023.jpg"
+      alt="boygenius at Frost Amphitheater during Re:SET Bay Area"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>boygenius at Frost Amphitheater near the start of the concert.</figcaption>
+  </figure>
+   </p>
+   
+  <p>
+    Boygenius closed the night and turned it into a full-body goosebumps moment. They opened with an a cappella harmony offstage and then ran through favorites—“Emily I’m Sorry,” “True Blue,” “Cool About It,” “Me &amp; My Dog,” and “Not Strong Enough”—each one building the energy higher. I love how Phoebe Bridgers, Julien Baker, and Lucy Dacus blend; their voices lock together in a way that feels both delicate and huge at the same time.
+    <YouTube
+  id="yQnGI_WAtCk"
+  title="Full boygenius conert at Re:SET show"
+  caption="My performance begins at 53:53 with Not Strong Enough."
+  t="53:54"
+/>
+
+
+  <p>
+    Bartees Strange and Dijon added a lot to the day’s arc—Bartees with sharp, guitar-driven dynamics and Dijon with a loose, soulful set that made the amphitheater feel like a big backyard. As a whole, the lineup flowed surprisingly well for a single-day festival.
+  </p>
+
+
 </Layout>
+

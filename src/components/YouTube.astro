@@ -3,24 +3,52 @@
  *  - id      (string)   YouTube video ID, e.g. "BZf3GbDg6w4"
  *  - title   (string)   Accessible title for the iframe
  *  - caption (string)   Visible caption under the video
- *  - start   (number?)  Optional start time (seconds)
+ *  - start   (number?)  Optional start time in seconds (e.g., 3233)
+ *  - t       (string?)  Optional human time like "53:53" or "1:02:15"
  */
 interface Props {
   id: string;
   title: string;
   caption?: string;
   start?: number;
+  t?: string;
 }
-const { id, title, caption = '', start } = Astro.props;
+
+function parseTimeToSeconds(t?: string): number | undefined {
+  if (!t) return undefined;
+  // Accept "MM:SS" or "HH:MM:SS" (extra spaces tolerated)
+  const parts = t.trim().split(':').map((p) => p.trim());
+  if (parts.some((p) => p === '' || isNaN(Number(p)))) return undefined;
+  const nums = parts.map(Number);
+  if (nums.length === 2) {
+    const [mm, ss] = nums;
+    return mm * 60 + ss;
+  } else if (nums.length === 3) {
+    const [hh, mm, ss] = nums;
+    return hh * 3600 + mm * 60 + ss;
+  }
+  return undefined;
+}
+
+const { id, title, caption = '', start, t } = Astro.props as Props;
+
+const parsed = parseTimeToSeconds(t);
+const startSec =
+  typeof start === 'number' && start >= 0
+    ? Math.floor(start)
+    : (parsed !== undefined ? Math.max(0, Math.floor(parsed)) : undefined);
+
 const params = new URLSearchParams({
   rel: '0',
   modestbranding: '1',
   playsinline: '1',
-  ...(start ? { start: String(start) } : {})
+  ...(startSec !== undefined ? { start: String(startSec) } : {})
 });
+
 const embedUrl = `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
 const captionId = `yt-${id}-caption`;
 ---
+
 <figure class="yt-embed">
   <div class="frame">
     <iframe
@@ -50,4 +78,3 @@ const captionId = `yt-${id}-caption`;
     display: block;
   }
 </style>
-
