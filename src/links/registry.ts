@@ -41,7 +41,7 @@ export const musicSections = [
 ];
 export const musicConcerts = [
   { href: '/music/concerts/laufey-2025',              label: 'Laufey 2025' },
-  { href: '/music/concerts/sabrina-carpenter-2025',   label: 'Sabrina Carpenter 2025' },
+  { href: '/music/concerts/sabrina-carpenter-2024',   label: 'Sabrina Carpenter 2024' },
   { href: '/music/concerts/laufey-2024',              label: 'Laufey 2024' },
   { href: '/music/concerts/reset-2023', label: 'Re:Set 2023' },
 ];

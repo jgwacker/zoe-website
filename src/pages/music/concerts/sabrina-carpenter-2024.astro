@@ -1,0 +1,34 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { musicConcerts } from '@links/registry';
+---
+<Layout title="Sabrina Carpenter 2024">
+  <LinkList slot="sidebar" items={musicConcerts} orientation="vertical" />
+
+  <p>
+    I saw Sabrina Carpenter’s <em>Short n’ Sweet</em> tour at the Chase Center in November 2024. The show was split into three parts—“Short n’ Sweet,” “After Dark,” and “Don’t Touch That Dial”—and the production was huge: multi-level stage, big lighting cues, and slick transitions that made it feel like a musical in motion.
+  </p>
+
+  <figure class="photo">
+    <img
+      src="/images/concerts/sabrina_carpenter_2024/sabrina_carpenter_preshow_2024.jpeg"
+      alt="The pre-show stage of Sabrina Carpenter in November 2024"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>The pre-show stage for Sabrina Carpenter at the Chase Center, November 2024.</figcaption>
+  </figure>
+
+  <p>
+    The opener was “taste,” which is one of my favorites, and it set the tone right away. The first section kept the energy high with new songs like “Good Graces,” “Slim Pickens,” and “Tornado Warnings.” I felt like I was on cloud nine by the end of that part.
+  </p>
+
+  <p>
+    The middle set was a full-on jam—fun and dancey—even if those weren’t my absolute top-tier tracks. The final segment brought the big sing-alongs, ending with “Please Please Please,” and then an encore of “Espresso” that had the whole arena bouncing. It was a high-gloss pop show in the best way.
+  </p>
+
+
+</Layout>
