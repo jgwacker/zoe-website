@@ -3,7 +3,61 @@ import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
 import { photographyAwards } from '@links/registry';
 ---
-<Layout title="Peninsula Photo Competition 2025">
+
+<Layout title="Peninsula Art Contest (2025) — “Cinderello”">
   <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
-  <p>This is a stub page for Peninsula Photo Competition 2025. Replace this text with real content.</p>
+
+  <p class="intro">
+The Six Fifty Peninsula Photo Contest is presented by the Palo Alto Weekly and the Palo Alto Art Center and
+is open to photographers who live, work, or attend school in the 650 area code. Entries are judged across
+six categories—Abstract, Landscapes, Moments, Portraits, Travel, and Wildlife—with separate Youth and Adult
+divisions.</p>
+<p> I received <strong>Second Prize / Honorable Mention</strong> in the <strong>Youth Division</strong> (“Moments” category) at the 2025 Peninsula Art Contest.
+  </p>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/cinderello.jpg"
+      alt="“Cinderello” — a caretaker sweeping patterned carpets inside the Mosque–Madrasa of Sultan Hasan, sunlight cutting across the vast stone interior."
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>“Cinderello,” photographed at the Mosque–Madrasa of Sultan Ḥasan (Historic Cairo).</figcaption>
+  </figure>
+
+  <p>
+    My winning photo, <em>Cinderello</em>, was taken at the Mosque–Madrasa of Sultan Ḥasan in Historic Cairo. A man was sweeping the carpets, and the light caught the dust just right—he looked like he needed a fairy godmother, which made me think of Cinderella. I tried to frame the scale of the space against a single everyday gesture, so the scene feels both grand and human.
+  </p>
+
+  <p>
+    The photograph was exhibited at the <strong>Palo Alto Art Center</strong> from <strong>September–December 2025</strong> as part of the contest showcase. I was the youngest winner; the other Youth Division awardees were mostly juniors and seniors from Paly, Menlo-Atherton, and St. Francis. It was exciting (and a little intimidating!) to be shown alongside older students whose work I admire.
+  </p>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/650_award_2025.jpg"
+      alt="My accepting the award for Cinderello"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption> Me accepting the aware for “Cinderello,” photographed at the Mosque–Madrasa of Sultan Ḥasan (Historic Cairo).</figcaption>
+  </figure>
+
+
+  <p>
+    This recognition encourages me to keep building longer photo series around small moments in large places—where light, scale, and everyday life overlap. <em>Cinderello</em> is part of an ongoing set of images from Egypt that explores quiet work, ritual spaces, and the way a single figure can turn a vast interior into a story.
+  </p>
+
+  <style>
+    .intro {
+      margin-bottom: 0.75rem;
+    }
+    .photo { margin: 1.25rem 0; }
+    .photo img { max-width: 100%; height: auto; border-radius: 6px; }
+    .photo figcaption { font-size: 0.9rem; color: var(--color-text-dim, #666); margin-top: 0.4rem; }
+  </style>
 </Layout>
