@@ -1,0 +1,41 @@
+---
+import BaseHead from '@components/BaseHead.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+
+const { title = 'Untitled', pad = false } = Astro.props;
+/**
+ * FullBleed layout
+ * - No sidebar grid.
+ * - Spans the viewport width (overrides any global main/container limits).
+ * - Pass `pad` if a page wants soft page padding.
+ */
+---
+<html lang="en">
+  <head>
+    <BaseHead title={title} />
+  </head>
+  <body>
+    <Header />
+
+    <main class={pad ? 'fullbleed padded' : 'fullbleed'}>
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+
+  <style>
+    /* Break out of the starter’s centered content wrapper */
+    .fullbleed {
+      width: 100%;
+      max-width: none;
+      margin: 0;              /* kill auto-centering */
+      padding: 0;             /* true edge-to-edge by default */
+      display: block;
+    }
+    .padded {
+      padding: clamp(12px, 3vw, 24px);
+    }
+  </style>
+</html>

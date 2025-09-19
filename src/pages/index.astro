@@ -1,17 +1,114 @@
 ---
-import Layout from '@layouts/Page.astro';
+import FullBleed from '@layouts/FullBleed.astro';
+
+const tiles = [
+  { href: '/about',        label: 'About',        img: '/images/home/about.jpg',        alt: 'About Zoe' },
+  { href: '/travel',       label: 'Travel',       img: '/images/home/travel.jpg',       alt: 'Travel highlights' },
+  { href: '/photography',  label: 'Photography',  img: '/images/home/photography.jpg',  alt: 'Photography portfolio' },
+  { href: '/music',        label: 'Music',        img: '/images/home/music.jpg',        alt: 'Music and cello' },
+  { href: '/geography',    label: 'Geography',    img: '/images/home/geography.jpg',    alt: 'Geography projects' },
+  { href: '/academics',    label: 'Academics',    img: '/images/home/academics.jpg',    alt: 'Academic work' },
+];
 ---
 
-<Layout title="Zoe Wacker">
-  <p>Hi! This is a site containing lots of things that I like and I do.</p>
+<FullBleed title="Zoe Wacker — Home">
+  <section class="wrap" aria-label="Featured sections">
+    <div class="grid">
+      {tiles.map(t => (
+        <a href={t.href} class="tile">
+          <img src={t.img} alt={t.alt} loading="lazy" decoding="async" />
+          <span class="label">{t.label}</span>
+        </a>
+      ))}
+    </div>
+  </section>
 
-  <ul>
-    <li><a href="/travel">Travel</a>: A list of my big trips! These help define who am I.</li>
-    <li><a href="/photography">Photography</a>: A gallery of my photos and a list of my awards. </li>
-    <li><a href="/music">Music</a>: The music I like and the music I play.</li>
-    <li><a href="/geography">Geography</a>: A summary of love for geography</li>
-    <li><a href="/guardian-arts">Guardian Arts</a>: This is a sport I've been part of since I was 4 years
-    old.</li>
-    <li><a href="/academics">Academics</a>: A quick overview of my academic work.</li>
-  </ul>
-</Layout>
+  <style>
+    /* Uses your neutral site palette (inherits colors from layout) */
+    :root {
+      --pad: clamp(16px, 4vw, 36px);
+      --gap: clamp(12px, 2vw, 20px);
+      --ring: currentColor;
+      --overlay: linear-gradient(
+        to top,
+        rgba(0,0,0,.55),
+        rgba(0,0,0,.15) 55%,
+        rgba(0,0,0,0) 85%
+      );
+    }
+
+    .wrap {
+      padding: var(--pad);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 × 2 on desktop */
+      gap: var(--gap);
+      align-items: stretch;
+    }
+
+    .tile {
+      position: relative;
+      display: block;
+      aspect-ratio: 3 / 2;              /* consistent card size */
+      overflow: hidden;
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;                   /* visited links don’t change color */
+      box-shadow:
+        0 1px 2px rgba(0,0,0,.04),
+        0 8px 24px rgba(0,0,0,.06);
+      transform: translateZ(0);         /* smoother hover on Safari */
+    }
+    .tile:visited { color: inherit; }
+    .tile:focus-visible {
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+    }
+    .tile:hover .label { transform: translateY(-2px); }
+
+    .tile img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Readability overlay */
+    .tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--overlay);
+    }
+
+    /* Text over image */
+    .label {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: clamp(1rem, 1.6vw, 1.35rem);
+      line-height: 1.1;
+      color: #fff;
+      text-shadow: 0 2px 6px rgba(0,0,0,.45);
+      transform: translateY(0);
+      transition: transform 120ms ease-out;
+      z-index: 1;
+    }
+
+    /* Responsive: 2 columns on tablet, 1 on mobile */
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</FullBleed>
+
