@@ -1,0 +1,63 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { photographyAwards } from '@links/registry';
+---
+
+<Layout title="Travel Photographer of the Year (2025)">
+  <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <p class="intro">
+I applied to the Travel Photograher of the Year for the Under 14 competition. I had to submit collections of
+four coherent images for the competition. I was thrilled when two of my
+4-image collections were short-listed and as of December 2025, I'm still waiting on the final decision.
+  </p>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/tpoty-2025-logo.png"
+      alt="Travel Photographer of the Year finalist"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>The official logo for short lists</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/tpoty-2025-shortlist.png"
+      alt="The 8-person Shortlist for the Under 14 Travel Photographer of the Year award"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>Here are the Shortlist candidates.</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/tpoty2025-people-collection.png"
+      alt="Collection of 4 images of people."
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>Collection of 4 images from Egypt of people that I saw.</figcaption>
+  </figure>
+ 
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/tpoty2025-places-collection.png"
+      alt="Collection of 4 images of places."
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>Collection of 4 images from Egypt of buildings and places that I saw.</figcaption>
+  </figure>
+</Layout>

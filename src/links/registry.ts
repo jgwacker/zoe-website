@@ -29,8 +29,9 @@ export const photographySections = [
   { href: '/photography/portfolio', label: 'Portfolio' },
 ];
 export const photographyAwards = [
-  { href: '/photography/awards/peninsula-photo-competition-2025',
-    label: 'Peninsula Photo Competition 2025' },
+  { href: '/photography/awards/peninsula-photo-competition-2025', label: 'Peninsula Photo Competition 2025' },
+  { href: '/photography/awards/tpoy-competition-2025', label: 'Travel Photographer of the Year Competition 2025' },
+  { href: '/photography/awards/npcfk-competition-color-2025', label: 'I Spy Something-“Color” : National Photography Competition for Kids November 2025' },
 ];
 
 // Music

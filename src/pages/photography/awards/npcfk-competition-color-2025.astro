@@ -1,0 +1,53 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { photographyAwards } from '@links/registry';
+---
+
+<Layout title="I Spy Something-“Color” : National Photography Competition for Kids November 2025">
+  <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <p class="intro">
+I applied to the National Photography Competition for Kids in the Raising Photographer section for ages 12 to 14. The competition was focusing on color.  I submitted one of my images from a Nubian village in Egypt
+which had amazing colors for the painted doors and buildings and the gorgeous dyed fabrics. I received a
+Notable Entry of 9.
+  </p>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/nation-junion-phographers.png"
+      alt=""I Spy Something-"Color" : National Photography Competition for Kids"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>The official logo for short lists</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/npcfk-color-shortlist-2025.png"
+      alt="The 9-person Notable Entriesfor the Rising Photographers"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>Here are the Shortlist candidates.</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/npcfk-color-2025.png"
+      alt="My notable entry"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>My notable entry for the I Spy Something-"Color" : National Photography Competition for Kids
+    in November 2025.</figcaption>
+  </figure>
+ 
+</Layout>
