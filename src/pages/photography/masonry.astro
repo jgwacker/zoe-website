@@ -114,12 +114,18 @@ const photos: PhotoRow[] = data
 
   <section class="masonry" aria-label="Masonry photo gallery">
     {photos.map(({ filename, title, description, date, location }) => {
-      const src = `/images/${filename}`;
+      const fullSrc = `/images/${filename}`;
+      // Use thumbnail if available (for portfolio images)
+      const thumbSrc = filename.startsWith('portfolio/')
+        ? `/images/portfolio/thumbs/${filename.replace('portfolio/', '')}`
+        : fullSrc;
       const alt = title || description || `${filename}`;
       const hasMeta = Boolean(date || location);
       return (
         <figure class="masonry-item">
-          <img src={src} alt={alt} loading="lazy" decoding="async" />
+          <a href={fullSrc} target="_blank" rel="noopener">
+            <img src={thumbSrc} alt={alt} loading="lazy" decoding="async" />
+          </a>
           {(title || description || hasMeta) && (
             <figcaption>
               {title && <strong class="title">{title}</strong>}
@@ -155,11 +161,20 @@ const photos: PhotoRow[] = data
       margin: 0 0 1rem 0;
     }
 
+    .masonry-item a {
+      display: block;
+    }
+
     .masonry-item img {
       display: block;
       width: 100%;
       height: auto;
       border-radius: 6px;
+      transition: opacity 0.2s ease;
+    }
+
+    .masonry-item a:hover img {
+      opacity: 0.9;
     }
 
     figcaption {

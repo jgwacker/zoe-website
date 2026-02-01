@@ -11,6 +11,7 @@ Personal portfolio website for Zoe Wacker built with Astro. Showcases travel, ph
 - `npm run dev` - Start dev server at localhost:4321
 - `npm run build` - Build production site to ./dist/
 - `npm run preview` - Preview production build
+- `npm run thumbnails` - Regenerate portfolio thumbnails (run after adding new portfolio images)
 
 ## Architecture
 
