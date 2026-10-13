@@ -1,6 +1,0 @@
----
-import Layout from '../../../layouts/Site.astro';
----
-<Layout title="Sabrina Carpenter 2025">
-  <p>This is a stub page for Sabrina Carpenter 2025. Replace this text with real content.</p>
-</Layout>
