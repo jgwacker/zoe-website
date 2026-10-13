@@ -44,6 +44,9 @@ export const musicSections = [
   { href: '/music/concerts',  label: 'Concerts' },
   { href: '/music/favorites', label: 'Favorites' },
 ];
+export const celloPerformances = [
+  { href: '/music/cello/disneyland-2026', label: 'Disneyland 2026' },
+];
 export const musicConcerts = [
   { href: '/music/concerts/outside-lands-2026',       label: 'Outside Lands 2026' },
   { href: '/music/concerts/ariana-grande-2026',       label: 'Ariana Grande 2026' },

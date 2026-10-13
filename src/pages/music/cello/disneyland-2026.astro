@@ -1,0 +1,13 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { celloPerformances } from '@links/registry';
+---
+
+<Layout title="Disneyland 2026">
+  <LinkList slot="sidebar" items={celloPerformances} orientation="vertical" />
+
+  <p>In May 2026 I went down to Disneyland to perform. We played on Main Street, U.S.A. in the park, and we also
+  had a session in a recording studio where we recorded a few songs.</p>
+
+</Layout>

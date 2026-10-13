@@ -1,6 +1,9 @@
 ---
 import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { celloPerformances } from '@links/registry';
 ---
 <Layout title="Cello">
+  <LinkList slot="sidebar" items={celloPerformances} orientation="vertical" />
   <p>Practice logs, repertoire, performances.</p>
 </Layout>
