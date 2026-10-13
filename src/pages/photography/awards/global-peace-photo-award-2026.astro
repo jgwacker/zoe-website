@@ -1,0 +1,111 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { photographyAwards } from '@links/registry';
+---
+
+<Layout title="Global Peace Photo Award 2026">
+  <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <p class="intro">
+I entered the Global Peace Photo Award, an international award presented in Vienna, with a seven-image series called
+"Faces of Peace." It was shortlisted for the Children's Peace Image of the Year, for photographers 14 and under.
+  </p>
+
+  <p>
+For this project I traveled to different places and photographed people, animals, and moments that felt peaceful to
+me. What I discovered surprised me. Peace isn't just one thing. It's a dog who doesn't know what worry means. It's an
+old man who has made his peace with everything. It's a woman so full of music she can't stop laughing. It's two
+penguins who just have each other's backs. It's a stranger who doesn't speak your language but gives you a thumbs up
+anyway. It's even a celebration of death that somehow feels full of life. I used to think peace was the absence of
+something bad. Now I think it's the presence of something good — and it's everywhere, if you look.
+  </p>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/gppa-2026-1.jpg"
+      alt="A woman in Day of the Dead calavera face paint and a crown of red roses, holding a red fan at night in the Mission District, San Francisco."
+      width="723"
+      height="1200"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>1. La Paz</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/gppa-2026-2.jpg"
+      alt="A golden retriever wearing sunflower-shaped glasses and a flower garland."
+      width="1200"
+      height="1200"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>2. Flower Power</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/gppa-2026-3.jpg"
+      alt="An elderly man resting on a blue bench in a Nubian village, gazing upward."
+      width="1200"
+      height="1196"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>3. Contentment</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/gppa-2026-4.jpg"
+      alt="A Nubian woman in a tie-dyed headscarf laughing as she plays a frame drum."
+      width="1200"
+      height="1200"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>4. The Sound of Peace</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/gppa-2026-5.jpg"
+      alt="A smiling craftsman giving a thumbs up in front of colorful woven baskets."
+      width="1200"
+      height="960"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>5. Thumbs up for Peace</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/gppa-2026-6.jpg"
+      alt="A line of king penguins walking together down a dirt path in Patagonia."
+      width="791"
+      height="1200"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>6. March Towards Peace</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/gppa-2026-7.jpg"
+      alt="Two king penguins standing side by side on golden grass."
+      width="960"
+      height="1200"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>7. You've Got Me</figcaption>
+  </figure>
+
+  <p>
+    See my entry on the <a href="https://globalpeacephotoaward.org/submissions/shortlist-2026/faces-of-peace">official 2026 shortlist</a>.
+  </p>
+</Layout>

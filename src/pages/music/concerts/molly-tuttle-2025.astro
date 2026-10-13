@@ -1,0 +1,22 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import YouTube from '@components/YouTube.astro';
+import { musicConcerts } from '@links/registry';
+---
+
+<Layout title="Molly Tuttle">
+  <LinkList slot="sidebar" items={musicConcerts} orientation="vertical" />
+
+  <p>
+    This was my second time seeing Molly Tuttle. It was my first time at the historic Fillmore Theater. I
+    loved the venue and seeing all the photos of prior concerts. It was also my first time being in general
+    admission, meaning I had to battle the crowds. Thankfully they were really nice and I got a place just
+    behind the stage and had a great view.
+    </p>
+ 
+  <p> This was in support of her So Long Little Miss Sunshine album which I really loved. </p>
+
+
+</Layout>
+

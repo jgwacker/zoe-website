@@ -1,0 +1,43 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { photographyAwards } from '@links/registry';
+---
+
+<Layout title="Home is Where the Heart Is: National Photography Competition for Kids December 2025">
+  <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <p class="intro">
+I entered the "Home is Where the Heart Is" National Photography Competition for Kids in the Rising Photographers
+section for ages 12 to 14. My photo of a Nubian woman laughing as she plays her drum in her home in Egypt was one of
+the three winners in my age group, and I received the Visionary Voyager award.
+  </p>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/nation-junion-phographers.png"
+      alt="National Photography Competition for Kids logo"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>The official competition logo</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/npcfk-home-2025.jpg"
+      alt="A Nubian woman in a bright tie-dyed headscarf laughing as she plays a frame drum in front of an ochre wall."
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>My Visionary Voyager winning photo for "Home is Where the Heart Is," December 2025.</figcaption>
+  </figure>
+
+  <p>
+    See the <a href="https://www.junior-photographers.com/awards-page/home-is-where-the-heart-is-national-photography-competition-for-kids/">official winners page</a>.
+  </p>
+</Layout>

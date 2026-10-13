@@ -1,0 +1,43 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { photographyAwards } from '@links/registry';
+---
+
+<Layout title="Life in Red: National Photography Competition for Kids March 2026">
+  <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <p class="intro">
+I entered the "Life in Red" National Photography Competition for Kids in the Rising Photographers section for ages
+12 to 14. I submitted my portrait from the Day of the Dead celebration in the Mission District of San Francisco: a woman in red with a painted calavera face, a crown of roses,
+and a red fan. It was one of the three winners in my age group, and I received the Dream Snapper award.
+  </p>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/nation-junion-phographers.png"
+      alt="National Photography Competition for Kids logo"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>The official competition logo</figcaption>
+  </figure>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/npcfk-red-2026.jpg"
+      alt="A woman in a red dress with Day of the Dead calavera face paint, a crown of red roses and gold spikes, holding a red fan at night in the Mission District, San Francisco."
+      width="651"
+      height="1080"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>My Dream Snapper winning photo for "Life in Red," March 2026.</figcaption>
+  </figure>
+
+  <p>
+    See the <a href="https://www.junior-photographers.com/awards-page/life-in-red-national-photography-competition-for-kids/">official winners page</a>.
+  </p>
+</Layout>

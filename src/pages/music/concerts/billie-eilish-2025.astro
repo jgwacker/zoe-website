@@ -1,0 +1,26 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import YouTube from '@components/YouTube.astro';
+import { musicConcerts } from '@links/registry';
+---
+
+<Layout title="Billie Eilish 2025">
+  <LinkList slot="sidebar" items={musicConcerts} orientation="vertical" />
+
+  <p>Billie Eilish came to finish up her Hit Me Hard and Soft tour in San Francisco in November 2025. I went
+  to the concert with my mom. We saw her on the next to last night. I had been listening to the concert set
+  list for the previous month and knew the whole set list</p>
+ 
+  <p> The whole show was a spectacle and it was my favorite concert ever.</p>
+
+   <YouTube
+  id="fAdEZqwMj7s"
+  title="Full concert video of Billie"
+  caption="My favorite song's performance begins at 53:53 with Not Strong Enough."
+/>
+
+
+
+</Layout>
+

@@ -29,9 +29,13 @@ export const photographySections = [
   { href: '/photography/portfolio', label: 'Portfolio' },
 ];
 export const photographyAwards = [
-  { href: '/photography/awards/peninsula-photo-competition-2025', label: 'Peninsula Photo Competition 2025' },
+  { href: '/photography/awards/global-peace-photo-award-2026', label: 'Global Peace Photo Award 2026' },
+  { href: '/photography/awards/npcfk-competition-shelter-2026', label: 'The Shelter: National Photography Competition for Kids June 2026' },
+  { href: '/photography/awards/npcfk-competition-life-in-red-2026', label: 'Life in Red: National Photography Competition for Kids March 2026' },
+  { href: '/photography/awards/npcfk-competition-home-2025', label: 'Home is Where the Heart Is: National Photography Competition for Kids December 2025' },
   { href: '/photography/awards/tpoy-competition-2025', label: 'Travel Photographer of the Year Competition 2025' },
   { href: '/photography/awards/npcfk-competition-color-2025', label: 'I Spy Something-“Color” : National Photography Competition for Kids November 2025' },
+  { href: '/photography/awards/peninsula-photo-competition-2025', label: 'Peninsula Photo Competition 2025' },
 ];
 
 // Music
@@ -41,10 +45,12 @@ export const musicSections = [
   { href: '/music/favorites', label: 'Favorites' },
 ];
 export const musicConcerts = [
+  { href: '/music/concerts/molly-tuttle-2025',        label: 'Molly Tuttle 2025' },
+  { href: '/music/concerts/billie-eilish-2025',       label: 'Billie Eilish 2025' },
   { href: '/music/concerts/laufey-2025',              label: 'Laufey 2025' },
   { href: '/music/concerts/sabrina-carpenter-2024',   label: 'Sabrina Carpenter 2024' },
   { href: '/music/concerts/laufey-2024',              label: 'Laufey 2024' },
-  { href: '/music/concerts/reset-2023', label: 'Re:Set 2023' },
+  { href: '/music/concerts/reset-2023',               label: 'Re:Set 2023' },
 ];
 export const musicFavorites = [
   { href: '/music/favorites/laufey-matter-of-time',                    label: 'Laufey — Matter of Time' },
