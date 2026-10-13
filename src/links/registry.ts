@@ -45,6 +45,8 @@ export const musicSections = [
   { href: '/music/favorites', label: 'Favorites' },
 ];
 export const musicConcerts = [
+  { href: '/music/concerts/outside-lands-2026',       label: 'Outside Lands 2026' },
+  { href: '/music/concerts/ariana-grande-2026',       label: 'Ariana Grande 2026' },
   { href: '/music/concerts/molly-tuttle-2025',        label: 'Molly Tuttle 2025' },
   { href: '/music/concerts/billie-eilish-2025',       label: 'Billie Eilish 2025' },
   { href: '/music/concerts/laufey-2025',              label: 'Laufey 2025' },

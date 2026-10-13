@@ -1,0 +1,13 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { musicConcerts } from '@links/registry';
+---
+
+<Layout title="Outside Lands 2026">
+  <LinkList slot="sidebar" items={musicConcerts} orientation="vertical" />
+
+  <p>I went to all three days of Outside Lands in Golden Gate Park in San Francisco, August 7–9, 2026. The
+  headliners were Charli XCX, The Strokes, and Rüfüs Du Sol.</p>
+
+</Layout>

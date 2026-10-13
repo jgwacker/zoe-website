@@ -1,0 +1,13 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { musicConcerts } from '@links/registry';
+---
+
+<Layout title="Ariana Grande 2026">
+  <LinkList slot="sidebar" items={musicConcerts} orientation="vertical" />
+
+  <p>I saw Ariana Grande at Oakland Arena on June 6, 2026, the opening night of her Eternal Sunshine Tour. It was
+  her first headlining tour in almost seven years.</p>
+
+</Layout>
