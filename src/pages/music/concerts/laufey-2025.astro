@@ -1,9 +1,64 @@
 ---
 import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
+import YouTube from '@components/YouTube.astro';
 import { musicConcerts } from '@links/registry';
 ---
 <Layout title="Laufey 2025">
   <LinkList slot="sidebar" items={musicConcerts} orientation="vertical" />
-  <p>This is a stub page for Laufey 2025. Replace this text with real content.</p>
+<p>
+This was my second time seeing Laufey. This time I went with my father and my mentor, Imani Camera. My
+father bought the VIP tickets for the Oakland Oco Arena because they were cheaper than the normal tickets at
+the San Francisco Oracle Arena. 
+</p>
+<figure class="photo">
+    <img
+      src="/images/concerts/laufey_2025/Imani_and_I_at_Laufey.jpg"
+      alt="Imani and I at the VIP section of Laufey"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>Imani and I at the VIP section of concert before entering</figcaption>
+  </figure>
+
+<p>
+Overall the entire concert was amazing. I was right up against the barricade and got to fully experiene the
+concert and got within a few feet of her. She performed my favorite song, Too Little, Too Late.
+</p>
+<YouTube
+  id="f8mPby1U69I"
+  title="Too Little, Too Late"
+  caption="The performance of Too Little, Too Late"
+  t="24:58"
+/>
+
+<p>
+My favorite part of the concert was Snow White where she brought out multiple full body mirrors and they
+danced around you could see different vantage points of her.
+</p>
+<YouTube
+  id="f8mPby1U69I"
+  title="Snow White"
+  caption="The performance of Snow White where she brought out these amazing mirrors"
+  t="88:50"
+/>
+
+<p>
+The crowd was very intense. People were crying and screaming. I was taking in the whole environment
+</p>
+
+<figure class="photo">
+    <img
+      src="/images/concerts/laufey_2025/laufey_stage_2025.jpg"
+      alt="Laufey on stage at the Oco Arena"
+      width="1600"
+      height="1067"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>Laufey on stage at the Oco Arena in Oakland</figcaption>
+  </figure>
+
 </Layout>
