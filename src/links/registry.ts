@@ -31,6 +31,7 @@ export const photographySections = [
 export const photographyAwards = [
   { href: '/photography/awards/global-peace-photo-award-2026', label: 'Global Peace Photo Award 2026' },
   { href: '/photography/awards/npcfk-competition-shelter-2026', label: 'The Shelter: National Photography Competition for Kids June 2026' },
+  { href: '/photography/awards/no-frames-2026', label: 'No Frames International Youth Photo Contest 2026' },
   { href: '/photography/awards/npcfk-competition-life-in-red-2026', label: 'Life in Red: National Photography Competition for Kids March 2026' },
   { href: '/photography/awards/npcfk-competition-home-2025', label: 'Home is Where the Heart Is: National Photography Competition for Kids December 2025' },
   { href: '/photography/awards/tpoy-competition-2025', label: 'Travel Photographer of the Year Competition 2025' },

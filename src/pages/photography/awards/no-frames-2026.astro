@@ -1,0 +1,43 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { photographyAwards } from '@links/registry';
+---
+
+<Layout title="No Frames International Youth Photo Contest 2026">
+  <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <p class="intro">
+I entered the V International Youth Photo Contest "No Frames," run by the Association of Photographers Eurasia and
+recognized by the International Association of Art Photographers (IAAP). There were 891 young photographers from 24
+countries and over 11,600 photos entered across ten sections. My photo "ColonyPanorama," of a king penguin colony in
+Patagonia, received an Honorable Mention in the under-14 category of the Nature section.
+  </p>
+
+  <figure class="photo">
+    <img
+      src="/images/photography_awards/no-frames-2026-colony-panorama.jpg"
+      alt="A colony of king penguins standing in a row among golden grass, with the sea behind them in Patagonia."
+      width="1600"
+      height="893"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>"ColonyPanorama," Honorable Mention, under-14, Nature section.</figcaption>
+  </figure>
+
+  <p>In total, 13 of my photos were accepted into the exhibition:</p>
+  <ul>
+    <li><strong>Black and White:</strong> The Eternal Triangle</li>
+    <li><strong>Staged Photography / Portrait:</strong> The Camel Rider, Aswan Elder, Egyptian Man with Cat, Smoke Break</li>
+    <li><strong>Nature:</strong> ColonyPanorama, Duo Portrait, Penguin Parade, Group Stroll</li>
+    <li><strong>Daily Life:</strong> Cinderello, SF Skate Park</li>
+    <li><strong>Visions of Tomorrow:</strong> Tangled Dreams</li>
+    <li><strong>Heritage of Humanity:</strong> The Path to Philae</li>
+  </ul>
+
+  <p>
+    See the <a href="https://noframes-photofest.com/?lang=eng">contest website</a> and the
+    <a href="https://theiaap.com/contests/join/1895/1895_accepted_web.pdf">full list of accepted photos</a>.
+  </p>
+</Layout>
