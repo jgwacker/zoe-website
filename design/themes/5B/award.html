@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinderello · Zoe Wacker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#1E1424; --night-2:#2A1C33;
+    --coral:#FF6F59; --coral-ink:#D9432F; --rose:#FF4F8B; --rose-ink:#C92A64; --marigold:#FFB13B;
+    --cream:#FBF1E6; --paper:#FFF8F0; --plum:#3A1F3D; --plum-2:#6E5470; --rule:#EADACB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{background:var(--cream);color:var(--plum);font-family:'DM Sans',system-ui,sans-serif;font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .mono{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+  /* dark header band */
+  .band{background:var(--night);color:var(--cream);position:relative;overflow:hidden;
+    background-image:radial-gradient(700px 360px at 10% 0%, rgba(255,79,139,.25), transparent 60%),radial-gradient(700px 360px at 100% 30%, rgba(255,111,89,.2), transparent 60%);}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:64px;border-bottom:1px solid rgba(251,241,230,.12)}
+  .mark{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.04em}
+  .mark span{color:var(--coral)}
+  .nav ul{display:flex;gap:22px;list-style:none}
+  .nav li a{font-size:14px;font-weight:500;color:#C9B6C9}
+  .nav li a:hover,.nav li a.on{color:var(--cream)}
+  .nav li a.on{box-shadow:inset 0 -2px 0 var(--coral)}
+  .menu{display:none}
+  .menu summary{list-style:none;cursor:pointer;font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+  .menu summary::-webkit-details-marker{display:none}
+  .drop{display:none;position:absolute;left:0;right:0;top:64px;z-index:20;background:var(--night-2);flex-direction:column;padding:12px 16px 20px}
+  .menu[open] .drop{display:flex}
+  .drop a{font-family:'Anton',sans-serif;font-size:28px;text-transform:uppercase;padding:6px 0;border-bottom:1px solid rgba(251,241,230,.12)}
+
+  .titleblock{padding:56px 0 150px}
+  .crumbs{color:#C9B6C9}
+  .crumbs a:hover{color:var(--coral)}
+  .crumbs b{color:var(--marigold);font-weight:500}
+  .eyebrow{display:inline-flex;gap:10px;align-items:center;margin-top:28px;padding:7px 14px;border:1px solid rgba(255,177,59,.55);border-radius:999px;color:var(--marigold)}
+  h1{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:.92;font-size:clamp(48px,8vw,112px);margin-top:20px;letter-spacing:.01em;text-shadow:0 0 40px rgba(255,111,89,.35)}
+  h1 em{font-style:normal;color:var(--coral)}
+  .sub{margin-top:16px;font-size:clamp(17px,2vw,22px);color:#E7D7E2}
+  .sub b{color:var(--rose);font-weight:700}
+
+  /* hero image overlapping band */
+  .hero{margin-top:-110px;position:relative;z-index:2}
+  .hero .frame{border-radius:6px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(201,42,100,.55),0 0 0 1px rgba(58,31,61,.08)}
+  .hero img{width:100%;aspect-ratio:3/2;object-fit:cover}
+  .hero figcaption{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:14px;color:var(--plum-2)}
+  .hero figcaption b{color:var(--plum);font-weight:500}
+
+  /* body */
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:80px;padding:72px 0 40px}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--plum);border-bottom:1px solid var(--rule);margin-bottom:44px}
+  .facts div{padding:16px 16px 16px 0}
+  .facts div+div{padding-left:16px;border-left:1px solid var(--rule)}
+  .facts .mono{color:var(--rose-ink);font-size:11px}
+  .facts p{font-weight:700;font-size:16px;line-height:1.35;margin-top:4px}
+  article p{margin-bottom:1.3em;max-width:660px}
+  article p.lede{font-size:22px;line-height:1.55}
+  article p.lede::first-letter{font-family:'Anton',sans-serif;float:left;font-size:88px;line-height:.85;margin:8px 12px 0 0;color:var(--coral)}
+  h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:34px;line-height:1;letter-spacing:.01em;margin:44px 0 18px;color:var(--plum)}
+  h2 span{color:var(--rose-ink)}
+  .pull{margin:40px 0;padding:28px 0 28px 28px;border-left:4px solid var(--coral);font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(28px,3.4vw,40px);line-height:1.05;max-width:620px}
+  .pull em{font-style:normal;color:var(--rose-ink)}
+  .accept{margin-top:44px;max-width:520px}
+  .accept .frame{border-radius:6px;overflow:hidden;box-shadow:0 24px 60px -24px rgba(255,111,89,.6)}
+  .accept figcaption{margin-top:12px;color:var(--plum-2)}
+
+  aside{position:sticky;top:24px;align-self:start}
+  .more{background:var(--paper);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+  .more h3{background:var(--night);color:var(--cream);font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:24px;letter-spacing:.02em;padding:16px 22px}
+  .more h3 span{color:var(--marigold)}
+  .more ol{list-style:none}
+  .more li a{display:grid;grid-template-columns:30px 1fr;gap:10px;padding:16px 22px;border-top:1px solid var(--rule);transition:background .2s}
+  .more li a:hover{background:#FFEDE3}
+  .more .n{font-family:'Anton',sans-serif;color:var(--rose-ink);font-size:18px}
+  .more .t{font-weight:700;font-size:15px;line-height:1.35}
+  .more .d{display:block;font-weight:400;font-size:13.5px;color:var(--plum-2);margin-top:2px}
+  .more li.on a{background:linear-gradient(90deg,rgba(255,79,139,.14),rgba(255,111,89,.06));box-shadow:inset 4px 0 0 var(--coral)}
+  .more li.on .d{color:var(--rose-ink)}
+  .back{display:inline-flex;gap:10px;align-items:center;margin-top:20px;padding:12px 20px;border-radius:999px;background:var(--coral);color:var(--night);font-weight:700;font-size:15px;box-shadow:0 10px 30px -8px rgba(255,111,89,.7)}
+  .back:hover{background:var(--rose);color:#fff}
+
+  footer{background:var(--night);color:var(--cream);margin-top:80px;padding:40px 0 60px}
+  .foot{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px}
+  .foot .big{font-family:'Anton',sans-serif;font-size:clamp(44px,7vw,96px);line-height:.9;color:transparent;-webkit-text-stroke:1px rgba(251,241,230,.35)}
+  .foot .mono{color:#C9B6C9}
+
+  .label{position:fixed;right:14px;bottom:14px;z-index:50;background:var(--plum);color:var(--marigold);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;padding:6px 10px;border-radius:4px}
+
+  @media (max-width:960px){
+    .nav ul{display:none}.menu{display:block}
+    .layout{grid-template-columns:1fr;gap:56px}
+    aside{position:static}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 16px}
+    body{font-size:17px}
+    .titleblock{padding:36px 0 110px}
+    .hero{margin-top:-80px}
+    .facts{grid-template-columns:1fr}
+    .facts div+div{padding-left:0;border-left:0;border-top:1px solid var(--rule)}
+    article p.lede{font-size:19px}
+    article p.lede::first-letter{font-size:68px}
+    .pull{padding-left:18px}
+  }
+</style>
+</head>
+<body>
+
+<div class="band">
+  <div class="wrap">
+    <div class="nav">
+      <a class="mark" href="index.html">ZOE<span>.</span>W</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#tour">Travel</a></li>
+        <li><a class="on" href="index.html#photography">Photography</a></li>
+        <li><a href="index.html#music">Music</a></li>
+        <li><a href="#">Geography</a></li>
+        <li><a href="#">Guardian Arts</a></li>
+        <li><a href="#">Academics</a></li>
+      </ul>
+      <details class="menu">
+        <summary>Menu</summary>
+        <nav class="drop">
+          <a href="index.html">Home</a><a href="index.html#about">About</a><a href="index.html#tour">Travel</a><a href="index.html#photography">Photography</a><a href="index.html#music">Music</a><a href="#">Geography</a><a href="#">Guardian Arts</a><a href="#">Academics</a>
+        </nav>
+      </details>
+    </div>
+    <div class="titleblock">
+      <p class="mono crumbs"><a href="index.html">Home</a> / <a href="index.html#photography">Photography</a> / <b>Awards</b></p>
+      <span class="mono eyebrow">Honorable Mention &middot; Youth Division</span>
+      <h1>Peninsula Photo<br>Contest <em>2025</em></h1>
+      <p class="sub">Youth Division, &ldquo;Moments&rdquo; &mdash; <b>&ldquo;Cinderello&rdquo;</b></p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <figure class="hero">
+    <div class="frame"><img src="../../../public/images/photography_awards/cinderello.jpg" alt="A caretaker in a gray galabeya sweeps the red carpets of the vast Mosque-Madrasa of Sultan Hasan, under hanging lamps"></div>
+    <figcaption class="mono"><span><b>Cinderello</b> &middot; Zoe Wacker</span><span>Mosque&ndash;Madrasa of Sultan &#7716;asan, Historic Cairo</span></figcaption>
+  </figure>
+
+  <div class="layout">
+    <article>
+      <div class="facts">
+        <div><span class="mono">Presented by</span><p>Palo Alto Weekly &amp; Palo Alto Art Center</p></div>
+        <div><span class="mono">Field</span><p>Over 1,200 entries, six categories</p></div>
+        <div><span class="mono">Exhibited</span><p>Palo Alto Art Center, Sept&ndash;Dec 2025</p></div>
+      </div>
+
+      <p class="lede">The Six Fifty Peninsula Photo Contest is presented by the Palo Alto Weekly and the Palo Alto Art Center and is open to photographers who live, work, or attend school in the 650 area code. There were over 1,200 entries across six categories.</p>
+
+      <h2>The <span>photo</span></h2>
+      <p>My winning photo, <i>Cinderello</i>, was taken at the Mosque&ndash;Madrasa of Sultan &#7716;asan in Historic Cairo. A man was sweeping the carpets, and the light caught the dust just right&mdash;he looked like he needed a fairy godmother, which made me think of Cinderella. I tried to frame the scale of the space against a single everyday gesture, so the scene feels both grand and human.</p>
+
+      <blockquote class="pull">&ldquo;The scene feels both <em>grand and human.</em>&rdquo;</blockquote>
+
+      <h2>The <span>show</span></h2>
+      <p>The photograph was exhibited at the Palo Alto Art Center from September&ndash;December 2025. I was the youngest winner; the other Youth Division awardees were mostly juniors and seniors. It was exciting (and a little intimidating!) to be shown alongside older students whose work I admire.</p>
+
+      <figure class="accept">
+        <div class="frame"><img src="../../../public/images/photography_awards/650_award_2025.jpg" alt="Zoe accepting the Peninsula Photo Contest award"></div>
+        <figcaption class="mono">Accepting the award</figcaption>
+      </figure>
+    </article>
+
+    <aside>
+      <nav class="more" aria-label="Photo awards">
+        <h3>All photo <span>awards</span></h3>
+        <ol>
+          <li><a href="#"><span class="n">01</span><span class="t">Travel Photographer of the Year 2025<span class="d">Young TPOTY Runner-Up, 14 &amp; under</span></span></a></li>
+          <li class="on"><a href="award.html" aria-current="page"><span class="n">02</span><span class="t">Six Fifty Peninsula Photo Contest 2025<span class="d">Honorable Mention &middot; you are here</span></span></a></li>
+          <li><a href="#"><span class="n">03</span><span class="t">National Photography Competition for Kids<span class="d">Two wins, 2025&ndash;26</span></span></a></li>
+          <li><a href="#"><span class="n">04</span><span class="t">No Frames International Youth Photo Contest 2026<span class="d">Honorable Mention, under-14 Nature</span></span></a></li>
+          <li><a href="#"><span class="n">05</span><span class="t">Global Peace Photo Award 2026<span class="d">Shortlisted, &ldquo;Faces of Peace&rdquo;</span></span></a></li>
+        </ol>
+      </nav>
+      <a class="back" href="index.html">&larr; Back to the lineup</a>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div class="big">ZOE WACKER</div>
+    <p class="mono">Menlo Park, California &middot; &copy; 2026</p>
+  </div>
+</footer>
+
+<div class="label">Mockup 5B &middot; After Dark</div>
+</body>
+</html>

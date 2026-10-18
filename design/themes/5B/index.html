@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoe Wacker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#1E1424; --night-2:#2A1C33; --night-3:#362541;
+    --coral:#FF6F59; --rose:#FF4F8B; --marigold:#FFB13B;
+    --cream:#FBEFE3; --mist:#C9B6C9; --line:rgba(251,239,227,.14);
+    --img:'../../../public/images/';
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{
+    background:var(--night);
+    background-image:
+      radial-gradient(900px 500px at 15% -5%, rgba(255,79,139,.20), transparent 60%),
+      radial-gradient(800px 500px at 95% 10%, rgba(255,111,89,.16), transparent 60%),
+      radial-gradient(900px 600px at 50% 110%, rgba(255,177,59,.10), transparent 60%);
+    color:var(--cream);font-family:'DM Sans',system-ui,sans-serif;font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .mono{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:10;background:rgba(30,20,36,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:64px}
+  .mark{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.04em}
+  .mark span{color:var(--coral)}
+  .nav ul{display:flex;gap:22px;list-style:none;flex-wrap:wrap}
+  .nav li a{font-size:14px;font-weight:500;color:var(--mist);transition:color .2s}
+  .nav li a:hover,.nav li a.on{color:var(--cream)}
+  .nav li a.on{box-shadow:inset 0 -2px 0 var(--coral)}
+
+  /* poster hero */
+  .poster{padding:72px 0 40px;text-align:center;position:relative}
+  .presents{color:var(--marigold)}
+  .presents b{color:var(--cream);font-weight:500}
+  h1{
+    font-family:'Anton',sans-serif;font-weight:400;line-height:.86;letter-spacing:.01em;
+    font-size:clamp(76px,15.5vw,224px);margin:18px 0 8px;
+    color:var(--cream);
+    text-shadow:0 0 28px rgba(255,111,89,.55),0 0 80px rgba(255,79,139,.35);
+  }
+  .tagline{font-size:clamp(16px,2vw,20px);color:var(--mist);max-width:640px;margin:0 auto}
+  .tagline em{font-style:normal;color:var(--coral)}
+
+  .bill{margin:52px auto 0;max-width:1100px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0 34px}
+  .row{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:22px;row-gap:4px;font-family:'Anton',sans-serif;text-transform:uppercase;line-height:1.05}
+  .row a{transition:color .2s,text-shadow .2s}
+  .row a:hover{color:var(--marigold);text-shadow:0 0 22px rgba(255,177,59,.6)}
+  .row .dot{width:9px;height:9px;transform:rotate(45deg);background:var(--rose);display:inline-block;align-self:center;box-shadow:0 0 12px var(--rose)}
+  .r1{font-size:clamp(40px,6.2vw,84px);color:var(--coral)}
+  .r2{font-size:clamp(28px,3.8vw,50px);color:var(--cream);margin-top:10px}
+  .r2 .dot{width:7px;height:7px;background:var(--marigold);box-shadow:0 0 10px var(--marigold)}
+  .r3{font-size:clamp(20px,2.3vw,28px);color:var(--rose);margin-top:14px}
+  .r3 .dot{width:5px;height:5px}
+  .support{margin-top:20px;color:var(--mist)}
+  .support b{color:var(--cream);font-weight:500}
+
+  /* glowing photos */
+  .glowstrip{display:grid;grid-template-columns:1.25fr .8fr 1fr;gap:28px;align-items:end;padding:70px 0 20px}
+  figure{position:relative}
+  .glow{border-radius:6px;overflow:hidden;position:relative}
+  .glow img{width:100%;height:100%;object-fit:cover}
+  .g-coral{box-shadow:0 0 0 1px rgba(255,111,89,.35),0 20px 60px -10px rgba(255,111,89,.55),0 0 120px -20px rgba(255,111,89,.45)}
+  .g-rose{box-shadow:0 0 0 1px rgba(255,79,139,.35),0 20px 60px -10px rgba(255,79,139,.55),0 0 120px -20px rgba(255,79,139,.45)}
+  .g-gold{box-shadow:0 0 0 1px rgba(255,177,59,.35),0 20px 60px -10px rgba(255,177,59,.5),0 0 120px -20px rgba(255,177,59,.4)}
+  figcaption{margin-top:14px;display:flex;justify-content:space-between;gap:12px;color:var(--mist)}
+  figcaption span:first-child{color:var(--cream)}
+  .p1 .glow{aspect-ratio:3/2}
+  .p2 .glow{aspect-ratio:3/5}
+  .p3 .glow{aspect-ratio:4/5}
+
+  /* sections */
+  section{padding:96px 0 0}
+  .kicker{color:var(--coral);margin-bottom:14px;display:flex;align-items:center;gap:12px}
+  .kicker::before{content:"";width:28px;height:2px;background:var(--coral);box-shadow:0 0 10px var(--coral)}
+  h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(40px,5.4vw,72px);line-height:.95;letter-spacing:.01em}
+  h2 em{font-style:normal;color:var(--marigold)}
+
+  /* awards setlist */
+  .two{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:start}
+  .setlist{list-style:none;border-top:1px solid var(--line)}
+  .setlist li{border-bottom:1px solid var(--line)}
+  .setlist a{display:grid;grid-template-columns:48px 1fr auto;gap:16px;align-items:baseline;padding:20px 4px;transition:background .2s}
+  .setlist a:hover{background:linear-gradient(90deg,rgba(255,79,139,.10),transparent)}
+  .setlist .n{font-family:'Anton',sans-serif;font-size:26px;color:var(--rose)}
+  .setlist .t{font-weight:700;font-size:18px;line-height:1.3}
+  .setlist .d{display:block;font-weight:400;font-size:15px;color:var(--mist);margin-top:3px}
+  .setlist .y{color:var(--marigold)}
+  .setlist .feat .t{color:var(--coral)}
+  .setlist .arrow{color:var(--coral)}
+  .awardcard{display:block}
+  .awardcard .glow{aspect-ratio:3/2}
+  .awardcard .cap{margin-top:18px}
+  .awardcard .cap b{font-family:'Anton',sans-serif;font-weight:400;font-size:30px;text-transform:uppercase;display:block;letter-spacing:.01em}
+  .awardcard .cap p{color:var(--mist);font-size:15px}
+  .btn{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:12px 20px;border-radius:999px;background:var(--coral);color:var(--night);font-weight:700;font-size:15px;box-shadow:0 0 30px rgba(255,111,89,.45);transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(255,111,89,.7)}
+
+  /* tour dates */
+  .tour{margin-top:36px;border-top:2px solid var(--cream)}
+  .date{display:grid;grid-template-columns:110px 1.1fr 2fr 120px;gap:24px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+  .date .yr{font-family:'Anton',sans-serif;font-size:30px;color:var(--marigold)}
+  .date .place{font-family:'Anton',sans-serif;font-size:34px;text-transform:uppercase;line-height:1}
+  .date .stops{color:var(--mist)}
+  .date .thumb{width:120px;height:72px;border-radius:4px;overflow:hidden}
+  .date .thumb img{width:100%;height:100%;object-fit:cover}
+  .date:hover .place{color:var(--coral)}
+
+  /* music */
+  .music{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  blockquote{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(34px,4.2vw,58px);line-height:1.02;color:var(--cream)}
+  blockquote em{font-style:normal;color:var(--rose);text-shadow:0 0 30px rgba(255,79,139,.6)}
+  .who{margin-top:18px;color:var(--mist)}
+  .gigs{list-style:none;columns:2;column-gap:32px;margin-top:8px}
+  .gigs li{break-inside:avoid;padding:12px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}
+  .gigs li b{font-weight:700}
+  .gigs li span{color:var(--marigold);font-family:'DM Mono',monospace;font-size:13px}
+  .cello{margin-top:28px;padding:22px 24px;border:1px solid rgba(255,177,59,.4);border-radius:6px;background:rgba(255,177,59,.06)}
+  .cello .mono{color:var(--marigold)}
+  .cello p{margin-top:6px}
+
+  /* about */
+  .about{display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:center;padding-bottom:20px}
+  .about .glow{aspect-ratio:1/1;border-radius:50%}
+  .about p.voice{font-size:21px;line-height:1.55;margin-top:22px;max-width:640px}
+  .about p.voice::first-line{color:var(--coral)}
+  .interests{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .interests span{padding:7px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--mist)}
+
+  footer{margin-top:110px;border-top:1px solid var(--line);padding:40px 0 60px}
+  .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  .foot .big{font-family:'Anton',sans-serif;font-size:clamp(44px,7vw,96px);line-height:.9;color:transparent;-webkit-text-stroke:1px rgba(251,239,227,.35)}
+  .foot .mono{color:var(--mist)}
+
+  .label{position:fixed;right:14px;bottom:14px;z-index:50;background:var(--marigold);color:var(--night);font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;padding:6px 10px;border-radius:4px;box-shadow:0 0 20px rgba(255,177,59,.5)}
+
+  @media (max-width:900px){
+    .nav ul{display:none}
+    .menu{display:block !important}
+    .glowstrip{grid-template-columns:1fr 1fr;gap:18px}
+    .glowstrip .p1{grid-column:1/-1}
+    .two,.music,.about{grid-template-columns:1fr;gap:40px}
+    .about .glow{max-width:240px}
+    .date{grid-template-columns:70px 1fr;gap:6px 16px}
+    .date .stops{grid-column:2}
+    .date .thumb{display:none}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 16px}
+    .poster{padding-top:48px}
+    .bill{margin-top:36px}
+    .row{column-gap:14px}
+    .glowstrip figcaption{flex-direction:column;gap:2px}
+    .gigs{columns:1}
+    .date .yr{font-size:24px}.date .place{font-size:28px}
+    .setlist a{grid-template-columns:34px 1fr;}
+    .setlist .arrow{display:none}
+    section{padding-top:72px}
+  }
+  .menu{display:none;color:var(--cream)}
+  .menu summary{list-style:none;cursor:pointer;font-weight:700;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+  .menu summary::-webkit-details-marker{display:none}
+  .menu[open] .drop{display:flex}
+  .drop{position:absolute;left:0;right:0;top:64px;background:var(--night-2);border-bottom:1px solid var(--line);flex-direction:column;padding:12px 16px 20px}
+  .drop a{font-family:'Anton',sans-serif;font-size:28px;text-transform:uppercase;padding:6px 0;border-bottom:1px solid var(--line)}
+  .drop a:hover{color:var(--coral)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="mark" href="index.html">ZOE<span>.</span>W</a>
+    <ul>
+      <li><a class="on" href="index.html">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#tour">Travel</a></li>
+      <li><a href="#photography">Photography</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#">Geography</a></li>
+      <li><a href="#">Guardian Arts</a></li>
+      <li><a href="#">Academics</a></li>
+    </ul>
+    <details class="menu">
+      <summary>Menu</summary>
+      <nav class="drop">
+        <a href="index.html">Home</a><a href="#about">About</a><a href="#tour">Travel</a><a href="#photography">Photography</a><a href="#music">Music</a><a href="#">Geography</a><a href="#">Guardian Arts</a><a href="#">Academics</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="poster">
+    <p class="mono presents">Menlo Park, CA &nbsp;<b>presents</b>&nbsp; the 2025&ndash;26 season</p>
+    <h1>ZOE WACKER</h1>
+    <p class="tagline">Photographer, cellist, map nerd. A highlight reel of <em>experiments, adventures and &ldquo;aha!&rdquo; moments.</em></p>
+
+    <div class="bill">
+      <div class="row r1">
+        <a href="#photography">Photography</a><i class="dot"></i>
+        <a href="#tour">Travel</a><i class="dot"></i>
+        <a href="#music">Music</a>
+      </div>
+      <div class="row r2">
+        <a href="#">Geography</a><i class="dot"></i>
+        <a href="#">Guardian Arts</a><i class="dot"></i>
+        <a href="#">Academics</a>
+      </div>
+      <div class="row r3">
+        <a href="#about">About Zoe</a><i class="dot"></i>
+        <a href="award.html">Awards</a><i class="dot"></i>
+        <a href="#music">Concerts</a>
+      </div>
+      <p class="mono support">On location in <b>Egypt</b> &middot; <b>Chile</b> &middot; <b>London</b> &middot; <b>Rome</b> &middot; <b>Paris</b></p>
+    </div>
+  </div>
+
+  <div class="glowstrip" id="photography">
+    <figure class="p1">
+      <div class="glow g-coral"><img src="../../../public/images/portfolio/portfolio-64.jpg" alt="Nubian woman laughing and playing a frame drum against an ochre wall"></div>
+      <figcaption class="mono"><span>Frame drum</span><span>Aswan, Egypt</span></figcaption>
+    </figure>
+    <figure class="p2">
+      <div class="glow g-rose"><img src="../../../public/images/portfolio/portfolio-72.jpg" alt="Day of the Dead portrait in a red dress with calavera face paint"></div>
+      <figcaption class="mono"><span>Life in red</span><span>Mission, SF</span></figcaption>
+    </figure>
+    <figure class="p3">
+      <div class="glow g-gold"><img src="../../../public/images/portfolio/portfolio-53.jpg" alt="Bright red Nubian house with a blue arched door"></div>
+      <figcaption class="mono"><span>Blue door</span><span>Nubia</span></figcaption>
+    </figure>
+  </div>
+
+  <section>
+    <div class="two">
+      <div>
+        <p class="mono kicker">The set list</p>
+        <h2>Photo<br>awards <em>&rsquo;25&ndash;&rsquo;26</em></h2>
+        <a class="awardcard" href="award.html" style="margin-top:36px">
+          <div class="glow g-rose"><img src="../../../public/images/photography_awards/cinderello.jpg" alt="Cinderello: a caretaker sweeping red carpets in the Mosque-Madrasa of Sultan Hasan, Cairo"></div>
+          <div class="cap">
+            <b>&ldquo;Cinderello&rdquo;</b>
+            <p>Honorable Mention, Six Fifty Peninsula Photo Contest 2025. Exhibited at the Palo Alto Art Center.</p>
+            <span class="btn">Read the story &rarr;</span>
+          </div>
+        </a>
+      </div>
+      <ol class="setlist">
+        <li><a href="#"><span class="n">01</span><span class="t">Travel Photographer of the Year 2025<span class="d">Young TPOTY (14 &amp; under) Runner-Up. <i>Places</i> collection exhibited internationally in 2026.</span></span><span class="arrow">&rarr;</span></a></li>
+        <li class="feat"><a href="award.html"><span class="n">02</span><span class="t">Six Fifty Peninsula Photo Contest 2025<span class="d">Honorable Mention, Youth &ldquo;Moments&rdquo; &mdash; &ldquo;Cinderello&rdquo;</span></span><span class="arrow">&rarr;</span></a></li>
+        <li><a href="#"><span class="n">03</span><span class="t">National Photography Competition for Kids<span class="d">Winner, &ldquo;Home is Where the Heart Is&rdquo; (Dec 2025, Visionary Voyager). Winner, &ldquo;Life in Red&rdquo; (Mar 2026, Dream Snapper). Notable Entries Nov 2025 &amp; Jun 2026.</span></span><span class="arrow">&rarr;</span></a></li>
+        <li><a href="#"><span class="n">04</span><span class="t">No Frames International Youth Photo Contest 2026<span class="d">Honorable Mention, under-14 Nature. 13 photos accepted.</span></span><span class="arrow">&rarr;</span></a></li>
+        <li><a href="#"><span class="n">05</span><span class="t">Global Peace Photo Award 2026<span class="d">Shortlisted, Children&rsquo;s Peace Image of the Year &mdash; &ldquo;Faces of Peace&rdquo;</span></span><span class="arrow">&rarr;</span></a></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="tour">
+    <p class="mono kicker">World tour</p>
+    <h2>Travel <em>dates</em></h2>
+    <div class="tour">
+      <a class="date" href="#"><span class="yr">2025</span><span class="place">Egypt</span><span class="stops">Cairo &middot; Giza &middot; Aswan &middot; Kom Ombo &middot; Nubia</span><span class="thumb"><img src="../../../public/images/trips/egypt_2025/nile_cruise_egypt_2025.jpg" alt=""></span></a>
+      <a class="date" href="#"><span class="yr">2025</span><span class="place">Chile</span><span class="stops">Santiago &middot; Valpara&iacute;so &middot; Torres del Paine &middot; Tierra del Fuego</span><span class="thumb"><img src="../../../public/images/trips/chile_2025/tierra_del_fuego_chile_2025.jpg" alt=""></span></a>
+      <a class="date" href="#"><span class="yr">2024</span><span class="place">London</span><span class="stops">England</span><span class="thumb"><img src="../../../public/images/trips/london_2024/london_eye_london_2024.jpg" alt=""></span></a>
+      <a class="date" href="#"><span class="yr">2024</span><span class="place">Rome</span><span class="stops">Italy</span><span class="thumb"><img src="../../../public/images/trips/rome_2024/colluseum_rome_2024.jpeg" alt=""></span></a>
+      <a class="date" href="#"><span class="yr">2023</span><span class="place">Paris</span><span class="stops">France</span><span class="thumb"><img src="../../../public/images/trips/paris_2023/champs_paris_2023.jpg" alt=""></span></a>
+    </div>
+  </section>
+
+  <section id="music">
+    <div class="music">
+      <div>
+        <p class="mono kicker">Music</p>
+        <blockquote>&ldquo;Concerts are my favorite because you don&rsquo;t just hear the music &mdash; <em>you feel it in your chest.</em>&rdquo;</blockquote>
+        <p class="mono who">Music makes everything in my day feel more colorful.</p>
+      </div>
+      <div>
+        <p class="mono" style="color:var(--mist)">From the crowd</p>
+        <ul class="gigs">
+          <li><b>Outside Lands</b><span>2026</span></li>
+          <li><b>Ariana Grande</b><span>2026</span></li>
+          <li><b>Molly Tuttle</b><span>2025</span></li>
+          <li><b>Billie Eilish</b><span>2025</span></li>
+          <li><b>Laufey</b><span>2025 / 24</span></li>
+          <li><b>Sabrina Carpenter</b><span>2024</span></li>
+        </ul>
+        <div class="cello">
+          <p class="mono">On stage &middot; Cello</p>
+          <p>Played with the school orchestra on Main Street at Disneyland, May 2026.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about">
+      <div class="glow g-coral"><img src="../../../public/images/home/about.jpg" alt="Zoe"></div>
+      <div>
+        <p class="mono kicker">Meet the headliner</p>
+        <h2>Hi! I&rsquo;m Zoe.</h2>
+        <p class="voice">A middle schooler who&rsquo;s always juggling a bunch of different interests. I started this site to keep track of the things I&rsquo;m working on, the ideas I&rsquo;m excited about, and the projects that don&rsquo;t always fit neatly into a school folder.</p>
+        <div class="interests"><span>Geography</span><span>Travel</span><span>Cello</span><span>Parkour</span><span>Mixed martial arts</span><span>History</span><span>Photos that tell little stories</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="big">ZOE WACKER</div>
+    <p class="mono">Menlo Park, California &middot; &copy; 2026</p>
+  </div>
+</footer>
+
+<div class="label">Mockup 5B &middot; After Dark</div>
+</body>
+</html>

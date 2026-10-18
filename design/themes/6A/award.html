@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinderello · Peninsula Photo Contest 2025 · Zoe Wacker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+SC:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7EFE3; --sea:#F1E3D0; --rule:#E2CDB2;
+  --land:#D98C5F; --land-edge:#B66940;
+  --rose:#D45D79; --rose-ink:#B03F5B;
+  --ink:#3A2820; --ink-2:#6E5244; --marigold:#E3A03A; --nile:#6F9C98;
+  --serif:"Cormorant Garamond", Georgia, serif;
+  --sc:"Cormorant SC", "Cormorant Garamond", Georgia, serif;
+  --sans:"DM Sans", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);overflow-x:hidden;
+  background-image:radial-gradient(ellipse at 15% 0%, rgba(227,160,58,.10), transparent 55%),radial-gradient(ellipse at 100% 30%, rgba(212,93,121,.07), transparent 50%);}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:30px 0 18px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand svg{width:42px;height:42px;flex:none}
+.brand b{display:block;font:600 34px/1 var(--serif);letter-spacing:.01em}
+.brand small{display:block;font:600 13px/1 var(--sc);letter-spacing:.2em;color:var(--ink-2);margin-top:6px}
+.coords{font:500 15px/1.3 var(--sc);letter-spacing:.14em;color:var(--ink-2);text-align:right}
+.coords em{font-style:normal;color:var(--rose-ink)}
+nav.main{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);position:relative}
+nav.main::before,nav.main::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--ink);opacity:.35}
+nav.main::before{top:3px} nav.main::after{bottom:3px}
+nav.main ul{list-style:none;margin:0;padding:13px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 0}
+nav.main li{display:flex;align-items:center}
+nav.main li+li::before{content:"";width:5px;height:5px;background:var(--rose);transform:rotate(45deg);margin:0 18px;opacity:.8}
+nav.main a{font:600 17px/1 var(--sc);letter-spacing:.12em;text-decoration:none;color:var(--ink);padding:4px 0;border-bottom:1px solid transparent}
+nav.main a:hover{color:var(--rose-ink);border-color:var(--rose)}
+nav.main a[aria-current]{color:var(--rose-ink)}
+
+.crumbs{font:600 13.5px/1.4 var(--sc);letter-spacing:.16em;color:var(--ink-2);padding:28px 0 0}
+.crumbs a{text-decoration:none;border-bottom:1px solid var(--rule)}
+.crumbs a:hover{color:var(--rose-ink);border-color:var(--rose)}
+.crumbs span{color:var(--rose);margin:0 8px}
+
+.head{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;padding:38px 0 30px}
+.kicker{font:600 14px/1.3 var(--sc);letter-spacing:.24em;color:var(--rose-ink);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+.kicker::before{content:"";width:34px;height:1px;background:var(--rose)}
+h1{font:500 clamp(42px,5.6vw,80px)/.98 var(--serif);letter-spacing:-.015em;margin:0}
+.head .sub{font:italic 400 clamp(21px,2.2vw,28px)/1.25 var(--serif);color:var(--rose-ink);margin:14px 0 0}
+.seal{width:132px;height:132px;flex:none}
+
+.plate{border:1px solid var(--ink);padding:9px;background:var(--paper);position:relative;box-shadow:0 30px 60px -40px rgba(58,40,32,.5)}
+.plate::before{content:"";position:absolute;inset:4px;border:1px solid var(--ink);opacity:.28;pointer-events:none}
+.plate img{width:100%;aspect-ratio:1600/1067;object-fit:cover}
+.plate figcaption{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 6px 4px;align-items:baseline}
+.plate figcaption b{font:italic 500 24px/1.2 var(--serif)}
+.plate figcaption b small{font:600 12px/1 var(--sc);letter-spacing:.2em;color:var(--rose-ink);font-style:normal;margin-right:12px}
+.plate figcaption span{font:500 12px/1.4 var(--sans);letter-spacing:.1em;color:var(--ink-2);text-transform:uppercase}
+.ticks{position:absolute;left:9px;right:9px;top:-14px;display:flex;justify-content:space-between;font:500 10px/1 var(--sans);letter-spacing:.06em;color:#9A7A63}
+
+.body{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:72px;padding:76px 0 30px}
+.label{font:600 14px/1.3 var(--sc);letter-spacing:.22em;color:var(--rose-ink)}
+.story h2{font:500 clamp(32px,3.4vw,46px)/1.05 var(--serif);margin:10px 0 28px}
+.story h2 i{color:var(--rose-ink)}
+.story p{font:400 21px/1.6 var(--serif);margin:0 0 22px;max-width:36em;text-wrap:pretty}
+.story p:first-of-type::first-letter{float:left;font:500 82px/.78 var(--serif);color:var(--rose-ink);margin:8px 12px 0 0}
+.story .pull{font:italic 400 clamp(26px,2.6vw,34px)/1.3 var(--serif);color:var(--ink);border-left:2px solid var(--rose);padding:4px 0 4px 26px;margin:36px 0;max-width:24em}
+
+aside .box{border:1px solid var(--ink);padding:7px;background:var(--paper);position:relative}
+aside .box::before{content:"";position:absolute;inset:3px;border:1px solid var(--ink);opacity:.25;pointer-events:none}
+.inset{background:var(--sea);position:relative}
+.inset svg{display:block;width:100%;height:auto}
+.inset .title{position:absolute;left:10px;bottom:10px;font:600 12px/1 var(--sc);letter-spacing:.2em;color:var(--ink);background:rgba(247,239,227,.9);padding:5px 7px 4px;border:1px solid var(--ink)}
+.i-land{fill:var(--land);stroke:var(--land-edge);stroke-width:.8}
+.i-coast{fill:none;stroke:var(--land);stroke-width:10;opacity:.13}
+.i-grat{stroke:#C9AE8E;stroke-width:.6;fill:none}
+.i-nile{fill:none;stroke:var(--nile);stroke-width:2.2;stroke-linecap:round}
+.i-nile2{fill:none;stroke:var(--nile);stroke-width:1.3;stroke-linecap:round}
+.i-lake{fill:var(--nile);opacity:.85}
+.i-sea{font:italic 400 12px var(--serif);fill:#9A7A63;letter-spacing:.14em}
+.i-name{font:600 10.5px var(--sc);fill:var(--ink);letter-spacing:.08em;paint-order:stroke;stroke:#E8A57C;stroke-width:2.5px}
+.i-country{font:600 15px var(--sc);fill:#FBE9D8;letter-spacing:.5em}
+.i-edge{font:500 8px var(--sans);fill:#9A7A63}
+.ring{animation:pulse 2.2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pulse{0%{transform:scale(.5);opacity:1}100%{transform:scale(2.6);opacity:0}}
+dl.legend{margin:0;padding:18px 12px 8px}
+dl.legend div{display:grid;grid-template-columns:118px 1fr;gap:14px;padding:10px 0;border-top:1px solid var(--rule)}
+dl.legend div:first-child{border-top:0}
+dl.legend dt{font:600 13px/1.4 var(--sc);letter-spacing:.14em;color:var(--rose-ink)}
+dl.legend dd{margin:0;font-size:14.5px;line-height:1.45}
+dl.legend dd em{font:italic 400 17px/1.3 var(--serif)}
+.scale{display:flex;align-items:center;gap:10px;padding:4px 12px 12px;font:500 10.5px/1 var(--sans);letter-spacing:.08em;color:var(--ink-2);text-transform:uppercase}
+.scale i{display:block;height:6px;width:120px;border:1px solid var(--ink);background:linear-gradient(90deg,var(--ink) 0 25%,transparent 25% 50%,var(--ink) 50% 75%,transparent 75%)}
+
+.after{display:grid;grid-template-columns:360px 1fr;gap:72px;padding:70px 0 90px;border-top:1px solid var(--rule);margin-top:50px;align-items:start}
+.snap{margin:0;border:1px solid var(--ink);padding:7px;background:var(--paper);transform:rotate(-1.2deg);box-shadow:5px 5px 0 rgba(212,93,121,.22)}
+.snap img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.snap figcaption{font:italic 400 18px/1.3 var(--serif);color:var(--ink-2);padding:10px 4px 2px;text-align:center}
+.others h2{font:500 clamp(32px,3.4vw,46px)/1.05 var(--serif);margin:10px 0 24px}
+.others h2 i{color:var(--rose-ink)}
+.others ol{list-style:none;margin:0;padding:0;counter-reset:a}
+.others li{counter-increment:a}
+.others ol a{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:baseline;padding:17px 0;border-top:1px solid var(--rule);text-decoration:none}
+.others li:last-child > a{border-bottom:1px solid var(--rule)}
+.others ol a::before{content:counter(a,upper-roman);font:600 14px/1 var(--sc);letter-spacing:.1em;color:var(--rose-ink)}
+.others b{display:block;font:600 21px/1.2 var(--serif)}
+.others span{display:block;font-size:14px;color:var(--ink-2);margin-top:3px}
+.others small{font:600 13px/1 var(--sc);letter-spacing:.14em;color:var(--ink-2)}
+.others ol a:hover b{color:var(--rose-ink)}
+.others li.here > a{background:linear-gradient(90deg,rgba(212,93,121,.10),transparent 70%);padding-left:10px;margin-left:-10px}
+.others li.here small{color:var(--rose-ink)}
+.back{display:inline-flex;align-items:center;gap:10px;margin-top:34px;font:500 12.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--rose);padding-bottom:5px}
+.back:hover{color:var(--rose-ink)}
+
+footer{border-top:1px solid var(--ink);padding:26px 0 70px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font:500 14px/1.4 var(--sc);letter-spacing:.14em;color:var(--ink-2)}
+.mock{position:fixed;right:14px;bottom:14px;z-index:20;background:var(--ink);color:var(--paper);font:500 11px/1 var(--sans);letter-spacing:.08em;padding:8px 11px;border-radius:2px;opacity:.92}
+
+@media (max-width:1080px){
+  .body{grid-template-columns:1fr;gap:50px}
+  aside{max-width:520px}
+  .after{grid-template-columns:300px 1fr;gap:48px}
+}
+@media (max-width:760px){
+  .wrap{padding:0 16px}
+  .top{padding:20px 0 14px}
+  .brand b{font-size:27px} .brand svg{width:34px;height:34px}
+  .coords{display:none}
+  nav.main ul{padding:11px 0;gap:8px 0}
+  nav.main li+li::before{margin:0 10px;width:4px;height:4px}
+  nav.main a{font-size:15px;letter-spacing:.08em}
+  .crumbs{font-size:12.5px;letter-spacing:.1em;padding-top:20px}
+  .head{grid-template-columns:1fr;gap:20px;padding:26px 0 30px}
+  .seal{display:none}
+  .plate{padding:5px}
+  .plate::before{inset:2px}
+  .ticks{display:none}
+  .plate figcaption b{font-size:20px}
+  .body{padding:48px 0 10px;gap:44px}
+  .story p{font-size:19px}
+  .story p:first-of-type::first-letter{font-size:66px}
+  .story .pull{padding-left:18px;margin:28px 0}
+  dl.legend div{grid-template-columns:96px 1fr;gap:10px}
+  .after{grid-template-columns:1fr;gap:44px;padding:50px 0 60px;margin-top:30px}
+  .snap{max-width:300px;margin:0 auto}
+  .others ol a{grid-template-columns:34px 1fr;}
+  .others small{grid-column:2}
+}
+</style>
+</head>
+<body>
+<div class="mock">Mockup 6A · Sunset Map</div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="index.html" aria-label="Zoe Wacker, home">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="#3A2820" stroke-width="1"/><circle cx="24" cy="24" r="18" fill="none" stroke="#3A2820" stroke-width=".6" stroke-dasharray="1 2.2"/><path d="M24 4 L28 24 L24 44 L20 24Z" fill="#D45D79"/><path d="M4 24 L24 20.5 L44 24 L24 27.5Z" fill="#D98C5F"/><path d="M24 4 L28 24 L24 24Z" fill="#3A2820" opacity=".35"/><circle cx="24" cy="24" r="2.2" fill="#F7EFE3" stroke="#3A2820" stroke-width=".8"/></svg>
+      <span><b>Zoe Wacker</b><small>A Field Atlas</small></span>
+    </a>
+    <div class="coords">Cairo, Egypt<br><em>30°01′ N</em> · <em>31°15′ E</em></div>
+  </header>
+  <nav class="main" aria-label="Main">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Travel</a></li>
+      <li><a href="index.html#honors" aria-current="page">Photography</a></li>
+      <li><a href="#">Music</a></li>
+      <li><a href="#">Geography</a></li>
+      <li><a href="#">Guardian Arts</a></li>
+      <li><a href="#">Academics</a></li>
+    </ul>
+  </nav>
+
+  <div class="crumbs"><a href="index.html">Atlas</a><span>›</span><a href="#">Photography</a><span>›</span><a href="index.html#honors">Awards</a><span>›</span>Peninsula 2025</div>
+
+  <section class="head">
+    <div>
+      <p class="kicker">Six Fifty · Peninsula Photo Contest</p>
+      <h1>Peninsula Photo Contest 2025</h1>
+      <p class="sub">Honorable Mention, Youth Division &mdash; &ldquo;Moments&rdquo;</p>
+    </div>
+    <svg class="seal" viewBox="0 0 140 140" aria-hidden="true">
+      <defs><path id="sc" d="M70 70 m-50 0 a50 50 0 1 1 100 0 a50 50 0 1 1 -100 0"/></defs>
+      <circle cx="70" cy="70" r="66" fill="none" stroke="#3A2820" stroke-width="1"/>
+      <circle cx="70" cy="70" r="61" fill="none" stroke="#3A2820" stroke-width=".5" stroke-dasharray="1 3"/>
+      <circle cx="70" cy="70" r="38" fill="#D45D79"/>
+      <text style="font:600 10.5px 'Cormorant SC',serif;letter-spacing:.2em;fill:#3A2820"><textPath href="#sc" textLength="300">Honorable Mention · Youth · Moments ·</textPath></text>
+      <text x="70" y="66" text-anchor="middle" style="font:italic 500 17px 'Cormorant Garamond',serif;fill:#F7EFE3">Six Fifty</text>
+      <text x="70" y="82" text-anchor="middle" style="font:600 9px 'Cormorant SC',serif;letter-spacing:.2em;fill:#F7EFE3">2025</text>
+    </svg>
+  </section>
+
+  <figure class="plate" style="margin:0">
+    <div class="ticks" aria-hidden="true"><span>31°15′ E</span><span>Plate · Cinderello</span><span>30°02′ N</span></div>
+    <img src="../../../public/images/photography_awards/cinderello.jpg" alt="Cinderello: a caretaker sweeps the red carpets of the vast Mosque–Madrasa of Sultan Hasan in Cairo, lamps hanging above him">
+    <figcaption><b><small>The photograph</small>&ldquo;Cinderello&rdquo;</b><span>Mosque–Madrasa of Sultan Ḥasan · Historic Cairo · 2025</span></figcaption>
+  </figure>
+
+  <div class="body">
+    <article class="story">
+      <div class="label">In her words</div>
+      <h2>A broom, a sunbeam, and <i>a lot of carpet</i></h2>
+      <p>The Six Fifty Peninsula Photo Contest is presented by the Palo Alto Weekly and the Palo Alto Art Center and is open to photographers who live, work, or attend school in the 650 area code. There were over 1,200 entries across six categories.</p>
+      <p>My winning photo, <em>Cinderello</em>, was taken at the Mosque–Madrasa of Sultan Ḥasan in Historic Cairo. A man was sweeping the carpets, and the light caught the dust just right&mdash;he looked like he needed a fairy godmother, which made me think of Cinderella. I tried to frame the scale of the space against a single everyday gesture, so the scene feels both grand and human.</p>
+      <p class="pull">&ldquo;The scene feels both grand and human.&rdquo;</p>
+      <p>The photograph was exhibited at the Palo Alto Art Center from September&ndash;December 2025. I was the youngest winner; the other Youth Division awardees were mostly juniors and seniors. It was exciting (and a little intimidating!) to be shown alongside older students whose work I admire.</p>
+    </article>
+
+    <aside>
+      <div class="label" style="margin-bottom:14px">Where it was taken</div>
+      <div class="box">
+        <div class="inset">
+          <span class="title">Inset · Egypt</span>
+          <svg viewBox="0 0 308 253" role="img" aria-label="Inset map of Egypt with the Nile, marking Cairo">
+            <g class="i-grat"><path d="M22 0V253M132 0V253M242 0V253M0 66H308M0 176H308"/></g>
+            <path class="i-coast" d="M-22.0 126.5Q-22.0 -11.0 -11.0 5.5Q0.0 22.0 11.0 26.4Q22.0 30.8 44.0 34.1Q66.0 37.4 88.0 41.8Q110.0 46.2 125.4 39.6Q140.8 33.0 152.9 31.9Q165.0 30.8 173.8 35.2Q182.6 39.6 203.5 38.5Q224.4 37.4 232.1 57.2Q239.8 77.0 232.1 95.7Q224.4 114.4 217.8 108.9Q211.2 103.4 200.2 85.8Q189.2 68.2 189.2 71.5Q189.2 74.8 200.2 96.8Q211.2 118.8 217.8 130.9Q224.4 143.0 231.0 157.3Q237.6 171.6 246.4 187.0Q255.2 202.4 266.2 217.8Q277.2 233.2 286.0 248.6Q294.8 264.0 136.4 264.0Q-22.0 264.0 -22.0 126.5Z"/>
+            <path class="i-coast" d="M235.4 53.9Q239.8 77.0 240.9 78.1Q242.0 79.2 250.8 94.6Q259.6 110.0 268.4 127.6Q277.2 145.2 288.2 168.3Q299.2 191.4 310.2 211.2Q321.2 231.0 325.6 247.5Q330.0 264.0 330.0 126.5Q330.0 -11.0 279.4 -11.0Q228.8 -11.0 245.3 -22.0Q261.8 -33.0 246.4 -1.1Q231.0 30.8 235.4 53.9Z"/>
+            <path class="i-land" d="M-22.0 126.5Q-22.0 -11.0 -11.0 5.5Q0.0 22.0 11.0 26.4Q22.0 30.8 44.0 34.1Q66.0 37.4 88.0 41.8Q110.0 46.2 125.4 39.6Q140.8 33.0 152.9 31.9Q165.0 30.8 173.8 35.2Q182.6 39.6 203.5 38.5Q224.4 37.4 232.1 57.2Q239.8 77.0 232.1 95.7Q224.4 114.4 217.8 108.9Q211.2 103.4 200.2 85.8Q189.2 68.2 189.2 71.5Q189.2 74.8 200.2 96.8Q211.2 118.8 217.8 130.9Q224.4 143.0 231.0 157.3Q237.6 171.6 246.4 187.0Q255.2 202.4 266.2 217.8Q277.2 233.2 286.0 248.6Q294.8 264.0 136.4 264.0Q-22.0 264.0 -22.0 126.5Z"/>
+            <path class="i-land" d="M235.4 53.9Q239.8 77.0 240.9 78.1Q242.0 79.2 250.8 94.6Q259.6 110.0 268.4 127.6Q277.2 145.2 288.2 168.3Q299.2 191.4 310.2 211.2Q321.2 231.0 325.6 247.5Q330.0 264.0 330.0 126.5Q330.0 -11.0 279.4 -11.0Q228.8 -11.0 245.3 -22.0Q261.8 -33.0 246.4 -1.1Q231.0 30.8 235.4 53.9Z"/>
+            <path class="i-lake" d="M191.4 207.4Q195.8 199.1 198.0 205.2Q200.2 211.2 195.8 220.0Q191.4 228.8 185.9 235.4Q180.4 242.0 170.5 248.6Q160.6 255.2 165.0 247.5Q169.4 239.8 178.2 227.7Q187.0 215.6 191.4 207.4Z"/>
+            <path class="i-nile" d="M159.5 64.9Q156.2 81.4 153.5 91.3Q150.7 101.2 150.2 110.0Q149.6 118.8 154.0 125.4Q158.4 132.0 163.9 138.6Q169.4 145.2 177.1 149.6Q184.8 154.0 188.6 158.4Q192.5 162.8 190.9 169.4Q189.2 176.0 192.5 185.9Q195.8 195.8 196.4 201.3L196.9 206.8"/>
+            <path class="i-nile2" d="M159.5 64.9Q151.8 52.8 146.3 43.4L140.8 34.1"/>
+            <path class="i-nile2" d="M159.5 64.9Q162.8 50.6 167.8 41.8L172.7 33.0"/>
+            <text class="i-sea" x="96" y="17" style="font-size:10.5px">MEDITERRANEAN SEA</text>
+            <text class="i-sea" transform="translate(262 150) rotate(58)">RED SEA</text>
+            <text class="i-country" x="40" y="140">EGYPT</text>
+            <text class="i-edge" x="134" y="250">30°E</text><text class="i-edge" x="244" y="250">35°E</text>
+            <text class="i-edge" x="290" y="64">30°N</text><text class="i-edge" x="290" y="174">25°N</text>
+            <circle cx="130.2" cy="39.6" r="2.5" fill="#3A2820"/><text class="i-name" x="124" y="54" text-anchor="end">Alexandria</text>
+            <circle cx="190.1" cy="160.8" r="2.5" fill="#3A2820"/><text class="i-name" x="198" y="164">Luxor</text>
+            <circle cx="195.8" cy="196" r="2.5" fill="#3A2820"/><text class="i-name" x="204" y="199">Aswan</text>
+            <circle cx="156.9" cy="66.4" r="2" fill="#3A2820"/><text class="i-name" x="116" y="80">Giza</text>
+            <circle class="ring" cx="159.6" cy="65.3" r="7" fill="none" stroke="#D45D79" stroke-width="1.5"/>
+            <circle cx="159.6" cy="65.3" r="5.5" fill="#D45D79" stroke="#3A2820" stroke-width="1.2"/>
+            <circle cx="159.6" cy="65.3" r="1.6" fill="#F7EFE3"/>
+            <text class="i-name" x="170" y="62" style="font-size:13px">Cairo</text>
+          </svg>
+        </div>
+        <dl class="legend">
+          <div><dt>Location</dt><dd>Mosque–Madrasa of Sultan Ḥasan, Historic Cairo</dd></div>
+          <div><dt>Coordinates</dt><dd>30.0324° N, 31.2565° E</dd></div>
+          <div><dt>From home</dt><dd>About 12,000 km (7,470 mi) from Menlo Park</dd></div>
+          <div><dt>Presented by</dt><dd>Palo Alto Weekly &amp; Palo Alto Art Center</dd></div>
+          <div><dt>Division</dt><dd>Youth &middot; <em>Moments</em></dd></div>
+          <div><dt>Result</dt><dd>Honorable Mention</dd></div>
+          <div><dt>Field</dt><dd>1,200+ entries across six categories</dd></div>
+          <div><dt>Exhibited</dt><dd>Palo Alto Art Center, Sept&ndash;Dec 2025</dd></div>
+        </dl>
+        <div class="scale"><i></i>0 &mdash; 500 km (approx.)</div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="after">
+    <figure class="snap">
+      <img src="../../../public/images/photography_awards/650_award_2025.jpg" alt="Zoe accepting the Peninsula Photo Contest award">
+      <figcaption>Accepting the award</figcaption>
+    </figure>
+    <div class="others">
+      <div class="label">More on the map</div>
+      <h2>Other honors, <i>2025 – 2026</i></h2>
+      <ol>
+        <li><a href="#"><span><b>Travel Photographer of the Year 2025</b><span>Young TPOTY (14 &amp; under) Runner-Up · Places collection exhibited internationally in 2026</span></span><small>2025</small></a></li>
+        <li class="here"><a href="award.html" aria-current="page"><span><b>Six Fifty Peninsula Photo Contest 2025</b><span>Honorable Mention, Youth &ldquo;Moments&rdquo; · You are here</span></span><small>2025</small></a></li>
+        <li><a href="#"><span><b>National Photography Competition for Kids</b><span>Winner &ldquo;Home is Where the Heart Is&rdquo; &amp; &ldquo;Life in Red&rdquo; · Notable Entries</span></span><small>2025–26</small></a></li>
+        <li><a href="#"><span><b>No Frames International Youth Photo Contest 2026</b><span>Honorable Mention, under-14 Nature · 13 photos accepted</span></span><small>2026</small></a></li>
+        <li><a href="#"><span><b>Global Peace Photo Award 2026</b><span>Shortlisted, Children&rsquo;s Peace Image of the Year &mdash; &ldquo;Faces of Peace&rdquo;</span></span><small>2026</small></a></li>
+      </ol>
+      <a class="back" href="index.html">&larr; Back to the map</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Zoe Wacker · Menlo Park, California</span>
+    <span>Drawn by hand, more or less · 2026</span>
+  </footer>
+</div>
+</body>
+</html>

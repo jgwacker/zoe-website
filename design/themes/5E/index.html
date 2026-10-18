@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoe Wacker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF3E8;
+    --cream-2:#F5E8D8;
+    --paper:#FFFAF3;
+    --ink:#2B1B18;
+    --muted:#6F5A52;
+    --rose:#DE4A6E;
+    --orange:#F27A2F;
+    --marigold:#F3AA3C;
+    --terracotta:#B9472C;
+    --line:#E7D5C1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--cream);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;font-size:17px;line-height:1.6;overflow-x:hidden}
+  a{color:inherit}
+  img{display:block;max-width:100%}
+  .display{font-family:"Big Shoulders Display",Impact,sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:.01em;line-height:.88}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(251,243,232,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:1240px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:28px}
+  .brand{font-family:"Big Shoulders Display",sans-serif;font-weight:900;font-size:26px;text-transform:uppercase;letter-spacing:.02em;text-decoration:none;white-space:nowrap}
+  .brand span{color:var(--orange)}
+  .nav ul{list-style:none;display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+  .nav li a{display:block;text-decoration:none;font-size:14px;font-weight:500;padding:7px 12px;border-radius:999px;color:var(--muted);transition:background .2s,color .2s}
+  .nav li a:hover{color:var(--ink);background:var(--cream-2)}
+  .nav li a.on{color:#fff;background:var(--ink)}
+
+  /* ---------- stage hero ---------- */
+  .stage{position:relative;overflow:hidden;isolation:isolate;padding:120px 32px 110px;text-align:center}
+  .stage::after{content:"";position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(to bottom,rgba(251,243,232,0),var(--cream));z-index:-1}
+  .beam{position:absolute;top:-140px;width:1500px;height:1200px;z-index:-2;filter:blur(38px);mix-blend-mode:multiply;transform-origin:50% 0;pointer-events:none}
+  .beam.o{left:calc(50% - 1080px);background:conic-gradient(from 168deg at 50% 0%,transparent 0deg,rgba(242,122,47,.0) 2deg,rgba(242,122,47,.55) 12deg,rgba(243,170,60,.35) 20deg,transparent 28deg);transform:rotate(-24deg);animation:sweepO 11s ease-in-out infinite alternate}
+  .beam.p{left:calc(50% - 420px);background:conic-gradient(from 166deg at 50% 0%,transparent 0deg,rgba(222,74,110,.0) 2deg,rgba(222,74,110,.5) 13deg,rgba(240,110,130,.3) 21deg,transparent 29deg);transform:rotate(24deg);animation:sweepP 13s ease-in-out infinite alternate}
+  .lamp{position:absolute;top:-30px;width:90px;height:60px;border-radius:50%;filter:blur(18px);z-index:-1}
+  .lamp.o{left:calc(50% - 600px);background:rgba(242,122,47,.7)}
+  .lamp.p{right:calc(50% - 600px);background:rgba(222,74,110,.65)}
+  .pool{position:absolute;left:50%;top:58%;width:760px;height:220px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.75),rgba(255,236,214,.4) 55%,transparent);filter:blur(10px);z-index:-1}
+  @keyframes sweepO{from{transform:rotate(-27deg)}to{transform:rotate(-19deg)}}
+  @keyframes sweepP{from{transform:rotate(27deg)}to{transform:rotate(19deg)}}
+  @media (prefers-reduced-motion:reduce){.beam{animation:none}}
+
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta);margin-bottom:22px}
+  .kicker::before,.kicker::after{content:"";width:28px;height:2px;background:linear-gradient(90deg,var(--orange),var(--rose))}
+  .stage h1{font-size:clamp(84px,15vw,220px);color:var(--ink)}
+  .stage h1 .last{display:block;background:linear-gradient(95deg,var(--orange) 10%,var(--rose) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stage .tag{margin:28px auto 0;max-width:560px;font-size:19px;color:var(--muted)}
+  .chips{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:30px}
+  .chips span{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:8px 16px;border-radius:999px;background:var(--paper);border:1px solid var(--line)}
+
+  /* ---------- intro ---------- */
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+  .intro{display:grid;grid-template-columns:320px 1fr;gap:64px;align-items:center;padding:40px 0 100px}
+  .portrait{position:relative}
+  .portrait img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:20px;box-shadow:0 30px 60px -30px rgba(185,71,44,.45)}
+  .portrait::before{content:"";position:absolute;inset:-26px;border-radius:50%;background:radial-gradient(closest-side,rgba(242,122,47,.32),transparent);z-index:-1;filter:blur(12px)}
+  .intro h2{font-size:clamp(46px,5vw,68px);margin-bottom:22px}
+  .intro h2 em{font-style:normal;color:var(--rose)}
+  .intro p{font-size:19px;max-width:640px;margin-bottom:16px}
+  .intro .sig{font-family:"Big Shoulders Display",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--terracotta);font-size:15px;margin-top:8px}
+
+  /* ---------- section headers ---------- */
+  .sec-head{position:relative;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:36px;isolation:isolate}
+  .sec-head::before{content:"";position:absolute;left:-60px;top:-120px;width:520px;height:300px;z-index:-1;background:conic-gradient(from 150deg at 20% 0%,transparent 0deg,rgba(243,170,60,.35) 14deg,rgba(222,74,110,.22) 30deg,transparent 44deg);filter:blur(30px);pointer-events:none}
+  .sec-head h2{font-size:clamp(52px,6.5vw,96px)}
+  .sec-head .num{font-family:"Big Shoulders Display",sans-serif;font-weight:800;color:var(--orange);font-size:18px;letter-spacing:.14em;display:block;margin-bottom:8px}
+  .sec-head a{font-weight:700;font-size:15px;text-decoration:none;border-bottom:2px solid var(--rose);padding-bottom:2px;white-space:nowrap}
+
+  /* ---------- photo grid ---------- */
+  .photos{padding:20px 0 110px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
+  .ph{grid-column:span 4;margin:0}
+  .ph .frame{overflow:hidden;border-radius:14px;background:var(--cream-2)}
+  .ph img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/2;transition:transform .6s ease}
+  .ph:hover img{transform:scale(1.035)}
+  .ph figcaption{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);padding:10px 2px 0}
+  .ph figcaption b{color:var(--ink);font-weight:700}
+  .ph.wide{grid-column:span 8}
+  .ph.wide img{aspect-ratio:auto;height:100%}
+  .ph.wide .frame{height:calc(100% - 34px)}
+  .ph.tall img{aspect-ratio:4/5}
+  .ph.half{grid-column:span 6}
+
+  /* ---------- awards strip ---------- */
+  .awards{position:relative;overflow:hidden;isolation:isolate;background:var(--ink);color:#FCEFE3;padding:90px 0;margin-bottom:110px}
+  .awards .beam{mix-blend-mode:screen;filter:blur(50px);opacity:.55;top:-200px}
+  .awards .beam.o{left:calc(50% - 1200px)}
+  .awards .beam.p{left:calc(50% - 300px)}
+  .awards .sec-head::before{display:none}
+  .awards .sec-head a{border-color:var(--marigold);color:#FCEFE3}
+  .alist{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:0 56px}
+  .alist li{border-top:1px solid rgba(252,239,227,.18);padding:22px 0}
+  .alist .yr{font-family:"Big Shoulders Display",sans-serif;font-weight:800;color:var(--marigold);letter-spacing:.1em;font-size:14px}
+  .alist h3{font-family:"Big Shoulders Display",sans-serif;font-weight:800;text-transform:uppercase;font-size:28px;line-height:1.02;margin:4px 0 6px}
+  .alist p{color:rgba(252,239,227,.72);font-size:15px}
+  .alist a{text-decoration:none;display:block}
+  .alist a h3 span{color:var(--orange)}
+  .alist li.feature{position:relative}
+  .alist li.feature a:hover h3{color:var(--marigold)}
+
+  /* ---------- section tiles ---------- */
+  .sections{padding-bottom:120px}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .tile{position:relative;display:block;text-decoration:none;border-radius:18px;overflow:hidden;background:var(--paper);border:1px solid var(--line);transition:transform .3s ease,box-shadow .3s ease}
+  .tile:hover{transform:translateY(-4px);box-shadow:0 26px 50px -28px rgba(222,74,110,.55)}
+  .tile img{width:100%;aspect-ratio:16/10;object-fit:cover}
+  .tile .t{padding:18px 20px 22px}
+  .tile h3{font-family:"Big Shoulders Display",sans-serif;font-weight:900;text-transform:uppercase;font-size:34px;line-height:1}
+  .tile p{font-size:15px;color:var(--muted);margin-top:6px}
+  .tile .arrow{position:absolute;right:18px;bottom:22px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--orange),var(--rose));color:#fff;font-weight:700}
+
+  /* ---------- music quote ---------- */
+  .quote{position:relative;overflow:hidden;isolation:isolate;text-align:center;padding:100px 32px 120px}
+  .quote .beam{top:-260px;opacity:.75}
+  .quote blockquote{font-family:"Big Shoulders Display",sans-serif;font-weight:800;text-transform:uppercase;font-size:clamp(40px,5.4vw,78px);line-height:.98;max-width:1000px;margin:0 auto}
+  .quote blockquote span{color:var(--rose)}
+  .quote cite{display:block;margin-top:22px;font-style:normal;color:var(--muted);font-size:15px}
+  .gigs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin-top:30px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--terracotta)}
+
+  footer{border-top:1px solid var(--line);padding:34px 32px;text-align:center;color:var(--muted);font-size:14px}
+  .mock{position:fixed;left:14px;bottom:14px;z-index:50;font-size:12px;font-weight:700;letter-spacing:.04em;background:var(--ink);color:#FCEFE3;padding:7px 12px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:980px){
+    .nav-inner{flex-wrap:wrap;gap:10px}
+    .nav ul{margin-left:0;width:100%;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+    .nav ul::-webkit-scrollbar{display:none}
+    .nav li a{white-space:nowrap}
+    .intro{grid-template-columns:1fr;gap:36px}
+    .portrait{max-width:300px}
+    .tiles{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:640px){
+    body{font-size:16px}
+    .nav-inner{padding:12px 16px}
+    .wrap{padding:0 16px}
+    .stage{padding:80px 16px 70px}
+    .beam{width:900px;height:800px}
+    .beam.o{left:calc(50% - 650px)}
+    .beam.p{left:calc(50% - 250px)}
+    .lamp.o{left:-20px}.lamp.p{right:-20px}
+    .pool{width:360px}
+    .stage .tag{font-size:17px}
+    .intro{padding:20px 0 70px}
+    .intro p{font-size:17px}
+    .sec-head{flex-direction:column;align-items:flex-start}
+    .sec-head::before{width:320px;left:-40px}
+    .grid{grid-template-columns:1fr;gap:26px}
+    .ph,.ph.wide,.ph.half{grid-column:auto}
+    .ph.wide img{aspect-ratio:3/2}
+    .ph.wide .frame{height:auto}
+    .photos{padding-bottom:80px}
+    .awards{padding:64px 0;margin-bottom:80px}
+    .alist{grid-template-columns:1fr}
+    .tiles{grid-template-columns:1fr}
+    .sections{padding-bottom:70px}
+    .quote{padding:70px 16px 90px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Zoe <span>Wacker</span></a>
+    <ul>
+      <li><a class="on" href="index.html">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Travel</a></li>
+      <li><a href="award.html">Photography</a></li>
+      <li><a href="#">Music</a></li>
+      <li><a href="#">Geography</a></li>
+      <li><a href="#">Guardian Arts</a></li>
+      <li><a href="#">Academics</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="stage">
+  <div class="beam o"></div>
+  <div class="beam p"></div>
+  <div class="lamp o"></div>
+  <div class="lamp p"></div>
+  <div class="pool"></div>
+  <div class="kicker">Photographer · Cellist · Menlo Park, CA</div>
+  <h1 class="display">Zoe<span class="last">Wacker</span></h1>
+  <p class="tag">Photos that tell little stories, music I can feel in my chest, and a lot of places I want to see next.</p>
+  <div class="chips"><span>Photography</span><span>Cello</span><span>Travel</span><span>Geography</span><span>Parkour + MMA</span></div>
+</header>
+
+<main>
+  <section class="wrap intro">
+    <div class="portrait"><img src="../../../public/images/home/about.jpg" alt="Zoe"></div>
+    <div>
+      <h2 class="display">Hi! I'm <em>Zoe.</em></h2>
+      <p>I'm a middle schooler who's always juggling a bunch of different interests. I started this site to keep track of the things I'm working on, the ideas I'm excited about, and the projects that don't always fit neatly into a school folder.</p>
+      <p>Right now, I'm into geography and travel, playing cello and music, and parkour with mixed-martial arts. I also love discovering new places, digging into history, and snapping photos that tell little stories.</p>
+      <p class="sig">Basically, it's my highlight reel.</p>
+    </div>
+  </section>
+
+  <section class="wrap photos">
+    <div class="sec-head">
+      <div><span class="num">01 — Recent work</span><h2 class="display">From my camera</h2></div>
+      <a href="#">Full portfolio</a>
+    </div>
+    <div class="grid">
+      <figure class="ph wide">
+        <div class="frame"><img src="../../../public/images/portfolio/portfolio-64.jpg" alt="Nubian woman laughing and playing a frame drum"></div>
+        <figcaption><b>The Drummer</b><span>Aswan, Egypt</span></figcaption>
+      </figure>
+      <figure class="ph tall">
+        <div class="frame"><img src="../../../public/images/portfolio/portfolio-53.jpg" alt="Red Nubian house with a blue arched door"></div>
+        <figcaption><b>Blue Door</b><span>Aswan, Egypt</span></figcaption>
+      </figure>
+      <figure class="ph tall">
+        <div class="frame"><img src="../../../public/images/portfolio/portfolio-72.jpg" alt="Day of the Dead portrait in a red dress"></div>
+        <figcaption><b>Día de Muertos</b><span>San Francisco</span></figcaption>
+      </figure>
+      <figure class="ph tall">
+        <div class="frame"><img src="../../../public/images/portfolio/portfolio-32.jpg" alt="The Sphinx with a pyramid behind"></div>
+        <figcaption><b>The Sphinx</b><span>Giza, Egypt</span></figcaption>
+      </figure>
+      <figure class="ph tall">
+        <div class="frame"><img src="../../../public/images/portfolio/portfolio-59.jpg" alt="Elder in a galabeya with a cat on a temple pillar"></div>
+        <figcaption><b>Temple Cat</b><span>Aswan, Egypt</span></figcaption>
+      </figure>
+      <figure class="ph half">
+        <div class="frame"><img src="../../../public/images/portfolio/portfolio-21.jpg" alt="Two king penguins on grass"></div>
+        <figcaption><b>King Penguins</b><span>Tierra del Fuego, Chile</span></figcaption>
+      </figure>
+      <figure class="ph half">
+        <div class="frame"><img src="../../../public/images/portfolio/portfolio-45.jpg" alt="Black cat walking across a mosque carpet"></div>
+        <figcaption><b>Night Shift</b><span>Cairo, Egypt</span></figcaption>
+      </figure>
+      <figure class="ph">
+        <div class="frame"><img src="../../../public/images/portfolio/portfolio-9.jpg" alt="Torres del Paine mountains and lake"></div>
+        <figcaption><b>Torres del Paine</b><span>Chile</span></figcaption>
+      </figure>
+      <figure class="ph">
+        <div class="frame"><img src="../../../public/images/portfolio/portfolio-24.jpg" alt="Colorful street mural"></div>
+        <figcaption><b>Walls That Talk</b><span>Valparaíso, Chile</span></figcaption>
+      </figure>
+      <figure class="ph">
+        <div class="frame"><img src="../../../public/images/portfolio/portfolio-69.jpg" alt="Sunset silhouette"></div>
+        <figcaption><b>Last Light</b><span>Kom Ombo, Egypt</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="awards">
+    <div class="beam o"></div>
+    <div class="beam p"></div>
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="num" style="color:var(--marigold)">02 — In the spotlight</span><h2 class="display">Awards</h2></div>
+        <a href="award.html">Read about Cinderello</a>
+      </div>
+      <ul class="alist">
+        <li><span class="yr">2025 · 2026</span><h3>Travel Photographer of the Year</h3><p>Young TPOTY (14 &amp; under) Runner-Up. Places collection exhibited internationally in 2026.</p></li>
+        <li class="feature"><a href="award.html"><span class="yr">2025</span><h3>Six Fifty Peninsula Photo Contest <span>&rarr;</span></h3><p>Honorable Mention, Youth "Moments" — <i>Cinderello</i></p></a></li>
+        <li><span class="yr">2025 · 2026</span><h3>National Photography Competition for Kids</h3><p>Winner, "Home is Where the Heart Is" (Visionary Voyager) and "Life in Red" (Dream Snapper). Notable Entries Nov 2025 &amp; Jun 2026.</p></li>
+        <li><span class="yr">2026</span><h3>No Frames International Youth Photo Contest</h3><p>Honorable Mention, under-14 Nature. 13 photos accepted.</p></li>
+        <li><span class="yr">2026</span><h3>Global Peace Photo Award</h3><p>Shortlisted, Children's Peace Image of the Year — "Faces of Peace"</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap sections">
+    <div class="sec-head">
+      <div><span class="num">03 — Explore</span><h2 class="display">Everything else</h2></div>
+    </div>
+    <div class="tiles">
+      <a class="tile" href="#"><img src="../../../public/images/home/travel.jpg" alt=""><div class="t"><h3>Travel</h3><p>Egypt, Patagonia, London, Rome, Paris</p></div><span class="arrow">&rarr;</span></a>
+      <a class="tile" href="award.html"><img src="../../../public/images/home/photography.jpg" alt=""><div class="t"><h3>Photography</h3><p>Portfolio and awards</p></div><span class="arrow">&rarr;</span></a>
+      <a class="tile" href="#"><img src="../../../public/images/home/music.jpg" alt=""><div class="t"><h3>Music</h3><p>Cello and concerts</p></div><span class="arrow">&rarr;</span></a>
+      <a class="tile" href="#"><img src="../../../public/images/home/geography.jpg" alt=""><div class="t"><h3>Geography</h3><p>Maps, places and history</p></div><span class="arrow">&rarr;</span></a>
+      <a class="tile" href="#"><img src="../../../public/images/portfolio/portfolio-50.jpg" alt=""><div class="t"><h3>Guardian Arts</h3><p>Art projects</p></div><span class="arrow">&rarr;</span></a>
+      <a class="tile" href="#"><img src="../../../public/images/home/academics.jpg" alt=""><div class="t"><h3>Academics</h3><p>Projects that don't fit a folder</p></div><span class="arrow">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="quote">
+    <div class="beam o"></div>
+    <div class="beam p"></div>
+    <blockquote>"Concerts are my favorite because you don't just hear the music — <span>you feel it in your chest.</span>"</blockquote>
+    <cite>Zoe, on music</cite>
+    <div class="gigs"><span>Outside Lands '26</span><span>Ariana Grande '26</span><span>Molly Tuttle '25</span><span>Billie Eilish '25</span><span>Laufey '25 &amp; '24</span><span>Sabrina Carpenter '24</span><span>Cello · Disneyland Main Street '26</span></div>
+  </section>
+</main>
+
+<footer>Zoe Wacker · Menlo Park, California · Photos &copy; 2026 Zoe Wacker</footer>
+<div class="mock">Mockup 5E · Stage Lights</div>
+</body>
+</html>

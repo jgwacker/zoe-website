@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoe Wacker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F2;
+    --paper-2:#F5EFE6;
+    --blush:#F3D9D2;
+    --terra:#D9653B;
+    --terra-deep:#B44E2A;
+    --ink:#2B2522;
+    --ink-soft:#6B5F58;
+    --line:#E6DBD0;
+    --serif:"Cormorant Garamond", Georgia, serif;
+    --sans:"Work Sans", system-ui, -apple-system, sans-serif;
+    --img:"../../../public/images/";
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+
+  /* nav */
+  header.site{border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+  .mark{font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:.01em}
+  .mark span{color:var(--terra)}
+  nav.main ul{list-style:none;margin:0;padding:0;display:flex;gap:26px}
+  nav.main a{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);padding:6px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  nav.main a:hover,nav.main a.on{color:var(--ink);border-color:var(--terra)}
+  .menu-btn{display:none}
+
+  /* intro */
+  .intro{padding:96px 0 72px}
+  .intro .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--terra);margin:0 0 22px}
+  .intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(56px,9vw,128px);line-height:.92;letter-spacing:-.01em;margin:0}
+  .intro h1 em{font-style:italic;color:var(--terra)}
+  .intro .grid{display:grid;grid-template-columns:1.5fr 1fr;gap:64px;align-items:end}
+  .intro p.voice{font-family:var(--serif);font-size:24px;line-height:1.45;font-style:italic;color:var(--ink);margin:0;max-width:30ch;border-left:2px solid var(--terra);padding-left:22px}
+  .intro p.voice small{display:block;font-family:var(--sans);font-style:normal;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:14px}
+
+  /* gallery */
+  .gallery-head{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:22px;margin-bottom:36px}
+  .gallery-head h2,.sec-title{font-family:var(--serif);font-weight:500;font-size:34px;margin:0}
+  .gallery-head a,.more{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--terra)}
+  .gallery-head a:hover,.more:hover{color:var(--terra-deep)}
+  .masonry{columns:3;column-gap:36px}
+  figure.ph{break-inside:avoid;margin:0 0 44px}
+  figure.ph .frame{overflow:hidden;background:var(--paper-2)}
+  figure.ph img{width:100%;height:auto;transition:transform .8s ease}
+  figure.ph:hover img{transform:scale(1.025)}
+  figure.ph figcaption{padding-top:14px;display:grid;grid-template-columns:auto 1fr;column-gap:14px}
+  figure.ph .place{grid-column:1/-1;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--terra);margin-bottom:4px}
+  figure.ph .line{grid-column:1/-1;font-family:var(--serif);font-size:20px;line-height:1.35;font-style:italic;color:var(--ink)}
+
+  /* sections */
+  .sections{padding:56px 0 96px}
+  .sec-list{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:64px;border-top:1px solid var(--line)}
+  .sec-list li{border-bottom:1px solid var(--line)}
+  .sec-list a{display:grid;grid-template-columns:84px 1fr auto;gap:22px;align-items:center;padding:20px 0;transition:background .2s}
+  .sec-list .thumb{width:84px;height:64px;overflow:hidden;background:var(--blush)}
+  .sec-list .thumb img{width:100%;height:100%;object-fit:cover}
+  .sec-list .thumb.blank{display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:30px;font-style:italic;color:var(--terra)}
+  .sec-list h3{font-family:var(--serif);font-weight:500;font-size:26px;margin:0;line-height:1.1}
+  .sec-list p{margin:4px 0 0;font-size:14px;color:var(--ink-soft);line-height:1.5}
+  .sec-list .arr{color:var(--terra);font-size:20px;transition:transform .25s}
+  .sec-list a:hover .arr{transform:translateX(5px)}
+  .sec-list a:hover h3{color:var(--terra-deep)}
+
+  /* awards strip */
+  .awards{background:var(--blush);padding:72px 0 80px}
+  .awards .top{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:36px}
+  .awards .top p{margin:0;font-size:14px;color:var(--ink-soft);max-width:40ch}
+  .strip{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid rgba(43,37,34,.18)}
+  .strip a{display:block;padding:24px 22px 8px 0;margin-right:22px;border-right:1px solid rgba(43,37,34,.12)}
+  .strip a:last-child{border-right:0;margin-right:0}
+  .strip .yr{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-deep)}
+  .strip h4{font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.15;margin:8px 0 8px}
+  .strip p{margin:0;font-size:13.5px;line-height:1.5;color:var(--ink-soft)}
+  .strip a.feat h4{color:var(--ink)}
+  .strip a.feat .go{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--terra)}
+  .strip a:hover h4{color:var(--terra-deep)}
+
+  footer.site{padding:44px 0 56px;font-size:13px;color:var(--ink-soft)}
+  footer.site .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  footer.site .mark{font-size:20px;color:var(--ink)}
+
+  .mock-label{position:fixed;right:14px;bottom:14px;z-index:50;background:var(--ink);color:var(--paper);font-size:11px;letter-spacing:.08em;padding:7px 11px;border-radius:2px;opacity:.88}
+
+  @media (max-width:1100px){
+    nav.main ul{gap:18px}
+    .strip{grid-template-columns:repeat(3,1fr);row-gap:8px}
+    .strip a:nth-child(3){border-right:0}
+  }
+  @media (max-width:900px){
+    .wrap{padding:0 16px}
+    header.site .wrap{height:64px}
+    .menu-btn{display:block;background:none;border:1px solid var(--line);font:500 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;color:var(--ink);cursor:pointer}
+    nav.main{position:absolute;left:0;right:0;top:64px;background:var(--paper);border-bottom:1px solid var(--line);display:none;z-index:20}
+    nav.main.open{display:block}
+    nav.main ul{flex-direction:column;gap:0;padding:8px 16px 16px}
+    nav.main li a{display:block;padding:12px 0;border-bottom:1px solid var(--line)}
+    .intro{padding:56px 0 44px}
+    .intro .grid{grid-template-columns:1fr;gap:32px}
+    .intro p.voice{font-size:21px}
+    .masonry{columns:2;column-gap:18px}
+    figure.ph{margin-bottom:30px}
+    figure.ph .line{font-size:17px}
+    .sec-list{grid-template-columns:1fr}
+    .strip{grid-template-columns:1fr 1fr}
+    .strip a{border-right:0;margin-right:0;padding-right:16px;border-bottom:1px solid rgba(43,37,34,.12);padding-bottom:20px}
+    .awards .top{flex-direction:column;gap:10px}
+  }
+  @media (max-width:560px){
+    .masonry{columns:1}
+    .strip{grid-template-columns:1fr}
+    .sec-list a{grid-template-columns:64px 1fr auto;gap:16px}
+    .sec-list .thumb{width:64px;height:52px}
+    .sec-list h3{font-size:23px}
+    .gallery-head h2,.sec-title{font-size:29px}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap" style="position:relative">
+    <a class="mark" href="index.html">Zoe Wacker<span>.</span></a>
+    <button class="menu-btn" onclick="document.querySelector('nav.main').classList.toggle('open')">Menu</button>
+    <nav class="main">
+      <ul>
+        <li><a class="on" href="index.html">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Travel</a></li>
+        <li><a href="#gallery">Photography</a></li>
+        <li><a href="#">Music</a></li>
+        <li><a href="#">Geography</a></li>
+        <li><a href="#">Guardian Arts</a></li>
+        <li><a href="#">Academics</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <div class="wrap">
+      <p class="eyebrow">Photographs &middot; Cello &middot; Places</p>
+      <div class="grid">
+        <h1>Zoe<br><em>Wacker</em></h1>
+        <p class="voice">&ldquo;I love discovering new places, digging into history, and snapping photos that tell little stories.&rdquo;<small>Menlo Park, California</small></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="wrap">
+      <div class="gallery-head">
+        <h2>Selected photographs</h2>
+        <a href="#">Full portfolio &rarr;</a>
+      </div>
+
+      <div class="masonry">
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-64.jpg" alt="A Nubian woman laughing while holding a frame drum against an ochre wall" loading="lazy"></div>
+          <figcaption><span class="place">Aswan, Egypt</span><span class="line">A frame drum, a huge laugh, and that ochre wall behind her.</span></figcaption>
+        </figure>
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-72.jpg" alt="Portrait of a woman in a red dress with calavera face paint" loading="lazy"></div>
+          <figcaption><span class="place">Mission District, San Francisco</span><span class="line">Calavera face paint and a red dress for D&iacute;a de los Muertos.</span></figcaption>
+        </figure>
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-21.jpg" alt="Two king penguins standing on grass" loading="lazy"></div>
+          <figcaption><span class="place">Tierra del Fuego, Chile</span><span class="line">Two king penguins, standing in the grass like they own it.</span></figcaption>
+        </figure>
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-53.jpg" alt="A bright red Nubian house with a blue arched door" loading="lazy"></div>
+          <figcaption><span class="place">Aswan, Egypt</span><span class="line">Red walls, a blue arched door. Nubian color at full volume.</span></figcaption>
+        </figure>
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-45.jpg" alt="A black cat walking across a patterned mosque carpet" loading="lazy"></div>
+          <figcaption><span class="place">Cairo, Egypt</span><span class="line">A black cat crossing the mosque carpets on its own schedule.</span></figcaption>
+        </figure>
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-9.jpg" alt="The mountains of Torres del Paine above a lake" loading="lazy"></div>
+          <figcaption><span class="place">Torres del Paine, Chile</span><span class="line">The towers rising over the lake. Patagonia makes everything feel enormous.</span></figcaption>
+        </figure>
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-59.jpg" alt="An elder in a galabeya beside a temple pillar with a cat on it" loading="lazy"></div>
+          <figcaption><span class="place">Aswan, Egypt</span><span class="line">An elder in his galabeya, and a cat keeping watch from the pillar.</span></figcaption>
+        </figure>
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-32.jpg" alt="The Sphinx with a pyramid behind it" loading="lazy"></div>
+          <figcaption><span class="place">Giza, Egypt</span><span class="line">The Sphinx, with a pyramid looking over its shoulder.</span></figcaption>
+        </figure>
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-55.jpg" alt="A smiling craftsman giving a thumbs up among woven baskets" loading="lazy"></div>
+          <figcaption><span class="place">Aswan, Egypt</span><span class="line">A thumbs-up from the man surrounded by his woven baskets.</span></figcaption>
+        </figure>
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-24.jpg" alt="A colorful street mural" loading="lazy"></div>
+          <figcaption><span class="place">Valpara&iacute;so, Chile</span><span class="line">In Valpara&iacute;so, the walls do the talking.</span></figcaption>
+        </figure>
+        <figure class="ph">
+          <div class="frame"><img src="../../../public/images/portfolio/portfolio-69.jpg" alt="A silhouette against the sunset" loading="lazy"></div>
+          <figcaption><span class="place">Kom Ombo, Egypt</span><span class="line">Sunset turning everything into shapes.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sections">
+    <div class="wrap">
+      <h2 class="sec-title">Around the site</h2>
+      <ul class="sec-list">
+        <li><a href="#">
+          <div class="thumb"><img src="../../../public/images/home/about.jpg" alt=""></div>
+          <div><h3>About</h3><p>My highlight reel of experiments, adventures, and &ldquo;aha!&rdquo; moments.</p></div>
+          <span class="arr">&rarr;</span></a></li>
+        <li><a href="#">
+          <div class="thumb"><img src="../../../public/images/home/travel.jpg" alt=""></div>
+          <div><h3>Travel</h3><p>Egypt &amp; Chile 2025 &middot; London &amp; Rome 2024 &middot; Paris 2023</p></div>
+          <span class="arr">&rarr;</span></a></li>
+        <li><a href="#gallery">
+          <div class="thumb"><img src="../../../public/images/home/photography.jpg" alt=""></div>
+          <div><h3>Photography</h3><p>Portfolio, awards, and exhibitions.</p></div>
+          <span class="arr">&rarr;</span></a></li>
+        <li><a href="#">
+          <div class="thumb"><img src="../../../public/images/home/music.jpg" alt=""></div>
+          <div><h3>Music</h3><p>&ldquo;Music makes everything in my day feel more colorful.&rdquo; Cello, orchestra, and concerts.</p></div>
+          <span class="arr">&rarr;</span></a></li>
+        <li><a href="#">
+          <div class="thumb"><img src="../../../public/images/home/geography.jpg" alt=""></div>
+          <div><h3>Geography</h3><p>Maps, places, and the history behind them.</p></div>
+          <span class="arr">&rarr;</span></a></li>
+        <li><a href="#">
+          <div class="thumb blank">G</div>
+          <div><h3>Guardian Arts</h3><p>Art projects and work in progress.</p></div>
+          <span class="arr">&rarr;</span></a></li>
+        <li><a href="#">
+          <div class="thumb"><img src="../../../public/images/home/academics.jpg" alt=""></div>
+          <div><h3>Academics</h3><p>The projects that don&rsquo;t fit neatly into a school folder.</p></div>
+          <span class="arr">&rarr;</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="awards" id="awards">
+    <div class="wrap">
+      <div class="top">
+        <h2 class="sec-title">Recognition</h2>
+        <p>Photography awards and exhibitions, 2025&ndash;2026.</p>
+      </div>
+      <div class="strip">
+        <a href="#"><span class="yr">2025 &middot; Runner-Up</span><h4>Travel Photographer of the Year</h4><p>Young TPOTY, 14 &amp; under. Places collection exhibited internationally in 2026.</p></a>
+        <a class="feat" href="award.html"><span class="yr">2025 &middot; Honorable Mention</span><h4>Six Fifty Peninsula Photo Contest</h4><p>Youth &ldquo;Moments&rdquo; &mdash; <em>Cinderello</em></p><span class="go">View the work &rarr;</span></a>
+        <a href="#"><span class="yr">2025&ndash;26 &middot; Winner &times;2</span><h4>National Photography Competition for Kids</h4><p>&ldquo;Home is Where the Heart Is&rdquo; and &ldquo;Life in Red.&rdquo;</p></a>
+        <a href="#"><span class="yr">2026 &middot; Honorable Mention</span><h4>No Frames International Youth Photo Contest</h4><p>Under-14, Nature. 13 photos accepted.</p></a>
+        <a href="#"><span class="yr">2026 &middot; Shortlisted</span><h4>Global Peace Photo Award</h4><p>Children&rsquo;s Peace Image of the Year, &ldquo;Faces of Peace.&rdquo;</p></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="mark">Zoe Wacker</span>
+    <span>Menlo Park, California &middot; All photographs &copy; Zoe Wacker</span>
+  </div>
+</footer>
+
+<div class="mock-label">Mockup 3A &middot; Terracotta Gallery</div>
+</body>
+</html>

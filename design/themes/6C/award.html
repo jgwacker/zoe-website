@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinderello · Peninsula 2025</title>
+<meta name="description" content="Peninsula Photo Contest 2025 — Honorable Mention, Youth Division “Moments”, for the photograph Cinderello.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Sans:ital,wght@0,400..600;1,400..500&family=Oswald:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cover:#5A1830; --cover-2:#74223F; --cover-hi:#8E3352; --emboss:#E9B48F;
+  --paper:#F8F1E6; --paper-2:#F1E5D3; --line:#E3D2BC;
+  --ink:#2A1A1E; --muted:#7A655E; --rose:#B0304F; --orange:#E0662C; --marigold:#D99A2B;
+  --serif:"Fraunces", Georgia, serif; --sans:"Instrument Sans", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace; --stamp:"Oswald", "Arial Narrow", sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#EADCC8;color:var(--ink);font:400 17px/1.6 var(--sans);overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+.f-stamp{font-family:var(--stamp);fill:currentColor;text-transform:uppercase}
+.f-mono{font-family:var(--mono);fill:currentColor}
+.f-serif{font-family:var(--serif);fill:currentColor}
+
+/* mockup label */
+.mock-label{position:fixed;right:12px;bottom:12px;z-index:50;font:500 11px/1 var(--mono);letter-spacing:.06em;
+  background:var(--ink);color:var(--paper);padding:8px 10px;border-radius:4px;opacity:.88}
+
+/* ---------- cover ---------- */
+.cover{position:relative;overflow:hidden;color:var(--emboss);
+  background:
+    radial-gradient(120% 90% at 50% 0%, var(--cover-2) 0%, var(--cover) 62%, #47112A 100%);
+  padding:28px 24px 0}
+.cover::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E")}
+.cover .guill{position:absolute;color:#F2B79A;opacity:.13;pointer-events:none}
+.cover .guill.g1{width:900px;height:900px;left:50%;top:50%;transform:translate(-50%,-46%)}
+.cover .guill.g2{width:520px;height:520px;right:-180px;top:-200px;opacity:.08}
+.cover .guill.g3{width:520px;height:520px;left:-200px;bottom:-260px;opacity:.08}
+.cover-inner{position:relative;z-index:2;max-width:1180px;margin:0 auto}
+.cover-top{display:flex;justify-content:space-between;align-items:center;gap:16px;
+  font:500 11px/1.4 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:#E7A988}
+.cover-top .chip{display:inline-flex;align-items:center;gap:8px}
+.chip-ic{width:30px;height:22px;border:1.5px solid currentColor;border-radius:4px;position:relative;opacity:.8}
+.chip-ic::before{content:"";position:absolute;inset:5px 10px;border:1px solid currentColor;border-radius:9px}
+.emboss{color:#E8AE8A;text-shadow:0 -1px 0 rgba(0,0,0,.45), 0 1px 0 rgba(255,214,190,.28), 0 0 18px rgba(0,0,0,.18)}
+.crest{display:block;width:96px;height:96px;margin:0 auto 18px;color:#E8AE8A;filter:drop-shadow(0 -1px 0 rgba(0,0,0,.4)) drop-shadow(0 1px 0 rgba(255,214,190,.25))}
+
+/* contents nav */
+.contents{margin-top:34px;border-top:1px solid rgba(232,174,138,.28)}
+.contents ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center}
+.contents li{flex:0 0 auto}
+.contents a{display:flex;align-items:baseline;gap:7px;padding:14px 14px 16px;text-decoration:none;
+  font:500 13px/1 var(--sans);letter-spacing:.06em;color:#F1C9AE;border-bottom:2px solid transparent}
+.contents a .pg{font:500 10px/1 var(--mono);color:var(--orange);letter-spacing:0}
+.contents a:hover{color:#fff}
+.contents a[aria-current]{color:#fff;border-bottom-color:var(--orange)}
+
+/* ---------- paper ---------- */
+.moire{
+  background-color:var(--paper);
+  background-image:
+    repeating-radial-gradient(circle at 0% 0%, transparent 0 7px, rgba(176,48,79,.055) 7px 8px),
+    repeating-radial-gradient(circle at 100% 100%, transparent 0 7px, rgba(224,102,44,.05) 7px 8px);
+}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.spread{position:relative;display:grid;grid-template-columns:1fr 1fr;margin:56px auto 0;border-radius:14px;
+  box-shadow:0 1px 0 #fff inset, 0 30px 60px -30px rgba(74,25,38,.45), 0 2px 6px rgba(74,25,38,.12);
+  overflow:hidden}
+.spread::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:70px;transform:translateX(-50%);z-index:1;pointer-events:none;
+  background:linear-gradient(90deg, transparent, rgba(90,40,30,.10) 42%, rgba(90,40,30,.22) 50%, rgba(90,40,30,.10) 58%, transparent)}
+.page{position:relative;padding:44px 48px 40px;min-width:0}
+.page-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  font:500 10.5px/1.3 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:26px}
+.page-head b{color:var(--rose);font-weight:600}
+.page-num{position:absolute;bottom:14px;font:500 11px/1 var(--mono);color:var(--muted)}
+.page:first-child .page-num{left:48px}.page:last-child .page-num{right:48px}
+.punch{position:absolute;right:28px;top:120px;font:600 64px/1 var(--mono);color:rgba(176,48,79,.06);letter-spacing:-.04em;
+  writing-mode:vertical-rl;user-select:none;pointer-events:none}
+
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;margin:0}
+.kicker{font:500 11px/1.3 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--orange)}
+
+/* ---------- stamps ---------- */
+.stamp{display:block;width:var(--w);flex:0 0 auto;
+  transform:translateY(var(--dy)) rotate(var(--r));transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .3s;
+  mix-blend-mode:multiply;opacity:.86;outline-offset:6px;border-radius:50%}
+.stamp svg{display:block;width:100%;height:auto;overflow:visible}
+
+
+
+.stamp:hover,.stamp:focus-visible{transform:translateY(calc(var(--dy) - 6px)) rotate(calc(var(--r) * .25)) scale(1.06);opacity:1}
+.stamp.pale{opacity:.72}
+.stamps{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:18px 22px;padding:6px 0 30px}
+
+
+.stamps .stamp, .stamp{color:var(--ink)}
+
+@media (max-width: 900px){
+  .spread{grid-template-columns:1fr;border-radius:10px}
+  .spread::before{display:none}
+  .page + .page{border-top:1px dashed var(--line)}
+  .page{padding:32px 22px 44px}
+  .page:first-child .page-num,.page:last-child .page-num{left:22px;right:auto}
+  .stamp{width:calc(var(--w) * .74)}
+  .stamps{gap:12px 14px}
+  .punch{display:none}
+  .wrap{padding:0 14px}
+  .contents a{padding:12px 9px 13px;font-size:12.5px}
+}
+
+.cover{padding-bottom:0}
+.cover-mini{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0 4px}
+.cover-mini a.home{display:flex;align-items:center;gap:14px;text-decoration:none}
+.cover-mini .crest{width:52px;height:52px;margin:0}
+.cover-mini .nm{font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:.12em;text-transform:uppercase;font-variation-settings:"opsz" 144}
+.cover-mini .lbl{font:500 10.5px/1.4 var(--mono);letter-spacing:.3em;text-transform:uppercase;color:#E7A988;text-align:right}
+.contents{margin-top:18px}
+
+.crumbs{max-width:1240px;margin:28px auto 0;padding:0 24px;font:500 11px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.crumbs a{color:var(--rose);text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+
+.visa-book{max-width:1240px;margin:18px auto 0;padding:0 24px}
+.vpage{position:relative;border-radius:14px;padding:40px 48px 0;overflow:hidden;
+  box-shadow:0 1px 0 #fff inset, 0 30px 60px -30px rgba(74,25,38,.45), 0 2px 6px rgba(74,25,38,.12)}
+.vband{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  margin:0 -48px 30px;padding:12px 48px;background:var(--cover);color:#F0C1A3;
+  font:500 11px/1.3 var(--mono);letter-spacing:.24em;text-transform:uppercase}
+.vband b{color:var(--orange);font-weight:600}
+.vtitle{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end;margin-bottom:28px}
+.vtitle h1{font-size:clamp(40px,6vw,84px);line-height:.96;font-variation-settings:"opsz" 144;font-weight:500}
+.vtitle h1 em{font-style:italic;color:var(--rose)}
+.vtitle .meta{font:500 12px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:right}
+.vtitle .meta b{display:block;color:var(--ink);font-weight:600}
+
+.hero{position:relative;margin:0}
+.hero-frame{position:relative;padding:12px;background:#fff;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.1), 0 24px 50px -30px rgba(74,25,38,.55)}
+.hero-frame img{width:100%;aspect-ratio:1600/1067;object-fit:cover}
+.hero figcaption{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:12px;font:500 11px/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero figcaption b{color:var(--ink);font-weight:600}
+.entry{position:absolute;right:-18px;bottom:-185px;width:230px;color:var(--ink);transform:rotate(-11deg);mix-blend-mode:multiply;opacity:.9;z-index:3}
+.entry svg{width:100%;height:auto;display:block}
+.exst{display:block;width:230px;color:var(--ink);transform:rotate(-3deg);mix-blend-mode:multiply;opacity:.8;margin:0 0 4px 6px}
+.exst svg{width:100%;height:auto;display:block}
+
+.vbody{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:56px;margin-top:64px;padding-bottom:40px}
+.story .kicker{margin-bottom:12px}
+.story p{margin:0 0 18px;font-size:18px;line-height:1.7;max-width:60ch}
+.story p:first-of-type::first-letter{font-family:var(--serif);font-size:3.4em;float:left;line-height:.8;padding:7px 10px 0 0;color:var(--orange);font-weight:500}
+.story .pull{font:italic 400 clamp(22px,2.4vw,30px)/1.3 var(--serif);color:var(--rose);border-left:3px solid var(--orange);padding:4px 0 4px 20px;margin:28px 0;max-width:30ch}
+.side{display:flex;flex-direction:column;gap:26px;padding-top:150px}
+.record{margin:0;border-top:2px solid var(--ink);padding-top:4px}
+.record div{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.record dt{font:500 10px/1.5 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.record dd{margin:0;font:500 15px/1.45 var(--sans)}
+.accept{margin:0;position:relative;background:#fff;padding:10px 10px 14px;border-radius:3px;transform:rotate(1.6deg);
+  box-shadow:0 1px 2px rgba(0,0,0,.1), 0 20px 40px -26px rgba(74,25,38,.55);max-width:300px;align-self:center}
+.accept img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}
+.accept figcaption{font:italic 400 17px/1.3 var(--serif);color:var(--ink);margin-top:10px;text-align:center}
+.clip{position:absolute;top:-16px;left:28px;width:22px;height:58px;border:2.5px solid #9C8F86;border-radius:12px;border-bottom-color:transparent}
+.clip::after{content:"";position:absolute;left:3px;right:3px;top:8px;height:36px;border:2px solid #9C8F86;border-radius:9px;border-top-color:transparent}
+.mrz{margin:0 -48px;padding:16px 48px 22px;background:rgba(255,255,255,.45);border-top:1px solid var(--line);
+  font:500 clamp(9px,1.1vw,14.5px)/1.65 var(--mono);letter-spacing:.14em;color:#4D3A3A;white-space:nowrap;overflow:hidden}
+
+.others{max-width:1240px;margin:80px auto 0;padding:0 24px}
+.others h2{font-size:clamp(30px,3.6vw,46px);font-variation-settings:"opsz" 144}
+.others h2 em{font-style:italic;color:var(--rose)}
+.others p.sub{color:var(--muted);margin:8px 0 26px}
+.others ul{list-style:none;margin:0;padding:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px 28px;border-radius:14px;
+  box-shadow:0 1px 0 #fff inset, 0 24px 50px -30px rgba(74,25,38,.4), 0 2px 6px rgba(74,25,38,.1)}
+.others li{display:flex;align-items:center;gap:16px;min-width:0}
+.others li .stamp{flex:0 0 auto}
+.others li span{font:500 14.5px/1.35 var(--sans);min-width:0}
+.others li em{display:block;font-style:normal;color:var(--muted);font-size:13px;margin-top:3px}
+.others li b{display:inline-block;margin-top:6px;font:600 9.5px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#fff;background:var(--orange);padding:5px 7px;border-radius:3px}
+.back{display:flex;justify-content:center;margin:40px 0 0}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 14px/1 var(--sans);padding:14px 20px;border-radius:999px;background:var(--cover);color:#F6D3BC}
+.btn:hover{background:var(--rose);color:#fff}
+footer{margin-top:100px;background:var(--cover);color:#E7B597}
+footer .wrap{padding-top:36px;padding-bottom:56px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer p{margin:0;font:italic 400 17px/1.5 var(--serif)}
+footer small{font:500 10.5px/1.4 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:#C98C78}
+
+@media (max-width: 900px){
+  .cover-mini .lbl{display:none}
+  .cover-mini .nm{font-size:22px}
+  .crumbs,.visa-book,.others{padding:0 14px}
+  .vpage{padding:28px 18px 0;border-radius:10px}
+  .vband{margin:0 -18px 22px;padding:10px 18px;font-size:9.5px;letter-spacing:.16em}
+  .vtitle{grid-template-columns:1fr;gap:14px}
+  .vtitle .meta{text-align:left}
+  .hero-frame{padding:6px}
+  .entry{width:150px;right:-6px;bottom:-130px}
+  .side{padding-top:0}
+  .exst{width:190px}
+  .vbody{grid-template-columns:1fr;gap:40px;margin-top:120px}
+  .story p{font-size:17px}
+  .record div{grid-template-columns:96px 1fr}
+  .mrz{margin:0 -18px;padding:14px 18px 18px;font-size:8.4px;letter-spacing:.05em}
+  .others ul{grid-template-columns:1fr;padding:20px 16px}
+  .others li .stamp{width:calc(var(--w) * .8)}
+}
+@media (min-width: 901px) and (max-width: 1150px){ .others ul{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body id="top">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <path id="arcTop" d="M 33,100 A 67,67 0 0,1 167,100"/>
+  <path id="arcBot" d="M 23,100 A 77,77 0 0,0 177,100"/>
+  <filter id="ink1" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.4 0 0 0 2.05" result="m"/>
+    <feComposite in="SourceGraphic" in2="m" operator="in" result="c"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="w"/>
+    <feDisplacementMap in="c" in2="w" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="ink2" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.6 0 0 0 2.15" result="m"/>
+    <feComposite in="SourceGraphic" in2="m" operator="in" result="c"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="1" seed="2" result="w"/>
+    <feDisplacementMap in="c" in2="w" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="ink3" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="23" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.2 0 0 0 1.95" result="m"/>
+    <feComposite in="SourceGraphic" in2="m" operator="in" result="c"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="5" result="w"/>
+    <feDisplacementMap in="c" in2="w" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <g id="rosette">
+    <g fill="none" stroke="currentColor" stroke-width="0.6">
+      <ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(0)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(6)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(12)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(18)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(24)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(30)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(36)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(42)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(48)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(54)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(60)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(66)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(72)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(78)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(84)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(90)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(96)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(102)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(108)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(114)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(120)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(126)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(132)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(138)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(144)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(150)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(156)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(162)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(168)"/><ellipse cx="0" cy="0" rx="240" ry="70" transform="rotate(174)"/>
+      <circle cx="0" cy="0" r="40"/><circle cx="0" cy="0" r="52"/><circle cx="0" cy="0" r="64"/><circle cx="0" cy="0" r="250"/><circle cx="0" cy="0" r="258"/>
+    </g>
+  </g>
+</defs>
+</svg>
+<div class="mock-label">Mockup 6C · Passport</div>
+
+<header class="cover">
+  <svg class="guill g2" viewBox="-260 -260 520 520" aria-hidden="true"><use href="#rosette"/></svg><svg class="guill g3" viewBox="-260 -260 520 520" aria-hidden="true"><use href="#rosette"/></svg>
+  <div class="cover-inner">
+    <div class="cover-mini">
+      <a class="home" href="index.html" aria-label="Zoe Wacker — home"><svg class="crest" viewBox="0 0 120 120" aria-hidden="true">
+  <g fill="none" stroke="currentColor">
+    <circle cx="60" cy="60" r="56" stroke-width="2"/>
+    <circle cx="60" cy="60" r="50" stroke-width=".8" stroke-dasharray="1.5 3"/>
+    <circle cx="60" cy="60" r="30" stroke-width="1.6"/>
+    <g stroke-width="1.6">
+      <path d="M60 30 L71 55"/><path d="M86 45 L64 58"/><path d="M86 75 L62 66"/><path d="M60 90 L52 66"/><path d="M34 75 L50 58"/><path d="M34 45 L57 52"/>
+    </g>
+    <path d="M60 4 v8 M60 108 v8 M4 60 h8 M108 60 h8" stroke-width="1.4"/>
+  </g>
+</svg><span class="nm emboss">Zoe Wacker</span></a>
+      <span class="lbl">Passport · Photography endorsements</span>
+    </div>
+    <nav class="contents" aria-label="Site"><ul><li><a href="index.html"><span class="pg">01</span>Home</a></li><li><a href="#"><span class="pg">02</span>About</a></li><li><a href="#"><span class="pg">03</span>Travel</a></li><li><a href="#" aria-current="page"><span class="pg">04</span>Photography</a></li><li><a href="#"><span class="pg">05</span>Music</a></li><li><a href="#"><span class="pg">06</span>Geography</a></li><li><a href="#"><span class="pg">07</span>Guardian Arts</a></li><li><a href="#"><span class="pg">08</span>Academics</a></li></ul></nav>
+  </div>
+</header>
+
+<div class="crumbs"><a href="index.html">Home</a> / <a href="#">Photography</a> / Awards / Peninsula 2025</div>
+
+<main>
+  <article class="visa-book">
+    <div class="vpage moire">
+      <div class="vband"><span><b>Visa</b> · Peninsula Photo Contest</span><span>Page 11 · Nº 2025-HM</span></div>
+
+      <div class="vtitle">
+        <div>
+          <div class="kicker">Peninsula Photo Contest 2025 · Youth Division — “Moments”</div>
+          <h1 style="margin-top:12px">Honorable Mention<br>for <em>Cinderello</em></h1>
+        </div>
+        <div class="meta"><b>Six Fifty</b>Palo Alto Weekly<br>Palo Alto Art Center</div>
+      </div>
+
+      <figure class="hero">
+        <div class="hero-frame">
+          <img src="../../../public/images/photography_awards/cinderello.jpg" alt="Cinderello: a caretaker sweeping the red carpets of the Mosque–Madrasa of Sultan Hasan in Cairo, dwarfed by tall stone walls and hanging lamps.">
+        </div>
+        <figcaption><span><b>Cinderello</b> · Mosque–Madrasa of Sultan Ḥasan, Historic Cairo · 2025</span></figcaption>
+        <span class="entry" style="--ink:#B0304F" aria-label="Entry stamp: Honorable Mention"><svg viewBox="0 0 200 200" aria-hidden="true" focusable="false"><g filter="url(#ink1)"><circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="4.5"/><circle cx="100" cy="100" r="87" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="100" cy="100" r="58" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="28" cy="100" r="3.2" fill="currentColor"/><circle cx="172" cy="100" r="3.2" fill="currentColor"/><text font-size="11.74" font-weight="600" letter-spacing="1.2" class="f-stamp"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">PENINSULA PHOTO CONTEST</textPath></text><text font-size="10.67" font-weight="500" letter-spacing="1.2" class="f-stamp"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">PALO ALTO ART CENTER · 2025</textPath></text><circle cx="100" cy="100" r="50" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"/><text x="100" y="80" font-size="11" font-weight="600" letter-spacing="3.5" text-anchor="middle" class="f-stamp">ADMITTED</text><text x="100" y="102" font-size="19" font-weight="700" letter-spacing="1.5" text-anchor="middle" class="f-stamp">HONORABLE</text><text x="100" y="124" font-size="23" font-weight="700" letter-spacing="2.5" text-anchor="middle" class="f-stamp">MENTION</text><text x="100" y="140" font-size="8.5" font-weight="600" letter-spacing="1.5" text-anchor="middle" class="f-stamp">YOUTH · MOMENTS</text></g></svg></span>
+      </figure>
+
+      <div class="vbody">
+        <div class="story">
+          <div class="kicker">In my words</div>
+          <p>The Six Fifty Peninsula Photo Contest is presented by the Palo Alto Weekly and the Palo Alto Art Center and is open to photographers who live, work, or attend school in the 650 area code. There were over 1,200 entries across six categories.</p>
+          <p>My winning photo, Cinderello, was taken at the Mosque–Madrasa of Sultan Ḥasan in Historic Cairo. A man was sweeping the carpets, and the light caught the dust just right—he looked like he needed a fairy godmother, which made me think of Cinderella. I tried to frame the scale of the space against a single everyday gesture, so the scene feels both grand and human.</p>
+          <p class="pull">“The scene feels both grand and human.”</p>
+          <p>The photograph was exhibited at the Palo Alto Art Center from September–December 2025. I was the youngest winner; the other Youth Division awardees were mostly juniors and seniors. It was exciting (and a little intimidating!) to be shown alongside older students whose work I admire.</p>
+        </div>
+        <aside class="side">
+          <span class="exst" style="--ink:#3B4C86" aria-hidden="true"><svg viewBox="0 0 250 120" aria-hidden="true" focusable="false"><g filter="url(#ink2)"><rect x="3" y="3" width="244" height="114" rx="7" fill="none" stroke="currentColor" stroke-width="4.5"/><rect x="11" y="11" width="228" height="98" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><text x="125" y="40" font-size="10.5" font-weight="600" letter-spacing="1.6" text-anchor="middle" class="f-stamp">EXHIBITED · PALO ALTO ART CENTER</text><text x="125" y="78" font-size="28" font-weight="700" letter-spacing="2.5" text-anchor="middle" class="f-stamp">SEP – DEC 2025</text><text x="125" y="100" font-size="9.5" font-weight="500" letter-spacing="1.6" text-anchor="middle" class="f-stamp">ONE PHOTOGRAPH · ONE BROOM</text></g></svg></span>
+          <dl class="record">
+            <div><dt>Contest</dt><dd>Six Fifty Peninsula Photo Contest 2025</dd></div>
+            <div><dt>Division</dt><dd>Youth · “Moments”</dd></div>
+            <div><dt>Result</dt><dd>Honorable Mention</dd></div>
+            <div><dt>Photograph</dt><dd>Cinderello</dd></div>
+            <div><dt>Taken at</dt><dd>Mosque–Madrasa of Sultan Ḥasan, Cairo</dd></div>
+            <div><dt>Field</dt><dd>Over 1,200 entries, six categories</dd></div>
+            <div><dt>Exhibited</dt><dd>Palo Alto Art Center, Sep–Dec 2025</dd></div>
+          </dl>
+          <figure class="accept">
+            <span class="clip" aria-hidden="true"></span>
+            <img src="../../../public/images/photography_awards/650_award_2025.jpg" alt="Zoe holding her Honorable Mention certificate beneath the framed print of Cinderello">
+            <figcaption>Accepting the award</figcaption>
+          </figure>
+        </aside>
+      </div>
+
+      <div class="mrz" aria-hidden="true">V&lt;PAACINDERELLO&lt;&lt;HONORABLE&lt;MENTION&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br>WACKER&lt;&lt;ZOE&lt;&lt;&lt;YOUTH&lt;MOMENTS&lt;&lt;&lt;CAIRO&lt;EGY&lt;&lt;2025&lt;&lt;&lt;&lt;</div>
+    </div>
+  </article>
+
+  <section class="others" aria-label="Other awards">
+    <div class="kicker">Endorsements · 2025 – 2026</div>
+    <h2 style="margin-top:10px">Other stamps on <em>this page</em></h2>
+    <p class="sub">Every recognition gets its own visa page.</p>
+    <ul class="moire"><li class="cur">
+          <a class="stamp " href="#top" aria-label="Six Fifty Peninsula Photo Contest 2025 — Honorable Mention" title="Six Fifty Peninsula Photo Contest 2025 — Honorable Mention" style="--ink:#B0304F;--w:130px;--r:-7deg;--dy:0px"><svg viewBox="0 0 200 200" aria-hidden="true" focusable="false"><g filter="url(#ink1)"><circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="4.5"/><circle cx="100" cy="100" r="87" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="100" cy="100" r="58" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="28" cy="100" r="3.2" fill="currentColor"/><circle cx="172" cy="100" r="3.2" fill="currentColor"/><text font-size="11.74" font-weight="600" letter-spacing="1.2" class="f-stamp"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">PENINSULA PHOTO CONTEST</textPath></text><text font-size="8.47" font-weight="500" letter-spacing="1.2" class="f-stamp"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">SIX FIFTY · YOUTH · MOMENTS · 2025</textPath></text><text x="100" y="84" font-size="17" font-weight="700" letter-spacing="2" text-anchor="middle" class="f-stamp">HONORABLE</text><text x="100" y="106" font-size="22" font-weight="700" letter-spacing="2.5" text-anchor="middle" class="f-stamp">MENTION</text><text x="100" y="128" font-size="11" font-weight="500" letter-spacing="1.5" text-anchor="middle" class="f-stamp">“CINDERELLO”</text></g></svg></a>
+          <span>Six Fifty Peninsula Photo Contest 2025<em>Honorable Mention</em><b>You are here</b></span>
+        </li><li class="">
+          <a class="stamp " href="#" aria-label="Travel Photographer of the Year 2025 — Young TPOTY Runner-Up" title="Travel Photographer of the Year 2025 — Young TPOTY Runner-Up" style="--ink:#3B4C86;--w:155px;--r:4deg;--dy:0px"><svg viewBox="0 0 250 150" aria-hidden="true" focusable="false"><g filter="url(#ink2)"><rect x="3" y="3" width="244" height="144" rx="7" fill="none" stroke="currentColor" stroke-width="4.5"/><rect x="11" y="11" width="228" height="128" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><text x="125" y="40" font-size="10.5" font-weight="600" letter-spacing="1.4" text-anchor="middle" class="f-stamp">TRAVEL PHOTOGRAPHER OF THE YEAR</text><line x1="28" y1="50" x2="222" y2="50" stroke="currentColor" stroke-width="1.2"/><text x="125" y="90" font-size="34" font-weight="700" letter-spacing="3" text-anchor="middle" class="f-stamp">RUNNER-UP</text><text x="125" y="112" font-size="11" font-weight="500" letter-spacing="1.8" text-anchor="middle" class="f-stamp">YOUNG TPOTY · 14 &amp; UNDER</text><text x="125" y="130" font-size="11" font-weight="600" letter-spacing="4" text-anchor="middle" class="f-stamp">2025</text></g></svg></a>
+          <span>Travel Photographer of the Year 2025<em>Young TPOTY Runner-Up</em></span>
+        </li><li class="">
+          <a class="stamp " href="#" aria-label="National Photography Competition for Kids — Winner, Home is Where the Heart Is" title="National Photography Competition for Kids — Winner, Home is Where the Heart Is" style="--ink:#2C6A6C;--w:136px;--r:-3deg;--dy:0px"><svg viewBox="0 0 230 140" aria-hidden="true" focusable="false"><g filter="url(#ink3)"><ellipse cx="115.0" cy="70.0" rx="111.0" ry="66.0" fill="none" stroke="currentColor" stroke-width="4"/><ellipse cx="115.0" cy="70.0" rx="103.0" ry="58.0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-dasharray="3 3"/><text x="115" y="46" font-size="7.8" font-weight="600" letter-spacing="0.9" text-anchor="middle" class="f-stamp">NATL. PHOTOGRAPHY COMPETITION FOR KIDS</text><text x="115" y="76" font-size="28" font-weight="700" letter-spacing="4" text-anchor="middle" class="f-stamp">WINNER</text><text x="115" y="96" font-size="9.5" font-weight="500" letter-spacing="1" text-anchor="middle" class="f-stamp">HOME IS WHERE THE HEART IS</text><text x="115" y="112" font-size="9.5" font-weight="500" letter-spacing="2.5" text-anchor="middle" class="f-stamp">DEC 2025</text></g></svg></a>
+          <span>National Photography Competition for Kids<em>Winner, Home is Where the Heart Is</em></span>
+        </li><li class="">
+          <a class="stamp " href="#" aria-label="National Photography Competition for Kids — Winner, Life in Red" title="National Photography Competition for Kids — Winner, Life in Red" style="--ink:#D25A22;--w:108px;--r:9deg;--dy:0px"><svg viewBox="0 0 200 200" aria-hidden="true" focusable="false"><g filter="url(#ink1)"><circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="4.5"/><circle cx="100" cy="100" r="87" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="100" cy="100" r="58" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="28" cy="100" r="3.2" fill="currentColor"/><circle cx="172" cy="100" r="3.2" fill="currentColor"/><text font-size="10.38" font-weight="600" letter-spacing="1.2" class="f-stamp"><textPath href="#arcTop" startOffset="50%" text-anchor="middle">NATL. PHOTO COMP. FOR KIDS</textPath></text><text font-size="12.00" font-weight="500" letter-spacing="2" class="f-stamp"><textPath href="#arcBot" startOffset="50%" text-anchor="middle">DREAM SNAPPER · MAR 2026</textPath></text><text x="100" y="96" font-size="24" font-weight="700" letter-spacing="2" text-anchor="middle" class="f-stamp">WINNER</text><text x="100" y="120" font-size="12" font-weight="500" letter-spacing="1.4" text-anchor="middle" class="f-stamp">“LIFE IN RED”</text></g></svg></a>
+          <span>National Photography Competition for Kids<em>Winner, Life in Red</em></span>
+        </li><li class="">
+          <a class="stamp " href="#" aria-label="No Frames International Youth Photo Contest 2026 — Honorable Mention" title="No Frames International Youth Photo Contest 2026 — Honorable Mention" style="--ink:#6E2A55;--w:105px;--r:-10deg;--dy:0px"><svg viewBox="0 0 200 200" aria-hidden="true" focusable="false"><g filter="url(#ink2)"><polygon points="60,4 140,4 196,60 196,140 140,196 60,196 4,140 4,60" fill="none" stroke="currentColor" stroke-width="4.5"/><polygon points="64,13 136,13 187,64 187,136 136,187 64,187 13,136 13,64" fill="none" stroke="currentColor" stroke-width="1.3"/><text x="100" y="58" font-size="12" font-weight="600" letter-spacing="2" text-anchor="middle" class="f-stamp">NO FRAMES · 2026</text><text x="100" y="92" font-size="20" font-weight="700" letter-spacing="1.5" text-anchor="middle" class="f-stamp">HONORABLE</text><text x="100" y="116" font-size="22" font-weight="700" letter-spacing="2" text-anchor="middle" class="f-stamp">MENTION</text><line x1="44" y1="130" x2="156" y2="130" stroke="currentColor" stroke-width="1.2"/><text x="100" y="150" font-size="12" font-weight="500" letter-spacing="2" text-anchor="middle" class="f-stamp">NATURE · U-14</text></g></svg></a>
+          <span>No Frames International Youth Photo Contest 2026<em>Honorable Mention</em></span>
+        </li><li class="">
+          <a class="stamp " href="#" aria-label="Global Peace Photo Award 2026 — Shortlisted" title="Global Peace Photo Award 2026 — Shortlisted" style="--ink:#A8482E;--w:142px;--r:3deg;--dy:0px"><svg viewBox="0 0 240 130" aria-hidden="true" focusable="false"><g filter="url(#ink3)"><rect x="3" y="3" width="234" height="124" rx="7" fill="none" stroke="currentColor" stroke-width="4.5"/><rect x="11" y="11" width="218" height="108" rx="3" fill="none" stroke="currentColor" stroke-width="1.3"/><text x="120" y="42" font-size="11.5" font-weight="600" letter-spacing="1.6" text-anchor="middle" class="f-stamp">GLOBAL PEACE PHOTO AWARD</text><text x="120" y="82" font-size="30" font-weight="700" letter-spacing="2" text-anchor="middle" class="f-stamp">SHORTLISTED</text><text x="120" y="104" font-size="10.5" font-weight="500" letter-spacing="1.6" text-anchor="middle" class="f-stamp">“FACES OF PEACE” · 2026</text></g></svg></a>
+          <span>Global Peace Photo Award 2026<em>Shortlisted</em></span>
+        </li></ul>
+    <div class="back"><a class="btn" href="index.html">← Back to the passport</a></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>This visa page is valid for as long as people keep sweeping carpets in beautiful light.</p>
+    <small>Zoe Wacker · Menlo Park, CA</small>
+  </div>
+</footer>
+</body>
+</html>

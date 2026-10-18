@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoe Wacker · Field Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+SC:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7EFE3; --sea:#F1E3D0; --rule:#E2CDB2;
+  --land:#D98C5F; --land-edge:#B66940;
+  --rose:#D45D79; --rose-ink:#B03F5B;
+  --ink:#3A2820; --ink-2:#6E5244; --marigold:#E3A03A;
+  --serif:"Cormorant Garamond", Georgia, serif;
+  --sc:"Cormorant SC", "Cormorant Garamond", Georgia, serif;
+  --sans:"DM Sans", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);overflow-x:hidden;
+  background-image:radial-gradient(ellipse at 15% 0%, rgba(227,160,58,.10), transparent 55%),radial-gradient(ellipse at 100% 30%, rgba(212,93,121,.07), transparent 50%);}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+
+/* header */
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:30px 0 18px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand svg{width:42px;height:42px;flex:none}
+.brand b{display:block;font:600 34px/1 var(--serif);letter-spacing:.01em}
+.brand small{display:block;font:600 13px/1 var(--sc);letter-spacing:.2em;color:var(--ink-2);margin-top:6px}
+.coords{font:500 15px/1.3 var(--sc);letter-spacing:.14em;color:var(--ink-2);text-align:right}
+.coords em{font-style:normal;color:var(--rose-ink)}
+nav.main{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);position:relative}
+nav.main::before,nav.main::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--ink);opacity:.35}
+nav.main::before{top:3px} nav.main::after{bottom:3px}
+nav.main ul{list-style:none;margin:0;padding:13px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 0}
+nav.main li{display:flex;align-items:center}
+nav.main li+li::before{content:"";width:5px;height:5px;background:var(--rose);transform:rotate(45deg);margin:0 18px;opacity:.8}
+nav.main a{font:600 17px/1 var(--sc);letter-spacing:.12em;text-decoration:none;color:var(--ink);padding:4px 0;border-bottom:1px solid transparent}
+nav.main a:hover{color:var(--rose-ink);border-color:var(--rose)}
+nav.main a[aria-current]{color:var(--rose-ink)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;padding:54px 0 28px}
+.kicker{white-space:nowrap;font:600 14px/1 var(--sc);letter-spacing:.24em;color:var(--rose-ink);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+.kicker::before{content:"";width:34px;height:1px;background:var(--rose)}
+h1{font:500 clamp(44px,6.2vw,86px)/.98 var(--serif);letter-spacing:-.015em;margin:0;max-width:13ch}
+h1 i{color:var(--rose-ink);font-weight:500}
+.hero p{max-width:34ch;font-size:17px;color:var(--ink-2);margin:0 0 6px}
+.hero p strong{color:var(--ink);font-weight:500}
+
+/* map */
+.mapframe{border:1px solid var(--ink);padding:7px;background:var(--paper);position:relative}
+.mapframe::before{content:"";position:absolute;inset:3px;border:1px solid var(--ink);opacity:.3;pointer-events:none}
+.map{position:relative;background:var(--sea);overflow:hidden}
+.map svg{display:block;width:100%;height:auto}
+.grat{stroke:#C9AE8E;stroke-width:.5;fill:none;opacity:.7}
+.trop{stroke:#C9AE8E;stroke-width:.6;stroke-dasharray:4 3;fill:none}
+.coast1{fill:none;stroke:var(--land);stroke-width:9;opacity:.10;stroke-linejoin:round}
+.coast2{fill:none;stroke:var(--land);stroke-width:4;opacity:.16;stroke-linejoin:round}
+.land{fill:var(--land);stroke:var(--land-edge);stroke-width:.7;stroke-linejoin:round}
+.water{fill:var(--sea);stroke:var(--land-edge);stroke-width:.5}
+.ocean{font:italic 400 11px var(--serif);fill:#9A7A63;letter-spacing:.18em}
+.cont{font:600 9.5px var(--sc);fill:#FBE9D8;letter-spacing:.32em;opacity:.95}
+.edge{font:500 7.5px var(--sans);fill:#9A7A63;letter-spacing:.06em}
+.route{fill:none;stroke:var(--rose);stroke-width:1.6;stroke-linecap:round;stroke-dasharray:.1 5;opacity:.75;transition:opacity .3s,stroke-width .3s}
+.route.on{opacity:1;stroke-width:2.6;stroke-dasharray:.1 4.4}
+.pin{cursor:pointer;outline:none}
+.pin .hit{fill:transparent}
+.pin .dot{fill:var(--paper);stroke:var(--rose-ink);stroke-width:1.6;transition:all .2s}
+.pin .core{fill:var(--rose);transition:all .2s}
+.pin .ring{fill:none;stroke:var(--rose);stroke-width:1;opacity:0}
+.pin.on .ring{opacity:.9;animation:pulse 2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.pin.on .dot,.pin:hover .dot,.pin:focus-visible .dot{fill:var(--rose);stroke:var(--ink)}
+.pin.on .core,.pin:hover .core{fill:var(--paper)}
+.lbl{font:600 10px var(--sc);fill:var(--ink);letter-spacing:.08em;paint-order:stroke;stroke:var(--sea);stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.lbl tspan.y{font:500 7.5px var(--sans);fill:var(--rose-ink);letter-spacing:.05em}
+.lead{stroke:var(--ink);stroke-width:.5;opacity:.6}
+.home .dot{fill:var(--marigold);stroke:var(--ink)}
+.home .core{fill:var(--ink)}
+@keyframes pulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+
+.cartouche{position:absolute;left:2.2%;bottom:5%;background:rgba(247,239,227,.92);border:1px solid var(--ink);padding:12px 16px 11px;text-align:center;box-shadow:3px 3px 0 rgba(58,40,32,.12)}
+.cartouche::before{content:"";position:absolute;inset:3px;border:1px solid var(--ink);opacity:.25;pointer-events:none}
+.cartouche b{display:block;font:600 17px/1.1 var(--sc);letter-spacing:.14em}
+.cartouche span{display:block;font:italic 400 14px/1.3 var(--serif);color:var(--ink-2);margin-top:3px}
+.legend{position:absolute;right:1.6%;bottom:4.5%;background:rgba(247,239,227,.92);border:1px solid var(--ink);padding:10px 14px;font:500 11px/1 var(--sans);letter-spacing:.06em;color:var(--ink-2);display:grid;gap:8px}
+.legend div{display:flex;align-items:center;gap:9px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%}
+.legend .lh{background:var(--marigold);border:1.5px solid var(--ink)}
+.legend .lt{background:var(--paper);border:1.5px solid var(--rose-ink)}
+.legend .lr{width:22px;height:2px;border-radius:0;background:repeating-linear-gradient(90deg,var(--rose) 0 2px,transparent 2px 6px)}
+
+/* card */
+.card{position:absolute;width:262px;background:var(--paper);border:1px solid var(--ink);padding:8px 8px 13px;box-shadow:0 18px 40px -18px rgba(58,40,32,.45),4px 4px 0 rgba(212,93,121,.25);z-index:3;transition:left .35s cubic-bezier(.2,.7,.2,1),top .35s cubic-bezier(.2,.7,.2,1),opacity .2s}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--rule)}
+.card .meta{display:flex;justify-content:space-between;align-items:baseline;margin:10px 4px 2px;font:500 10.5px/1 var(--sans);letter-spacing:.1em;color:var(--rose-ink);text-transform:uppercase}
+.card h3{font:600 21px/1.1 var(--serif);margin:4px 4px 4px}
+.card p{font:italic 400 16px/1.3 var(--serif);color:var(--ink-2);margin:0 4px}
+
+/* key */
+.key{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--rule);margin-top:22px}
+.key button{all:unset;cursor:pointer;display:flex;gap:12px;align-items:baseline;padding:12px 10px 12px 0;border-top:1px solid var(--rule)}
+.key button .n{font:600 13px/1 var(--sc);color:var(--rose-ink);letter-spacing:.1em;min-width:22px}
+.key button b{display:block;font:600 19px/1.15 var(--serif)}
+.key button small{display:block;font:400 12.5px/1.4 var(--sans);color:var(--ink-2);margin-top:2px}
+.key button:hover b,.key button.on b{color:var(--rose-ink)}
+.key button.on{box-shadow:inset 0 2px 0 var(--rose)}
+.key button:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+
+/* intro */
+.intro{display:grid;grid-template-columns:260px 1fr;gap:60px;padding:96px 0 84px;border-bottom:1px solid var(--rule)}
+.label{font:600 14px/1.3 var(--sc);letter-spacing:.22em;color:var(--rose-ink)}
+.label + .sub{font:italic 400 17px/1.4 var(--serif);color:var(--ink-2);margin-top:8px}
+.intro blockquote{margin:0;font:400 clamp(24px,2.6vw,33px)/1.38 var(--serif);text-wrap:pretty}
+.intro blockquote::first-letter{font-size:1.6em;color:var(--rose-ink);font-weight:500}
+.intro .sig{margin-top:22px;font:italic 500 24px/1 var(--serif);color:var(--rose-ink)}
+.intro .sig span{font:500 12px/1 var(--sans);letter-spacing:.14em;color:var(--ink-2);text-transform:uppercase;font-style:normal;margin-left:12px}
+
+/* sections */
+.sechead{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:80px 0 30px}
+h2{font:500 clamp(34px,3.8vw,52px)/1 var(--serif);margin:8px 0 0;letter-spacing:-.01em}
+h2 i{color:var(--rose-ink)}
+.sechead p{max-width:36ch;color:var(--ink-2);margin:0;font-size:15px}
+.gaz{display:grid;grid-template-columns:repeat(12,1fr);gap:44px 32px}
+.entry{grid-column:span 4;text-decoration:none;display:block}
+.entry.wide{grid-column:span 6}
+.entry.wide figure img,.entry.wide .plate{aspect-ratio:16/9}
+.entry figure{margin:0;border:1px solid var(--ink);padding:6px;background:var(--paper);position:relative}
+.entry figure img{width:100%;aspect-ratio:3/2;object-fit:cover;filter:saturate(.95) sepia(.08);transition:filter .4s,transform .6s}
+.entry .ph{overflow:hidden}
+.entry:hover figure img{filter:none;transform:scale(1.03)}
+.entry .tag{position:absolute;top:16px;left:16px;background:var(--paper);border:1px solid var(--ink);font:600 11.5px/1 var(--sc);letter-spacing:.16em;padding:6px 8px 5px}
+.entry h3{font:600 30px/1 var(--serif);margin:18px 0 6px;display:flex;align-items:baseline;gap:10px}
+.entry h3::after{content:"";flex:1;border-bottom:1px dotted var(--ink-2);opacity:.6;transform:translateY(-5px)}
+.entry h3 em{order:2;font:500 12px/1 var(--sans);letter-spacing:.12em;color:var(--rose-ink);font-style:normal;text-transform:uppercase}
+.entry p{margin:0;color:var(--ink-2);font-size:15px;max-width:44ch}
+.entry p q{font:italic 400 18px/1.35 var(--serif);color:var(--ink);quotes:"\201C" "\201D"}
+.entry:hover h3{color:var(--rose-ink)}
+.plate{aspect-ratio:3/2;background:
+   repeating-linear-gradient(135deg, rgba(212,93,121,.0) 0 14px, rgba(212,93,121,.10) 14px 15px),
+   linear-gradient(160deg,#E7A276 0%,#D45D79 100%);display:grid;place-items:center;color:var(--paper);text-align:center}
+.plate span{font:500 italic 40px/1 var(--serif)}
+.plate small{display:block;font:600 12px/1 var(--sc);letter-spacing:.3em;margin-top:10px;opacity:.9;font-style:normal}
+
+/* honors */
+.honors{margin-top:100px;padding:70px 0 80px;border-top:1px solid var(--ink);position:relative}
+.honors::before{content:"";position:absolute;left:0;right:0;top:3px;height:1px;background:var(--ink);opacity:.3}
+.hgrid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;margin-top:34px;align-items:start}
+.feature{display:block;text-decoration:none;border:1px solid var(--ink);padding:8px;background:var(--paper);box-shadow:6px 6px 0 rgba(212,93,121,.22);transition:box-shadow .3s,transform .3s}
+.feature:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 rgba(212,93,121,.3)}
+.feature img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.feature .fb{padding:16px 10px 8px;display:flex;justify-content:space-between;gap:16px;align-items:end}
+.feature .fb small{font:600 12px/1 var(--sc);letter-spacing:.18em;color:var(--rose-ink)}
+.feature .fb b{display:block;font:600 26px/1.1 var(--serif);margin-top:6px}
+.feature .fb span{font:italic 400 17px/1.3 var(--serif);color:var(--ink-2)}
+.feature .fb .go{font-style:normal;color:var(--ink);font:500 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--rose);padding-bottom:3px}
+.hlist{list-style:none;margin:0;padding:0}
+.hlist li{display:grid;grid-template-columns:62px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.hlist li:first-child{border-top:1px solid var(--rule)}
+.hlist .yr{font:600 15px/1.4 var(--sc);letter-spacing:.1em;color:var(--rose-ink)}
+.hlist b{display:block;font:600 21px/1.2 var(--serif)}
+.hlist span{display:block;font-size:14px;color:var(--ink-2);margin-top:3px}
+
+footer{border-top:1px solid var(--ink);padding:26px 0 70px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font:500 14px/1.4 var(--sc);letter-spacing:.14em;color:var(--ink-2)}
+.mock{position:fixed;right:14px;bottom:14px;z-index:20;background:var(--ink);color:var(--paper);font:500 11px/1 var(--sans);letter-spacing:.08em;padding:8px 11px;border-radius:2px;opacity:.92}
+
+@media (max-width:1080px){
+  .key{grid-template-columns:repeat(2,1fr)}
+  .entry,.entry.wide{grid-column:span 6}
+  .hgrid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .wrap{padding:0 16px}
+  .top{padding:20px 0 14px}
+  .brand b{font-size:27px} .brand svg{width:34px;height:34px}
+  .coords{display:none}
+  nav.main ul{padding:11px 0;gap:8px 0}
+  nav.main li+li::before{margin:0 10px;width:4px;height:4px}
+  nav.main a{font-size:15px;letter-spacing:.08em}
+  .hero{grid-template-columns:1fr;gap:16px;padding:34px 0 22px}
+  .hero p{font-size:16px}
+  .mapframe{padding:4px}
+  .lbl,.ocean,.cont,.edge,.lead{display:none}
+  .cartouche,.legend{display:none}
+  .card{position:relative;left:auto!important;top:auto!important;width:auto;margin-top:14px;display:grid;grid-template-columns:120px 1fr;gap:4px 14px;padding:8px;align-items:center}
+  .card img{grid-row:span 3;aspect-ratio:1;height:100%}
+  .card .meta,.card h3,.card p{margin-left:0;margin-right:0}
+  .card .meta{margin-top:0}
+  .card h3{font-size:19px}
+  .card p{font-size:15px}
+  .key{grid-template-columns:1fr 1fr}
+  .key button{padding:11px 6px 11px 0}
+  .key button b{font-size:17px}
+  .intro{grid-template-columns:1fr;gap:20px;padding:64px 0 56px}
+  .sechead{flex-direction:column;align-items:flex-start;padding:56px 0 24px}
+  .gaz{gap:38px}
+  .entry,.entry.wide{grid-column:span 12}
+  .entry h3{font-size:27px}
+  .honors{margin-top:70px;padding:50px 0 56px}
+  .feature .fb{flex-direction:column;align-items:flex-start}
+  .mock{left:auto;right:10px;bottom:10px;font-size:10px}
+}
+</style>
+</head>
+<body>
+<div class="mock">Mockup 6A · Sunset Map</div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="index.html" aria-label="Zoe Wacker, home">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="#3A2820" stroke-width="1"/><circle cx="24" cy="24" r="18" fill="none" stroke="#3A2820" stroke-width=".6" stroke-dasharray="1 2.2"/><path d="M24 4 L28 24 L24 44 L20 24Z" fill="#D45D79"/><path d="M4 24 L24 20.5 L44 24 L24 27.5Z" fill="#D98C5F"/><path d="M24 4 L28 24 L24 24Z" fill="#3A2820" opacity=".35"/><circle cx="24" cy="24" r="2.2" fill="#F7EFE3" stroke="#3A2820" stroke-width=".8"/></svg>
+      <span><b>Zoe Wacker</b><small>A Field Atlas</small></span>
+    </a>
+    <div class="coords">Menlo Park, California<br><em>37°27′ N</em> · <em>122°11′ W</em></div>
+  </header>
+  <nav class="main" aria-label="Main">
+    <ul>
+      <li><a href="index.html" aria-current="page">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Travel</a></li>
+      <li><a href="#">Photography</a></li>
+      <li><a href="#">Music</a></li>
+      <li><a href="#">Geography</a></li>
+      <li><a href="#">Guardian Arts</a></li>
+      <li><a href="#">Academics</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <p class="kicker">Photographs · Cello · Travels</p>
+      <h1>The world, as I&rsquo;ve seen it <i>so far.</i></h1>
+    </div>
+    <p><strong>Zoe Wacker</strong> is a middle-school photographer and cellist from Menlo Park, California. Every rose line below starts at home. Choose a pin to see a place.</p>
+  </section>
+
+  <div class="mapframe">
+    <div class="map" id="map">
+      <svg viewBox="0 28 1000 383" role="img" aria-label="World map with routes from Menlo Park to Cairo, Aswan, Santiago, Patagonia, London, Paris and Rome">
+        <defs>
+          <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><line x1="0" y1="0" x2="0" y2="6" stroke="#B66940" stroke-width=".6" opacity=".22"/></pattern>
+        </defs>
+        <g class="grat">
+          <path d="M83.3 28V411M166.7 28V411M250 28V411M333.3 28V411M416.7 28V411M500 28V411M583.3 28V411M666.7 28V411M750 28V411M833.3 28V411M916.7 28V411M0 83.3H1000M0 166.7H1000M0 333.3H1000"/>
+          <path d="M0 250H1000" style="stroke-width:.9"/>
+        </g>
+        <path class="trop" d="M0 184.9H1000M0 315.1H1000"/>
+        <text class="edge" x="6" y="182">TROPIC OF CANCER</text>
+        <text class="edge" x="6" y="247">EQUATOR</text>
+        <text class="edge" x="6" y="312">TROPIC OF CAPRICORN</text>
+        <path class="coast1" d="M40.3 66.0Q38.9 61.1 52.8 56.9Q66.7 52.8 88.9 54.2Q111.1 55.6 131.9 55.6Q152.8 55.6 173.6 58.3Q194.4 61.1 215.3 58.3Q236.1 55.6 250.0 56.9Q263.9 58.3 268.1 65.3Q272.2 72.2 261.1 79.2Q250.0 86.1 244.4 87.5Q238.9 88.9 251.4 93.1Q263.9 97.2 270.8 101.4Q277.8 105.6 280.6 97.2Q283.3 88.9 284.7 83.3Q286.1 77.8 295.8 79.2Q305.6 80.6 313.9 81.9Q322.2 83.3 326.4 88.9Q330.6 94.4 337.5 100.0Q344.4 105.6 338.9 112.5Q333.3 119.4 325.0 123.6Q316.7 127.8 311.1 129.2Q305.6 130.6 305.6 132.6Q305.6 134.7 300.0 136.1Q294.4 137.5 291.7 142.4Q288.9 147.2 289.6 150.0Q290.3 152.8 282.6 158.3Q275.0 163.9 276.4 169.4Q277.8 175.0 277.1 177.5Q276.4 180.0 274.3 177.5Q272.2 175.0 270.8 171.5Q269.4 168.1 266.7 167.4Q263.9 166.7 258.3 166.7Q252.8 166.7 251.4 168.1Q250.0 169.4 244.4 168.8Q238.9 168.1 234.7 170.8Q230.6 173.6 229.9 181.2Q229.2 188.9 232.6 193.1Q236.1 197.2 241.7 197.2Q247.2 197.2 247.9 194.4Q248.6 191.7 253.5 191.0Q258.3 190.3 256.9 197.9Q255.6 205.6 261.8 206.9Q268.1 208.3 268.1 213.9Q268.1 219.4 270.8 222.2Q273.6 225.0 276.4 224.3Q279.2 223.6 281.9 225.0Q284.7 226.4 284.0 228.5Q283.3 230.6 280.6 229.9Q277.8 229.2 275.0 228.5Q272.2 227.8 267.4 224.3Q262.5 220.8 259.7 217.4Q256.9 213.9 252.1 212.5Q247.2 211.1 242.4 208.3Q237.5 205.6 234.0 205.6Q230.6 205.6 225.0 203.5Q219.4 201.4 213.2 197.9Q206.9 194.4 206.9 190.3Q206.9 186.1 202.1 181.9Q197.2 177.8 192.4 172.9Q187.5 168.1 184.7 165.3Q181.9 162.5 184.7 168.8Q187.5 175.0 191.0 180.6Q194.4 186.1 191.7 184.0Q188.9 181.9 186.1 177.1Q183.3 172.2 181.9 169.4Q180.6 166.7 177.8 163.2Q175.0 159.7 170.1 156.9Q165.3 154.2 162.5 150.0Q159.7 145.8 157.6 142.4Q155.6 138.9 154.9 134.7Q154.2 130.6 154.9 125.0Q155.6 119.4 156.9 116.7Q158.3 113.9 152.8 111.1Q147.2 108.3 143.1 103.5Q138.9 98.6 133.3 94.4Q127.8 90.3 123.6 88.2Q119.4 86.1 113.9 84.7Q108.3 83.3 100.0 82.6Q91.7 81.9 84.7 84.0Q77.8 86.1 75.0 88.2Q72.2 90.3 66.7 91.7Q61.1 93.1 55.6 95.1Q50.0 97.2 55.6 93.1Q61.1 88.9 55.6 86.8Q50.0 84.7 45.8 81.2Q41.7 77.8 41.7 74.3Q41.7 70.8 40.3 66.0Z M318.1 37.5Q297.2 33.3 315.3 27.8Q333.3 22.2 368.1 20.1Q402.8 18.1 423.6 20.1Q444.4 22.2 447.2 29.2Q450.0 36.1 444.4 43.1Q438.9 50.0 434.7 55.6Q430.6 61.1 416.7 64.6Q402.8 68.1 393.1 75.7Q383.3 83.3 375.0 81.9Q366.7 80.6 361.1 75.0Q355.6 69.4 352.8 63.9Q350.0 58.3 344.4 50.0Q338.9 41.7 318.1 37.5Z M323.6 70.8Q327.8 65.3 319.4 60.4Q311.1 55.6 297.2 52.1Q283.3 48.6 266.7 47.2Q250.0 45.8 263.9 53.5Q277.8 61.1 284.7 66.0Q291.7 70.8 305.6 73.6Q319.4 76.4 323.6 70.8Z M243.1 31.9Q250.0 38.9 270.8 37.5Q291.7 36.1 305.6 31.9Q319.4 27.8 305.6 23.6Q291.7 19.4 263.9 22.2Q236.1 25.0 243.1 31.9Z M169.4 55.6Q172.2 58.3 190.3 59.0Q208.3 59.7 215.3 57.6Q222.2 55.6 216.7 51.4Q211.1 47.2 195.8 47.2Q180.6 47.2 173.6 50.0Q166.7 52.8 169.4 55.6Z M285.4 228.5Q286.1 226.4 293.1 221.5Q300.0 216.7 306.9 218.5Q313.9 220.3 322.2 220.6Q330.6 220.8 334.7 225.7Q338.9 230.6 347.2 233.3Q355.6 236.1 358.3 241.0Q361.1 245.8 369.4 251.4Q377.8 256.9 386.1 259.0Q394.4 261.1 398.6 263.9Q402.8 266.7 402.8 270.8Q402.8 275.0 397.2 281.2Q391.7 287.5 391.7 293.8Q391.7 300.0 388.9 305.6Q386.1 311.1 381.2 312.8Q376.4 314.4 370.8 318.3Q365.3 322.2 364.6 326.4Q363.9 330.6 358.3 336.8Q352.8 343.1 347.9 344.4Q343.1 345.8 341.7 350.0Q340.3 354.2 334.0 356.2Q327.8 358.3 323.6 361.1Q319.4 363.9 321.5 366.0Q323.6 368.1 320.8 371.5Q318.1 375.0 315.3 377.1Q312.5 379.2 314.6 381.2Q316.7 383.3 312.5 387.5Q308.3 391.7 309.0 393.8Q309.7 395.8 313.2 399.3Q316.7 402.8 311.1 402.8Q305.6 402.8 300.0 398.6Q294.4 394.4 292.4 388.9Q290.3 383.3 292.4 377.8Q294.4 372.2 295.1 366.7Q295.8 361.1 295.8 356.9Q295.8 352.8 298.6 347.2Q301.4 341.7 301.4 334.7Q301.4 327.8 302.8 320.8Q304.2 313.9 304.4 307.6Q304.7 301.4 298.2 297.2Q291.7 293.1 289.6 289.6Q287.5 286.1 283.3 278.5Q279.2 270.8 277.1 267.4Q275.0 263.9 276.4 258.3Q277.8 252.8 277.8 250.0Q277.8 247.2 279.9 245.1Q281.9 243.1 283.3 241.0Q284.7 238.9 284.7 234.7Q284.7 230.6 285.4 228.5Z M481.2 130.0Q475.0 130.6 475.0 136.1Q475.0 141.7 475.0 144.4Q475.0 147.2 479.2 148.3Q483.3 149.4 488.9 148.8Q494.4 148.1 497.2 145.3Q500.0 142.5 504.2 137.9Q508.3 133.3 509.0 131.2Q509.7 129.2 513.2 129.9Q516.7 130.6 520.8 128.8Q525.0 126.9 529.2 130.1Q533.3 133.3 538.3 138.9Q543.3 144.4 544.6 143.2Q545.8 141.9 546.5 141.4Q547.2 140.8 547.5 139.2Q547.8 137.5 549.6 137.9Q551.4 138.3 547.9 136.2Q544.4 134.2 541.0 131.5Q537.5 128.9 535.8 127.6Q534.2 126.4 535.1 124.7Q536.1 123.1 536.9 123.3Q537.8 123.6 539.7 125.0Q541.7 126.4 547.2 129.9Q552.8 133.3 554.2 136.1Q555.6 138.9 557.6 143.1Q559.7 147.2 561.8 147.9Q563.9 148.6 565.3 146.5Q566.7 144.4 565.3 141.0Q563.9 137.5 568.1 137.1Q572.2 136.7 576.4 136.4Q580.6 136.1 577.1 138.2Q573.6 140.3 574.3 143.8Q575.0 147.2 579.2 148.2Q583.3 149.2 591.7 148.9Q600.0 148.6 599.7 151.4Q599.4 154.2 598.3 156.2Q597.2 158.3 596.2 160.7Q595.3 163.1 596.1 165.6Q596.9 168.1 598.5 170.8Q600.0 173.6 604.2 181.2Q608.3 188.9 613.2 197.2Q618.1 205.6 619.4 210.1Q620.8 214.7 622.9 214.3Q625.0 213.9 630.6 211.8Q636.1 209.7 640.3 207.6Q644.4 205.6 649.3 203.5Q654.2 201.4 657.4 199.3Q660.6 197.2 663.3 192.4Q666.1 187.5 662.2 185.7Q658.3 183.9 657.4 180.8Q656.4 177.8 653.2 180.3Q650.0 182.8 646.5 182.4Q643.1 181.9 641.0 179.2Q638.9 176.4 636.1 172.2Q633.3 168.1 636.1 167.4Q638.9 166.7 644.4 171.1Q650.0 175.6 654.2 177.1Q658.3 178.6 663.9 179.3Q669.4 180.0 677.1 179.7Q684.7 179.4 686.8 182.1Q688.9 184.7 691.7 188.2Q694.4 191.7 698.3 194.4Q702.2 197.2 703.9 202.8Q705.6 208.3 708.3 216.0Q711.1 223.6 713.2 225.7Q715.3 227.8 717.4 224.6Q719.4 221.4 721.1 216.9Q722.8 212.5 722.9 209.0Q723.1 205.6 726.1 204.2Q729.2 202.8 735.4 196.5Q741.7 190.3 744.4 189.9Q747.2 189.4 750.7 188.5Q754.2 187.5 755.3 190.0Q756.4 192.5 759.4 199.0Q762.5 205.6 766.9 204.9Q771.4 204.2 772.5 210.4Q773.6 216.7 773.6 222.2Q773.6 227.8 776.4 234.0Q779.2 240.3 783.3 243.3Q787.5 246.4 788.2 244.0Q788.9 241.7 787.5 238.2Q786.1 234.7 782.6 231.9Q779.2 229.2 778.5 222.2Q777.8 215.3 781.2 216.0Q784.7 216.7 788.2 221.2Q791.7 225.8 793.8 223.3Q795.8 220.8 799.3 218.8Q802.8 216.7 802.8 212.5Q802.8 208.3 798.6 203.5Q794.4 198.6 796.5 194.4Q798.6 190.3 802.1 191.0Q805.6 191.7 809.7 190.0Q813.9 188.3 819.4 186.5Q825.0 184.7 829.2 180.6Q833.3 176.4 836.1 171.5Q838.9 166.7 837.5 163.2Q836.1 159.7 834.0 156.2Q831.9 152.8 836.1 150.0Q840.3 147.2 834.0 145.8Q827.8 144.4 832.6 141.0Q837.5 137.5 838.2 139.6Q838.9 141.7 843.1 141.0Q847.2 140.3 849.3 143.1Q851.4 145.8 851.4 150.0Q851.4 154.2 855.6 153.2Q859.7 152.2 859.7 149.7Q859.7 147.2 857.6 143.1Q855.6 138.9 858.3 135.4Q861.1 131.9 868.1 130.6Q875.0 129.2 881.9 122.9Q888.9 116.7 890.3 109.7Q891.7 102.8 886.1 101.4Q880.6 100.0 884.7 94.4Q888.9 88.9 904.2 87.1Q919.4 85.3 925.0 85.0Q930.6 84.7 932.6 87.5Q934.7 90.3 934.0 99.3Q933.3 108.3 938.9 104.2Q944.4 100.0 947.9 97.2Q951.4 94.4 952.8 88.9Q954.2 83.3 963.2 83.3Q972.2 83.3 981.9 79.9Q991.7 76.4 995.8 72.9Q1000.0 69.4 1000.0 63.9Q1000.0 58.3 986.1 56.9Q972.2 55.6 958.3 56.2Q944.4 56.9 930.6 54.2Q916.7 51.4 902.8 50.0Q888.9 48.6 875.0 50.7Q861.1 52.8 856.9 49.3Q852.8 45.8 833.3 45.8Q813.9 45.8 809.7 41.7Q805.6 37.5 797.2 36.1Q788.9 34.7 779.2 36.8Q769.4 38.9 756.9 39.6Q744.4 40.3 733.3 43.8Q722.2 47.2 711.1 47.5Q700.0 47.8 694.4 53.8Q688.9 59.7 677.8 58.3Q666.7 56.9 659.7 58.3Q652.8 59.7 637.5 59.7Q622.2 59.7 618.1 62.5Q613.9 65.3 606.9 65.3Q600.0 65.3 594.4 61.1Q588.9 56.9 583.3 54.9Q577.8 52.8 566.7 54.2Q555.6 55.6 548.6 57.6Q541.7 59.7 538.2 63.9Q534.7 68.1 528.5 71.5Q522.2 75.0 518.1 77.8Q513.9 80.6 514.6 84.0Q515.3 87.5 518.8 88.2Q522.2 88.9 525.7 87.5Q529.2 86.1 529.9 86.1Q530.6 86.1 532.6 90.3Q534.7 94.4 536.8 95.1Q538.9 95.8 541.7 94.9Q544.4 93.9 545.1 92.1Q545.8 90.3 549.3 87.1Q552.8 83.9 550.7 81.5Q548.6 79.2 549.3 77.1Q550.0 75.0 554.9 72.9Q559.7 70.8 564.6 69.4Q569.4 68.1 565.3 71.5Q561.1 75.0 559.7 77.8Q558.3 80.6 561.1 81.9Q563.9 83.3 570.8 82.6Q577.8 81.9 572.2 84.7Q566.7 87.5 566.0 89.6Q565.3 91.7 561.8 92.4Q558.3 93.1 558.3 95.1Q558.3 97.2 554.2 97.5Q550.0 97.8 544.4 98.9Q538.9 100.0 534.7 99.7Q530.6 99.4 529.2 94.9Q527.8 90.3 525.3 91.2Q522.8 92.2 523.2 94.7Q523.6 97.2 523.6 99.3Q523.6 101.4 521.5 101.4Q519.4 101.4 516.0 103.5Q512.5 105.6 510.4 106.5Q508.3 107.5 506.4 108.2Q504.4 108.9 504.3 110.0Q504.2 111.1 500.0 111.8Q495.8 112.5 495.7 113.8Q495.6 115.0 491.5 115.1Q487.5 115.3 487.9 116.2Q488.3 117.2 491.4 118.3Q494.4 119.4 495.6 122.9Q496.7 126.4 495.8 127.9Q495.0 129.4 491.2 129.4Q487.5 129.4 481.2 130.0Z M454.2 194.4Q452.8 191.7 453.5 187.5Q454.2 183.3 459.0 178.2Q463.9 173.1 468.3 169.9Q472.8 166.7 473.2 163.2Q473.6 159.7 477.4 157.6Q481.1 155.6 482.5 153.1Q483.9 150.6 489.2 151.5Q494.4 152.5 501.4 150.1Q508.3 147.8 518.1 147.2Q527.8 146.7 529.2 149.4Q530.6 152.2 529.2 154.2Q527.8 156.1 529.9 157.2Q531.9 158.3 537.2 159.3Q542.5 160.3 547.6 163.1Q552.8 165.8 554.2 163.8Q555.6 161.7 555.6 160.3Q555.6 158.9 559.7 159.0Q563.9 159.2 566.7 160.6Q569.4 161.9 575.0 163.1Q580.6 164.2 585.1 163.8Q589.7 163.3 592.4 163.3Q595.0 163.3 595.6 165.6Q596.1 167.8 595.3 170.0Q594.4 172.2 593.1 171.4Q591.7 170.6 591.0 168.8Q590.3 166.9 591.8 171.0Q593.3 175.0 595.3 179.2Q597.2 183.3 600.3 187.5Q603.3 191.7 605.1 195.8Q606.9 200.0 608.6 203.8Q610.3 207.5 615.1 211.4Q620.0 215.3 621.1 217.4Q622.2 219.4 632.2 218.3Q642.2 217.2 641.9 219.2Q641.7 221.1 638.9 227.2Q636.1 233.3 633.3 236.1Q630.6 238.9 625.7 245.1Q620.8 251.4 616.0 254.9Q611.1 258.3 610.0 263.2Q608.9 268.1 609.3 272.9Q609.7 277.8 611.1 284.7Q612.5 291.7 607.6 295.1Q602.8 298.6 600.0 303.5Q597.2 308.3 597.9 312.5Q598.6 316.7 594.9 319.4Q591.1 322.2 590.7 326.1Q590.3 330.0 586.8 333.5Q583.3 336.9 579.2 340.1Q575.0 343.3 568.8 343.9Q562.5 344.4 559.0 345.6Q555.6 346.7 553.3 345.6Q551.1 344.4 550.6 341.0Q550.0 337.5 546.5 331.2Q543.1 325.0 541.7 319.4Q540.3 313.9 536.5 306.2Q532.8 298.6 535.1 291.0Q537.5 283.3 535.4 275.0Q533.3 266.7 529.9 261.1Q526.4 255.6 526.4 247.9Q526.4 240.3 525.0 238.9Q523.6 237.5 520.1 237.8Q516.7 238.1 512.5 235.1Q508.3 232.2 501.4 234.4Q494.4 236.7 486.8 237.2Q479.2 237.8 473.6 234.3Q468.1 230.8 465.6 227.9Q463.1 225.0 460.7 222.2Q458.3 219.4 455.8 216.7Q453.3 213.9 452.8 211.5Q452.2 209.2 453.2 206.7Q454.2 204.2 454.9 200.7Q455.6 197.2 454.2 194.4Z M635.1 285.4Q636.9 283.3 638.6 288.2Q640.3 293.1 638.9 295.8Q637.5 298.6 634.3 309.0Q631.1 319.4 628.1 319.9Q625.0 320.3 623.2 317.1Q621.4 313.9 622.2 309.7Q623.1 305.6 622.6 301.4Q622.2 297.2 625.7 295.4Q629.2 293.6 631.2 290.6Q633.3 287.5 635.1 285.4Z M487.4 109.0Q484.2 110.8 494.0 109.3Q503.9 107.8 504.3 105.7Q504.7 103.6 502.4 102.5Q500.0 101.4 497.9 98.6Q495.8 95.8 495.1 93.8Q494.4 91.7 494.7 90.8Q495.0 90.0 491.9 88.6Q488.9 87.2 487.5 87.2Q486.1 87.2 484.4 90.0Q482.8 92.8 484.7 95.0Q486.7 97.2 489.2 98.6Q491.7 100.0 489.6 101.0Q487.5 101.9 487.4 103.6Q487.2 105.3 486.2 105.8Q485.3 106.4 487.9 106.8Q490.6 107.2 487.4 109.0Z M480.6 106.1Q483.3 105.6 483.1 102.9Q482.8 100.3 483.8 99.3Q484.7 98.3 481.9 97.4Q479.2 96.4 475.7 97.9Q472.2 99.4 472.2 103.1Q472.2 106.7 475.0 106.7Q477.8 106.7 480.6 106.1Z M861.1 160.4Q861.1 163.9 863.9 159.7Q866.7 155.6 870.8 155.6Q875.0 155.6 881.9 154.2Q888.9 152.8 890.3 148.6Q891.7 144.4 892.4 139.6Q893.1 134.7 891.0 135.4Q888.9 136.1 888.9 138.9Q888.9 141.7 884.7 144.4Q880.6 147.2 875.0 149.3Q869.4 151.4 865.3 154.2Q861.1 156.9 861.1 160.4Z M891.7 128.5Q888.9 133.3 891.7 133.3Q894.4 133.3 899.3 131.5Q904.2 129.7 899.3 126.7Q894.4 123.6 891.7 128.5Z M820.1 309.3Q815.3 311.1 816.0 317.4Q816.7 323.6 818.1 334.0Q819.4 344.4 823.6 345.8Q827.8 347.2 834.7 345.8Q841.7 344.4 850.0 341.1Q858.3 337.8 865.3 339.4Q872.2 341.1 877.8 344.2Q883.3 347.2 886.1 351.4Q888.9 355.6 897.2 356.9Q905.6 358.3 911.1 356.2Q916.7 354.2 921.5 341.0Q926.4 327.8 925.7 323.6Q925.0 319.4 919.4 313.2Q913.9 306.9 909.0 299.3Q904.2 291.7 900.0 285.7Q895.8 279.7 894.4 282.9Q893.1 286.1 893.1 291.7Q893.1 297.2 891.0 297.9Q888.9 298.6 884.0 295.1Q879.2 291.7 879.9 287.5Q880.6 283.3 873.6 282.4Q866.7 281.4 863.2 286.5Q859.7 291.7 854.9 290.3Q850.0 288.9 845.1 293.1Q840.3 297.2 838.2 300.7Q836.1 304.2 830.6 305.8Q825.0 307.5 820.1 309.3Z M902.2 364.9Q901.7 363.1 906.8 363.3Q911.9 363.6 911.5 366.8Q911.1 370.0 908.3 370.6Q905.6 371.1 904.2 368.9Q902.8 366.7 902.2 364.9Z M982.2 352.8Q979.7 345.8 982.9 349.3Q986.1 352.8 991.0 353.8Q995.8 354.7 993.1 357.9Q990.3 361.1 988.2 363.2Q986.1 365.3 985.4 362.5Q984.7 359.7 982.2 352.8Z M980.6 363.3Q981.9 363.9 982.6 365.0Q983.3 366.1 979.9 369.2Q976.4 372.2 975.0 374.7Q973.6 377.2 968.8 377.9Q963.9 378.6 963.2 377.5Q962.5 376.4 966.0 373.6Q969.4 370.8 974.3 366.8Q979.2 362.8 980.6 363.3Z M767.1 241.0Q764.7 234.7 768.5 236.8Q772.2 238.9 780.6 247.2Q788.9 255.6 791.7 261.1Q794.4 266.7 788.9 263.9Q783.3 261.1 776.4 254.2Q769.4 247.2 767.1 241.0Z M808.3 243.8Q802.8 245.8 805.6 252.1Q808.3 258.3 815.3 259.7Q822.2 261.1 825.7 254.2Q829.2 247.2 829.9 241.7Q830.6 236.1 827.1 233.3Q823.6 230.6 818.8 236.1Q813.9 241.7 808.3 243.8Z M793.8 269.9Q793.1 268.9 805.6 270.3Q818.1 271.7 814.6 272.6Q811.1 273.6 802.8 272.2Q794.4 270.8 793.8 269.9Z M834.7 264.6Q830.6 265.3 832.6 259.0Q834.7 252.8 840.3 250.0Q845.8 247.2 841.0 250.7Q836.1 254.2 837.5 259.0Q838.9 263.9 834.7 264.6Z M865.3 256.9Q863.9 252.8 872.2 253.5Q880.6 254.2 886.1 255.7Q891.7 257.2 900.7 261.9Q909.7 266.7 913.2 272.9Q916.7 279.2 911.1 276.4Q905.6 273.6 898.6 274.3Q891.7 275.0 887.5 273.6Q883.3 272.2 879.2 266.9Q875.0 261.7 870.8 261.4Q866.7 261.1 865.3 256.9Z M833.3 204.2Q833.3 198.6 836.8 199.3Q840.3 200.0 842.4 207.6Q844.4 215.3 847.2 222.9Q850.0 230.6 849.3 231.9Q848.6 233.3 843.8 231.9Q838.9 230.6 839.6 225.7Q840.3 220.8 836.8 215.3Q833.3 209.7 833.3 204.2Z M435.4 70.4Q433.3 68.1 436.1 66.8Q438.9 65.6 447.2 65.4Q455.6 65.3 459.0 67.4Q462.5 69.4 456.2 71.7Q450.0 73.9 443.8 73.3Q437.5 72.8 435.4 70.4Z M270.1 189.4Q263.9 189.4 268.1 187.6Q272.2 185.8 279.2 187.4Q286.1 188.9 290.0 191.4Q293.9 193.9 289.3 194.3Q284.7 194.7 280.6 192.1Q276.4 189.4 270.1 189.4Z M297.2 200.0Q293.1 198.9 295.4 196.8Q297.8 194.7 303.1 194.9Q308.3 195.0 309.2 196.8Q310.0 198.6 305.7 199.9Q301.4 201.1 297.2 200.0Z M721.9 227.8Q721.7 222.8 724.4 226.0Q727.2 229.2 726.4 231.1Q725.6 233.1 723.9 232.9Q722.2 232.8 721.9 227.8Z M834.6 187.5Q833.6 186.1 834.9 182.9Q836.1 179.7 837.5 180.1Q838.9 180.6 837.2 184.7Q835.6 188.9 834.6 187.5Z M537.5 34.6Q530.6 31.9 538.9 29.9Q547.2 27.8 561.1 27.8Q575.0 27.8 568.1 30.6Q561.1 33.3 552.8 35.3Q544.4 37.2 537.5 34.6Z M648.6 50.3Q644.4 51.4 650.0 47.9Q655.6 44.4 672.2 41.0Q688.9 37.5 677.8 40.3Q666.7 43.1 659.7 46.1Q652.8 49.2 648.6 50.3Z M538.2 146.1Q534.4 144.2 538.9 143.9Q543.3 143.6 542.6 145.8Q541.9 148.1 538.2 146.1Z M523.3 138.9Q523.3 136.1 525.0 136.1Q526.7 136.1 526.7 138.6Q526.7 141.1 525.0 141.4Q523.3 141.7 523.3 138.9Z M894.4 113.9Q894.4 122.2 896.5 118.1Q898.6 113.9 897.9 106.9Q897.2 100.0 895.8 102.8Q894.4 105.6 894.4 113.9Z"/>
+        <path class="coast2" d="M40.3 66.0Q38.9 61.1 52.8 56.9Q66.7 52.8 88.9 54.2Q111.1 55.6 131.9 55.6Q152.8 55.6 173.6 58.3Q194.4 61.1 215.3 58.3Q236.1 55.6 250.0 56.9Q263.9 58.3 268.1 65.3Q272.2 72.2 261.1 79.2Q250.0 86.1 244.4 87.5Q238.9 88.9 251.4 93.1Q263.9 97.2 270.8 101.4Q277.8 105.6 280.6 97.2Q283.3 88.9 284.7 83.3Q286.1 77.8 295.8 79.2Q305.6 80.6 313.9 81.9Q322.2 83.3 326.4 88.9Q330.6 94.4 337.5 100.0Q344.4 105.6 338.9 112.5Q333.3 119.4 325.0 123.6Q316.7 127.8 311.1 129.2Q305.6 130.6 305.6 132.6Q305.6 134.7 300.0 136.1Q294.4 137.5 291.7 142.4Q288.9 147.2 289.6 150.0Q290.3 152.8 282.6 158.3Q275.0 163.9 276.4 169.4Q277.8 175.0 277.1 177.5Q276.4 180.0 274.3 177.5Q272.2 175.0 270.8 171.5Q269.4 168.1 266.7 167.4Q263.9 166.7 258.3 166.7Q252.8 166.7 251.4 168.1Q250.0 169.4 244.4 168.8Q238.9 168.1 234.7 170.8Q230.6 173.6 229.9 181.2Q229.2 188.9 232.6 193.1Q236.1 197.2 241.7 197.2Q247.2 197.2 247.9 194.4Q248.6 191.7 253.5 191.0Q258.3 190.3 256.9 197.9Q255.6 205.6 261.8 206.9Q268.1 208.3 268.1 213.9Q268.1 219.4 270.8 222.2Q273.6 225.0 276.4 224.3Q279.2 223.6 281.9 225.0Q284.7 226.4 284.0 228.5Q283.3 230.6 280.6 229.9Q277.8 229.2 275.0 228.5Q272.2 227.8 267.4 224.3Q262.5 220.8 259.7 217.4Q256.9 213.9 252.1 212.5Q247.2 211.1 242.4 208.3Q237.5 205.6 234.0 205.6Q230.6 205.6 225.0 203.5Q219.4 201.4 213.2 197.9Q206.9 194.4 206.9 190.3Q206.9 186.1 202.1 181.9Q197.2 177.8 192.4 172.9Q187.5 168.1 184.7 165.3Q181.9 162.5 184.7 168.8Q187.5 175.0 191.0 180.6Q194.4 186.1 191.7 184.0Q188.9 181.9 186.1 177.1Q183.3 172.2 181.9 169.4Q180.6 166.7 177.8 163.2Q175.0 159.7 170.1 156.9Q165.3 154.2 162.5 150.0Q159.7 145.8 157.6 142.4Q155.6 138.9 154.9 134.7Q154.2 130.6 154.9 125.0Q155.6 119.4 156.9 116.7Q158.3 113.9 152.8 111.1Q147.2 108.3 143.1 103.5Q138.9 98.6 133.3 94.4Q127.8 90.3 123.6 88.2Q119.4 86.1 113.9 84.7Q108.3 83.3 100.0 82.6Q91.7 81.9 84.7 84.0Q77.8 86.1 75.0 88.2Q72.2 90.3 66.7 91.7Q61.1 93.1 55.6 95.1Q50.0 97.2 55.6 93.1Q61.1 88.9 55.6 86.8Q50.0 84.7 45.8 81.2Q41.7 77.8 41.7 74.3Q41.7 70.8 40.3 66.0Z M318.1 37.5Q297.2 33.3 315.3 27.8Q333.3 22.2 368.1 20.1Q402.8 18.1 423.6 20.1Q444.4 22.2 447.2 29.2Q450.0 36.1 444.4 43.1Q438.9 50.0 434.7 55.6Q430.6 61.1 416.7 64.6Q402.8 68.1 393.1 75.7Q383.3 83.3 375.0 81.9Q366.7 80.6 361.1 75.0Q355.6 69.4 352.8 63.9Q350.0 58.3 344.4 50.0Q338.9 41.7 318.1 37.5Z M323.6 70.8Q327.8 65.3 319.4 60.4Q311.1 55.6 297.2 52.1Q283.3 48.6 266.7 47.2Q250.0 45.8 263.9 53.5Q277.8 61.1 284.7 66.0Q291.7 70.8 305.6 73.6Q319.4 76.4 323.6 70.8Z M243.1 31.9Q250.0 38.9 270.8 37.5Q291.7 36.1 305.6 31.9Q319.4 27.8 305.6 23.6Q291.7 19.4 263.9 22.2Q236.1 25.0 243.1 31.9Z M169.4 55.6Q172.2 58.3 190.3 59.0Q208.3 59.7 215.3 57.6Q222.2 55.6 216.7 51.4Q211.1 47.2 195.8 47.2Q180.6 47.2 173.6 50.0Q166.7 52.8 169.4 55.6Z M285.4 228.5Q286.1 226.4 293.1 221.5Q300.0 216.7 306.9 218.5Q313.9 220.3 322.2 220.6Q330.6 220.8 334.7 225.7Q338.9 230.6 347.2 233.3Q355.6 236.1 358.3 241.0Q361.1 245.8 369.4 251.4Q377.8 256.9 386.1 259.0Q394.4 261.1 398.6 263.9Q402.8 266.7 402.8 270.8Q402.8 275.0 397.2 281.2Q391.7 287.5 391.7 293.8Q391.7 300.0 388.9 305.6Q386.1 311.1 381.2 312.8Q376.4 314.4 370.8 318.3Q365.3 322.2 364.6 326.4Q363.9 330.6 358.3 336.8Q352.8 343.1 347.9 344.4Q343.1 345.8 341.7 350.0Q340.3 354.2 334.0 356.2Q327.8 358.3 323.6 361.1Q319.4 363.9 321.5 366.0Q323.6 368.1 320.8 371.5Q318.1 375.0 315.3 377.1Q312.5 379.2 314.6 381.2Q316.7 383.3 312.5 387.5Q308.3 391.7 309.0 393.8Q309.7 395.8 313.2 399.3Q316.7 402.8 311.1 402.8Q305.6 402.8 300.0 398.6Q294.4 394.4 292.4 388.9Q290.3 383.3 292.4 377.8Q294.4 372.2 295.1 366.7Q295.8 361.1 295.8 356.9Q295.8 352.8 298.6 347.2Q301.4 341.7 301.4 334.7Q301.4 327.8 302.8 320.8Q304.2 313.9 304.4 307.6Q304.7 301.4 298.2 297.2Q291.7 293.1 289.6 289.6Q287.5 286.1 283.3 278.5Q279.2 270.8 277.1 267.4Q275.0 263.9 276.4 258.3Q277.8 252.8 277.8 250.0Q277.8 247.2 279.9 245.1Q281.9 243.1 283.3 241.0Q284.7 238.9 284.7 234.7Q284.7 230.6 285.4 228.5Z M481.2 130.0Q475.0 130.6 475.0 136.1Q475.0 141.7 475.0 144.4Q475.0 147.2 479.2 148.3Q483.3 149.4 488.9 148.8Q494.4 148.1 497.2 145.3Q500.0 142.5 504.2 137.9Q508.3 133.3 509.0 131.2Q509.7 129.2 513.2 129.9Q516.7 130.6 520.8 128.8Q525.0 126.9 529.2 130.1Q533.3 133.3 538.3 138.9Q543.3 144.4 544.6 143.2Q545.8 141.9 546.5 141.4Q547.2 140.8 547.5 139.2Q547.8 137.5 549.6 137.9Q551.4 138.3 547.9 136.2Q544.4 134.2 541.0 131.5Q537.5 128.9 535.8 127.6Q534.2 126.4 535.1 124.7Q536.1 123.1 536.9 123.3Q537.8 123.6 539.7 125.0Q541.7 126.4 547.2 129.9Q552.8 133.3 554.2 136.1Q555.6 138.9 557.6 143.1Q559.7 147.2 561.8 147.9Q563.9 148.6 565.3 146.5Q566.7 144.4 565.3 141.0Q563.9 137.5 568.1 137.1Q572.2 136.7 576.4 136.4Q580.6 136.1 577.1 138.2Q573.6 140.3 574.3 143.8Q575.0 147.2 579.2 148.2Q583.3 149.2 591.7 148.9Q600.0 148.6 599.7 151.4Q599.4 154.2 598.3 156.2Q597.2 158.3 596.2 160.7Q595.3 163.1 596.1 165.6Q596.9 168.1 598.5 170.8Q600.0 173.6 604.2 181.2Q608.3 188.9 613.2 197.2Q618.1 205.6 619.4 210.1Q620.8 214.7 622.9 214.3Q625.0 213.9 630.6 211.8Q636.1 209.7 640.3 207.6Q644.4 205.6 649.3 203.5Q654.2 201.4 657.4 199.3Q660.6 197.2 663.3 192.4Q666.1 187.5 662.2 185.7Q658.3 183.9 657.4 180.8Q656.4 177.8 653.2 180.3Q650.0 182.8 646.5 182.4Q643.1 181.9 641.0 179.2Q638.9 176.4 636.1 172.2Q633.3 168.1 636.1 167.4Q638.9 166.7 644.4 171.1Q650.0 175.6 654.2 177.1Q658.3 178.6 663.9 179.3Q669.4 180.0 677.1 179.7Q684.7 179.4 686.8 182.1Q688.9 184.7 691.7 188.2Q694.4 191.7 698.3 194.4Q702.2 197.2 703.9 202.8Q705.6 208.3 708.3 216.0Q711.1 223.6 713.2 225.7Q715.3 227.8 717.4 224.6Q719.4 221.4 721.1 216.9Q722.8 212.5 722.9 209.0Q723.1 205.6 726.1 204.2Q729.2 202.8 735.4 196.5Q741.7 190.3 744.4 189.9Q747.2 189.4 750.7 188.5Q754.2 187.5 755.3 190.0Q756.4 192.5 759.4 199.0Q762.5 205.6 766.9 204.9Q771.4 204.2 772.5 210.4Q773.6 216.7 773.6 222.2Q773.6 227.8 776.4 234.0Q779.2 240.3 783.3 243.3Q787.5 246.4 788.2 244.0Q788.9 241.7 787.5 238.2Q786.1 234.7 782.6 231.9Q779.2 229.2 778.5 222.2Q777.8 215.3 781.2 216.0Q784.7 216.7 788.2 221.2Q791.7 225.8 793.8 223.3Q795.8 220.8 799.3 218.8Q802.8 216.7 802.8 212.5Q802.8 208.3 798.6 203.5Q794.4 198.6 796.5 194.4Q798.6 190.3 802.1 191.0Q805.6 191.7 809.7 190.0Q813.9 188.3 819.4 186.5Q825.0 184.7 829.2 180.6Q833.3 176.4 836.1 171.5Q838.9 166.7 837.5 163.2Q836.1 159.7 834.0 156.2Q831.9 152.8 836.1 150.0Q840.3 147.2 834.0 145.8Q827.8 144.4 832.6 141.0Q837.5 137.5 838.2 139.6Q838.9 141.7 843.1 141.0Q847.2 140.3 849.3 143.1Q851.4 145.8 851.4 150.0Q851.4 154.2 855.6 153.2Q859.7 152.2 859.7 149.7Q859.7 147.2 857.6 143.1Q855.6 138.9 858.3 135.4Q861.1 131.9 868.1 130.6Q875.0 129.2 881.9 122.9Q888.9 116.7 890.3 109.7Q891.7 102.8 886.1 101.4Q880.6 100.0 884.7 94.4Q888.9 88.9 904.2 87.1Q919.4 85.3 925.0 85.0Q930.6 84.7 932.6 87.5Q934.7 90.3 934.0 99.3Q933.3 108.3 938.9 104.2Q944.4 100.0 947.9 97.2Q951.4 94.4 952.8 88.9Q954.2 83.3 963.2 83.3Q972.2 83.3 981.9 79.9Q991.7 76.4 995.8 72.9Q1000.0 69.4 1000.0 63.9Q1000.0 58.3 986.1 56.9Q972.2 55.6 958.3 56.2Q944.4 56.9 930.6 54.2Q916.7 51.4 902.8 50.0Q888.9 48.6 875.0 50.7Q861.1 52.8 856.9 49.3Q852.8 45.8 833.3 45.8Q813.9 45.8 809.7 41.7Q805.6 37.5 797.2 36.1Q788.9 34.7 779.2 36.8Q769.4 38.9 756.9 39.6Q744.4 40.3 733.3 43.8Q722.2 47.2 711.1 47.5Q700.0 47.8 694.4 53.8Q688.9 59.7 677.8 58.3Q666.7 56.9 659.7 58.3Q652.8 59.7 637.5 59.7Q622.2 59.7 618.1 62.5Q613.9 65.3 606.9 65.3Q600.0 65.3 594.4 61.1Q588.9 56.9 583.3 54.9Q577.8 52.8 566.7 54.2Q555.6 55.6 548.6 57.6Q541.7 59.7 538.2 63.9Q534.7 68.1 528.5 71.5Q522.2 75.0 518.1 77.8Q513.9 80.6 514.6 84.0Q515.3 87.5 518.8 88.2Q522.2 88.9 525.7 87.5Q529.2 86.1 529.9 86.1Q530.6 86.1 532.6 90.3Q534.7 94.4 536.8 95.1Q538.9 95.8 541.7 94.9Q544.4 93.9 545.1 92.1Q545.8 90.3 549.3 87.1Q552.8 83.9 550.7 81.5Q548.6 79.2 549.3 77.1Q550.0 75.0 554.9 72.9Q559.7 70.8 564.6 69.4Q569.4 68.1 565.3 71.5Q561.1 75.0 559.7 77.8Q558.3 80.6 561.1 81.9Q563.9 83.3 570.8 82.6Q577.8 81.9 572.2 84.7Q566.7 87.5 566.0 89.6Q565.3 91.7 561.8 92.4Q558.3 93.1 558.3 95.1Q558.3 97.2 554.2 97.5Q550.0 97.8 544.4 98.9Q538.9 100.0 534.7 99.7Q530.6 99.4 529.2 94.9Q527.8 90.3 525.3 91.2Q522.8 92.2 523.2 94.7Q523.6 97.2 523.6 99.3Q523.6 101.4 521.5 101.4Q519.4 101.4 516.0 103.5Q512.5 105.6 510.4 106.5Q508.3 107.5 506.4 108.2Q504.4 108.9 504.3 110.0Q504.2 111.1 500.0 111.8Q495.8 112.5 495.7 113.8Q495.6 115.0 491.5 115.1Q487.5 115.3 487.9 116.2Q488.3 117.2 491.4 118.3Q494.4 119.4 495.6 122.9Q496.7 126.4 495.8 127.9Q495.0 129.4 491.2 129.4Q487.5 129.4 481.2 130.0Z M454.2 194.4Q452.8 191.7 453.5 187.5Q454.2 183.3 459.0 178.2Q463.9 173.1 468.3 169.9Q472.8 166.7 473.2 163.2Q473.6 159.7 477.4 157.6Q481.1 155.6 482.5 153.1Q483.9 150.6 489.2 151.5Q494.4 152.5 501.4 150.1Q508.3 147.8 518.1 147.2Q527.8 146.7 529.2 149.4Q530.6 152.2 529.2 154.2Q527.8 156.1 529.9 157.2Q531.9 158.3 537.2 159.3Q542.5 160.3 547.6 163.1Q552.8 165.8 554.2 163.8Q555.6 161.7 555.6 160.3Q555.6 158.9 559.7 159.0Q563.9 159.2 566.7 160.6Q569.4 161.9 575.0 163.1Q580.6 164.2 585.1 163.8Q589.7 163.3 592.4 163.3Q595.0 163.3 595.6 165.6Q596.1 167.8 595.3 170.0Q594.4 172.2 593.1 171.4Q591.7 170.6 591.0 168.8Q590.3 166.9 591.8 171.0Q593.3 175.0 595.3 179.2Q597.2 183.3 600.3 187.5Q603.3 191.7 605.1 195.8Q606.9 200.0 608.6 203.8Q610.3 207.5 615.1 211.4Q620.0 215.3 621.1 217.4Q622.2 219.4 632.2 218.3Q642.2 217.2 641.9 219.2Q641.7 221.1 638.9 227.2Q636.1 233.3 633.3 236.1Q630.6 238.9 625.7 245.1Q620.8 251.4 616.0 254.9Q611.1 258.3 610.0 263.2Q608.9 268.1 609.3 272.9Q609.7 277.8 611.1 284.7Q612.5 291.7 607.6 295.1Q602.8 298.6 600.0 303.5Q597.2 308.3 597.9 312.5Q598.6 316.7 594.9 319.4Q591.1 322.2 590.7 326.1Q590.3 330.0 586.8 333.5Q583.3 336.9 579.2 340.1Q575.0 343.3 568.8 343.9Q562.5 344.4 559.0 345.6Q555.6 346.7 553.3 345.6Q551.1 344.4 550.6 341.0Q550.0 337.5 546.5 331.2Q543.1 325.0 541.7 319.4Q540.3 313.9 536.5 306.2Q532.8 298.6 535.1 291.0Q537.5 283.3 535.4 275.0Q533.3 266.7 529.9 261.1Q526.4 255.6 526.4 247.9Q526.4 240.3 525.0 238.9Q523.6 237.5 520.1 237.8Q516.7 238.1 512.5 235.1Q508.3 232.2 501.4 234.4Q494.4 236.7 486.8 237.2Q479.2 237.8 473.6 234.3Q468.1 230.8 465.6 227.9Q463.1 225.0 460.7 222.2Q458.3 219.4 455.8 216.7Q453.3 213.9 452.8 211.5Q452.2 209.2 453.2 206.7Q454.2 204.2 454.9 200.7Q455.6 197.2 454.2 194.4Z M635.1 285.4Q636.9 283.3 638.6 288.2Q640.3 293.1 638.9 295.8Q637.5 298.6 634.3 309.0Q631.1 319.4 628.1 319.9Q625.0 320.3 623.2 317.1Q621.4 313.9 622.2 309.7Q623.1 305.6 622.6 301.4Q622.2 297.2 625.7 295.4Q629.2 293.6 631.2 290.6Q633.3 287.5 635.1 285.4Z M487.4 109.0Q484.2 110.8 494.0 109.3Q503.9 107.8 504.3 105.7Q504.7 103.6 502.4 102.5Q500.0 101.4 497.9 98.6Q495.8 95.8 495.1 93.8Q494.4 91.7 494.7 90.8Q495.0 90.0 491.9 88.6Q488.9 87.2 487.5 87.2Q486.1 87.2 484.4 90.0Q482.8 92.8 484.7 95.0Q486.7 97.2 489.2 98.6Q491.7 100.0 489.6 101.0Q487.5 101.9 487.4 103.6Q487.2 105.3 486.2 105.8Q485.3 106.4 487.9 106.8Q490.6 107.2 487.4 109.0Z M480.6 106.1Q483.3 105.6 483.1 102.9Q482.8 100.3 483.8 99.3Q484.7 98.3 481.9 97.4Q479.2 96.4 475.7 97.9Q472.2 99.4 472.2 103.1Q472.2 106.7 475.0 106.7Q477.8 106.7 480.6 106.1Z M861.1 160.4Q861.1 163.9 863.9 159.7Q866.7 155.6 870.8 155.6Q875.0 155.6 881.9 154.2Q888.9 152.8 890.3 148.6Q891.7 144.4 892.4 139.6Q893.1 134.7 891.0 135.4Q888.9 136.1 888.9 138.9Q888.9 141.7 884.7 144.4Q880.6 147.2 875.0 149.3Q869.4 151.4 865.3 154.2Q861.1 156.9 861.1 160.4Z M891.7 128.5Q888.9 133.3 891.7 133.3Q894.4 133.3 899.3 131.5Q904.2 129.7 899.3 126.7Q894.4 123.6 891.7 128.5Z M820.1 309.3Q815.3 311.1 816.0 317.4Q816.7 323.6 818.1 334.0Q819.4 344.4 823.6 345.8Q827.8 347.2 834.7 345.8Q841.7 344.4 850.0 341.1Q858.3 337.8 865.3 339.4Q872.2 341.1 877.8 344.2Q883.3 347.2 886.1 351.4Q888.9 355.6 897.2 356.9Q905.6 358.3 911.1 356.2Q916.7 354.2 921.5 341.0Q926.4 327.8 925.7 323.6Q925.0 319.4 919.4 313.2Q913.9 306.9 909.0 299.3Q904.2 291.7 900.0 285.7Q895.8 279.7 894.4 282.9Q893.1 286.1 893.1 291.7Q893.1 297.2 891.0 297.9Q888.9 298.6 884.0 295.1Q879.2 291.7 879.9 287.5Q880.6 283.3 873.6 282.4Q866.7 281.4 863.2 286.5Q859.7 291.7 854.9 290.3Q850.0 288.9 845.1 293.1Q840.3 297.2 838.2 300.7Q836.1 304.2 830.6 305.8Q825.0 307.5 820.1 309.3Z M902.2 364.9Q901.7 363.1 906.8 363.3Q911.9 363.6 911.5 366.8Q911.1 370.0 908.3 370.6Q905.6 371.1 904.2 368.9Q902.8 366.7 902.2 364.9Z M982.2 352.8Q979.7 345.8 982.9 349.3Q986.1 352.8 991.0 353.8Q995.8 354.7 993.1 357.9Q990.3 361.1 988.2 363.2Q986.1 365.3 985.4 362.5Q984.7 359.7 982.2 352.8Z M980.6 363.3Q981.9 363.9 982.6 365.0Q983.3 366.1 979.9 369.2Q976.4 372.2 975.0 374.7Q973.6 377.2 968.8 377.9Q963.9 378.6 963.2 377.5Q962.5 376.4 966.0 373.6Q969.4 370.8 974.3 366.8Q979.2 362.8 980.6 363.3Z M767.1 241.0Q764.7 234.7 768.5 236.8Q772.2 238.9 780.6 247.2Q788.9 255.6 791.7 261.1Q794.4 266.7 788.9 263.9Q783.3 261.1 776.4 254.2Q769.4 247.2 767.1 241.0Z M808.3 243.8Q802.8 245.8 805.6 252.1Q808.3 258.3 815.3 259.7Q822.2 261.1 825.7 254.2Q829.2 247.2 829.9 241.7Q830.6 236.1 827.1 233.3Q823.6 230.6 818.8 236.1Q813.9 241.7 808.3 243.8Z M793.8 269.9Q793.1 268.9 805.6 270.3Q818.1 271.7 814.6 272.6Q811.1 273.6 802.8 272.2Q794.4 270.8 793.8 269.9Z M834.7 264.6Q830.6 265.3 832.6 259.0Q834.7 252.8 840.3 250.0Q845.8 247.2 841.0 250.7Q836.1 254.2 837.5 259.0Q838.9 263.9 834.7 264.6Z M865.3 256.9Q863.9 252.8 872.2 253.5Q880.6 254.2 886.1 255.7Q891.7 257.2 900.7 261.9Q909.7 266.7 913.2 272.9Q916.7 279.2 911.1 276.4Q905.6 273.6 898.6 274.3Q891.7 275.0 887.5 273.6Q883.3 272.2 879.2 266.9Q875.0 261.7 870.8 261.4Q866.7 261.1 865.3 256.9Z M833.3 204.2Q833.3 198.6 836.8 199.3Q840.3 200.0 842.4 207.6Q844.4 215.3 847.2 222.9Q850.0 230.6 849.3 231.9Q848.6 233.3 843.8 231.9Q838.9 230.6 839.6 225.7Q840.3 220.8 836.8 215.3Q833.3 209.7 833.3 204.2Z M435.4 70.4Q433.3 68.1 436.1 66.8Q438.9 65.6 447.2 65.4Q455.6 65.3 459.0 67.4Q462.5 69.4 456.2 71.7Q450.0 73.9 443.8 73.3Q437.5 72.8 435.4 70.4Z M270.1 189.4Q263.9 189.4 268.1 187.6Q272.2 185.8 279.2 187.4Q286.1 188.9 290.0 191.4Q293.9 193.9 289.3 194.3Q284.7 194.7 280.6 192.1Q276.4 189.4 270.1 189.4Z M297.2 200.0Q293.1 198.9 295.4 196.8Q297.8 194.7 303.1 194.9Q308.3 195.0 309.2 196.8Q310.0 198.6 305.7 199.9Q301.4 201.1 297.2 200.0Z M721.9 227.8Q721.7 222.8 724.4 226.0Q727.2 229.2 726.4 231.1Q725.6 233.1 723.9 232.9Q722.2 232.8 721.9 227.8Z M834.6 187.5Q833.6 186.1 834.9 182.9Q836.1 179.7 837.5 180.1Q838.9 180.6 837.2 184.7Q835.6 188.9 834.6 187.5Z M537.5 34.6Q530.6 31.9 538.9 29.9Q547.2 27.8 561.1 27.8Q575.0 27.8 568.1 30.6Q561.1 33.3 552.8 35.3Q544.4 37.2 537.5 34.6Z M648.6 50.3Q644.4 51.4 650.0 47.9Q655.6 44.4 672.2 41.0Q688.9 37.5 677.8 40.3Q666.7 43.1 659.7 46.1Q652.8 49.2 648.6 50.3Z M538.2 146.1Q534.4 144.2 538.9 143.9Q543.3 143.6 542.6 145.8Q541.9 148.1 538.2 146.1Z M523.3 138.9Q523.3 136.1 525.0 136.1Q526.7 136.1 526.7 138.6Q526.7 141.1 525.0 141.4Q523.3 141.7 523.3 138.9Z M894.4 113.9Q894.4 122.2 896.5 118.1Q898.6 113.9 897.9 106.9Q897.2 100.0 895.8 102.8Q894.4 105.6 894.4 113.9Z"/>
+        <path class="land" d="M40.3 66.0Q38.9 61.1 52.8 56.9Q66.7 52.8 88.9 54.2Q111.1 55.6 131.9 55.6Q152.8 55.6 173.6 58.3Q194.4 61.1 215.3 58.3Q236.1 55.6 250.0 56.9Q263.9 58.3 268.1 65.3Q272.2 72.2 261.1 79.2Q250.0 86.1 244.4 87.5Q238.9 88.9 251.4 93.1Q263.9 97.2 270.8 101.4Q277.8 105.6 280.6 97.2Q283.3 88.9 284.7 83.3Q286.1 77.8 295.8 79.2Q305.6 80.6 313.9 81.9Q322.2 83.3 326.4 88.9Q330.6 94.4 337.5 100.0Q344.4 105.6 338.9 112.5Q333.3 119.4 325.0 123.6Q316.7 127.8 311.1 129.2Q305.6 130.6 305.6 132.6Q305.6 134.7 300.0 136.1Q294.4 137.5 291.7 142.4Q288.9 147.2 289.6 150.0Q290.3 152.8 282.6 158.3Q275.0 163.9 276.4 169.4Q277.8 175.0 277.1 177.5Q276.4 180.0 274.3 177.5Q272.2 175.0 270.8 171.5Q269.4 168.1 266.7 167.4Q263.9 166.7 258.3 166.7Q252.8 166.7 251.4 168.1Q250.0 169.4 244.4 168.8Q238.9 168.1 234.7 170.8Q230.6 173.6 229.9 181.2Q229.2 188.9 232.6 193.1Q236.1 197.2 241.7 197.2Q247.2 197.2 247.9 194.4Q248.6 191.7 253.5 191.0Q258.3 190.3 256.9 197.9Q255.6 205.6 261.8 206.9Q268.1 208.3 268.1 213.9Q268.1 219.4 270.8 222.2Q273.6 225.0 276.4 224.3Q279.2 223.6 281.9 225.0Q284.7 226.4 284.0 228.5Q283.3 230.6 280.6 229.9Q277.8 229.2 275.0 228.5Q272.2 227.8 267.4 224.3Q262.5 220.8 259.7 217.4Q256.9 213.9 252.1 212.5Q247.2 211.1 242.4 208.3Q237.5 205.6 234.0 205.6Q230.6 205.6 225.0 203.5Q219.4 201.4 213.2 197.9Q206.9 194.4 206.9 190.3Q206.9 186.1 202.1 181.9Q197.2 177.8 192.4 172.9Q187.5 168.1 184.7 165.3Q181.9 162.5 184.7 168.8Q187.5 175.0 191.0 180.6Q194.4 186.1 191.7 184.0Q188.9 181.9 186.1 177.1Q183.3 172.2 181.9 169.4Q180.6 166.7 177.8 163.2Q175.0 159.7 170.1 156.9Q165.3 154.2 162.5 150.0Q159.7 145.8 157.6 142.4Q155.6 138.9 154.9 134.7Q154.2 130.6 154.9 125.0Q155.6 119.4 156.9 116.7Q158.3 113.9 152.8 111.1Q147.2 108.3 143.1 103.5Q138.9 98.6 133.3 94.4Q127.8 90.3 123.6 88.2Q119.4 86.1 113.9 84.7Q108.3 83.3 100.0 82.6Q91.7 81.9 84.7 84.0Q77.8 86.1 75.0 88.2Q72.2 90.3 66.7 91.7Q61.1 93.1 55.6 95.1Q50.0 97.2 55.6 93.1Q61.1 88.9 55.6 86.8Q50.0 84.7 45.8 81.2Q41.7 77.8 41.7 74.3Q41.7 70.8 40.3 66.0Z M318.1 37.5Q297.2 33.3 315.3 27.8Q333.3 22.2 368.1 20.1Q402.8 18.1 423.6 20.1Q444.4 22.2 447.2 29.2Q450.0 36.1 444.4 43.1Q438.9 50.0 434.7 55.6Q430.6 61.1 416.7 64.6Q402.8 68.1 393.1 75.7Q383.3 83.3 375.0 81.9Q366.7 80.6 361.1 75.0Q355.6 69.4 352.8 63.9Q350.0 58.3 344.4 50.0Q338.9 41.7 318.1 37.5Z M323.6 70.8Q327.8 65.3 319.4 60.4Q311.1 55.6 297.2 52.1Q283.3 48.6 266.7 47.2Q250.0 45.8 263.9 53.5Q277.8 61.1 284.7 66.0Q291.7 70.8 305.6 73.6Q319.4 76.4 323.6 70.8Z M243.1 31.9Q250.0 38.9 270.8 37.5Q291.7 36.1 305.6 31.9Q319.4 27.8 305.6 23.6Q291.7 19.4 263.9 22.2Q236.1 25.0 243.1 31.9Z M169.4 55.6Q172.2 58.3 190.3 59.0Q208.3 59.7 215.3 57.6Q222.2 55.6 216.7 51.4Q211.1 47.2 195.8 47.2Q180.6 47.2 173.6 50.0Q166.7 52.8 169.4 55.6Z M285.4 228.5Q286.1 226.4 293.1 221.5Q300.0 216.7 306.9 218.5Q313.9 220.3 322.2 220.6Q330.6 220.8 334.7 225.7Q338.9 230.6 347.2 233.3Q355.6 236.1 358.3 241.0Q361.1 245.8 369.4 251.4Q377.8 256.9 386.1 259.0Q394.4 261.1 398.6 263.9Q402.8 266.7 402.8 270.8Q402.8 275.0 397.2 281.2Q391.7 287.5 391.7 293.8Q391.7 300.0 388.9 305.6Q386.1 311.1 381.2 312.8Q376.4 314.4 370.8 318.3Q365.3 322.2 364.6 326.4Q363.9 330.6 358.3 336.8Q352.8 343.1 347.9 344.4Q343.1 345.8 341.7 350.0Q340.3 354.2 334.0 356.2Q327.8 358.3 323.6 361.1Q319.4 363.9 321.5 366.0Q323.6 368.1 320.8 371.5Q318.1 375.0 315.3 377.1Q312.5 379.2 314.6 381.2Q316.7 383.3 312.5 387.5Q308.3 391.7 309.0 393.8Q309.7 395.8 313.2 399.3Q316.7 402.8 311.1 402.8Q305.6 402.8 300.0 398.6Q294.4 394.4 292.4 388.9Q290.3 383.3 292.4 377.8Q294.4 372.2 295.1 366.7Q295.8 361.1 295.8 356.9Q295.8 352.8 298.6 347.2Q301.4 341.7 301.4 334.7Q301.4 327.8 302.8 320.8Q304.2 313.9 304.4 307.6Q304.7 301.4 298.2 297.2Q291.7 293.1 289.6 289.6Q287.5 286.1 283.3 278.5Q279.2 270.8 277.1 267.4Q275.0 263.9 276.4 258.3Q277.8 252.8 277.8 250.0Q277.8 247.2 279.9 245.1Q281.9 243.1 283.3 241.0Q284.7 238.9 284.7 234.7Q284.7 230.6 285.4 228.5Z M481.2 130.0Q475.0 130.6 475.0 136.1Q475.0 141.7 475.0 144.4Q475.0 147.2 479.2 148.3Q483.3 149.4 488.9 148.8Q494.4 148.1 497.2 145.3Q500.0 142.5 504.2 137.9Q508.3 133.3 509.0 131.2Q509.7 129.2 513.2 129.9Q516.7 130.6 520.8 128.8Q525.0 126.9 529.2 130.1Q533.3 133.3 538.3 138.9Q543.3 144.4 544.6 143.2Q545.8 141.9 546.5 141.4Q547.2 140.8 547.5 139.2Q547.8 137.5 549.6 137.9Q551.4 138.3 547.9 136.2Q544.4 134.2 541.0 131.5Q537.5 128.9 535.8 127.6Q534.2 126.4 535.1 124.7Q536.1 123.1 536.9 123.3Q537.8 123.6 539.7 125.0Q541.7 126.4 547.2 129.9Q552.8 133.3 554.2 136.1Q555.6 138.9 557.6 143.1Q559.7 147.2 561.8 147.9Q563.9 148.6 565.3 146.5Q566.7 144.4 565.3 141.0Q563.9 137.5 568.1 137.1Q572.2 136.7 576.4 136.4Q580.6 136.1 577.1 138.2Q573.6 140.3 574.3 143.8Q575.0 147.2 579.2 148.2Q583.3 149.2 591.7 148.9Q600.0 148.6 599.7 151.4Q599.4 154.2 598.3 156.2Q597.2 158.3 596.2 160.7Q595.3 163.1 596.1 165.6Q596.9 168.1 598.5 170.8Q600.0 173.6 604.2 181.2Q608.3 188.9 613.2 197.2Q618.1 205.6 619.4 210.1Q620.8 214.7 622.9 214.3Q625.0 213.9 630.6 211.8Q636.1 209.7 640.3 207.6Q644.4 205.6 649.3 203.5Q654.2 201.4 657.4 199.3Q660.6 197.2 663.3 192.4Q666.1 187.5 662.2 185.7Q658.3 183.9 657.4 180.8Q656.4 177.8 653.2 180.3Q650.0 182.8 646.5 182.4Q643.1 181.9 641.0 179.2Q638.9 176.4 636.1 172.2Q633.3 168.1 636.1 167.4Q638.9 166.7 644.4 171.1Q650.0 175.6 654.2 177.1Q658.3 178.6 663.9 179.3Q669.4 180.0 677.1 179.7Q684.7 179.4 686.8 182.1Q688.9 184.7 691.7 188.2Q694.4 191.7 698.3 194.4Q702.2 197.2 703.9 202.8Q705.6 208.3 708.3 216.0Q711.1 223.6 713.2 225.7Q715.3 227.8 717.4 224.6Q719.4 221.4 721.1 216.9Q722.8 212.5 722.9 209.0Q723.1 205.6 726.1 204.2Q729.2 202.8 735.4 196.5Q741.7 190.3 744.4 189.9Q747.2 189.4 750.7 188.5Q754.2 187.5 755.3 190.0Q756.4 192.5 759.4 199.0Q762.5 205.6 766.9 204.9Q771.4 204.2 772.5 210.4Q773.6 216.7 773.6 222.2Q773.6 227.8 776.4 234.0Q779.2 240.3 783.3 243.3Q787.5 246.4 788.2 244.0Q788.9 241.7 787.5 238.2Q786.1 234.7 782.6 231.9Q779.2 229.2 778.5 222.2Q777.8 215.3 781.2 216.0Q784.7 216.7 788.2 221.2Q791.7 225.8 793.8 223.3Q795.8 220.8 799.3 218.8Q802.8 216.7 802.8 212.5Q802.8 208.3 798.6 203.5Q794.4 198.6 796.5 194.4Q798.6 190.3 802.1 191.0Q805.6 191.7 809.7 190.0Q813.9 188.3 819.4 186.5Q825.0 184.7 829.2 180.6Q833.3 176.4 836.1 171.5Q838.9 166.7 837.5 163.2Q836.1 159.7 834.0 156.2Q831.9 152.8 836.1 150.0Q840.3 147.2 834.0 145.8Q827.8 144.4 832.6 141.0Q837.5 137.5 838.2 139.6Q838.9 141.7 843.1 141.0Q847.2 140.3 849.3 143.1Q851.4 145.8 851.4 150.0Q851.4 154.2 855.6 153.2Q859.7 152.2 859.7 149.7Q859.7 147.2 857.6 143.1Q855.6 138.9 858.3 135.4Q861.1 131.9 868.1 130.6Q875.0 129.2 881.9 122.9Q888.9 116.7 890.3 109.7Q891.7 102.8 886.1 101.4Q880.6 100.0 884.7 94.4Q888.9 88.9 904.2 87.1Q919.4 85.3 925.0 85.0Q930.6 84.7 932.6 87.5Q934.7 90.3 934.0 99.3Q933.3 108.3 938.9 104.2Q944.4 100.0 947.9 97.2Q951.4 94.4 952.8 88.9Q954.2 83.3 963.2 83.3Q972.2 83.3 981.9 79.9Q991.7 76.4 995.8 72.9Q1000.0 69.4 1000.0 63.9Q1000.0 58.3 986.1 56.9Q972.2 55.6 958.3 56.2Q944.4 56.9 930.6 54.2Q916.7 51.4 902.8 50.0Q888.9 48.6 875.0 50.7Q861.1 52.8 856.9 49.3Q852.8 45.8 833.3 45.8Q813.9 45.8 809.7 41.7Q805.6 37.5 797.2 36.1Q788.9 34.7 779.2 36.8Q769.4 38.9 756.9 39.6Q744.4 40.3 733.3 43.8Q722.2 47.2 711.1 47.5Q700.0 47.8 694.4 53.8Q688.9 59.7 677.8 58.3Q666.7 56.9 659.7 58.3Q652.8 59.7 637.5 59.7Q622.2 59.7 618.1 62.5Q613.9 65.3 606.9 65.3Q600.0 65.3 594.4 61.1Q588.9 56.9 583.3 54.9Q577.8 52.8 566.7 54.2Q555.6 55.6 548.6 57.6Q541.7 59.7 538.2 63.9Q534.7 68.1 528.5 71.5Q522.2 75.0 518.1 77.8Q513.9 80.6 514.6 84.0Q515.3 87.5 518.8 88.2Q522.2 88.9 525.7 87.5Q529.2 86.1 529.9 86.1Q530.6 86.1 532.6 90.3Q534.7 94.4 536.8 95.1Q538.9 95.8 541.7 94.9Q544.4 93.9 545.1 92.1Q545.8 90.3 549.3 87.1Q552.8 83.9 550.7 81.5Q548.6 79.2 549.3 77.1Q550.0 75.0 554.9 72.9Q559.7 70.8 564.6 69.4Q569.4 68.1 565.3 71.5Q561.1 75.0 559.7 77.8Q558.3 80.6 561.1 81.9Q563.9 83.3 570.8 82.6Q577.8 81.9 572.2 84.7Q566.7 87.5 566.0 89.6Q565.3 91.7 561.8 92.4Q558.3 93.1 558.3 95.1Q558.3 97.2 554.2 97.5Q550.0 97.8 544.4 98.9Q538.9 100.0 534.7 99.7Q530.6 99.4 529.2 94.9Q527.8 90.3 525.3 91.2Q522.8 92.2 523.2 94.7Q523.6 97.2 523.6 99.3Q523.6 101.4 521.5 101.4Q519.4 101.4 516.0 103.5Q512.5 105.6 510.4 106.5Q508.3 107.5 506.4 108.2Q504.4 108.9 504.3 110.0Q504.2 111.1 500.0 111.8Q495.8 112.5 495.7 113.8Q495.6 115.0 491.5 115.1Q487.5 115.3 487.9 116.2Q488.3 117.2 491.4 118.3Q494.4 119.4 495.6 122.9Q496.7 126.4 495.8 127.9Q495.0 129.4 491.2 129.4Q487.5 129.4 481.2 130.0Z M454.2 194.4Q452.8 191.7 453.5 187.5Q454.2 183.3 459.0 178.2Q463.9 173.1 468.3 169.9Q472.8 166.7 473.2 163.2Q473.6 159.7 477.4 157.6Q481.1 155.6 482.5 153.1Q483.9 150.6 489.2 151.5Q494.4 152.5 501.4 150.1Q508.3 147.8 518.1 147.2Q527.8 146.7 529.2 149.4Q530.6 152.2 529.2 154.2Q527.8 156.1 529.9 157.2Q531.9 158.3 537.2 159.3Q542.5 160.3 547.6 163.1Q552.8 165.8 554.2 163.8Q555.6 161.7 555.6 160.3Q555.6 158.9 559.7 159.0Q563.9 159.2 566.7 160.6Q569.4 161.9 575.0 163.1Q580.6 164.2 585.1 163.8Q589.7 163.3 592.4 163.3Q595.0 163.3 595.6 165.6Q596.1 167.8 595.3 170.0Q594.4 172.2 593.1 171.4Q591.7 170.6 591.0 168.8Q590.3 166.9 591.8 171.0Q593.3 175.0 595.3 179.2Q597.2 183.3 600.3 187.5Q603.3 191.7 605.1 195.8Q606.9 200.0 608.6 203.8Q610.3 207.5 615.1 211.4Q620.0 215.3 621.1 217.4Q622.2 219.4 632.2 218.3Q642.2 217.2 641.9 219.2Q641.7 221.1 638.9 227.2Q636.1 233.3 633.3 236.1Q630.6 238.9 625.7 245.1Q620.8 251.4 616.0 254.9Q611.1 258.3 610.0 263.2Q608.9 268.1 609.3 272.9Q609.7 277.8 611.1 284.7Q612.5 291.7 607.6 295.1Q602.8 298.6 600.0 303.5Q597.2 308.3 597.9 312.5Q598.6 316.7 594.9 319.4Q591.1 322.2 590.7 326.1Q590.3 330.0 586.8 333.5Q583.3 336.9 579.2 340.1Q575.0 343.3 568.8 343.9Q562.5 344.4 559.0 345.6Q555.6 346.7 553.3 345.6Q551.1 344.4 550.6 341.0Q550.0 337.5 546.5 331.2Q543.1 325.0 541.7 319.4Q540.3 313.9 536.5 306.2Q532.8 298.6 535.1 291.0Q537.5 283.3 535.4 275.0Q533.3 266.7 529.9 261.1Q526.4 255.6 526.4 247.9Q526.4 240.3 525.0 238.9Q523.6 237.5 520.1 237.8Q516.7 238.1 512.5 235.1Q508.3 232.2 501.4 234.4Q494.4 236.7 486.8 237.2Q479.2 237.8 473.6 234.3Q468.1 230.8 465.6 227.9Q463.1 225.0 460.7 222.2Q458.3 219.4 455.8 216.7Q453.3 213.9 452.8 211.5Q452.2 209.2 453.2 206.7Q454.2 204.2 454.9 200.7Q455.6 197.2 454.2 194.4Z M635.1 285.4Q636.9 283.3 638.6 288.2Q640.3 293.1 638.9 295.8Q637.5 298.6 634.3 309.0Q631.1 319.4 628.1 319.9Q625.0 320.3 623.2 317.1Q621.4 313.9 622.2 309.7Q623.1 305.6 622.6 301.4Q622.2 297.2 625.7 295.4Q629.2 293.6 631.2 290.6Q633.3 287.5 635.1 285.4Z M487.4 109.0Q484.2 110.8 494.0 109.3Q503.9 107.8 504.3 105.7Q504.7 103.6 502.4 102.5Q500.0 101.4 497.9 98.6Q495.8 95.8 495.1 93.8Q494.4 91.7 494.7 90.8Q495.0 90.0 491.9 88.6Q488.9 87.2 487.5 87.2Q486.1 87.2 484.4 90.0Q482.8 92.8 484.7 95.0Q486.7 97.2 489.2 98.6Q491.7 100.0 489.6 101.0Q487.5 101.9 487.4 103.6Q487.2 105.3 486.2 105.8Q485.3 106.4 487.9 106.8Q490.6 107.2 487.4 109.0Z M480.6 106.1Q483.3 105.6 483.1 102.9Q482.8 100.3 483.8 99.3Q484.7 98.3 481.9 97.4Q479.2 96.4 475.7 97.9Q472.2 99.4 472.2 103.1Q472.2 106.7 475.0 106.7Q477.8 106.7 480.6 106.1Z M861.1 160.4Q861.1 163.9 863.9 159.7Q866.7 155.6 870.8 155.6Q875.0 155.6 881.9 154.2Q888.9 152.8 890.3 148.6Q891.7 144.4 892.4 139.6Q893.1 134.7 891.0 135.4Q888.9 136.1 888.9 138.9Q888.9 141.7 884.7 144.4Q880.6 147.2 875.0 149.3Q869.4 151.4 865.3 154.2Q861.1 156.9 861.1 160.4Z M891.7 128.5Q888.9 133.3 891.7 133.3Q894.4 133.3 899.3 131.5Q904.2 129.7 899.3 126.7Q894.4 123.6 891.7 128.5Z M820.1 309.3Q815.3 311.1 816.0 317.4Q816.7 323.6 818.1 334.0Q819.4 344.4 823.6 345.8Q827.8 347.2 834.7 345.8Q841.7 344.4 850.0 341.1Q858.3 337.8 865.3 339.4Q872.2 341.1 877.8 344.2Q883.3 347.2 886.1 351.4Q888.9 355.6 897.2 356.9Q905.6 358.3 911.1 356.2Q916.7 354.2 921.5 341.0Q926.4 327.8 925.7 323.6Q925.0 319.4 919.4 313.2Q913.9 306.9 909.0 299.3Q904.2 291.7 900.0 285.7Q895.8 279.7 894.4 282.9Q893.1 286.1 893.1 291.7Q893.1 297.2 891.0 297.9Q888.9 298.6 884.0 295.1Q879.2 291.7 879.9 287.5Q880.6 283.3 873.6 282.4Q866.7 281.4 863.2 286.5Q859.7 291.7 854.9 290.3Q850.0 288.9 845.1 293.1Q840.3 297.2 838.2 300.7Q836.1 304.2 830.6 305.8Q825.0 307.5 820.1 309.3Z M902.2 364.9Q901.7 363.1 906.8 363.3Q911.9 363.6 911.5 366.8Q911.1 370.0 908.3 370.6Q905.6 371.1 904.2 368.9Q902.8 366.7 902.2 364.9Z M982.2 352.8Q979.7 345.8 982.9 349.3Q986.1 352.8 991.0 353.8Q995.8 354.7 993.1 357.9Q990.3 361.1 988.2 363.2Q986.1 365.3 985.4 362.5Q984.7 359.7 982.2 352.8Z M980.6 363.3Q981.9 363.9 982.6 365.0Q983.3 366.1 979.9 369.2Q976.4 372.2 975.0 374.7Q973.6 377.2 968.8 377.9Q963.9 378.6 963.2 377.5Q962.5 376.4 966.0 373.6Q969.4 370.8 974.3 366.8Q979.2 362.8 980.6 363.3Z M767.1 241.0Q764.7 234.7 768.5 236.8Q772.2 238.9 780.6 247.2Q788.9 255.6 791.7 261.1Q794.4 266.7 788.9 263.9Q783.3 261.1 776.4 254.2Q769.4 247.2 767.1 241.0Z M808.3 243.8Q802.8 245.8 805.6 252.1Q808.3 258.3 815.3 259.7Q822.2 261.1 825.7 254.2Q829.2 247.2 829.9 241.7Q830.6 236.1 827.1 233.3Q823.6 230.6 818.8 236.1Q813.9 241.7 808.3 243.8Z M793.8 269.9Q793.1 268.9 805.6 270.3Q818.1 271.7 814.6 272.6Q811.1 273.6 802.8 272.2Q794.4 270.8 793.8 269.9Z M834.7 264.6Q830.6 265.3 832.6 259.0Q834.7 252.8 840.3 250.0Q845.8 247.2 841.0 250.7Q836.1 254.2 837.5 259.0Q838.9 263.9 834.7 264.6Z M865.3 256.9Q863.9 252.8 872.2 253.5Q880.6 254.2 886.1 255.7Q891.7 257.2 900.7 261.9Q909.7 266.7 913.2 272.9Q916.7 279.2 911.1 276.4Q905.6 273.6 898.6 274.3Q891.7 275.0 887.5 273.6Q883.3 272.2 879.2 266.9Q875.0 261.7 870.8 261.4Q866.7 261.1 865.3 256.9Z M833.3 204.2Q833.3 198.6 836.8 199.3Q840.3 200.0 842.4 207.6Q844.4 215.3 847.2 222.9Q850.0 230.6 849.3 231.9Q848.6 233.3 843.8 231.9Q838.9 230.6 839.6 225.7Q840.3 220.8 836.8 215.3Q833.3 209.7 833.3 204.2Z M435.4 70.4Q433.3 68.1 436.1 66.8Q438.9 65.6 447.2 65.4Q455.6 65.3 459.0 67.4Q462.5 69.4 456.2 71.7Q450.0 73.9 443.8 73.3Q437.5 72.8 435.4 70.4Z M270.1 189.4Q263.9 189.4 268.1 187.6Q272.2 185.8 279.2 187.4Q286.1 188.9 290.0 191.4Q293.9 193.9 289.3 194.3Q284.7 194.7 280.6 192.1Q276.4 189.4 270.1 189.4Z M297.2 200.0Q293.1 198.9 295.4 196.8Q297.8 194.7 303.1 194.9Q308.3 195.0 309.2 196.8Q310.0 198.6 305.7 199.9Q301.4 201.1 297.2 200.0Z M721.9 227.8Q721.7 222.8 724.4 226.0Q727.2 229.2 726.4 231.1Q725.6 233.1 723.9 232.9Q722.2 232.8 721.9 227.8Z M834.6 187.5Q833.6 186.1 834.9 182.9Q836.1 179.7 837.5 180.1Q838.9 180.6 837.2 184.7Q835.6 188.9 834.6 187.5Z M537.5 34.6Q530.6 31.9 538.9 29.9Q547.2 27.8 561.1 27.8Q575.0 27.8 568.1 30.6Q561.1 33.3 552.8 35.3Q544.4 37.2 537.5 34.6Z M648.6 50.3Q644.4 51.4 650.0 47.9Q655.6 44.4 672.2 41.0Q688.9 37.5 677.8 40.3Q666.7 43.1 659.7 46.1Q652.8 49.2 648.6 50.3Z M538.2 146.1Q534.4 144.2 538.9 143.9Q543.3 143.6 542.6 145.8Q541.9 148.1 538.2 146.1Z M523.3 138.9Q523.3 136.1 525.0 136.1Q526.7 136.1 526.7 138.6Q526.7 141.1 525.0 141.4Q523.3 141.7 523.3 138.9Z M894.4 113.9Q894.4 122.2 896.5 118.1Q898.6 113.9 897.9 106.9Q897.2 100.0 895.8 102.8Q894.4 105.6 894.4 113.9Z"/>
+        <path d="M40.3 66.0Q38.9 61.1 52.8 56.9Q66.7 52.8 88.9 54.2Q111.1 55.6 131.9 55.6Q152.8 55.6 173.6 58.3Q194.4 61.1 215.3 58.3Q236.1 55.6 250.0 56.9Q263.9 58.3 268.1 65.3Q272.2 72.2 261.1 79.2Q250.0 86.1 244.4 87.5Q238.9 88.9 251.4 93.1Q263.9 97.2 270.8 101.4Q277.8 105.6 280.6 97.2Q283.3 88.9 284.7 83.3Q286.1 77.8 295.8 79.2Q305.6 80.6 313.9 81.9Q322.2 83.3 326.4 88.9Q330.6 94.4 337.5 100.0Q344.4 105.6 338.9 112.5Q333.3 119.4 325.0 123.6Q316.7 127.8 311.1 129.2Q305.6 130.6 305.6 132.6Q305.6 134.7 300.0 136.1Q294.4 137.5 291.7 142.4Q288.9 147.2 289.6 150.0Q290.3 152.8 282.6 158.3Q275.0 163.9 276.4 169.4Q277.8 175.0 277.1 177.5Q276.4 180.0 274.3 177.5Q272.2 175.0 270.8 171.5Q269.4 168.1 266.7 167.4Q263.9 166.7 258.3 166.7Q252.8 166.7 251.4 168.1Q250.0 169.4 244.4 168.8Q238.9 168.1 234.7 170.8Q230.6 173.6 229.9 181.2Q229.2 188.9 232.6 193.1Q236.1 197.2 241.7 197.2Q247.2 197.2 247.9 194.4Q248.6 191.7 253.5 191.0Q258.3 190.3 256.9 197.9Q255.6 205.6 261.8 206.9Q268.1 208.3 268.1 213.9Q268.1 219.4 270.8 222.2Q273.6 225.0 276.4 224.3Q279.2 223.6 281.9 225.0Q284.7 226.4 284.0 228.5Q283.3 230.6 280.6 229.9Q277.8 229.2 275.0 228.5Q272.2 227.8 267.4 224.3Q262.5 220.8 259.7 217.4Q256.9 213.9 252.1 212.5Q247.2 211.1 242.4 208.3Q237.5 205.6 234.0 205.6Q230.6 205.6 225.0 203.5Q219.4 201.4 213.2 197.9Q206.9 194.4 206.9 190.3Q206.9 186.1 202.1 181.9Q197.2 177.8 192.4 172.9Q187.5 168.1 184.7 165.3Q181.9 162.5 184.7 168.8Q187.5 175.0 191.0 180.6Q194.4 186.1 191.7 184.0Q188.9 181.9 186.1 177.1Q183.3 172.2 181.9 169.4Q180.6 166.7 177.8 163.2Q175.0 159.7 170.1 156.9Q165.3 154.2 162.5 150.0Q159.7 145.8 157.6 142.4Q155.6 138.9 154.9 134.7Q154.2 130.6 154.9 125.0Q155.6 119.4 156.9 116.7Q158.3 113.9 152.8 111.1Q147.2 108.3 143.1 103.5Q138.9 98.6 133.3 94.4Q127.8 90.3 123.6 88.2Q119.4 86.1 113.9 84.7Q108.3 83.3 100.0 82.6Q91.7 81.9 84.7 84.0Q77.8 86.1 75.0 88.2Q72.2 90.3 66.7 91.7Q61.1 93.1 55.6 95.1Q50.0 97.2 55.6 93.1Q61.1 88.9 55.6 86.8Q50.0 84.7 45.8 81.2Q41.7 77.8 41.7 74.3Q41.7 70.8 40.3 66.0Z M318.1 37.5Q297.2 33.3 315.3 27.8Q333.3 22.2 368.1 20.1Q402.8 18.1 423.6 20.1Q444.4 22.2 447.2 29.2Q450.0 36.1 444.4 43.1Q438.9 50.0 434.7 55.6Q430.6 61.1 416.7 64.6Q402.8 68.1 393.1 75.7Q383.3 83.3 375.0 81.9Q366.7 80.6 361.1 75.0Q355.6 69.4 352.8 63.9Q350.0 58.3 344.4 50.0Q338.9 41.7 318.1 37.5Z M323.6 70.8Q327.8 65.3 319.4 60.4Q311.1 55.6 297.2 52.1Q283.3 48.6 266.7 47.2Q250.0 45.8 263.9 53.5Q277.8 61.1 284.7 66.0Q291.7 70.8 305.6 73.6Q319.4 76.4 323.6 70.8Z M243.1 31.9Q250.0 38.9 270.8 37.5Q291.7 36.1 305.6 31.9Q319.4 27.8 305.6 23.6Q291.7 19.4 263.9 22.2Q236.1 25.0 243.1 31.9Z M169.4 55.6Q172.2 58.3 190.3 59.0Q208.3 59.7 215.3 57.6Q222.2 55.6 216.7 51.4Q211.1 47.2 195.8 47.2Q180.6 47.2 173.6 50.0Q166.7 52.8 169.4 55.6Z M285.4 228.5Q286.1 226.4 293.1 221.5Q300.0 216.7 306.9 218.5Q313.9 220.3 322.2 220.6Q330.6 220.8 334.7 225.7Q338.9 230.6 347.2 233.3Q355.6 236.1 358.3 241.0Q361.1 245.8 369.4 251.4Q377.8 256.9 386.1 259.0Q394.4 261.1 398.6 263.9Q402.8 266.7 402.8 270.8Q402.8 275.0 397.2 281.2Q391.7 287.5 391.7 293.8Q391.7 300.0 388.9 305.6Q386.1 311.1 381.2 312.8Q376.4 314.4 370.8 318.3Q365.3 322.2 364.6 326.4Q363.9 330.6 358.3 336.8Q352.8 343.1 347.9 344.4Q343.1 345.8 341.7 350.0Q340.3 354.2 334.0 356.2Q327.8 358.3 323.6 361.1Q319.4 363.9 321.5 366.0Q323.6 368.1 320.8 371.5Q318.1 375.0 315.3 377.1Q312.5 379.2 314.6 381.2Q316.7 383.3 312.5 387.5Q308.3 391.7 309.0 393.8Q309.7 395.8 313.2 399.3Q316.7 402.8 311.1 402.8Q305.6 402.8 300.0 398.6Q294.4 394.4 292.4 388.9Q290.3 383.3 292.4 377.8Q294.4 372.2 295.1 366.7Q295.8 361.1 295.8 356.9Q295.8 352.8 298.6 347.2Q301.4 341.7 301.4 334.7Q301.4 327.8 302.8 320.8Q304.2 313.9 304.4 307.6Q304.7 301.4 298.2 297.2Q291.7 293.1 289.6 289.6Q287.5 286.1 283.3 278.5Q279.2 270.8 277.1 267.4Q275.0 263.9 276.4 258.3Q277.8 252.8 277.8 250.0Q277.8 247.2 279.9 245.1Q281.9 243.1 283.3 241.0Q284.7 238.9 284.7 234.7Q284.7 230.6 285.4 228.5Z M481.2 130.0Q475.0 130.6 475.0 136.1Q475.0 141.7 475.0 144.4Q475.0 147.2 479.2 148.3Q483.3 149.4 488.9 148.8Q494.4 148.1 497.2 145.3Q500.0 142.5 504.2 137.9Q508.3 133.3 509.0 131.2Q509.7 129.2 513.2 129.9Q516.7 130.6 520.8 128.8Q525.0 126.9 529.2 130.1Q533.3 133.3 538.3 138.9Q543.3 144.4 544.6 143.2Q545.8 141.9 546.5 141.4Q547.2 140.8 547.5 139.2Q547.8 137.5 549.6 137.9Q551.4 138.3 547.9 136.2Q544.4 134.2 541.0 131.5Q537.5 128.9 535.8 127.6Q534.2 126.4 535.1 124.7Q536.1 123.1 536.9 123.3Q537.8 123.6 539.7 125.0Q541.7 126.4 547.2 129.9Q552.8 133.3 554.2 136.1Q555.6 138.9 557.6 143.1Q559.7 147.2 561.8 147.9Q563.9 148.6 565.3 146.5Q566.7 144.4 565.3 141.0Q563.9 137.5 568.1 137.1Q572.2 136.7 576.4 136.4Q580.6 136.1 577.1 138.2Q573.6 140.3 574.3 143.8Q575.0 147.2 579.2 148.2Q583.3 149.2 591.7 148.9Q600.0 148.6 599.7 151.4Q599.4 154.2 598.3 156.2Q597.2 158.3 596.2 160.7Q595.3 163.1 596.1 165.6Q596.9 168.1 598.5 170.8Q600.0 173.6 604.2 181.2Q608.3 188.9 613.2 197.2Q618.1 205.6 619.4 210.1Q620.8 214.7 622.9 214.3Q625.0 213.9 630.6 211.8Q636.1 209.7 640.3 207.6Q644.4 205.6 649.3 203.5Q654.2 201.4 657.4 199.3Q660.6 197.2 663.3 192.4Q666.1 187.5 662.2 185.7Q658.3 183.9 657.4 180.8Q656.4 177.8 653.2 180.3Q650.0 182.8 646.5 182.4Q643.1 181.9 641.0 179.2Q638.9 176.4 636.1 172.2Q633.3 168.1 636.1 167.4Q638.9 166.7 644.4 171.1Q650.0 175.6 654.2 177.1Q658.3 178.6 663.9 179.3Q669.4 180.0 677.1 179.7Q684.7 179.4 686.8 182.1Q688.9 184.7 691.7 188.2Q694.4 191.7 698.3 194.4Q702.2 197.2 703.9 202.8Q705.6 208.3 708.3 216.0Q711.1 223.6 713.2 225.7Q715.3 227.8 717.4 224.6Q719.4 221.4 721.1 216.9Q722.8 212.5 722.9 209.0Q723.1 205.6 726.1 204.2Q729.2 202.8 735.4 196.5Q741.7 190.3 744.4 189.9Q747.2 189.4 750.7 188.5Q754.2 187.5 755.3 190.0Q756.4 192.5 759.4 199.0Q762.5 205.6 766.9 204.9Q771.4 204.2 772.5 210.4Q773.6 216.7 773.6 222.2Q773.6 227.8 776.4 234.0Q779.2 240.3 783.3 243.3Q787.5 246.4 788.2 244.0Q788.9 241.7 787.5 238.2Q786.1 234.7 782.6 231.9Q779.2 229.2 778.5 222.2Q777.8 215.3 781.2 216.0Q784.7 216.7 788.2 221.2Q791.7 225.8 793.8 223.3Q795.8 220.8 799.3 218.8Q802.8 216.7 802.8 212.5Q802.8 208.3 798.6 203.5Q794.4 198.6 796.5 194.4Q798.6 190.3 802.1 191.0Q805.6 191.7 809.7 190.0Q813.9 188.3 819.4 186.5Q825.0 184.7 829.2 180.6Q833.3 176.4 836.1 171.5Q838.9 166.7 837.5 163.2Q836.1 159.7 834.0 156.2Q831.9 152.8 836.1 150.0Q840.3 147.2 834.0 145.8Q827.8 144.4 832.6 141.0Q837.5 137.5 838.2 139.6Q838.9 141.7 843.1 141.0Q847.2 140.3 849.3 143.1Q851.4 145.8 851.4 150.0Q851.4 154.2 855.6 153.2Q859.7 152.2 859.7 149.7Q859.7 147.2 857.6 143.1Q855.6 138.9 858.3 135.4Q861.1 131.9 868.1 130.6Q875.0 129.2 881.9 122.9Q888.9 116.7 890.3 109.7Q891.7 102.8 886.1 101.4Q880.6 100.0 884.7 94.4Q888.9 88.9 904.2 87.1Q919.4 85.3 925.0 85.0Q930.6 84.7 932.6 87.5Q934.7 90.3 934.0 99.3Q933.3 108.3 938.9 104.2Q944.4 100.0 947.9 97.2Q951.4 94.4 952.8 88.9Q954.2 83.3 963.2 83.3Q972.2 83.3 981.9 79.9Q991.7 76.4 995.8 72.9Q1000.0 69.4 1000.0 63.9Q1000.0 58.3 986.1 56.9Q972.2 55.6 958.3 56.2Q944.4 56.9 930.6 54.2Q916.7 51.4 902.8 50.0Q888.9 48.6 875.0 50.7Q861.1 52.8 856.9 49.3Q852.8 45.8 833.3 45.8Q813.9 45.8 809.7 41.7Q805.6 37.5 797.2 36.1Q788.9 34.7 779.2 36.8Q769.4 38.9 756.9 39.6Q744.4 40.3 733.3 43.8Q722.2 47.2 711.1 47.5Q700.0 47.8 694.4 53.8Q688.9 59.7 677.8 58.3Q666.7 56.9 659.7 58.3Q652.8 59.7 637.5 59.7Q622.2 59.7 618.1 62.5Q613.9 65.3 606.9 65.3Q600.0 65.3 594.4 61.1Q588.9 56.9 583.3 54.9Q577.8 52.8 566.7 54.2Q555.6 55.6 548.6 57.6Q541.7 59.7 538.2 63.9Q534.7 68.1 528.5 71.5Q522.2 75.0 518.1 77.8Q513.9 80.6 514.6 84.0Q515.3 87.5 518.8 88.2Q522.2 88.9 525.7 87.5Q529.2 86.1 529.9 86.1Q530.6 86.1 532.6 90.3Q534.7 94.4 536.8 95.1Q538.9 95.8 541.7 94.9Q544.4 93.9 545.1 92.1Q545.8 90.3 549.3 87.1Q552.8 83.9 550.7 81.5Q548.6 79.2 549.3 77.1Q550.0 75.0 554.9 72.9Q559.7 70.8 564.6 69.4Q569.4 68.1 565.3 71.5Q561.1 75.0 559.7 77.8Q558.3 80.6 561.1 81.9Q563.9 83.3 570.8 82.6Q577.8 81.9 572.2 84.7Q566.7 87.5 566.0 89.6Q565.3 91.7 561.8 92.4Q558.3 93.1 558.3 95.1Q558.3 97.2 554.2 97.5Q550.0 97.8 544.4 98.9Q538.9 100.0 534.7 99.7Q530.6 99.4 529.2 94.9Q527.8 90.3 525.3 91.2Q522.8 92.2 523.2 94.7Q523.6 97.2 523.6 99.3Q523.6 101.4 521.5 101.4Q519.4 101.4 516.0 103.5Q512.5 105.6 510.4 106.5Q508.3 107.5 506.4 108.2Q504.4 108.9 504.3 110.0Q504.2 111.1 500.0 111.8Q495.8 112.5 495.7 113.8Q495.6 115.0 491.5 115.1Q487.5 115.3 487.9 116.2Q488.3 117.2 491.4 118.3Q494.4 119.4 495.6 122.9Q496.7 126.4 495.8 127.9Q495.0 129.4 491.2 129.4Q487.5 129.4 481.2 130.0Z M454.2 194.4Q452.8 191.7 453.5 187.5Q454.2 183.3 459.0 178.2Q463.9 173.1 468.3 169.9Q472.8 166.7 473.2 163.2Q473.6 159.7 477.4 157.6Q481.1 155.6 482.5 153.1Q483.9 150.6 489.2 151.5Q494.4 152.5 501.4 150.1Q508.3 147.8 518.1 147.2Q527.8 146.7 529.2 149.4Q530.6 152.2 529.2 154.2Q527.8 156.1 529.9 157.2Q531.9 158.3 537.2 159.3Q542.5 160.3 547.6 163.1Q552.8 165.8 554.2 163.8Q555.6 161.7 555.6 160.3Q555.6 158.9 559.7 159.0Q563.9 159.2 566.7 160.6Q569.4 161.9 575.0 163.1Q580.6 164.2 585.1 163.8Q589.7 163.3 592.4 163.3Q595.0 163.3 595.6 165.6Q596.1 167.8 595.3 170.0Q594.4 172.2 593.1 171.4Q591.7 170.6 591.0 168.8Q590.3 166.9 591.8 171.0Q593.3 175.0 595.3 179.2Q597.2 183.3 600.3 187.5Q603.3 191.7 605.1 195.8Q606.9 200.0 608.6 203.8Q610.3 207.5 615.1 211.4Q620.0 215.3 621.1 217.4Q622.2 219.4 632.2 218.3Q642.2 217.2 641.9 219.2Q641.7 221.1 638.9 227.2Q636.1 233.3 633.3 236.1Q630.6 238.9 625.7 245.1Q620.8 251.4 616.0 254.9Q611.1 258.3 610.0 263.2Q608.9 268.1 609.3 272.9Q609.7 277.8 611.1 284.7Q612.5 291.7 607.6 295.1Q602.8 298.6 600.0 303.5Q597.2 308.3 597.9 312.5Q598.6 316.7 594.9 319.4Q591.1 322.2 590.7 326.1Q590.3 330.0 586.8 333.5Q583.3 336.9 579.2 340.1Q575.0 343.3 568.8 343.9Q562.5 344.4 559.0 345.6Q555.6 346.7 553.3 345.6Q551.1 344.4 550.6 341.0Q550.0 337.5 546.5 331.2Q543.1 325.0 541.7 319.4Q540.3 313.9 536.5 306.2Q532.8 298.6 535.1 291.0Q537.5 283.3 535.4 275.0Q533.3 266.7 529.9 261.1Q526.4 255.6 526.4 247.9Q526.4 240.3 525.0 238.9Q523.6 237.5 520.1 237.8Q516.7 238.1 512.5 235.1Q508.3 232.2 501.4 234.4Q494.4 236.7 486.8 237.2Q479.2 237.8 473.6 234.3Q468.1 230.8 465.6 227.9Q463.1 225.0 460.7 222.2Q458.3 219.4 455.8 216.7Q453.3 213.9 452.8 211.5Q452.2 209.2 453.2 206.7Q454.2 204.2 454.9 200.7Q455.6 197.2 454.2 194.4Z M635.1 285.4Q636.9 283.3 638.6 288.2Q640.3 293.1 638.9 295.8Q637.5 298.6 634.3 309.0Q631.1 319.4 628.1 319.9Q625.0 320.3 623.2 317.1Q621.4 313.9 622.2 309.7Q623.1 305.6 622.6 301.4Q622.2 297.2 625.7 295.4Q629.2 293.6 631.2 290.6Q633.3 287.5 635.1 285.4Z M487.4 109.0Q484.2 110.8 494.0 109.3Q503.9 107.8 504.3 105.7Q504.7 103.6 502.4 102.5Q500.0 101.4 497.9 98.6Q495.8 95.8 495.1 93.8Q494.4 91.7 494.7 90.8Q495.0 90.0 491.9 88.6Q488.9 87.2 487.5 87.2Q486.1 87.2 484.4 90.0Q482.8 92.8 484.7 95.0Q486.7 97.2 489.2 98.6Q491.7 100.0 489.6 101.0Q487.5 101.9 487.4 103.6Q487.2 105.3 486.2 105.8Q485.3 106.4 487.9 106.8Q490.6 107.2 487.4 109.0Z M480.6 106.1Q483.3 105.6 483.1 102.9Q482.8 100.3 483.8 99.3Q484.7 98.3 481.9 97.4Q479.2 96.4 475.7 97.9Q472.2 99.4 472.2 103.1Q472.2 106.7 475.0 106.7Q477.8 106.7 480.6 106.1Z M861.1 160.4Q861.1 163.9 863.9 159.7Q866.7 155.6 870.8 155.6Q875.0 155.6 881.9 154.2Q888.9 152.8 890.3 148.6Q891.7 144.4 892.4 139.6Q893.1 134.7 891.0 135.4Q888.9 136.1 888.9 138.9Q888.9 141.7 884.7 144.4Q880.6 147.2 875.0 149.3Q869.4 151.4 865.3 154.2Q861.1 156.9 861.1 160.4Z M891.7 128.5Q888.9 133.3 891.7 133.3Q894.4 133.3 899.3 131.5Q904.2 129.7 899.3 126.7Q894.4 123.6 891.7 128.5Z M820.1 309.3Q815.3 311.1 816.0 317.4Q816.7 323.6 818.1 334.0Q819.4 344.4 823.6 345.8Q827.8 347.2 834.7 345.8Q841.7 344.4 850.0 341.1Q858.3 337.8 865.3 339.4Q872.2 341.1 877.8 344.2Q883.3 347.2 886.1 351.4Q888.9 355.6 897.2 356.9Q905.6 358.3 911.1 356.2Q916.7 354.2 921.5 341.0Q926.4 327.8 925.7 323.6Q925.0 319.4 919.4 313.2Q913.9 306.9 909.0 299.3Q904.2 291.7 900.0 285.7Q895.8 279.7 894.4 282.9Q893.1 286.1 893.1 291.7Q893.1 297.2 891.0 297.9Q888.9 298.6 884.0 295.1Q879.2 291.7 879.9 287.5Q880.6 283.3 873.6 282.4Q866.7 281.4 863.2 286.5Q859.7 291.7 854.9 290.3Q850.0 288.9 845.1 293.1Q840.3 297.2 838.2 300.7Q836.1 304.2 830.6 305.8Q825.0 307.5 820.1 309.3Z M902.2 364.9Q901.7 363.1 906.8 363.3Q911.9 363.6 911.5 366.8Q911.1 370.0 908.3 370.6Q905.6 371.1 904.2 368.9Q902.8 366.7 902.2 364.9Z M982.2 352.8Q979.7 345.8 982.9 349.3Q986.1 352.8 991.0 353.8Q995.8 354.7 993.1 357.9Q990.3 361.1 988.2 363.2Q986.1 365.3 985.4 362.5Q984.7 359.7 982.2 352.8Z M980.6 363.3Q981.9 363.9 982.6 365.0Q983.3 366.1 979.9 369.2Q976.4 372.2 975.0 374.7Q973.6 377.2 968.8 377.9Q963.9 378.6 963.2 377.5Q962.5 376.4 966.0 373.6Q969.4 370.8 974.3 366.8Q979.2 362.8 980.6 363.3Z M767.1 241.0Q764.7 234.7 768.5 236.8Q772.2 238.9 780.6 247.2Q788.9 255.6 791.7 261.1Q794.4 266.7 788.9 263.9Q783.3 261.1 776.4 254.2Q769.4 247.2 767.1 241.0Z M808.3 243.8Q802.8 245.8 805.6 252.1Q808.3 258.3 815.3 259.7Q822.2 261.1 825.7 254.2Q829.2 247.2 829.9 241.7Q830.6 236.1 827.1 233.3Q823.6 230.6 818.8 236.1Q813.9 241.7 808.3 243.8Z M793.8 269.9Q793.1 268.9 805.6 270.3Q818.1 271.7 814.6 272.6Q811.1 273.6 802.8 272.2Q794.4 270.8 793.8 269.9Z M834.7 264.6Q830.6 265.3 832.6 259.0Q834.7 252.8 840.3 250.0Q845.8 247.2 841.0 250.7Q836.1 254.2 837.5 259.0Q838.9 263.9 834.7 264.6Z M865.3 256.9Q863.9 252.8 872.2 253.5Q880.6 254.2 886.1 255.7Q891.7 257.2 900.7 261.9Q909.7 266.7 913.2 272.9Q916.7 279.2 911.1 276.4Q905.6 273.6 898.6 274.3Q891.7 275.0 887.5 273.6Q883.3 272.2 879.2 266.9Q875.0 261.7 870.8 261.4Q866.7 261.1 865.3 256.9Z M833.3 204.2Q833.3 198.6 836.8 199.3Q840.3 200.0 842.4 207.6Q844.4 215.3 847.2 222.9Q850.0 230.6 849.3 231.9Q848.6 233.3 843.8 231.9Q838.9 230.6 839.6 225.7Q840.3 220.8 836.8 215.3Q833.3 209.7 833.3 204.2Z M435.4 70.4Q433.3 68.1 436.1 66.8Q438.9 65.6 447.2 65.4Q455.6 65.3 459.0 67.4Q462.5 69.4 456.2 71.7Q450.0 73.9 443.8 73.3Q437.5 72.8 435.4 70.4Z M270.1 189.4Q263.9 189.4 268.1 187.6Q272.2 185.8 279.2 187.4Q286.1 188.9 290.0 191.4Q293.9 193.9 289.3 194.3Q284.7 194.7 280.6 192.1Q276.4 189.4 270.1 189.4Z M297.2 200.0Q293.1 198.9 295.4 196.8Q297.8 194.7 303.1 194.9Q308.3 195.0 309.2 196.8Q310.0 198.6 305.7 199.9Q301.4 201.1 297.2 200.0Z M721.9 227.8Q721.7 222.8 724.4 226.0Q727.2 229.2 726.4 231.1Q725.6 233.1 723.9 232.9Q722.2 232.8 721.9 227.8Z M834.6 187.5Q833.6 186.1 834.9 182.9Q836.1 179.7 837.5 180.1Q838.9 180.6 837.2 184.7Q835.6 188.9 834.6 187.5Z M537.5 34.6Q530.6 31.9 538.9 29.9Q547.2 27.8 561.1 27.8Q575.0 27.8 568.1 30.6Q561.1 33.3 552.8 35.3Q544.4 37.2 537.5 34.6Z M648.6 50.3Q644.4 51.4 650.0 47.9Q655.6 44.4 672.2 41.0Q688.9 37.5 677.8 40.3Q666.7 43.1 659.7 46.1Q652.8 49.2 648.6 50.3Z M538.2 146.1Q534.4 144.2 538.9 143.9Q543.3 143.6 542.6 145.8Q541.9 148.1 538.2 146.1Z M523.3 138.9Q523.3 136.1 525.0 136.1Q526.7 136.1 526.7 138.6Q526.7 141.1 525.0 141.4Q523.3 141.7 523.3 138.9Z M894.4 113.9Q894.4 122.2 896.5 118.1Q898.6 113.9 897.9 106.9Q897.2 100.0 895.8 102.8Q894.4 105.6 894.4 113.9Z" fill="url(#hatch)"/>
+        <path class="water" d="M581.9 135.6Q577.8 135.3 577.8 131.5Q577.8 127.8 581.2 124.3Q584.7 120.8 588.9 123.6Q593.1 126.4 598.6 125.4Q604.2 124.4 606.9 126.1Q609.7 127.8 612.5 131.2Q615.3 134.7 607.6 134.4Q600.0 134.2 593.1 135.0Q586.1 135.8 581.9 135.6Z M631.2 128.5Q630.6 126.4 634.7 123.6Q638.9 120.8 643.1 122.6Q647.2 124.4 645.1 127.5Q643.1 130.6 645.1 134.0Q647.2 137.5 648.3 141.9Q649.4 146.4 644.9 146.8Q640.3 147.2 638.2 145.1Q636.1 143.1 636.8 140.3Q637.5 137.5 634.7 134.0Q631.9 130.6 631.2 128.5Z M254.2 120.7Q244.4 120.3 254.9 120.6Q265.3 120.8 268.8 122.2Q272.2 123.6 275.7 126.4Q279.2 129.2 283.3 129.0Q287.5 128.9 284.0 130.0Q280.6 131.1 275.0 132.2Q269.4 133.3 270.1 130.6Q270.8 127.8 268.1 125.4Q265.3 123.1 261.1 128.6Q256.9 134.2 256.2 130.3Q255.6 126.4 259.7 123.8Q263.9 121.1 254.2 120.7Z"/>
+
+        <text class="ocean" x="40" y="215">NORTH PACIFIC</text>
+        <text class="ocean" x="58" y="300">SOUTH PACIFIC</text>
+        <text class="ocean" x="370" y="196">NORTH</text><text class="ocean" x="362" y="209">ATLANTIC</text>
+        <text class="ocean" x="430" y="320">SOUTH ATLANTIC</text>
+        <text class="ocean" x="700" y="300">INDIAN OCEAN</text>
+        <text class="ocean" x="880" y="180">PACIFIC</text>
+        <text class="cont" x="190" y="112">NORTH AMERICA</text>
+        <text class="cont" x="312" y="262">SOUTH</text><text class="cont" x="306" y="275">AMERICA</text>
+        <text class="cont" x="535" y="232">AFRICA</text>
+        <text class="cont" x="580" y="96">EUROPE</text>
+        <text class="cont" x="745" y="112">ASIA</text>
+        <text class="cont" x="842" y="322">AUSTRALIA</text>
+
+        <g class="edge">
+          <text x="80" y="38" text-anchor="middle">150°W</text><text x="247" y="38" text-anchor="middle">90°W</text><text x="414" y="38" text-anchor="middle">30°W</text><text x="583" y="38" text-anchor="middle">30°E</text><text x="750" y="38" text-anchor="middle">90°E</text><text x="917" y="38" text-anchor="middle">150°E</text>
+        </g>
+
+        <!-- compass -->
+        <g transform="translate(700 372)" opacity=".85">
+          <circle r="22" fill="none" stroke="#3A2820" stroke-width=".6"/>
+          <circle r="17" fill="none" stroke="#3A2820" stroke-width=".4" stroke-dasharray="1 2"/>
+          <path d="M0-28 L4 0 L0 28 L-4 0Z" fill="#D45D79"/>
+          <path d="M-28 0 L0-3.5 L28 0 L0 3.5Z" fill="#D98C5F"/>
+          <path d="M0-28 L4 0 L0 0Z" fill="#3A2820" opacity=".35"/>
+          <text y="-31" text-anchor="middle" style="font:600 8px var(--sc);fill:#3A2820">N</text>
+        </g>
+
+        <!-- routes -->
+        <g id="routes">
+          <path class="route" data-r="london" d="M160.6 146 Q330 51 499.6 106.9"/>
+          <path class="route" data-r="paris" d="M160.6 146 Q333.5 56 506.5 114.3"/>
+          <path class="route" data-r="rome" d="M160.6 146 Q347.6 60 534.7 133.6"/>
+          <path class="route" data-r="cairo" d="M160.6 146 Q373.7 64 586.8 166.6"/>
+          <path class="route" data-r="aswan" d="M160.6 146 Q376 72 591.4 183.1"/>
+          <path class="route" data-r="santiago" d="M160.6 146 Q205 300 302.2 342.2"/>
+          <path class="route" data-r="patagonia" d="M160.6 146 Q180 340 302.8 395.6"/>
+        </g>
+
+        <!-- leaders + labels -->
+        <g>
+          <line class="lead" x1="499.6" y1="106.9" x2="472" y2="90"/><text class="lbl" x="468" y="88" text-anchor="end">London <tspan class="y">2024</tspan></text>
+          <line class="lead" x1="506.5" y1="114.3" x2="480" y2="128"/><text class="lbl" x="476" y="132" text-anchor="end">Paris <tspan class="y">2023</tspan></text>
+          <line class="lead" x1="534.7" y1="133.6" x2="552" y2="116"/><text class="lbl" x="555" y="114">Rome <tspan class="y">2024</tspan></text>
+          <line class="lead" x1="586.8" y1="166.6" x2="566" y2="158"/><text class="lbl" x="562" y="157" text-anchor="end">Cairo · Giza <tspan class="y">2025</tspan></text>
+          <line class="lead" x1="591.4" y1="183.1" x2="612" y2="192"/><text class="lbl" x="615" y="196">Aswan <tspan class="y">2025</tspan></text>
+          <line class="lead" x1="302.2" y1="342.2" x2="320" y2="336"/><text class="lbl" x="323" y="339">Santiago · Valparaíso <tspan class="y">2025</tspan></text>
+          <line class="lead" x1="302.8" y1="395.6" x2="320" y2="392"/><text class="lbl" x="323" y="395">Torres del Paine · Tierra del Fuego <tspan class="y">2025</tspan></text>
+          <text class="lbl" x="150" y="163" text-anchor="end">Home · Menlo Park</text>
+        </g>
+
+        <!-- pins -->
+        <g class="pin home" data-place="home" tabindex="0" role="button" aria-label="Home: Menlo Park and San Francisco"><circle class="hit" cx="160.6" cy="146" r="13"/><circle class="ring" cx="160.6" cy="146" r="7"/><circle class="dot" cx="160.6" cy="146" r="6"/><circle class="core" cx="160.6" cy="146" r="1.8"/></g>
+        <g class="pin" data-place="london" tabindex="0" role="button" aria-label="London"><circle class="hit" cx="499.6" cy="106.9" r="7"/><circle class="ring" cx="499.6" cy="106.9" r="5"/><circle class="dot" cx="499.6" cy="106.9" r="4"/><circle class="core" cx="499.6" cy="106.9" r="1.3"/></g>
+        <g class="pin" data-place="paris" tabindex="0" role="button" aria-label="Paris"><circle class="hit" cx="506.5" cy="114.3" r="7"/><circle class="ring" cx="506.5" cy="114.3" r="5"/><circle class="dot" cx="506.5" cy="114.3" r="4"/><circle class="core" cx="506.5" cy="114.3" r="1.3"/></g>
+        <g class="pin" data-place="rome" tabindex="0" role="button" aria-label="Rome"><circle class="hit" cx="534.7" cy="133.6" r="8"/><circle class="ring" cx="534.7" cy="133.6" r="5"/><circle class="dot" cx="534.7" cy="133.6" r="4"/><circle class="core" cx="534.7" cy="133.6" r="1.3"/></g>
+        <g class="pin" data-place="cairo" tabindex="0" role="button" aria-label="Cairo and Giza"><circle class="hit" cx="586.8" cy="166.6" r="8"/><circle class="ring" cx="586.8" cy="166.6" r="5"/><circle class="dot" cx="586.8" cy="166.6" r="4"/><circle class="core" cx="586.8" cy="166.6" r="1.3"/></g>
+        <g class="pin" data-place="aswan" tabindex="0" role="button" aria-label="Aswan"><circle class="hit" cx="591.4" cy="183.1" r="8"/><circle class="ring" cx="591.4" cy="183.1" r="5"/><circle class="dot" cx="591.4" cy="183.1" r="4"/><circle class="core" cx="591.4" cy="183.1" r="1.3"/></g>
+        <g class="pin" data-place="santiago" tabindex="0" role="button" aria-label="Santiago and Valparaíso"><circle class="hit" cx="302.2" cy="342.2" r="9"/><circle class="ring" cx="302.2" cy="342.2" r="5"/><circle class="dot" cx="302.2" cy="342.2" r="4"/><circle class="core" cx="302.2" cy="342.2" r="1.3"/></g>
+        <g class="pin" data-place="patagonia" tabindex="0" role="button" aria-label="Torres del Paine and Tierra del Fuego"><circle class="hit" cx="302.8" cy="395.6" r="9"/><circle class="ring" cx="302.8" cy="395.6" r="5"/><circle class="dot" cx="302.8" cy="395.6" r="4"/><circle class="core" cx="302.8" cy="395.6" r="1.3"/></g>
+      </svg>
+
+      <div class="cartouche"><b>Routes from Home</b><span>Travels &amp; photographs, 2023 – 2025</span></div>
+      <div class="legend" aria-hidden="true">
+        <div><i class="lh"></i>Home</div>
+        <div><i class="lt"></i>Places visited</div>
+        <div><i class="lr"></i>Route</div>
+      </div>
+
+      <article class="card" id="card" aria-live="polite">
+        <img id="cImg" src="" alt="">
+        <div class="meta"><span id="cYear"></span><span id="cCoord"></span></div>
+        <h3 id="cName"></h3>
+        <p id="cCap"></p>
+      </article>
+    </div>
+  </div>
+
+  <div class="key" id="key">
+    <button data-place="home"><span class="n">H</span><span><b>Menlo Park &amp; San Francisco</b><small>California · home base</small></span></button>
+    <button data-place="cairo"><span class="n">01</span><span><b>Cairo &amp; Giza</b><small>Egypt · 2025</small></span></button>
+    <button data-place="aswan"><span class="n">02</span><span><b>Aswan &amp; Nubia</b><small>Egypt · 2025</small></span></button>
+    <button data-place="santiago"><span class="n">03</span><span><b>Santiago &amp; Valparaíso</b><small>Chile · 2025</small></span></button>
+    <button data-place="patagonia"><span class="n">04</span><span><b>Torres del Paine &amp; Tierra del Fuego</b><small>Patagonia, Chile · 2025</small></span></button>
+    <button data-place="london"><span class="n">05</span><span><b>London</b><small>England · 2024</small></span></button>
+    <button data-place="rome"><span class="n">06</span><span><b>Rome</b><small>Italy · 2024</small></span></button>
+    <button data-place="paris"><span class="n">07</span><span><b>Paris</b><small>France · 2023</small></span></button>
+  </div>
+
+  <section class="intro">
+    <div>
+      <div class="label">A Note from the Mapmaker</div>
+      <div class="sub">From the About page</div>
+    </div>
+    <div>
+      <blockquote>Hi! I&rsquo;m Zoe, a middle schooler who&rsquo;s always juggling a bunch of different interests. I started this site to keep track of the things I&rsquo;m working on, the ideas I&rsquo;m excited about, and the projects that don&rsquo;t always fit neatly into a school folder. Right now, I&rsquo;m into geography and travel, playing cello and music, and parkour with mixed-martial arts. I also love discovering new places, digging into history, and snapping photos that tell little stories. Basically, it&rsquo;s my highlight reel of experiments, adventures, and &lsquo;aha!&rsquo; moments.</blockquote>
+      <div class="sig">Zoe <span>Menlo Park, California</span></div>
+    </div>
+  </section>
+
+  <div class="sechead">
+    <div><div class="label">Gazetteer</div><h2>Everything else, <i>by region</i></h2></div>
+    <p>The sections of this site, arranged like the index at the back of an atlas.</p>
+  </div>
+
+  <div class="gaz">
+    <a class="entry wide" href="#">
+      <figure><div class="ph"><img src="../../../public/images/portfolio/portfolio-50.jpg" alt="A colorful Nubian market stall in Aswan"></div><span class="tag">I</span></figure>
+      <h3>Photography<em>Portfolio · Awards</em></h3>
+      <p>Portraits, places and small moments from Egypt, Chile and home &mdash; plus the contests they&rsquo;ve been part of.</p>
+    </a>
+    <a class="entry wide" href="#">
+      <figure><div class="ph"><img src="../../../public/images/portfolio/portfolio-9.jpg" alt="Torres del Paine above a lake in Chile"></div><span class="tag">II</span></figure>
+      <h3>Travel<em>5 trips</em></h3>
+      <p>Egypt and Chile in 2025, London and Rome in 2024, Paris in 2023.</p>
+    </a>
+    <a class="entry" href="#">
+      <figure><div class="ph"><img src="../../../public/images/home/music.jpg" alt=""></div><span class="tag">III</span></figure>
+      <h3>Music<em>Cello · Concerts</em></h3>
+      <p><q>Music makes everything in my day feel more colorful.</q> School orchestra, a Disneyland Main Street performance, and concert notes.</p>
+    </a>
+    <a class="entry" href="#">
+      <figure><div class="ph"><img src="../../../public/images/home/geography.jpg" alt=""></div><span class="tag">IV</span></figure>
+      <h3>Geography<em>Maps</em></h3>
+      <p>Places, borders and the history underneath them.</p>
+    </a>
+    <a class="entry" href="#">
+      <figure><div class="ph"><img src="../../../public/images/home/academics.jpg" alt=""></div><span class="tag">V</span></figure>
+      <h3>Academics<em>School</em></h3>
+      <p>Projects and ideas that started in class and kept going.</p>
+    </a>
+    <a class="entry wide" href="#">
+      <figure><div class="ph"><img src="../../../public/images/home/about.jpg" alt="" style="object-position:center 30%"></div><span class="tag">VI</span></figure>
+      <h3>About<em>Zoe</em></h3>
+      <p>Cello, parkour, mixed-martial arts, history, and why this site exists.</p>
+    </a>
+    <a class="entry wide" href="#">
+      <figure><div class="plate"><div><span>Guardian Arts</span><small>Section VII</small></div></div><span class="tag">VII</span></figure>
+      <h3>Guardian Arts<em>Arts</em></h3>
+      <p>Arts projects and pages, collected in one place.</p>
+    </a>
+  </div>
+
+  <section class="honors" id="honors">
+    <div class="label">Honors &amp; Recognition</div>
+    <h2>Marked on the map, <i>2025 – 2026</i></h2>
+    <div class="hgrid">
+      <a class="feature" href="award.html">
+        <img src="../../../public/images/photography_awards/cinderello.jpg" alt="A caretaker sweeping red carpets in the vast Mosque–Madrasa of Sultan Hasan, Cairo">
+        <div class="fb">
+          <div><small>Six Fifty · Peninsula Photo Contest 2025</small><b>Honorable Mention, Youth &ldquo;Moments&rdquo;</b><span>&ldquo;Cinderello&rdquo; &mdash; Cairo, Egypt</span></div>
+          <span class="go">Read the story</span>
+        </div>
+      </a>
+      <ul class="hlist">
+        <li><span class="yr">2025</span><div><b>Travel Photographer of the Year</b><span>Young TPOTY (14 &amp; under) Runner-Up · Places collection exhibited internationally in 2026</span></div></li>
+        <li><span class="yr">2025</span><div><b><a href="award.html" style="text-decoration:none">Six Fifty Peninsula Photo Contest</a></b><span>Honorable Mention, Youth &ldquo;Moments&rdquo; · &ldquo;Cinderello&rdquo;</span></div></li>
+        <li><span class="yr">2025–26</span><div><b>National Photography Competition for Kids</b><span>Winner &ldquo;Home is Where the Heart Is&rdquo; (Visionary Voyager) · Winner &ldquo;Life in Red&rdquo; (Dream Snapper) · Notable Entries Nov 2025 &amp; Jun 2026</span></div></li>
+        <li><span class="yr">2026</span><div><b>No Frames International Youth Photo Contest</b><span>Honorable Mention, under-14 Nature · 13 photos accepted</span></div></li>
+        <li><span class="yr">2026</span><div><b>Global Peace Photo Award</b><span>Shortlisted, Children&rsquo;s Peace Image of the Year &mdash; &ldquo;Faces of Peace&rdquo;</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>Zoe Wacker · Menlo Park, California</span>
+    <span>Drawn by hand, more or less · 2026</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var B='../../../public/images/';
+  var P={
+    home:{x:160.6,y:146,name:'Menlo Park & San Francisco',year:'Home base',coord:'37.45° N · 122.18° W',img:B+'portfolio/portfolio-72.jpg',pos:'center 25%',cap:'Día de los Muertos in the Mission District, San Francisco.'},
+    cairo:{x:586.8,y:166.6,name:'Cairo & Giza, Egypt',year:'2025',coord:'30.04° N · 31.24° E',img:B+'portfolio/portfolio-32.jpg',pos:'center 55%',cap:'The Sphinx, with a pyramid rising behind it.'},
+    aswan:{x:591.4,y:183.1,name:'Aswan & Nubia, Egypt',year:'2025',coord:'24.09° N · 32.90° E',img:B+'portfolio/portfolio-64.jpg',pos:'center 30%',cap:'A Nubian drummer, mid-laugh, against an ochre wall.'},
+    santiago:{x:302.2,y:342.2,name:'Santiago & Valparaíso, Chile',year:'2025',coord:'33.05° S · 71.62° W',img:B+'portfolio/portfolio-24.jpg',pos:'center',cap:'Street murals climbing the hills of Valparaíso.'},
+    patagonia:{x:302.8,y:395.6,name:'Torres del Paine & Tierra del Fuego',year:'2025',coord:'52.4° S · 71.0° W',img:B+'portfolio/portfolio-21.jpg',pos:'center',cap:'Two king penguins in Tierra del Fuego.'},
+    london:{x:499.6,y:106.9,name:'London, England',year:'2024',coord:'51.51° N · 0.13° W',img:B+'trips/london_2024/london_eye_london_2024.jpg',pos:'center',cap:'The London Eye.'},
+    rome:{x:534.7,y:133.6,name:'Rome, Italy',year:'2024',coord:'41.90° N · 12.50° E',img:B+'trips/rome_2024/colluseum_rome_2024.jpeg',pos:'center',cap:'The Colosseum.'},
+    paris:{x:506.5,y:114.3,name:'Paris, France',year:'2023',coord:'48.86° N · 2.35° E',img:B+'trips/paris_2023/champs_paris_2023.jpg',pos:'center',cap:'Along the Champs-Élysées.'}
+  };
+  var map=document.getElementById('map'),card=document.getElementById('card');
+  var $=function(id){return document.getElementById(id)};
+  var cur=null;
+  function place(){
+    if(!cur||window.innerWidth<=760)return;
+    var p=P[cur],w=map.clientWidth,h=map.clientHeight;
+    var px=p.x/1000*w,py=(p.y-28)/383*h,cw=card.offsetWidth,ch=card.offsetHeight;
+    var left=(p.x>400&&p.x<560)?px-cw-24:px+24;
+    if(left+cw>w-10)left=px-cw-24;
+    if(left<10)left=10;
+    var top=Math.max(10,Math.min(py-ch*0.35,h-ch-10));
+    card.style.left=left+'px';card.style.top=top+'px';
+  }
+  function show(id){
+    if(cur===id)return;cur=id;var p=P[id];
+    $('cImg').src=p.img;$('cImg').style.objectPosition=p.pos;$('cImg').alt=p.cap;
+    $('cName').textContent=p.name;$('cYear').textContent=p.year;$('cCoord').textContent=p.coord;$('cCap').textContent=p.cap;
+    document.querySelectorAll('[data-place]').forEach(function(el){el.classList.toggle('on',el.getAttribute('data-place')===id)});
+    document.querySelectorAll('.route').forEach(function(r){r.classList.toggle('on',r.getAttribute('data-r')===id)});
+    place();
+  }
+  document.querySelectorAll('[data-place]').forEach(function(el){
+    var id=el.getAttribute('data-place');
+    el.addEventListener('click',function(){show(id)});
+    el.addEventListener('focus',function(){show(id)});
+    if(el.classList.contains('pin'))el.addEventListener('mouseenter',function(){show(id)});
+    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();show(id)}});
+  });
+  var svg=map.querySelector('svg');
+  function vb(){svg.setAttribute('viewBox',window.innerWidth<=760?'115 50 530 370':'0 28 1000 383');}
+  vb();
+  window.addEventListener('resize',function(){vb();place();});
+  show('aswan');
+  $('cImg').addEventListener('load',place);
+})();
+</script>
+</body>
+</html>

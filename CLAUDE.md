@@ -62,3 +62,7 @@ Reference images in pages as `/images/section/filename.jpg`.
 - `Page.astro` - Standard two-column layout with sidebar (collapses on mobile)
 - `FullBleed.astro` - Full-width layout without sidebar (used for homepage)
 - `BlogPost.astro` - Blog post layout with date/metadata
+
+### Design Themes
+
+`design/themes/` archives static HTML mockups of seven candidate site redesigns (warm pink/orange directions), with a README summarizing each. They are not part of the Astro build or deployment. Open `design/themes/index.html` to browse them.
