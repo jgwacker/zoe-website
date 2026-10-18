@@ -1,6 +1,6 @@
 # Site theme mockups (archived)
 
-Seven design directions for warming up Zoe's site, explored October 2026. Each one has a homepage (`index.html`) and the Peninsula Photo Contest award page (`award.html`), built with her real photos and words. They're static mockups, not part of the Astro build, and nothing in `design/` is deployed.
+Seven design directions (plus four variations of 3D) for warming up Zoe's site, explored October 2026. Each one has a homepage (`index.html`) and the Peninsula Photo Contest award page (`award.html`), built with her real photos and words. They're static mockups, not part of the Astro build, and nothing in `design/` is deployed.
 
 **To view:** open `design/themes/index.html` in a browser (e.g. `open -a "Google Chrome" design/themes/index.html`). It links to every theme. Screenshots of each page are in `previews/`.
 
@@ -24,3 +24,16 @@ Images load from `../../../public/images/` relative to each page, so the mockups
 - **6C photo:** 6C's data page crops a close-up of Zoe from `photography_awards/650_award_2025.jpg`. Choose a deliberate public photo before using it.
 - **Image sizes:** the mockups load full-size originals (some up to 9,504px wide). A real build should use resized versions.
 - **Rejected directions:** Field Journal, Golden Hour (soft gradients), Sticker Book, Collage/Zine, Magazine Spread, Darkroom, Marigold, Postcards, Light Table, Soundcheck and Compass.
+
+## 3D variations (Zoe's pick, October 2026)
+
+Zoe liked **3D · Exhibition Card** best. These four keep its layout exactly and change only the colors and fonts, from subtle to dramatic:
+
+| Variant | Change level | Fonts | Wall / accent colors |
+|---|---|---|---|
+| **3D-1 · Soft Blush** | Subtle | Fraunces, Manrope | `#F8EBE7` wall, `#E2733A` orange, `#C25E77` rose |
+| **3D-2 · Apricot Room** | Subtle–medium | DM Serif Display, DM Sans | `#F9E6D6` apricot wall, `#D9582B` orange, `#C1466A` rose |
+| **3D-3 · Coral Gallery** | Medium–dramatic | Playfair Display, Work Sans | `#F4D3CB` coral-pink wall, `#E2551F` orange, `#A93A5E` berry |
+| **3D-4 · Sunset Wall** | Dramatic | Gloock, Outfit | `#E9876F` coral wall, `#C2410C` burnt orange, `#8E2446` plum-rose; on-wall text darkened to `#4A0F24` for contrast |
+
+All the colors and fonts are CSS variables in the `:root` block at the top of each page, so a mix-and-match (for example 3D-2 fonts with 3D-3 colors) means editing only those lines.
