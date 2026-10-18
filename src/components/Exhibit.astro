@@ -1,0 +1,150 @@
+---
+import { displayPath } from '../lib/exhibit.mjs';
+
+interface Item { image: string; alt: string; title: string; place: string; year: number | null; note: string; award?: string; href?: string }
+const { items } = Astro.props as { items: Item[] };
+
+const pad = (n: number) => String(n).padStart(2, '0');
+const show = items.map((it) => ({
+  src: displayPath(it.image),
+  alt: it.alt,
+  title: it.title,
+  meta: [it.place, it.year].filter(Boolean).join(' · '),
+  note: it.note,
+  award: it.award ?? '',
+  href: it.href ?? '',
+}));
+const first = show[0];
+---
+
+<section class="room" aria-label="Featured photographs">
+  <div class="room-head">
+    <div>
+      <p class="eyebrow">Gallery One · Now showing</p>
+      <h1>Little stories, <em>found</em> on the road</h1>
+    </div>
+    <p class="counter"><b data-cur>01</b> / <span>{pad(show.length)}</span></p>
+  </div>
+  <div class="exhibit" data-show={JSON.stringify(show)}>
+    <div class="frame">
+      <img data-art src={first.src} alt={first.alt} />
+    </div>
+    <aside class:list={['label', { 'has-award': first.award }]} data-label aria-live="polite">
+      <p class="no" data-no>No. 01</p>
+      <h2 data-title>{first.title}</h2>
+      <p class="meta" data-meta>{first.meta}</p>
+      <p class="note" data-note>{first.note}</p>
+      <a class="award" data-award href={first.href || undefined}>{first.award}</a>
+      <div class="controls" data-controls hidden>
+        <button type="button" data-prev aria-label="Previous photograph">&larr;</button>
+        <button type="button" data-next aria-label="Next photograph">&rarr;</button>
+        <div class="dots" data-dots aria-hidden="true"></div>
+      </div>
+    </aside>
+  </div>
+  <ol class="sr-only" aria-label="All featured photographs">
+    {show.map((s) => <li>{s.title}, {s.meta}</li>)}
+  </ol>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-show]');
+  if (root) {
+    const show = JSON.parse(root.dataset.show!);
+    const q = <T extends Element>(s: string) => document.querySelector<T>(s)!;
+    const img = q<HTMLImageElement>('[data-art]');
+    const label = q<HTMLElement>('[data-label]');
+    const dots = q<HTMLElement>('[data-dots]');
+    const award = q<HTMLAnchorElement>('[data-award]');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const pad = (n: number) => String(n).padStart(2, '0');
+    let i = 0;
+
+    show.forEach(() => dots.appendChild(document.createElement('i')));
+    q<HTMLElement>('[data-controls]').hidden = false;
+
+    const swap = (s: { src: string; alt: string }) => {
+      img.onload = img.onerror = () => img.classList.remove('fade');
+      img.src = s.src;
+      img.alt = s.alt;
+    };
+
+    function render(animate: boolean) {
+      const s = show[i];
+      if (animate && !reduce) {
+        img.classList.add('fade');
+        setTimeout(() => swap(s), 220);
+      } else {
+        swap(s);
+      }
+      q('[data-no]').textContent = 'No. ' + pad(i + 1);
+      q('[data-title]').textContent = s.title;
+      q('[data-meta]').textContent = s.meta;
+      q('[data-note]').textContent = s.note;
+      award.textContent = s.award;
+      if (s.href) award.setAttribute('href', s.href); else award.removeAttribute('href');
+      label.classList.toggle('has-award', !!s.award);
+      q('[data-cur]').textContent = pad(i + 1);
+      [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
+    }
+
+    const go = (d: number) => { i = (i + d + show.length) % show.length; render(true); };
+    q('[data-prev]').addEventListener('click', () => go(-1));
+    q('[data-next]').addEventListener('click', () => go(1));
+    document.addEventListener('keydown', (e) => {
+      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      if (e.key === 'ArrowLeft') go(-1);
+      if (e.key === 'ArrowRight') go(1);
+    });
+    render(false);
+  }
+</script>
+
+<style>
+  .room {
+    background: linear-gradient(180deg, var(--wall) 0%, var(--wall) 82%, var(--wall-deep) 82%, var(--wall-deep) 100%);
+    padding: 72px 48px 96px;
+  }
+  .room-head { max-width: 1240px; margin: 0 auto 44px; display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+  .room-head h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 5vw, 64px); line-height: 1.02; margin: 8px 0 0; }
+  .room-head h1 em { color: var(--rose); }
+  .counter { font-family: var(--serif); font-size: 22px; color: var(--muted); margin: 0; }
+  .counter b { color: var(--ink); font-weight: 400; }
+  .exhibit { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 56px; align-items: center; }
+  .frame { display: flex; justify-content: center; align-items: center; height: min(68vh, 640px); }
+  .frame img {
+    max-height: 100%; width: auto; max-width: 100%; object-fit: contain;
+    background: #fff; padding: 14px; border-radius: 0; box-shadow: var(--mat-shadow);
+    transition: opacity .45s ease;
+  }
+  .frame img.fade { opacity: 0; }
+  .label { background: var(--white); padding: 22px 22px 20px; box-shadow: 0 10px 24px -16px rgba(90, 40, 30, .35); border-top: 3px solid var(--rose); font-size: 13.5px; line-height: 1.5; }
+  .label p { margin: 0; }
+  .label .no { font-size: 10.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+  .label h2 { font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 8px 0 4px; }
+  .label .meta { color: var(--muted); }
+  .label .note { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--hair); color: var(--ink); }
+  .label .award { display: none; margin-top: 14px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--orange-text); }
+  .label .award::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); margin-right: 8px; vertical-align: 1px; }
+  .label.has-award { border-top-color: var(--orange); }
+  .label.has-award .award { display: block; }
+  .controls { display: flex; gap: 10px; margin-top: 22px; align-items: center; }
+  .controls[hidden] { display: none; }
+  .controls button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--ink); background: transparent; color: var(--ink); font-size: 18px; cursor: pointer; font-family: var(--sans); transition: background .2s, color .2s; }
+  .controls button:hover, .controls button:focus-visible { background: var(--ink); color: var(--white); }
+  .dots { display: flex; gap: 7px; margin-left: 10px; }
+  .dots :global(i) { width: 6px; height: 6px; border-radius: 50%; background: var(--hair); display: block; }
+  .dots :global(i.on) { background: var(--rose); }
+  @media (max-width: 900px) {
+    .room { padding: 44px 16px 64px; }
+    .room-head { margin-bottom: 28px; }
+    .exhibit { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .frame { height: auto; }
+    .frame img { max-height: 62vh; padding: 8px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .frame img, .controls button { transition: none; }
+  }
+</style>
