@@ -2,10 +2,19 @@
 import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
 import { photographyAwards } from '@links/registry';
+import AwardExhibit from '@components/AwardExhibit.astro';
 ---
 
 <Layout title="No Frames International Youth Photo Contest 2026">
   <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <AwardExhibit slot="hero"
+    image="/images/photography_awards/no-frames-2026-colony-panorama.jpg"
+    alt="A colony of king penguins standing in a row among golden grass, with the sea behind them in Patagonia."
+    title="ColonyPanorama" year={2026} result="Honorable Mention"
+    place="Patagonia, Chile"
+    contest="No Frames International Youth Photo Contest 2026"
+    division="Nature · under 14" />
 
   <p class="intro">
 I entered the V International Youth Photo Contest "No Frames," run by the Association of Photographers Eurasia and
@@ -14,17 +23,6 @@ countries and over 11,600 photos entered across ten sections. My photo "ColonyPa
 Patagonia, received an Honorable Mention in the under-14 category of the Nature section.
   </p>
 
-  <figure class="photo">
-    <img
-      src="/images/photography_awards/no-frames-2026-colony-panorama.jpg"
-      alt="A colony of king penguins standing in a row among golden grass, with the sea behind them in Patagonia."
-      width="1600"
-      height="893"
-      loading="lazy"
-      decoding="async"
-    />
-    <figcaption>"ColonyPanorama," Honorable Mention, under-14, Nature section.</figcaption>
-  </figure>
 
   <p>In total, 13 of my photos were accepted into the exhibition:</p>
   <ul>

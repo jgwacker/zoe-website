@@ -1,0 +1,47 @@
+---
+interface Props {
+  image: string;
+  alt: string;
+  title: string;
+  year: number | string;
+  result: string;
+  place?: string;
+  contest?: string;
+  division?: string;
+  shown?: string;
+}
+const { image, alt, title, year, result, place, contest, division, shown } = Astro.props;
+const rows = [['Place', place], ['Contest', contest], ['Division', division], ['Shown', shown]].filter(([, v]) => v);
+---
+<section class="award-exhibit" aria-label={title}>
+  <div class="hung"><img src={image} alt={alt} /></div>
+  <aside class="label">
+    <p class="badge">{result}</p>
+    <h2>{title}</h2>
+    <p class="by">Zoe Wacker, {year}</p>
+    {rows.length > 0 && (
+      <dl>
+        {rows.map(([k, v]) => (<><dt>{k}</dt><dd>{v}</dd></>))}
+      </dl>
+    )}
+  </aside>
+</section>
+
+<style>
+  .award-exhibit { width: var(--page-max); max-width: 100%; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; align-items: end; }
+  .hung img { display: block; width: 100%; height: auto; background: #fff; padding: 16px; border-radius: 0; box-shadow: var(--mat-shadow); }
+  .label { background: var(--white); padding: 24px 24px 22px; border-top: 3px solid var(--orange); box-shadow: 0 10px 24px -16px rgba(90, 40, 30, .35); font-size: 13.5px; line-height: 1.5; }
+  .label p { margin: 0; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; font-size: 10.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--orange-text); }
+  .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex: none; }
+  .label h2 { font-family: var(--serif); font-weight: 400; font-size: 36px; line-height: 1.05; margin: 12px 0 6px; overflow-wrap: anywhere; }
+  .by { color: var(--muted); }
+  dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--hair); }
+  dt { font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
+  dd { margin: 0; color: var(--ink); }
+  @media (max-width: 900px) {
+    .award-exhibit { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .hung img { padding: 8px; }
+    .label h2 { font-size: 30px; }
+  }
+</style>

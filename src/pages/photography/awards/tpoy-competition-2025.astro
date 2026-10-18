@@ -2,10 +2,20 @@
 import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
 import { photographyAwards } from '@links/registry';
+import AwardExhibit from '@components/AwardExhibit.astro';
 ---
 
 <Layout title="Travel Photographer of the Year (2025)">
   <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <AwardExhibit slot="hero"
+    image="/images/photography_awards/tpoty2025-places-collection.png"
+    alt="Collection of 4 images of places."
+    title="Places collection" year={2025} result="Runner-Up"
+    place="Egypt"
+    contest="Travel Photographer of the Year 2025"
+    division="Young TPOTY · 14 & under"
+    shown="Three international exhibitions, 2026" />
 
   <p class="intro">
 I applied to the Travel Photographer of the Year for the Under 14 competition. I had to submit collections of
@@ -66,15 +76,4 @@ four coherent images for the competition. I was thrilled when two of my
     <figcaption>Collection of 4 images from Egypt of people that I saw.</figcaption>
   </figure>
  
-  <figure class="photo">
-    <img
-      src="/images/photography_awards/tpoty2025-places-collection.png"
-      alt="Collection of 4 images of places."
-      width="1600"
-      height="1067"
-      loading="lazy"
-      decoding="async"
-    />
-    <figcaption>Collection of 4 images from Egypt of buildings and places that I saw. Second place winner, to be displayed at 3 international exhibits in 2026.</figcaption>
-  </figure>
 </Layout>

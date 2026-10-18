@@ -2,10 +2,19 @@
 import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
 import { photographyAwards } from '@links/registry';
+import AwardExhibit from '@components/AwardExhibit.astro';
 ---
 
 <Layout title="Global Peace Photo Award 2026">
   <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <AwardExhibit slot="hero"
+    image="/images/photography_awards/gppa-2026-1.jpg"
+    alt="A woman in Day of the Dead calavera face paint and a crown of red roses, holding a red fan at night in the Mission District, San Francisco."
+    title="La Paz" year={2026} result="Shortlisted"
+    place="Mission District, San Francisco"
+    contest="Global Peace Photo Award 2026 · series “Faces of Peace”"
+    division="Children’s Peace Image of the Year" />
 
   <p class="intro">
 I entered the Global Peace Photo Award, an international award presented in Vienna, with a seven-image series called
@@ -21,17 +30,6 @@ anyway. It's even a celebration of death that somehow feels full of life. I used
 something bad. Now I think it's the presence of something good — and it's everywhere, if you look.
   </p>
 
-  <figure class="photo">
-    <img
-      src="/images/photography_awards/gppa-2026-1.jpg"
-      alt="A woman in Day of the Dead calavera face paint and a crown of red roses, holding a red fan at night in the Mission District, San Francisco."
-      width="723"
-      height="1200"
-      loading="lazy"
-      decoding="async"
-    />
-    <figcaption>1. La Paz</figcaption>
-  </figure>
 
   <figure class="photo">
     <img

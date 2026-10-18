@@ -2,10 +2,20 @@
 import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
 import { photographyAwards } from '@links/registry';
+import AwardExhibit from '@components/AwardExhibit.astro';
 ---
 
 <Layout title="Peninsula Art Contest (2025) — “Cinderello”">
   <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <AwardExhibit slot="hero"
+    image="/images/photography_awards/cinderello.jpg"
+    alt="“Cinderello” — a caretaker sweeping patterned carpets inside the Mosque–Madrasa of Sultan Hasan, sunlight cutting across the vast stone interior."
+    title="Cinderello" year={2025} result="Honorable Mention"
+    place="Mosque–Madrasa of Sultan Ḥasan, Historic Cairo"
+    contest="Six Fifty Peninsula Photo Contest 2025"
+    division="Youth · “Moments”"
+    shown="Palo Alto Art Center, Sept–Dec 2025" />
 
   <p class="intro">
 The Six Fifty Peninsula Photo Contest is presented by the Palo Alto Weekly and the Palo Alto Art Center and
@@ -15,17 +25,6 @@ divisions. In total there were over 1200 entries.</p>
 <p> I received <strong>Second Prize / Honorable Mention</strong> in the <strong>Youth Division</strong> (“Moments” category) at the 2025 Peninsula Art Contest.
   </p>
 
-  <figure class="photo">
-    <img
-      src="/images/photography_awards/cinderello.jpg"
-      alt="“Cinderello” — a caretaker sweeping patterned carpets inside the Mosque–Madrasa of Sultan Hasan, sunlight cutting across the vast stone interior."
-      width="1600"
-      height="1067"
-      loading="lazy"
-      decoding="async"
-    />
-    <figcaption>“Cinderello,” photographed at the Mosque–Madrasa of Sultan Ḥasan (Historic Cairo).</figcaption>
-  </figure>
 
   <p>
     My winning photo, <em>Cinderello</em>, was taken at the Mosque–Madrasa of Sultan Ḥasan in Historic Cairo. A man was sweeping the carpets, and the light caught the dust just right—he looked like he needed a fairy godmother, which made me think of Cinderella. I tried to frame the scale of the space against a single everyday gesture, so the scene feels both grand and human.
