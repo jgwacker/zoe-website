@@ -15,15 +15,6 @@
 	--page-max: 1140px;
 	--mat-shadow: 0 1px 0 rgba(0, 0, 0, .04), 0 26px 50px -22px rgba(90, 40, 30, .45), 0 8px 18px -10px rgba(90, 40, 30, .25);
 
-	/* Legacy aliases so not-yet-converted files keep working; removed in Task 4. */
-	--accent: var(--rose-text);
-	--accent-dark: var(--ink);
-	--black: 46, 36, 35;
-	--gray: 111, 94, 89;
-	--gray-light: 241, 221, 215;
-	--gray-dark: 46, 36, 35;
-	--gray-gradient: var(--white), var(--white);
-	--box-shadow: var(--mat-shadow);
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -93,6 +84,35 @@ hr { border: none; border-top: 1px solid var(--hair); }
 @media (max-width: 720px) {
 	body { font-size: 16px; }
 	main { padding: 32px 0 24px; }
+}
+
+/* Every photo on the site hangs in a white mat with a wall-label caption. */
+figure { margin: 2rem 0; }
+figure > img,
+figure > video {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+	height: auto;
+	background: #fff;
+	padding: 12px;
+	border-radius: 0;
+	box-shadow: var(--mat-shadow);
+}
+figcaption {
+	max-width: 36rem;
+	margin: 14px auto 0;
+	padding-top: 10px;
+	border-top: 1px solid var(--hair);
+	font-family: var(--sans);
+	font-size: 13px;
+	line-height: 1.5;
+	color: var(--muted);
+	text-align: left;
+	font-style: normal;
+}
+@media (max-width: 860px) {
+	figure > img, figure > video { padding: 8px; }
 }
 
 .sr-only {
