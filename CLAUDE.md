@@ -59,9 +59,17 @@ Reference images in pages as `/images/section/filename.jpg`.
 
 ### Layouts
 
-- `Page.astro` - Standard two-column layout with sidebar (collapses on mobile)
+- `Page.astro` - Standard layout: blush title band (section eyebrow + title), optional full-width `hero` slot, then sidebar + content (collapses on mobile)
 - `FullBleed.astro` - Full-width layout without sidebar (used for homepage)
 - `BlogPost.astro` - Blog post layout with date/metadata
+
+### Theme (Soft Blush)
+
+- Colors and fonts are CSS variables in `src/styles/global.css` (`--wall`, `--ink`, `--rose-text`, `--orange-text`, `--serif` = Fraunces, `--sans` = Manrope). No italics anywhere.
+- Every `<figure>` image is automatically shown in a white mat with a wall-label `<figcaption>`. No per-page styling is needed.
+- Award pages put `<AwardExhibit slot="hero" … />` (in `src/components/`) at the top.
+- Homepage exhibit photos and section blurbs live in `src/data/exhibit.json`. After changing photos there, run `npm run thumbnails`. Entries with `"draft": true` are placeholder captions for Zoe to rewrite, and the build prints a warning until they're gone.
+- `npm test` builds the site and runs the checks in `tests/`. They need Google Chrome installed.
 
 ### Design Themes
 
