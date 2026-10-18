@@ -1,0 +1,72 @@
+{
+  "items": [
+    {
+      "image": "/images/photography_awards/cinderello.jpg",
+      "alt": "A caretaker sweeps the red carpets of the vast Mosque–Madrasa of Sultan Ḥasan in Cairo, light falling across the stone walls.",
+      "title": "Cinderello",
+      "place": "Mosque–Madrasa of Sultan Ḥasan, Cairo",
+      "year": 2025,
+      "note": "A man was sweeping the carpets, and the light caught the dust just right.",
+      "award": "Honorable Mention · Peninsula Photo Contest 2025",
+      "href": "/photography/awards/peninsula-photo-competition-2025"
+    },
+    {
+      "image": "/images/portfolio/portfolio-64.jpg",
+      "alt": "A Nubian woman in a bright headscarf laughing as she plays a frame drum in front of an ochre wall.",
+      "title": "Frame Drum",
+      "place": "Nubian village, Aswan, Egypt",
+      "year": 2025,
+      "note": "She couldn’t stop laughing while she played.",
+      "award": "Winner · National Photography Competition for Kids",
+      "href": "/photography/awards/npcfk-competition-home-2025",
+      "draft": true
+    },
+    {
+      "image": "/images/portfolio/portfolio-72.jpg",
+      "alt": "A woman in Day of the Dead calavera face paint, a crown of red roses and a red dress, at night.",
+      "title": "Día de los Muertos",
+      "place": "Mission District, San Francisco",
+      "year": null,
+      "note": "Calavera face paint, red roses and a red fan at the Day of the Dead celebration.",
+      "award": "Winner · National Photography Competition for Kids",
+      "href": "/photography/awards/npcfk-competition-life-in-red-2026",
+      "draft": true
+    },
+    {
+      "image": "/images/portfolio/portfolio-45.jpg",
+      "alt": "A black cat walking across a patterned mosque carpet.",
+      "title": "Visitor",
+      "place": "Cairo, Egypt",
+      "year": 2025,
+      "note": "A black cat crossing the patterned prayer carpet.",
+      "draft": true
+    },
+    {
+      "image": "/images/portfolio/portfolio-53.jpg",
+      "alt": "A bright red Nubian house with a blue arched door.",
+      "title": "Blue Door",
+      "place": "Nubian village, Aswan, Egypt",
+      "year": 2025,
+      "note": "A red house and an arched blue door in full sun.",
+      "draft": true
+    },
+    {
+      "image": "/images/portfolio/portfolio-21.jpg",
+      "alt": "Two king penguins standing side by side on grass.",
+      "title": "You’ve Got Me",
+      "place": "Tierra del Fuego, Chile",
+      "year": 2025,
+      "note": "Two king penguins who have each other’s backs.",
+      "draft": true
+    }
+  ],
+  "sections": [
+    { "href": "/about", "title": "About", "desc": "Who I am and what I’m into right now.", "thumb": "/images/home/about.jpg", "draft": true },
+    { "href": "/travel", "title": "Travel", "desc": "Egypt and Chile 2025, London and Rome 2024, Paris 2023, and more.", "thumb": "/images/trips/egypt_2025/nile_cruise_egypt_2025.jpg", "draft": true },
+    { "href": "/photography", "title": "Photography", "desc": "My portfolio and the contests I’ve entered.", "thumb": "/images/photography_awards/cinderello.jpg", "draft": true },
+    { "href": "/music", "title": "Music", "desc": "Cello, orchestra, and concerts from Laufey to Outside Lands.", "thumb": "/images/home/music.jpg", "draft": true },
+    { "href": "/geography", "title": "Geography", "desc": "Maps, places, and the history behind them.", "thumb": "/images/home/geography.jpg", "draft": true },
+    { "href": "/guardian-arts", "title": "Guardian Arts", "desc": "Arts projects and programs.", "thumb": "/images/home/photography.jpg", "draft": true },
+    { "href": "/academics", "title": "Academics", "desc": "Summer programs and my school years.", "thumb": "/images/home/academics.jpg", "draft": true }
+  ]
+}

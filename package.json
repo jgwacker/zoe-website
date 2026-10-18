@@ -7,7 +7,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "thumbnails": "node scripts/generate-thumbnails.mjs"
+    "thumbnails": "node scripts/generate-thumbnails.mjs && node scripts/generate-display.mjs",
+    "test": "astro build && node --test \"tests/**/*.test.mjs\"",
+    "test:only": "node --test \"tests/**/*.test.mjs\""
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.5",
@@ -16,5 +18,8 @@
     "astro": "^5.13.7",
     "csv-parse": "^6.1.0",
     "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.48.2"
   }
 }

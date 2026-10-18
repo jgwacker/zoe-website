@@ -2,10 +2,19 @@
 import Layout from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
 import { photographyAwards } from '@links/registry';
+import AwardExhibit from '@components/AwardExhibit.astro';
 ---
 
 <Layout title="The Shelter: National Photography Competition for Kids June 2026">
   <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <AwardExhibit slot="hero"
+    image="/images/photography_awards/npcfk-shelter-2026.jpg"
+    alt="Two king penguins standing side by side on golden grass, one flipper overlapping the other."
+    title="The Shelter" year={2026} result="Notable Entry"
+    place="Patagonia, Chile"
+    contest="National Photography Competition for Kids, June 2026"
+    division="Rising Photographers, ages 12–14" />
 
   <p class="intro">
 I entered "The Shelter" National Photography Competition for Kids in the Rising Photographers section for ages
@@ -25,17 +34,6 @@ Notable Entry.
     <figcaption>The official competition logo</figcaption>
   </figure>
 
-  <figure class="photo">
-    <img
-      src="/images/photography_awards/npcfk-shelter-2026.jpg"
-      alt="Two king penguins standing side by side on golden grass, one flipper overlapping the other."
-      width="864"
-      height="1080"
-      loading="lazy"
-      decoding="async"
-    />
-    <figcaption>My notable entry for "The Shelter," June 2026.</figcaption>
-  </figure>
 
   <p>
     See the <a href="https://www.junior-photographers.com/notable-entries/the-shelter-national-photography-competition-for-kids/page/2/">official notable entries page</a>.
