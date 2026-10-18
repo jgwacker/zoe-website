@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoe Wacker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFCFA;
+    --wall:#F8EBE7;
+    --wall-deep:#F1DDD7;
+    --ink:#2E2423;
+    --muted:#7A6863;
+    --hair:#E8D5CE;
+    --orange:#E2733A;
+    --rose:#C25E77;
+    --serif:"Fraunces", Georgia, serif;
+    --sans:"Manrope", system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  /* header */
+  header{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding:28px 48px;border-bottom:1px solid var(--hair);flex-wrap:wrap}
+  .mark{font-family:var(--serif);font-size:30px;letter-spacing:.01em;line-height:1}
+  .mark span{color:var(--orange)}
+  nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 26px;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  nav a{padding-bottom:3px;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  nav a:hover,nav a[aria-current]{color:var(--ink);border-color:var(--orange)}
+
+  /* gallery room */
+  .room{background:linear-gradient(180deg,var(--wall) 0%,var(--wall) 82%,var(--wall-deep) 82%,var(--wall-deep) 100%);padding:72px 48px 96px;position:relative}
+  .room-head{max-width:1240px;margin:0 auto 44px;display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+  .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rose)}
+  .room-head h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,64px);line-height:1.02;margin-top:8px}
+  .room-head h1 em{color:var(--rose)}
+  .counter{font-family:var(--serif);font-size:22px;color:var(--muted)}
+  .counter b{color:var(--ink);font-weight:400}
+
+  .exhibit{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:56px;align-items:center}
+  .frame{display:flex;justify-content:center;align-items:center;height:min(68vh,640px)}
+  .frame img{max-height:100%;width:auto;max-width:100%;object-fit:contain;background:#fff;padding:14px;box-shadow:0 1px 0 rgba(0,0,0,.04),0 26px 50px -22px rgba(90,40,30,.45),0 8px 18px -10px rgba(90,40,30,.25);transition:opacity .45s ease}
+  .frame img.fade{opacity:0}
+
+  .label{background:var(--white);padding:22px 22px 20px;box-shadow:0 10px 24px -16px rgba(90,40,30,.35);border-top:3px solid var(--rose);font-size:13.5px;line-height:1.5}
+  .label .no{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .label h2{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.1;margin:8px 0 4px}
+  .label .meta{color:var(--muted)}
+  .label .note{margin-top:14px;padding-top:12px;border-top:1px solid var(--hair);font-style:italic;color:var(--ink)}
+  .label .award{display:none;margin-top:14px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+  .label .award::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--orange);margin-right:8px;vertical-align:1px}
+  .label.has-award{border-top-color:var(--orange)}
+  .label.has-award .award{display:block}
+
+  .controls{display:flex;gap:10px;margin-top:22px;align-items:center}
+  .controls button{width:46px;height:46px;border-radius:50%;border:1px solid var(--ink);background:transparent;color:var(--ink);font-size:18px;cursor:pointer;transition:background .2s,color .2s;font-family:var(--sans)}
+  .controls button:hover{background:var(--ink);color:var(--white)}
+  .dots{display:flex;gap:7px;margin-left:10px}
+  .dots i{width:6px;height:6px;border-radius:50%;background:var(--hair);display:block;transition:background .2s}
+  .dots i.on{background:var(--rose)}
+
+  /* intro */
+  .intro{max-width:1240px;margin:0 auto;padding:96px 48px 40px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:56px}
+  .intro .side{display:flex;gap:18px;align-items:flex-start}
+  .intro .side img{width:96px;height:96px;object-fit:cover;border-radius:50%}
+  .intro .side p{font-size:12.5px;color:var(--muted);line-height:1.5}
+  .intro .side b{display:block;color:var(--ink);font-weight:600;font-size:14px}
+  .intro blockquote{font-family:var(--serif);font-size:clamp(24px,2.6vw,34px);line-height:1.3;max-width:820px}
+  .intro blockquote em{color:var(--rose)}
+  .intro .sig{margin-top:18px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+
+  /* index */
+  .index{max-width:1240px;margin:0 auto;padding:40px 48px 110px}
+  .index h3{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-bottom:18px}
+  .rows{list-style:none;border-top:1px solid var(--ink)}
+  .rows li a{display:grid;grid-template-columns:56px minmax(0,1.1fr) minmax(0,1.6fr) 120px;gap:20px;align-items:center;padding:20px 4px;border-bottom:1px solid var(--hair);transition:background .25s,padding .25s}
+  .rows li a:hover{background:var(--wall);padding-left:14px}
+  .rows .n{font-family:var(--serif);font-size:20px;color:var(--muted)}
+  .rows .t{font-family:var(--serif);font-size:32px;line-height:1.1}
+  .rows .d{font-size:14px;color:var(--muted)}
+  .rows .th{justify-self:end;width:100px;height:64px;object-fit:cover;filter:saturate(.9)}
+  .rows li.feat .t::after{content:"New";font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--white);background:var(--orange);padding:3px 8px;margin-left:12px;vertical-align:8px}
+
+  footer{border-top:1px solid var(--hair);padding:28px 48px;display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);flex-wrap:wrap;gap:8px}
+
+  .mock{position:fixed;right:14px;bottom:14px;z-index:20;background:var(--ink);color:var(--white);font-size:11px;letter-spacing:.06em;padding:7px 11px;font-weight:600}
+
+  @media (max-width:900px){
+    header{padding:20px 16px;gap:14px}
+    nav ul{gap:4px 16px;font-size:11px}
+    .room{padding:44px 16px 64px}
+    .room-head{margin-bottom:28px}
+    .exhibit{grid-template-columns:minmax(0,1fr);gap:28px}
+    .frame{height:auto}
+    .frame img{max-height:62vh;padding:8px}
+    .intro{grid-template-columns:minmax(0,1fr);padding:64px 16px 24px;gap:28px}
+    .index{padding:32px 16px 72px}
+    .rows li a{grid-template-columns:34px minmax(0,1fr) 72px;gap:12px}
+    .rows .d{grid-column:2 / 3;grid-row:2;font-size:13px;margin-top:-10px}
+    .rows .th{grid-row:1 / span 2;grid-column:3;width:72px;height:56px}
+    .rows .t{font-size:26px}
+    footer{padding:24px 16px 60px}
+  }
+
+  /* 3D-1a: no italics; accent words keep their color only */
+  em{font-style:normal}
+  .label .note{font-style:normal}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="mark" href="index.html">Zoe Wacker<span>.</span></a>
+  <nav aria-label="Site">
+    <ul>
+      <li><a href="index.html" aria-current="page">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Travel</a></li>
+      <li><a href="award.html">Photography</a></li>
+      <li><a href="#">Music</a></li>
+      <li><a href="#">Geography</a></li>
+      <li><a href="#">Guardian Arts</a></li>
+      <li><a href="#">Academics</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="room" aria-label="Featured photographs">
+  <div class="room-head">
+    <div>
+      <div class="eyebrow">Gallery One · Now showing</div>
+      <h1>Little stories, <em>found</em> on the road</h1>
+    </div>
+    <div class="counter"><b id="cur">01</b> / <span id="tot">06</span></div>
+  </div>
+
+  <div class="exhibit">
+    <div class="frame">
+      <img id="art" src="../../../public/images/photography_awards/cinderello.jpg" alt="">
+    </div>
+    <aside class="label" id="label">
+      <div class="no" id="l-no">No. 01</div>
+      <h2 id="l-title">Cinderello</h2>
+      <div class="meta" id="l-meta">Mosque–Madrasa of Sultan Ḥasan, Cairo · 2025</div>
+      <p class="note" id="l-note"></p>
+      <a class="award" id="l-award" href="award.html"></a>
+      <div class="controls">
+        <button id="prev" aria-label="Previous photograph">&larr;</button>
+        <button id="next" aria-label="Next photograph">&rarr;</button>
+        <div class="dots" id="dots"></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="side">
+    <img src="../../../public/images/home/about.jpg" alt="Zoe">
+    <p><b>Zoe Wacker</b>Photographer, cellist, map enthusiast. Menlo Park, California.</p>
+  </div>
+  <div>
+    <blockquote>“Hi! I’m Zoe, a middle schooler who’s always juggling a bunch of different interests. Right now, I’m into geography and travel, playing cello and music, and parkour with mixed-martial arts. I also love discovering new places, digging into history, and snapping photos that <em>tell little stories.</em>”</blockquote>
+    <div class="sig">Welcome to my highlight reel</div>
+  </div>
+</section>
+
+<section class="index" aria-label="Sections">
+  <h3>The rooms</h3>
+  <ul class="rows">
+    <li><a href="#"><span class="n">I</span><span class="t">About</span><span class="d">Who I am and what I’m into right now.</span><img class="th" src="../../../public/images/home/about.jpg" alt=""></a></li>
+    <li><a href="#"><span class="n">II</span><span class="t">Travel</span><span class="d">Egypt and Chile 2025 · London and Rome 2024 · Paris 2023</span><img class="th" src="../../../public/images/trips/egypt_2025/nile_cruise_egypt_2025.jpg" alt=""></a></li>
+    <li class="feat"><a href="award.html"><span class="n">III</span><span class="t">Photography</span><span class="d">Portfolio and awards, including the Peninsula Photo Contest and Young TPOTY.</span><img class="th" src="../../../public/images/photography_awards/cinderello.jpg" alt=""></a></li>
+    <li><a href="#"><span class="n">IV</span><span class="t">Music</span><span class="d">Cello, orchestra, and concerts from Laufey to Outside Lands.</span><img class="th" src="../../../public/images/home/music.jpg" alt=""></a></li>
+    <li><a href="#"><span class="n">V</span><span class="t">Geography</span><span class="d">Maps, places, and the history behind them.</span><img class="th" src="../../../public/images/home/geography.jpg" alt=""></a></li>
+    <li><a href="#"><span class="n">VI</span><span class="t">Guardian Arts</span><span class="d">Arts projects and programs.</span><img class="th" src="../../../public/images/home/photography.jpg" alt=""></a></li>
+    <li><a href="#"><span class="n">VII</span><span class="t">Academics</span><span class="d">Projects that don’t fit neatly into a school folder.</span><img class="th" src="../../../public/images/home/academics.jpg" alt=""></a></li>
+  </ul>
+</section>
+
+<footer>
+  <span>© 2026 Zoe Wacker · Menlo Park, CA</span>
+  <span>All photographs by Zoe Wacker</span>
+</footer>
+
+<div class="mock">Mockup 3D-1a · Soft Blush · no italics</div>
+
+<script>
+  var B = "../../../public/images/";
+  var show = [
+    {src:"photography_awards/cinderello.jpg", t:"Cinderello", m:"Mosque–Madrasa of Sultan Ḥasan, Cairo · 2025", n:"A man sweeping the carpets, and the light caught the dust just right.", a:"Honorable Mention · Peninsula Photo Contest 2025", alt:"A caretaker sweeps red carpets in a vast stone mosque courtyard"},
+    {src:"portfolio/portfolio-64.jpg", t:"Frame Drum", m:"Nubian village, Aswan, Egypt · 2025", n:"Laughter and rhythm against a hand-plastered ochre wall.", alt:"A Nubian woman laughing while playing a frame drum"},
+    {src:"portfolio/portfolio-72.jpg", t:"Día de Muertos", m:"Mission District, San Francisco", n:"Calavera face paint and a red dress, close up.", alt:"Day of the Dead portrait with calavera face paint and red dress"},
+    {src:"portfolio/portfolio-45.jpg", t:"Visitor", m:"Mosque, Cairo, Egypt · 2025", n:"A black cat crossing the patterned prayer carpet.", alt:"A black cat walking across a mosque carpet"},
+    {src:"portfolio/portfolio-53.jpg", t:"Blue Door", m:"Nubian village, Aswan, Egypt · 2025", n:"A red house and an arched blue door in full sun.", alt:"A bright red Nubian house with a blue arched door"},
+    {src:"portfolio/portfolio-21.jpg", t:"Two Kings", m:"Tierra del Fuego, Chile · 2025", n:"A pair of king penguins at the edge of the world.", alt:"Two king penguins standing on grass"}
+  ];
+  var i = 0, img = document.getElementById("art"), lab = document.getElementById("label");
+  var dots = document.getElementById("dots");
+  show.forEach(function(){ dots.appendChild(document.createElement("i")); });
+  document.getElementById("tot").textContent = ("0"+show.length).slice(-2);
+  function pad(n){return ("0"+n).slice(-2);}
+  function render(first){
+    var s = show[i];
+    if(!first){ img.classList.add("fade");
+    setTimeout(function(){
+      img.src = B + s.src; img.alt = s.alt;
+      img.onload = function(){ img.classList.remove("fade"); };
+    }, 220); }
+    document.getElementById("l-no").textContent = "No. " + pad(i+1);
+    document.getElementById("l-title").textContent = s.t;
+    document.getElementById("l-meta").textContent = s.m;
+    document.getElementById("l-note").textContent = s.n;
+    document.getElementById("l-award").textContent = s.a || "";
+    lab.classList.toggle("has-award", !!s.a);
+    document.getElementById("cur").textContent = pad(i+1);
+    [].forEach.call(dots.children, function(d,k){ d.classList.toggle("on", k===i); });
+  }
+  document.getElementById("prev").onclick = function(){ i = (i-1+show.length)%show.length; render(); };
+  document.getElementById("next").onclick = function(){ i = (i+1)%show.length; render(); };
+  document.addEventListener("keydown", function(e){
+    if(e.key==="ArrowLeft") document.getElementById("prev").click();
+    if(e.key==="ArrowRight") document.getElementById("next").click();
+  });
+  render(true);
+</script>
+</body>
+</html>

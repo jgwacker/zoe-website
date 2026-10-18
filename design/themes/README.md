@@ -48,3 +48,8 @@ All the colors and fonts are CSS variables in the `:root` block at the top of ea
 | **3D-8 · Plum Night** | Purple, dramatic | DM Serif Display, DM Sans | `#4B2350` plum wall, with on-wall text in `#FFF3EC` cream, `#F59AB8` pink and `#F7B58C` peach |
 
 All on-wall text was checked against WCAG AA contrast (4.5:1 or better).
+
+**Soft Blush italic options:** Zoe liked 3D-1 Soft Blush best but not its Fraunces italics, which appear on accent words like "found" and "tell little stories", on "Honorable Mention", and on the label notes. In all three alternatives the label notes are upright:
+- **3D-1a · No italics:** accent words upright, marked by color only.
+- **3D-1b · Classic italic:** accent words in Instrument Serif italic, calmer than Fraunces.
+- **3D-1c · Marker underline:** upright accent words with a translucent orange highlighter swipe.
