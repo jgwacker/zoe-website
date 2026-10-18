@@ -141,8 +141,11 @@ const first = show[0];
     .room { padding: 44px 16px 64px; }
     .room-head { margin-bottom: 28px; }
     .exhibit { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-    .frame { height: auto; }
-    .frame img { max-height: 62vh; padding: 8px; }
+    .frame { height: min(52vh, 440px); }
+    .frame img { max-height: 100%; padding: 8px; }
+    /* Arrows sit at the top of the label so caption length never moves them. */
+    .label { display: flex; flex-direction: column; }
+    .controls { order: -1; margin: 0 0 16px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .frame img, .controls button { transition: none; }

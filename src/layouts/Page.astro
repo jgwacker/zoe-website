@@ -7,6 +7,7 @@ import { sectionLabel } from '../lib/site-nav.mjs';
 const { title = 'Untitled', description = '' } = Astro.props;
 const eyebrow = sectionLabel(Astro.url.pathname);
 const hasHero = Astro.slots.has('hero');
+const hasSidebar = Astro.slots.has('sidebar');
 ---
 <html lang="en">
   <head>
@@ -26,10 +27,12 @@ const hasHero = Astro.slots.has('hero');
       </div>
     )}
     <main class="container">
-      <div class="layout">
-        <aside class="sidebar">
-          <slot name="sidebar" />
-        </aside>
+      <div class:list={['layout', { 'no-sidebar': !hasSidebar }]}>
+        {hasSidebar && (
+          <aside class="sidebar">
+            <slot name="sidebar" />
+          </aside>
+        )}
         <section class="content">
           <slot />
         </section>
@@ -55,8 +58,7 @@ const hasHero = Astro.slots.has('hero');
     padding: 8px 16px 72px;
   }
   .layout { display: grid; grid-template-columns: minmax(200px, 240px) minmax(0, 1fr); gap: 56px; }
-  .layout:has(.sidebar:empty) { grid-template-columns: minmax(0, 1fr); }
-  .sidebar:empty { display: none; }
+  .layout.no-sidebar { grid-template-columns: minmax(0, 1fr); }
   .sidebar { position: sticky; top: 24px; align-self: start; }
   .content { min-width: 0; }
   @media (max-width: 860px) {
