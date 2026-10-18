@@ -69,6 +69,8 @@ export const academicsSections = [
   { href: '/academics/years',           label: 'Years' },
 ];
 export const academicsSummerPrograms = [
+  { href: '/academics/summer-programs/johns-hopkins-cty-2026',
+    label: 'Johns Hopkins Center for Talented Youth 2026' },
   { href: '/academics/summer-programs/johns-hopkins-cty-2025',
     label: 'Johns Hopkins Center for Talented Youth 2025' },
   { href: '/academics/summer-programs/mountain-camp-2021-2024',

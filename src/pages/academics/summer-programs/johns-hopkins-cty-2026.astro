@@ -1,0 +1,10 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { academicsSummerPrograms } from '@links/registry';
+---
+<Layout title="Johns Hopkins Center for Talented Youth 2026">
+  <LinkList slot="sidebar" items={academicsSummerPrograms} orientation="vertical" />
+<p> In the summer of 2026, I went back to the Johns Hopkins Center for Talented Youth to take International Politics. It built on the Model United Nations course I took at CTY in 2025. </p>
+<p> The course looked at some of the biggest questions in international affairs: why countries go to war, and what makes them cooperate. We also studied newer debates about globalization, sovereignty, and global norms. We worked through these ideas with discussions, debates, simulations, and our own research projects. </p>
+</Layout>
