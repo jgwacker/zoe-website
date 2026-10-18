@@ -1,6 +1,6 @@
 # Site theme mockups (archived)
 
-Seven design directions (plus four variations of 3D) for warming up Zoe's site, explored October 2026. Each one has a homepage (`index.html`) and the Peninsula Photo Contest award page (`award.html`), built with her real photos and words. They're static mockups, not part of the Astro build, and nothing in `design/` is deployed.
+Seven design directions (plus eight variations of 3D) for warming up Zoe's site, explored October 2026. Each one has a homepage (`index.html`) and the Peninsula Photo Contest award page (`award.html`), built with her real photos and words. They're static mockups, not part of the Astro build, and nothing in `design/` is deployed.
 
 **To view:** open `design/themes/index.html` in a browser (e.g. `open -a "Google Chrome" design/themes/index.html`). It links to every theme. Screenshots of each page are in `previews/`.
 
@@ -37,3 +37,14 @@ Zoe liked **3D · Exhibition Card** best. These four keep its layout exactly and
 | **3D-4 · Sunset Wall** | Dramatic | Gloock, Outfit | `#E9876F` coral wall, `#C2410C` burnt orange, `#8E2446` plum-rose; on-wall text darkened to `#4A0F24` for contrast |
 
 All the colors and fonts are CSS variables in the `:root` block at the top of each page, so a mix-and-match (for example 3D-2 fonts with 3D-3 colors) means editing only those lines.
+
+**More color variety (purple, blue, pink):**
+
+| Variant | Direction | Fonts | Wall / accent colors |
+|---|---|---|---|
+| **3D-5 · Lavender Room** | Purple, subtle | Instrument Serif, Manrope (original) | `#ECE4F3` lavender wall, `#7B3FA0` violet, `#E0662C` orange awards |
+| **3D-6 · Rose Quartz** | More pink | Fraunces, Manrope | `#F7DCE4` rose wall, `#B02A5E` raspberry, `#E2652F` orange |
+| **3D-7 · Periwinkle & Coral** | Blue | Playfair Display, Work Sans | `#DFE6F3` periwinkle wall, `#B8325F` pink, `#E5602E` coral |
+| **3D-8 · Plum Night** | Purple, dramatic | DM Serif Display, DM Sans | `#4B2350` plum wall, with on-wall text in `#FFF3EC` cream, `#F59AB8` pink and `#F7B58C` peach |
+
+All on-wall text was checked against WCAG AA contrast (4.5:1 or better).
