@@ -17,7 +17,7 @@ test('pages without a sidebar render no sidebar column and align content with th
   assert.ok(Math.abs(title - content) <= 2, `title at ${title}px, content at ${content}px`);
 });
 
-test('portfolio slideshow photo uses the same white square mat as every other photo', async (t) => {
+test('portfolio slideshow photo glows with rounded corners like every other photo', async (t) => {
   const srv = await serveDist();
   const browser = await launch();
   t.after(async () => { await browser.close(); await srv.close(); });
@@ -25,8 +25,9 @@ test('portfolio slideshow photo uses the same white square mat as every other ph
   await page.goto(srv.url + '/photography/portfolio/', { waitUntil: 'domcontentloaded' });
   const s = await page.evaluate(() => {
     const cs = getComputedStyle(document.querySelector('.slide-img'));
-    return { bg: cs.backgroundColor, radius: cs.borderTopLeftRadius };
+    return { radius: cs.borderTopLeftRadius, shadow: cs.boxShadow, bg: cs.backgroundColor };
   });
-  assert.equal(s.bg, 'rgb(255, 255, 255)');
-  assert.equal(s.radius, '0px');
+  assert.equal(s.radius, '6px');
+  assert.notEqual(s.shadow, 'none');
+  assert.notEqual(s.bg, 'rgb(255, 255, 255)');
 });
