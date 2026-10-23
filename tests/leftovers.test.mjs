@@ -7,6 +7,8 @@ const EXT = new Set(['.astro', '.css', '.ts', '.mjs', '.js', '.md', '.mdx']);
 const BANNED = [
   /#2337ff/i, /var\(--accent\b/, /--gray/, /gray-gradient/, /Atkinson/, /var\(--box-shadow\)/,
   /var\(--black\)/, /--theme-text-light/, /--color-text-dim/, /--theme-bg-offset/,
+  /Fraunces/, /Manrope/, /#F8EBE7/i, /\/Exhibit\.astro/,
+  /var\(--(white|wall|wall-deep|ink|muted|hair|orange|orange-text|rose-text|serif|mat-shadow)\)/,
 ];
 
 function* walk(dir) {
@@ -30,8 +32,15 @@ test('legacy alias block is gone from global.css', () => {
   assert.doesNotMatch(fs.readFileSync('src/styles/global.css', 'utf8'), /--accent\s*:/);
 });
 
-test('global.css gives figures a white mat and wall-label captions', () => {
+test('global.css gives figures rounded glowing photos and mono captions', () => {
   const css = fs.readFileSync('src/styles/global.css', 'utf8');
-  assert.match(css, /figure > img,\s*figure > video\s*{[^}]*box-shadow:\s*var\(--mat-shadow\)/);
-  assert.match(css, /figcaption\s*{[^}]*border-top:\s*1px solid var\(--hair\)/);
+  assert.match(css, /figure > img,\s*figure > video\s*{[^}]*border-radius:\s*6px/);
+  assert.match(css, /figure:nth-of-type\(3n\+1\) > img[^{]*{[^}]*var\(--glow-coral\)/);
+  assert.match(css, /figure:nth-of-type\(3n\+2\) > img[^{]*{[^}]*var\(--glow-rose\)/);
+  assert.match(css, /figure:nth-of-type\(3n\) > img[^{]*{[^}]*var\(--glow-gold\)/);
+  assert.match(css, /figcaption\s*{[^}]*font-family:\s*var\(--mono\)/);
+});
+
+test('the Soft Blush slideshow component is gone', () => {
+  assert.equal(fs.existsSync('src/components/Exhibit.astro'), false);
 });

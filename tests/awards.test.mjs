@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readDist } from './helpers.mjs';
+import { readDist, serveDist, launch } from './helpers.mjs';
 
 const AWARDS = {
   'peninsula-photo-competition-2025': ['cinderello.jpg', 'Honorable Mention'],
@@ -25,3 +25,17 @@ for (const [slug, [lead, result]] of Object.entries(AWARDS)) {
     assert.equal(count, 1, `${lead} appears ${count} times`);
   });
 }
+
+test('award label card is dark with a marigold result', async (t) => {
+  const srv = await serveDist();
+  const browser = await launch();
+  t.after(async () => { await browser.close(); await srv.close(); });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await page.goto(srv.url + '/photography/awards/peninsula-photo-competition-2025/', { waitUntil: 'domcontentloaded' });
+  const s = await page.evaluate(() => ({
+    card: getComputedStyle(document.querySelector('.award-exhibit .label')).backgroundColor,
+    badge: getComputedStyle(document.querySelector('.award-exhibit .badge')).color,
+  }));
+  assert.equal(s.card, 'rgb(42, 28, 51)');
+  assert.equal(s.badge, 'rgb(255, 177, 59)');
+});

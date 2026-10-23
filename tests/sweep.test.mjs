@@ -33,7 +33,8 @@ test('every internal link and image in dist/ resolves', () => {
 
 const PAGES = ['/', '/about/', '/photography/awards/', '/photography/awards/peninsula-photo-competition-2025/',
   '/photography/awards/npcfk-competition-color-2025/', '/travel/trips/egypt-2025/', '/music/concerts/laufey-2025/',
-  '/music/cello/', '/blog/'];
+  '/music/cello/', '/blog/', '/photography/awards/npcfk-competition-shelter-2026/',
+  '/academics/summer-programs/johns-hopkins-cty-2026/', '/photography/portfolio/'];
 
 test('no sideways scroll at 390px on the key pages', async (t) => {
   const srv = await serveDist();

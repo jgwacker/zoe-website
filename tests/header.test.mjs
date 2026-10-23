@@ -4,9 +4,9 @@ import { readDist, serveDist, launch } from './helpers.mjs';
 
 const AWARD = '/photography/awards/peninsula-photo-competition-2025/';
 
-test('header markup: logo with orange period, 8 links, current section marked', () => {
+test('header markup: ZOE.W logo with coral period, 8 links, current section marked', () => {
   const html = readDist(AWARD);
-  assert.match(html, /Zoe Wacker<span[^>]*aria-hidden="true"[^>]*>\.<\/span>/);
+  assert.match(html, /<a[^>]*class="mark"[^>]*aria-label="Zoe Wacker, home"[^>]*>ZOE<span[^>]*aria-hidden="true"[^>]*>\.<\/span>W<\/a>/);
   const nav = html.match(/<nav[^>]*id="site-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1] ?? '';
   assert.equal((nav.match(/<a /g) || []).length, 8);
   assert.match(nav, /<a[^>]*href="\/photography"[^>]*aria-current="page"|<a[^>]*aria-current="page"[^>]*href="\/photography"/);

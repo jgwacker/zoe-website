@@ -28,20 +28,19 @@ const rows = [['Place', place], ['Contest', contest], ['Division', division], ['
 </section>
 
 <style>
-  .award-exhibit { width: var(--page-max); max-width: 100%; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; align-items: end; }
-  .hung img { display: block; width: 100%; height: auto; background: #fff; padding: 16px; border-radius: 0; box-shadow: var(--mat-shadow); }
-  .label { background: var(--white); padding: 24px 24px 22px; border-top: 3px solid var(--orange); box-shadow: 0 10px 24px -16px rgba(90, 40, 30, .35); font-size: 13.5px; line-height: 1.5; }
+  .award-exhibit { width: var(--page-max); max-width: 100%; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; align-items: center; }
+  .hung img { display: block; width: 100%; height: auto; border-radius: 6px; box-shadow: var(--glow-rose); }
+  .label { background: var(--night-2); border: 1px solid var(--line); border-radius: 8px; padding: 24px; font-size: 15px; line-height: 1.5; }
   .label p { margin: 0; }
-  .badge { display: inline-flex; align-items: center; gap: 8px; font-size: 10.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--orange-text); }
-  .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex: none; }
-  .label h2 { font-family: var(--serif); font-weight: 400; font-size: 36px; line-height: 1.05; margin: 12px 0 6px; overflow-wrap: anywhere; }
-  .by { color: var(--muted); }
-  dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--hair); }
-  dt { font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
-  dd { margin: 0; color: var(--ink); }
+  .badge { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--marigold); }
+  .badge::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--marigold); box-shadow: 0 0 12px var(--marigold); flex: none; }
+  .label h2 { font-size: 36px; line-height: 1; margin: 14px 0 6px; overflow-wrap: anywhere; }
+  .by { color: var(--mist); }
+  dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line); }
+  dt { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--mist); padding-top: 3px; }
+  dd { margin: 0; color: var(--cream); }
   @media (max-width: 900px) {
     .award-exhibit { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-    .hung img { padding: 8px; }
     .label h2 { font-size: 30px; }
   }
 </style>

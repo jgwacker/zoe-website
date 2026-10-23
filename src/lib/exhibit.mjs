@@ -7,19 +7,21 @@ export function displayPath(image, kind = 'full') {
   return `/images/display/${kind === 'row' ? 'row-' : ''}${name}.jpg`;
 }
 
-/** Captions and section blurbs still marked "draft": true, for Zoe to edit. */
-export function listDrafts(data) {
-  return [
-    ...data.items.filter((i) => i.draft).map((i) => `photo: ${i.title}`),
-    ...data.sections.filter((s) => s.draft).map((s) => `section: ${s.title}`),
-  ];
+/** Captions still marked "draft": true among the first `count` photos (the ones the homepage shows). */
+export function listDrafts(items, count = 3) {
+  return items.slice(0, count).filter((i) => i.draft).map((i) => `photo: ${i.title}`);
 }
 
-/** Display images referenced by the data that are missing from publicDir. */
-export function missingDisplayFiles(data, publicDir) {
-  const wanted = [
-    ...data.items.map((i) => displayPath(i.image)),
-    ...data.sections.map((s) => displayPath(s.thumb, 'row')),
+/** Display paths that are missing from publicDir. */
+export function missingDisplayFiles(paths, publicDir) {
+  return paths.filter((p) => !fs.existsSync(path.join(publicDir, p)));
+}
+
+/** Originals the homepage shows, with their display size: strip photos and the award card full-size, trip thumbnails row-size. */
+export function homepageImages({ items, award, trips }) {
+  return [
+    ...items.slice(0, 3).map((i) => [i.image, 'full']),
+    ...(award?.image ? [[award.image, 'full']] : []),
+    ...trips.filter((t) => t.image).map((t) => [t.image, 'row']),
   ];
-  return wanted.filter((p) => !fs.existsSync(path.join(publicDir, p)));
 }

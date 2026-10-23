@@ -26,25 +26,26 @@ const num = (i) => String(i + 1).padStart(2, '0');
 )}
 
 <style>
-  .vlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+  .vlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
   .vlist a {
     display: grid;
-    grid-template-columns: 30px minmax(0, 1fr);
-    gap: 10px;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 12px;
     align-items: baseline;
-    padding: 12px 4px;
-    border-bottom: 1px solid var(--hair);
-    color: var(--ink);
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--line);
+    color: var(--cream);
     font-size: 15px;
+    font-weight: 700;
     line-height: 1.35;
     text-decoration: none;
     transition: background .2s, padding .2s;
   }
-  .vlist a:visited { color: var(--ink); }
-  .vlist a:hover { background: var(--wall); padding-left: 10px; text-decoration: none; color: var(--ink); }
-  .vlist .n { font-family: var(--serif); font-size: 15px; color: var(--muted); }
-  .vlist a[aria-current='page'] { box-shadow: inset 3px 0 0 var(--orange); padding-left: 12px; font-weight: 600; }
-  .vlist a[aria-current='page'] .n { color: var(--orange-text); }
+  .vlist a:visited { color: var(--cream); }
+  .vlist a:hover { background: linear-gradient(90deg, rgba(255, 79, 139, .10), transparent); padding-left: 10px; text-decoration: none; color: var(--cream); }
+  .vlist .n { font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1; color: var(--rose); }
+  .vlist a[aria-current='page'] { box-shadow: inset 3px 0 0 var(--coral); padding-left: 12px; }
+  .vlist a[aria-current='page'] .t { color: var(--coral); }
   .grid {
     list-style: none;
     margin: .5rem 0 1.5rem;
@@ -53,8 +54,7 @@ const num = (i) => String(i + 1).padStart(2, '0');
     gap: .75rem 1.25rem;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
-  .grid a { color: var(--rose-text); text-decoration: none; }
+  .grid a { color: var(--coral); text-decoration: none; font-weight: 700; }
   .grid a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .desc { margin: .2rem 0 0; color: var(--muted); font-size: .95rem; }
-  @media (prefers-reduced-motion: reduce) { .vlist a { transition: none; } }
+  .desc { margin: .2rem 0 0; color: var(--mist); font-size: .95rem; }
 </style>

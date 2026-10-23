@@ -59,18 +59,19 @@ Reference images in pages as `/images/section/filename.jpg`.
 
 ### Layouts
 
-- `Page.astro` - Standard layout: blush title band (section eyebrow + title), optional full-width `hero` slot, then sidebar + content (collapses on mobile)
+- `Page.astro` - Standard layout: dark poster title band (section kicker + neon title), optional full-width `hero` slot, then sidebar set list + content (collapses on mobile)
 - `FullBleed.astro` - Full-width layout without sidebar (used for homepage)
 - `BlogPost.astro` - Blog post layout with date/metadata
 
-### Theme (Soft Blush)
+### Theme (After Dark)
 
-- Colors and fonts are CSS variables in `src/styles/global.css` (`--wall`, `--ink`, `--rose-text`, `--orange-text`, `--serif` = Fraunces, `--sans` = Manrope). No italics anywhere.
-- Every `<figure>` image is automatically shown in a white mat with a wall-label `<figcaption>`. No per-page styling is needed.
+- Dark "lineup poster" look from mockup `design/themes/5B`. Colors and fonts are CSS variables in `src/styles/global.css` (`--night`, `--cream`, `--mist`, `--coral`, `--rose`, `--marigold`, `--display` = Anton, `--sans` = DM Sans, `--mono` = DM Mono). No italics anywhere. Printing switches to dark text on white.
+- Every `<figure>` image automatically gets rounded corners and a coral/rose/marigold glow, with a mono `<figcaption>`. No per-page styling is needed.
 - Award pages put `<AwardExhibit slot="hero" … />` (in `src/components/`) at the top.
-- Homepage exhibit photos and section blurbs live in `src/data/exhibit.json`. After changing photos there, run `npm run thumbnails`. Entries with `"draft": true` are placeholder captions for Zoe to rewrite, and the build prints a warning until they're gone.
+- The homepage poster is generated from `src/links/registry.ts`: awards (with `note`, and one `featured: true` with an `image`), the five newest trips (`note` = stops, `image` = thumbnail), the six newest concerts and the newest cello performance. Add new entries at the top of each list. After adding an `image`, run `npm run thumbnails`.
+- The three glow-strip photos are the first three items in `src/data/exhibit.json`. Entries with `"draft": true` are placeholder captions for Zoe to rewrite, and the build prints a warning until they're gone.
 - `npm test` builds the site and runs the checks in `tests/`. They need Google Chrome installed.
 
 ### Design Themes
 
-`design/themes/` archives static HTML mockups of seven candidate site redesigns (warm pink/orange directions), with a README summarizing each. They are not part of the Astro build or deployment. Open `design/themes/index.html` to browse them.
+`design/themes/` archives static HTML mockups of candidate site redesigns (warm pink/orange directions), with a README summarizing each. They are not part of the Astro build or deployment. Open `design/themes/index.html` to browse them. 5B (After Dark) is the live theme; 3D-1a (Soft Blush) was live before it.

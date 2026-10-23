@@ -8,6 +8,7 @@ const { title = 'Untitled', description = '' } = Astro.props;
 const eyebrow = sectionLabel(Astro.url.pathname);
 const hasHero = Astro.slots.has('hero');
 const hasSidebar = Astro.slots.has('sidebar');
+const longTitle = String(title).length > 40;
 ---
 <html lang="en">
   <head>
@@ -18,7 +19,7 @@ const hasSidebar = Astro.slots.has('sidebar');
     <section class="title-band">
       <div class="band-inner">
         {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-        <h1 class="post-title">{title}</h1>
+        <h1 class:list={['post-title', { 'long-title': longTitle }]}>{title}</h1>
       </div>
     </section>
     {hasHero && (
@@ -43,27 +44,25 @@ const hasSidebar = Astro.slots.has('sidebar');
 </html>
 
 <style>
-  .title-band { background: var(--wall); padding: 56px 16px 40px; }
+  .title-band { padding: 64px 16px 40px; border-bottom: 1px solid var(--line); }
   .band-inner { width: var(--page-max); max-width: 100%; margin: 0 auto; }
   .post-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(32px, 5vw, 60px);
-    line-height: 1.05;
-    margin: 10px 0 0;
+    font-size: clamp(44px, 7vw, 104px);
+    line-height: .92;
+    margin: 16px 0 0;
+    text-shadow: var(--neon);
+    text-wrap: balance;
     overflow-wrap: anywhere;
   }
-  .hero-band {
-    background: linear-gradient(180deg, var(--wall) 0 86%, var(--wall-deep) 86% 100%);
-    padding: 8px 16px 72px;
-  }
-  .layout { display: grid; grid-template-columns: minmax(200px, 240px) minmax(0, 1fr); gap: 56px; }
+  .post-title.long-title { font-size: clamp(34px, 4.6vw, 64px); line-height: 1; }
+  .hero-band { padding: 48px 16px 24px; }
+  .layout { display: grid; grid-template-columns: minmax(200px, 260px) minmax(0, 1fr); gap: 56px; }
   .layout.no-sidebar { grid-template-columns: minmax(0, 1fr); }
-  .sidebar { position: sticky; top: 24px; align-self: start; }
+  .sidebar { position: sticky; top: 88px; align-self: start; }
   .content { min-width: 0; }
-  @media (max-width: 860px) {
-    .title-band { padding: 36px 16px 28px; }
-    .hero-band { padding: 4px 16px 48px; }
+  @media (max-width: 900px) {
+    .title-band { padding: 40px 16px 28px; }
+    .hero-band { padding: 32px 16px 8px; }
     .layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
     .sidebar { position: static; }
   }
