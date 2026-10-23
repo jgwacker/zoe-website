@@ -99,7 +99,7 @@ const INTERESTS = ['Geography', 'Travel', 'Cello', 'Parkour', 'Mixed martial art
             <span class="yr">{t.year ?? ''}</span>
             <span class="place">{t.name}</span>
             <span class="stops">{t.note ?? ''}</span>
-            <span class="thumb">{t.image && <img src={displayPath(t.image, 'row')} alt="" loading="lazy" />}</span>
+            {t.image && <span class="thumb"><img src={displayPath(t.image, 'row')} alt="" loading="lazy" /></span>}
           </a>
         ))}
       </div>

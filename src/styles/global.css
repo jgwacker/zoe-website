@@ -157,8 +157,13 @@ figcaption {
 
 @media print {
 	html, body { background: #fff !important; background-image: none !important; color: #1E1424 !important; }
-	*, *::before, *::after { box-shadow: none !important; text-shadow: none !important; }
-	h1, h2, h3, h4, h5, h6, p, li, dd, dt, figcaption, blockquote, .eyebrow { color: #1E1424 !important; }
-	a, a:visited { color: #3A1F3D !important; }
-	header, footer, nav { display: none !important; }
+	*, *::before, *::after {
+		color: #1E1424 !important;
+		background-color: transparent !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+		-webkit-text-stroke: 0 !important;
+	}
+	a, a:visited, a * { color: #3A1F3D !important; }
+	.site-header, .site-footer { display: none !important; }
 }

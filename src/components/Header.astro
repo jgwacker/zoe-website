@@ -83,8 +83,9 @@ const path = Astro.url.pathname;
 		nav ul { flex-direction: column; gap: 0; }
 		nav li a { display: block; padding: 8px 0; border-bottom: 1px solid var(--line); font-family: var(--display); font-size: 28px; font-weight: 400; text-transform: uppercase; color: var(--cream); }
 		nav li a[aria-current='page'] { color: var(--coral); box-shadow: none; }
+		.site-header:not(.js) { position: static; }
 		.site-header.js .menu-toggle { display: inline-flex; }
 		.site-header.js nav { display: none; }
-		.site-header.js.open nav { display: block; padding-bottom: 16px; }
+		.site-header.js.open nav { display: block; padding-bottom: 16px; max-height: calc(100dvh - 80px); overflow-y: auto; }
 	}
 </style>
