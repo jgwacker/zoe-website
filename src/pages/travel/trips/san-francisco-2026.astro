@@ -1,0 +1,26 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { travelTrips } from '@links/registry';
+---
+<Layout title="San Francisco 2026">
+  <LinkList slot="sidebar" items={travelTrips} orientation="vertical" />
+<p>
+This year I'm exploring San Francisco with my mentor, Imani, a PsyD student at Stanford. San Francisco is the big city closest to home, but I've mostly seen it the way a tourist does. Our goal is for me to know it like a local, as my own city. Every other week we pick a different neighborhood or experience and spend the day there.
+</p>
+
+<p>
+This page is a running log, and I'll add to it after each outing.
+</p>
+
+<table>
+  <thead>
+    <tr><th>Date</th><th>Neighborhood</th><th>What we did</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>October 17</td><td>North Beach</td><td>Explored the neighborhood</td></tr>
+    <tr><td>September 26</td><td>Valencia Street</td><td>Paxton Gate, the International Children’s Library, window shopping</td></tr>
+    <tr><td>September 6</td><td>Haight-Ashbury</td><td>Thrifting, vintage clothing stores, Amoeba Music</td></tr>
+  </tbody>
+</table>
+</Layout>

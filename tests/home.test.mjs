@@ -43,7 +43,8 @@ test('meet the headliner: ZW monogram and no photo of Zoe', () => {
 
 test('homepage uses resized images only, with no undefined/null and no empty img', () => {
   const srcs = [...html.matchAll(/<img[^>]*src="([^"]*)"/g)].map((m) => m[1]);
-  assert.ok(srcs.length >= 8);
+  const tripThumbs = travelTrips.slice(0, 5).filter((t) => t.image).length;
+  assert.equal(srcs.length, 3 + 1 + tripThumbs, 'three strip photos, the featured award, and one thumbnail per newest trip with a photo');
   for (const s of srcs) assert.match(s, /^\/images\/display\//);
   assert.doesNotMatch(html, />\s*(undefined|null)\s*</);
 });

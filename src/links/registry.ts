@@ -13,6 +13,7 @@ export const sections = [
 
 // Travel
 export const travelTrips: LinkItem[] = [
+  { href: '/travel/trips/san-francisco-2026', label: 'San Francisco 2026', note: 'Haight-Ashbury · Valencia Street · North Beach' },
   { href: '/travel/trips/amsterdam-2025',  label: 'Amsterdam 2025', note: 'Haarlem · Amsterdam · Anne Frank House' },
   { href: '/travel/trips/egypt-2025',      label: 'Egypt 2025', note: 'Cairo · Giza · Aswan · Kom Ombo · Nubia', image: '/images/trips/egypt_2025/nile_cruise_egypt_2025.jpg' },
   { href: '/travel/trips/chile-2025',      label: 'Chile 2025', note: 'Santiago · Torres del Paine · Tierra del Fuego · Valparaíso', image: '/images/trips/chile_2025/tierra_del_fuego_chile_2025.jpg' },
