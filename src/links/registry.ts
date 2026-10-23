@@ -79,6 +79,7 @@ export const academicsSummerPrograms = [
     label: 'Mountain Camp 2021–2024' },
 ];
 export const academicsYears = [
+  { href: '/academics/years/8th-grade', label: '8th Grade' },
   { href: '/academics/years/7th-grade', label: '7th Grade' },
   { href: '/academics/years/6th-grade', label: '6th Grade' },
 ];
