@@ -1,85 +1,254 @@
 ---
 import FullBleed from '@layouts/FullBleed.astro';
-import Exhibit from '@components/Exhibit.astro';
 import exhibit from '../data/exhibit.json';
-import { displayPath, listDrafts, missingDisplayFiles } from '../lib/exhibit.mjs';
+import { photographyAwards, travelTrips, musicConcerts, celloPerformances } from '@links/registry';
+import { displayPath, listDrafts, missingDisplayFiles, homepageImages } from '../lib/exhibit.mjs';
+import { splitYear, latest, featuredAward, seasonLabel } from '../lib/registry-meta.mjs';
 
-const missing = missingDisplayFiles(exhibit, 'public');
+const photos = exhibit.items.slice(0, 3);
+const award = featuredAward(photographyAwards);
+const trips = latest(travelTrips, 5).map((t) => ({ ...t, ...splitYear(t.label) }));
+const gigs = latest(musicConcerts, 6).map((c) => ({ ...c, ...splitYear(c.label) }));
+const cello = celloPerformances[0];
+
+const missing = missingDisplayFiles(
+  homepageImages({ items: exhibit.items, award, trips }).map(([src, kind]) => displayPath(src, kind)), 'public');
 if (missing.length) {
   throw new Error(`Missing homepage display images. Run \`npm run thumbnails\`. Missing: ${missing.join(', ')}`);
 }
-const drafts = listDrafts(exhibit);
+const drafts = listDrafts(exhibit.items);
 if (drafts.length) {
   console.warn(`[exhibit] ${drafts.length} draft caption(s) for Zoe to edit in src/data/exhibit.json: ${drafts.join('; ')}`);
 }
-const roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+
+const num = (i) => String(i + 1).padStart(2, '0');
+const BILL = [
+  [['/photography', 'Photography'], ['/travel', 'Travel'], ['/music', 'Music']],
+  [['/geography', 'Geography'], ['/guardian-arts', 'Guardian Arts'], ['/academics', 'Academics']],
+  [['/about', 'About'], ['/photography/awards', 'Awards'], ['/music/concerts', 'Concerts']],
+];
+const GLOW = ['g-coral', 'g-rose', 'g-gold'];
+const INTERESTS = ['Geography', 'Travel', 'Cello', 'Parkour', 'Mixed martial arts', 'History', 'Photos that tell little stories'];
 ---
 
 <FullBleed title="Zoe Wacker">
-  <Exhibit items={exhibit.items} />
+  <div class="home">
+    <section class="poster">
+      <p class="presents">Menlo Park, CA <b>presents</b> the {seasonLabel(new Date())} season</p>
+      <h1 class="headliner">ZOE WACKER</h1>
+      <p class="tagline">A highlight reel of experiments, adventures and <em>“aha!” moments.</em></p>
+      <nav class="bill" aria-label="Sections">
+        {BILL.map((row, r) => (
+          <div class={`row r${r + 1}`}>
+            {row.map(([href, label], i) => (
+              <>{i > 0 && <i class="dot" aria-hidden="true"></i>}<a href={href}>{label}</a></>
+            ))}
+          </div>
+        ))}
+        <p class="support">On location in {trips.map((t, i) => (<>{i > 0 && ' · '}<b>{t.name}</b></>))}</p>
+      </nav>
+    </section>
 
-  <section class="intro">
-    <div class="side">
-      <span class="monogram" aria-hidden="true">ZW</span>
-      <p><b>Zoe Wacker</b>Photographer, cellist, map enthusiast. Menlo Park, California.</p>
-    </div>
-    <div>
-      <blockquote>“Hi! I’m Zoe, a middle schooler who’s always juggling a bunch of different interests. Right now, I’m into geography and travel, playing cello and music, and parkour with mixed-martial arts. I also love discovering new places, digging into history, and snapping photos that <em>tell little stories.</em>”</blockquote>
-      <p class="sig">Welcome to my highlight reel</p>
-    </div>
-  </section>
-
-  <section class="index" aria-label="Sections">
-    <h2 class="eyebrow">The rooms</h2>
-    <ul class="rows" role="list">
-      {exhibit.sections.map((s, i) => (
-        <li>
-          <a href={s.href}>
-            <span class="n">{roman[i]}</span>
-            <span class="t">{s.title}</span>
-            <span class="d">{s.desc}</span>
-            <img class="th" src={displayPath(s.thumb, 'row')} alt="" loading="lazy" />
-          </a>
-        </li>
+    <section class="glowstrip" aria-label="Featured photos">
+      {photos.map((p, i) => (
+        <figure class={`p${i + 1}`}>
+          {p.href
+            ? <a class={`glow ${GLOW[i]}`} href={p.href}><img src={displayPath(p.image)} alt={p.alt} loading={i === 0 ? 'eager' : 'lazy'} /></a>
+            : <div class={`glow ${GLOW[i]}`}><img src={displayPath(p.image)} alt={p.alt} loading={i === 0 ? 'eager' : 'lazy'} /></div>}
+          <figcaption><span>{p.title}</span><span>{p.place}</span></figcaption>
+        </figure>
       ))}
-    </ul>
-  </section>
+    </section>
+
+    <section class="block" id="awards">
+      <div class="two">
+        <div>
+          <p class="eyebrow">The set list</p>
+          <h2>Photo <em>awards</em></h2>
+          {award && (
+            <a class="awardcard" href={award.href}>
+              {award.image && <span class="glow g-rose"><img src={displayPath(award.image)} alt="" loading="lazy" /></span>}
+              <span class="cap">
+                <b>{award.label}</b>
+                {award.note && <span class="note">{award.note}</span>}
+                <span class="btn">Read the story →</span>
+              </span>
+            </a>
+          )}
+        </div>
+        <ol class="setlist" role="list">
+          {photographyAwards.map((a, i) => (
+            <li class:list={{ feat: a === award }}>
+              <a href={a.href}>
+                <span class="n">{num(i)}</span>
+                <span class="t">{a.label}{a.note && <span class="d">{a.note}</span>}</span>
+                <span class="y">{splitYear(a.label).year ?? ''}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="block" id="travel">
+      <p class="eyebrow">World tour</p>
+      <h2>Travel <em>dates</em></h2>
+      <div class="tour">
+        {trips.map((t) => (
+          <a class="date" href={t.href}>
+            <span class="yr">{t.year ?? ''}</span>
+            <span class="place">{t.name}</span>
+            <span class="stops">{t.note ?? ''}</span>
+            <span class="thumb">{t.image && <img src={displayPath(t.image, 'row')} alt="" loading="lazy" />}</span>
+          </a>
+        ))}
+      </div>
+      <a class="more" href="/travel">All trips →</a>
+    </section>
+
+    <section class="block music" id="music">
+      <div>
+        <p class="eyebrow">Music</p>
+        <blockquote class="pull">“Concerts are my favorite because you don’t just hear the music—<em>you feel it in your chest.</em>”</blockquote>
+        <a class="more" href="/music">More about music →</a>
+      </div>
+      <div>
+        <p class="label">From the crowd</p>
+        <ul class="gigs" role="list">
+          {gigs.map((g) => (<li><a href={g.href}><b>{g.name}</b><span>{g.year ?? ''}</span></a></li>))}
+        </ul>
+        {cello && (
+          <a class="cello" href={cello.href}>
+            <span class="label">On stage · Cello</span>
+            <span class="c-t">{cello.label}</span>
+            {cello.note && <span class="c-n">{cello.note}</span>}
+          </a>
+        )}
+      </div>
+    </section>
+
+    <section class="block about" id="meet">
+      <span class="monogram" aria-hidden="true">ZW</span>
+      <div>
+        <p class="eyebrow">Meet the headliner</p>
+        <h2>Hi! I’m Zoe.</h2>
+        <p class="voice">A middle schooler who’s always juggling a bunch of different interests. I started this site to keep track of the things I’m working on, the ideas I’m excited about, and the projects that don’t always fit neatly into a school folder.</p>
+        <ul class="interests" role="list">{INTERESTS.map((s) => <li>{s}</li>)}</ul>
+        <a class="more" href="/about">More about me →</a>
+      </div>
+    </section>
+  </div>
 </FullBleed>
 
 <style>
-  .intro { max-width: 1240px; margin: 0 auto; padding: 96px 48px 40px; display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 56px; }
-  .intro .side { display: flex; gap: 18px; align-items: flex-start; }
-  .monogram {
-    flex: none; width: 96px; height: 96px; border-radius: 50%;
-    display: grid; place-items: center;
-    background: var(--wall); border: 1px solid var(--hair);
-    color: var(--rose-text); font-family: var(--serif); font-size: 34px; letter-spacing: .04em;
-  }
-  .intro .side p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
-  .intro .side b { display: block; color: var(--ink); font-weight: 600; font-size: 14px; }
-  .intro blockquote { border: 0; padding: 0; font-family: var(--serif); font-size: clamp(24px, 2.6vw, 34px); line-height: 1.3; max-width: 820px; }
-  .intro .sig { margin: 18px 0 0; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
-  .index { max-width: 1240px; margin: 0 auto; padding: 40px 48px 110px; }
-  .index .eyebrow { margin-bottom: 18px; }
-  .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
-  .rows a {
-    display: grid; grid-template-columns: 56px minmax(0, 1.1fr) minmax(0, 1.6fr) 120px; gap: 20px; align-items: center;
-    padding: 20px 4px; border-bottom: 1px solid var(--hair); color: var(--ink); text-decoration: none;
-    transition: background .25s, padding .25s;
-  }
-  .rows a:visited { color: var(--ink); }
-  .rows a:hover { background: var(--wall); padding-left: 14px; text-decoration: none; }
-  .rows .n { font-family: var(--serif); font-size: 20px; color: var(--muted); }
-  .rows .t { font-family: var(--serif); font-size: 32px; line-height: 1.1; }
-  .rows .d { font-size: 14px; color: var(--muted); }
-  .rows .th { justify-self: end; width: 100px; height: 64px; object-fit: cover; border-radius: 0; }
+  .home { width: var(--page-max); max-width: 100%; margin: 0 auto; padding: 0 32px 20px; }
+  .poster { padding: 72px 0 40px; text-align: center; }
+  .presents { margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--marigold); }
+  .presents b { color: var(--cream); font-weight: 500; }
+  .headliner { font-size: clamp(64px, 15.5vw, 224px); line-height: .86; margin: 18px 0 8px; text-shadow: var(--neon); }
+  .tagline { font-size: clamp(16px, 2vw, 20px); color: var(--mist); max-width: 640px; margin: 0 auto; }
+  .tagline em { color: var(--coral); }
+  .bill { margin: 52px auto 0; max-width: 1100px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 30px 0 34px; }
+  .row { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: 22px; row-gap: 4px; font-family: var(--display); text-transform: uppercase; line-height: 1.05; }
+  .row a { color: inherit; text-decoration: none; transition: color .2s, text-shadow .2s; }
+  .row a:hover { color: var(--marigold); text-shadow: 0 0 22px rgba(255, 177, 59, .6); text-decoration: none; }
+  .dot { width: 9px; height: 9px; transform: rotate(45deg); background: var(--rose); display: inline-block; align-self: center; box-shadow: 0 0 12px var(--rose); }
+  .r1 { font-size: clamp(36px, 6.2vw, 84px); color: var(--coral); }
+  .r2 { font-size: clamp(26px, 3.8vw, 50px); color: var(--cream); margin-top: 10px; }
+  .r2 .dot { width: 7px; height: 7px; background: var(--marigold); box-shadow: 0 0 10px var(--marigold); }
+  .r3 { font-size: clamp(20px, 2.3vw, 28px); color: var(--rose); margin-top: 14px; }
+  .r3 .dot { width: 5px; height: 5px; }
+  .support { margin: 20px 0 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--mist); }
+  .support b { color: var(--cream); font-weight: 500; }
+
+  .glowstrip { display: grid; grid-template-columns: 1.25fr .8fr 1fr; gap: 28px; align-items: end; padding: 70px 0 20px; }
+  .glowstrip figure { margin: 0; }
+  .glow { display: block; border-radius: 6px; overflow: hidden; }
+  .glow img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
+  .g-coral { box-shadow: var(--glow-coral); }
+  .g-rose { box-shadow: var(--glow-rose); }
+  .g-gold { box-shadow: var(--glow-gold); }
+  .p1 .glow { aspect-ratio: 3 / 2; }
+  .p2 .glow { aspect-ratio: 3 / 5; }
+  .p3 .glow { aspect-ratio: 4 / 5; }
+  .glowstrip figcaption { max-width: none; margin: 14px 0 0; display: flex; justify-content: space-between; gap: 12px; }
+  .glowstrip figcaption span:first-child { color: var(--cream); }
+
+  .block { padding-top: 96px; }
+  .block h2 { margin-top: 0; font-size: clamp(40px, 5.4vw, 72px); line-height: .95; }
+  .block .eyebrow { margin-bottom: 14px; }
+  .two { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
+  .awardcard { display: block; margin-top: 36px; color: var(--cream); text-decoration: none; }
+  .awardcard:hover, .awardcard:visited { color: var(--cream); text-decoration: none; }
+  .awardcard .glow { aspect-ratio: 3 / 2; }
+  .awardcard .cap { display: block; margin-top: 18px; }
+  .awardcard b { display: block; font-family: var(--display); font-weight: 400; font-size: 30px; line-height: 1.05; text-transform: uppercase; }
+  .awardcard .note { display: block; color: var(--mist); font-size: 15px; margin-top: 6px; }
+  .btn { display: inline-flex; margin-top: 18px; padding: 12px 20px; border-radius: 999px; background: var(--coral); color: var(--night); font-weight: 700; font-size: 15px; box-shadow: 0 0 30px rgba(255, 111, 89, .45); transition: transform .2s, box-shadow .2s; }
+  .awardcard:hover .btn { transform: translateY(-2px); box-shadow: 0 0 44px rgba(255, 111, 89, .7); }
+  .setlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .setlist li { border-bottom: 1px solid var(--line); }
+  .setlist a { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 20px 4px; color: var(--cream); text-decoration: none; transition: background .2s; }
+  .setlist a:visited { color: var(--cream); }
+  .setlist a:hover { background: linear-gradient(90deg, rgba(255, 79, 139, .10), transparent); color: var(--cream); text-decoration: none; }
+  .setlist .n { font-family: var(--display); font-size: 26px; line-height: 1; color: var(--rose); }
+  .setlist .t { font-weight: 700; font-size: 18px; line-height: 1.3; }
+  .setlist .d { display: block; font-weight: 400; font-size: 15px; color: var(--mist); margin-top: 3px; }
+  .setlist .y { font-family: var(--mono); font-size: 13px; color: var(--marigold); }
+  .setlist .feat .t { color: var(--coral); }
+
+  .tour { margin-top: 36px; border-top: 2px solid var(--cream); }
+  .date { display: grid; grid-template-columns: 110px minmax(0, 1.1fr) minmax(0, 2fr) 120px; gap: 24px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--line); color: var(--cream); text-decoration: none; }
+  .date:hover, .date:visited { color: var(--cream); text-decoration: none; }
+  .date .yr { font-family: var(--display); font-size: 30px; color: var(--marigold); }
+  .date .place { font-family: var(--display); font-size: 34px; text-transform: uppercase; line-height: 1; }
+  .date:hover .place { color: var(--coral); }
+  .date .stops { color: var(--mist); }
+  .date .thumb { width: 120px; height: 72px; border-radius: 4px; overflow: hidden; }
+  .date .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
+  .more { display: inline-block; margin-top: 22px; font-weight: 700; }
+
+  .music { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .pull { border: 0; padding: 0; font-family: var(--display); text-transform: uppercase; font-size: clamp(34px, 4.2vw, 58px); line-height: 1.02; max-width: none; }
+  .pull em { color: var(--rose); text-shadow: 0 0 30px rgba(255, 79, 139, .6); }
+  .label { display: block; margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--mist); }
+  .gigs { list-style: none; margin: 8px 0 0; padding: 0; columns: 2; column-gap: 32px; }
+  .gigs li { break-inside: avoid; border-bottom: 1px solid var(--line); }
+  .gigs a { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; color: var(--cream); text-decoration: none; }
+  .gigs a:hover b { color: var(--coral); }
+  .gigs span { color: var(--marigold); font-family: var(--mono); font-size: 13px; }
+  .cello { display: block; margin-top: 28px; padding: 22px 24px; border: 1px solid rgba(255, 177, 59, .4); border-radius: 6px; background: rgba(255, 177, 59, .06); color: var(--cream); text-decoration: none; }
+  .cello:hover, .cello:visited { color: var(--cream); text-decoration: none; }
+  .cello .label { color: var(--marigold); }
+  .cello .c-t { display: block; margin-top: 6px; font-weight: 700; }
+  .cello .c-n { display: block; color: var(--mist); font-size: 15px; }
+
+  .about { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 64px; align-items: center; }
+  .monogram { width: 240px; height: 240px; border-radius: 50%; display: grid; place-items: center; background: var(--night-2); box-shadow: var(--glow-coral); font-family: var(--display); font-size: 96px; letter-spacing: .04em; color: var(--cream); }
+  .voice { font-size: 21px; line-height: 1.55; margin: 22px 0 0; max-width: 640px; }
+  .interests { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .interests li { padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--mist); }
+
   @media (max-width: 900px) {
-    .intro { grid-template-columns: minmax(0, 1fr); padding: 64px 16px 24px; gap: 28px; }
-    .index { padding: 32px 16px 72px; }
-    .rows a { grid-template-columns: 34px minmax(0, 1fr) 72px; gap: 12px; }
-    .rows .d { grid-column: 2 / 3; grid-row: 2; font-size: 13px; margin-top: -10px; }
-    .rows .th { grid-row: 1 / span 2; grid-column: 3; width: 72px; height: 56px; }
-    .rows .t { font-size: 26px; }
+    .glowstrip { grid-template-columns: 1fr 1fr; gap: 18px; }
+    .glowstrip .p1 { grid-column: 1 / -1; }
+    .two, .music, .about { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .monogram { width: 160px; height: 160px; font-size: 64px; }
+    .date { grid-template-columns: 70px minmax(0, 1fr); gap: 6px 16px; }
+    .date .stops { grid-column: 2; }
+    .date .thumb { display: none; }
   }
-  @media (prefers-reduced-motion: reduce) { .rows a { transition: none; } }
+  @media (max-width: 560px) {
+    .home { padding: 0 16px 20px; }
+    .poster { padding-top: 48px; }
+    .bill { margin-top: 36px; }
+    .row { column-gap: 14px; }
+    .glowstrip figcaption { flex-direction: column; gap: 2px; }
+    .gigs { columns: 1; }
+    .date .yr { font-size: 24px; }
+    .date .place { font-size: 28px; }
+    .setlist a { grid-template-columns: 34px minmax(0, 1fr); }
+    .setlist .y { grid-column: 2; }
+    .block { padding-top: 72px; }
+  }
 </style>

@@ -2,22 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readDist, serveDist, launch } from './helpers.mjs';
 
-test('phone: exhibit Next button stays put while stepping through photos', async (t) => {
-  const srv = await serveDist();
-  const browser = await launch();
-  t.after(async () => { await browser.close(); await srv.close(); });
-  const ctx = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 390, height: 844 } });
-  const page = await ctx.newPage();
-  await page.goto(srv.url + '/', { waitUntil: 'load' });
-  const ys = [];
-  for (let k = 0; k < 6; k++) {
-    await page.waitForFunction(() => document.querySelector('[data-art]').complete);
-    ys.push(await page.evaluate(() => Math.round(document.querySelector('[data-next]').getBoundingClientRect().top + window.scrollY)));
-    await page.click('[data-next]');
-  }
-  assert.ok(Math.max(...ys) - Math.min(...ys) <= 2, `Next button moved: ${ys.join(' → ')}`);
-});
-
 test('pages without a sidebar render no sidebar column and align content with the title', async (t) => {
   assert.doesNotMatch(readDist('/about/'), /<aside[^>]*class="sidebar"/);
   assert.match(readDist('/travel/trips/egypt-2025/'), /<aside[^>]*class="sidebar"/);
