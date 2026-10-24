@@ -62,8 +62,11 @@ export const musicConcerts: LinkItem[] = [
   { href: '/music/concerts/reset-2023',               label: 'Re:Set 2023' },
 ];
 export const musicFavorites = [
+  { href: '/music/favorites/sienna-spiro-visitor',                     label: 'Sienna Spiro — Visitor' },
+  { href: '/music/favorites/faouzia-film-noir-fin',                    label: 'Faouzia — FILM NOIR (fin)' },
   { href: '/music/favorites/laufey-matter-of-time',                    label: 'Laufey — Matter of Time' },
   { href: '/music/favorites/molly-tuttle-so-long-little-miss-sunshine', label: 'Molly Tuttle — So Long Little Miss Sunshine' },
+  { href: '/music/favorites/billie-eilish-hit-me-hard-and-soft',       label: 'Billie Eilish — Hit Me Hard and Soft' },
 ];
 
 // Academics

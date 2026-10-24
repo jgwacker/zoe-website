@@ -1,0 +1,9 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { musicFavorites } from '@links/registry';
+---
+<Layout title="Sienna Spiro — Visitor">
+  <LinkList slot="sidebar" items={musicFavorites} orientation="vertical" />
+  <p><em>Visitor</em> is Sienna Spiro’s debut album, released in July 2026. The English singer-songwriter mixes soul with big, symphonic pop, and the songs are about love, loss, and how fragile life is. It includes the singles “You Stole the Show,” “Die on This Hill,” and “The Visitor,” plus “Material Lover” from <em>The Devil Wears Prada 2</em>.</p>
+</Layout>

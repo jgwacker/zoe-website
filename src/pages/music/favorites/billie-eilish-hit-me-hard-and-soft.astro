@@ -1,0 +1,9 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { musicFavorites } from '@links/registry';
+---
+<Layout title="Billie Eilish — Hit Me Hard and Soft">
+  <LinkList slot="sidebar" items={musicFavorites} orientation="vertical" />
+  <p><em>Hit Me Hard and Soft</em> is Billie Eilish’s third album, released in May 2024 and made with her brother, Finneas. It includes “Birds of a Feather,” “Lunch,” and “Chihiro.” I saw her play it live near the end of the tour, in San Francisco: <a href="/music/concerts/billie-eilish-2025">Billie Eilish 2025</a>.</p>
+</Layout>
