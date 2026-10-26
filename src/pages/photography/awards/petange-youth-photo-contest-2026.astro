@@ -1,0 +1,32 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import { photographyAwards } from '@links/registry';
+import AwardExhibit from '@components/AwardExhibit.astro';
+---
+
+<Layout title="Pétange International Youth Photo Contest 2026">
+  <LinkList slot="sidebar" items={photographyAwards} orientation="vertical" />
+
+  <AwardExhibit slot="hero"
+    image="/images/photography_awards/npcfk-shelter-2026.jpg"
+    alt="Two king penguins standing side by side on golden grass, one flipper overlapping the other."
+    title="Two Penguins" year={2026} result="Accepted"
+    place="Patagonia, Chile"
+    contest="39th International Youth Photo Contest 2026, Photo-Club Pétange, Luxembourg"
+    division="Group A · ages 16 and under"
+    shown="Public showing in Pétange, Luxembourg, November 14–15, 2026" />
+
+  <p class="intro">
+I entered the 39th International Youth Photo Contest, run by the Photo-Club Pétange in Luxembourg under the patronage
+of FIAP, the International Federation of Photographic Art, and the Luxembourg Amateur Photographic Federation (FLPA).
+The contest is open to photographers under 25, and any subject is allowed. This year 794 photos came in from 16
+countries, and the jury accepted 246 of them, about 31%. My photo "Two Penguins," of two king penguins in Patagonia,
+was accepted in Group A, for ages 16 and under. I was the only entrant from the United States.
+  </p>
+
+  <p>
+    See the <a href="https://www.photoclubpetange.lu/">contest website</a> and the
+    <a href="https://www.photoclubpetange.lu/liste.pdf">full list of accepted photos</a>.
+  </p>
+</Layout>
