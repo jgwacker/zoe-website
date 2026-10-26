@@ -9,9 +9,10 @@ interface Props {
   contest?: string;
   division?: string;
   shown?: string;
+  recognized?: string;
 }
-const { image, alt, title, year, result, place, contest, division, shown } = Astro.props;
-const rows = [['Place', place], ['Contest', contest], ['Division', division], ['Shown', shown]].filter(([, v]) => v);
+const { image, alt, title, year, result, place, contest, division, shown, recognized } = Astro.props;
+const rows = [['Place', place], ['Contest', contest], ['Division', division], ['Shown', shown], ['Recognized by', recognized]].filter(([, v]) => v);
 ---
 <section class="award-exhibit" aria-label={title}>
   <div class="hung"><img src={image} alt={alt} /></div>

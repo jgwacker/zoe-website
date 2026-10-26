@@ -32,7 +32,7 @@ export const photographySections = [
   { href: '/photography/portfolio', label: 'Portfolio' },
 ];
 export const photographyAwards: LinkItem[] = [
-  { href: '/photography/awards/petange-youth-photo-contest-2026', label: 'Pétange International Youth Photo Contest 2026', note: 'Accepted, Group A (16 and under) · “Two Penguins”' },
+  { href: '/photography/awards/petange-youth-photo-contest-2026', label: 'Pétange International Youth Photo Contest 2026', note: 'Accepted, Group A (16 and under) · “Two Penguins” · FIAP' },
   { href: '/photography/awards/global-peace-photo-award-2026', label: 'Global Peace Photo Award 2026', note: 'Shortlisted, Children’s Peace Image of the Year · “Faces of Peace”' },
   { href: '/photography/awards/npcfk-competition-shelter-2026', label: 'The Shelter: National Photography Competition for Kids June 2026', note: 'Notable Entry, Rising Photographers (ages 12–14)' },
   { href: '/photography/awards/no-frames-2026', label: 'No Frames International Youth Photo Contest 2026', note: 'Honorable Mention, Nature (under 14)' },

@@ -11,6 +11,7 @@ const AWARDS = {
   'no-frames-2026': ['no-frames-2026-colony-panorama.jpg', 'Honorable Mention'],
   'tpoy-competition-2025': ['tpoty2025-places-collection.png', 'Runner-Up'],
   'global-peace-photo-award-2026': ['gppa-2026-1.jpg', 'Shortlisted'],
+  'petange-youth-photo-contest-2026': ['npcfk-shelter-2026.jpg', 'Accepted'],
 };
 
 for (const [slug, [lead, result]] of Object.entries(AWARDS)) {
@@ -25,6 +26,12 @@ for (const [slug, [lead, result]] of Object.entries(AWARDS)) {
     assert.equal(count, 1, `${lead} appears ${count} times`);
   });
 }
+
+test('FIAP contest: the label names its FIAP patronage number', () => {
+  const html = readDist('/photography/awards/petange-youth-photo-contest-2026/');
+  const hero = html.match(/<div[^>]*class="hero-band"[^>]*>([\s\S]*?)<main/)?.[1] ?? '';
+  assert.match(hero, /<dt[^>]*>Recognized by<\/dt>\s*<dd[^>]*>FIAP 2026\/247 · FLPA 230\/26\/01<\/dd>/);
+});
 
 test('award label card is dark with a marigold result', async (t) => {
   const srv = await serveDist();
