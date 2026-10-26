@@ -3,6 +3,7 @@ import Layout   from '@layouts/Page.astro';
 import LinkList from '@components/LinkList.astro';
 import { photographySections } from '@links/registry';
 import fs from 'node:fs';
+import photoAwards from '/src/data/photo-awards.json';
 
 /**
  * Minimal CSV parser that supports:
@@ -121,18 +122,23 @@ const photos: PhotoRow[] = data
         : fullSrc;
       const alt = title || description || `${filename}`;
       const hasMeta = Boolean(date || location);
+      const awards = (photoAwards.photos[filename.replace('portfolio/', '') as keyof typeof photoAwards.photos] ?? [])
+        .map((a) => ({ ...a, ...photoAwards.contests[a.in as keyof typeof photoAwards.contests] }));
       return (
         <figure class="masonry-item">
           <a href={fullSrc} target="_blank" rel="noopener">
             <img src={thumbSrc} alt={alt} loading="lazy" decoding="async" />
           </a>
-          {(title || description || hasMeta) && (
+          {(title || description || hasMeta || awards.length > 0) && (
             <figcaption>
               {title && <strong class="title">{title}</strong>}
               {description && <div class="desc">{description}</div>}
               {hasMeta && <div class="meta">
                 {date}{date && location ? ' — ' : ''}{location}
               </div>}
+              {awards.map((a) => (
+                <div class="award"><a href={a.href}><span class="result">{a.result}</span> · {a.contest} · {a.detail}</a></div>
+              ))}
             </figcaption>
           )}
         </figure>
@@ -185,6 +191,10 @@ const photos: PhotoRow[] = data
     .title { display: block; }
     .desc  { margin-top: 0.25rem; opacity: 0.95; }
     .meta  { margin-top: 0.2rem; font-size: 0.85rem; opacity: 0.8; }
+    .award { margin-top: 0.3rem; font-family: var(--mono); font-size: 0.78rem; line-height: 1.4; }
+    .award a { color: var(--cream); text-decoration: none; }
+    .award a:hover { text-decoration: underline; }
+    .award .result { color: var(--marigold); }
   </style>
 </Layout>
 

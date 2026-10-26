@@ -1,0 +1,39 @@
+{
+  "contests": {
+    "tpoty": { "href": "/photography/awards/tpoy-competition-2025", "contest": "Travel Photographer of the Year 2025" },
+    "peninsula": { "href": "/photography/awards/peninsula-photo-competition-2025", "contest": "Six Fifty Peninsula Photo Contest 2025" },
+    "gppa": { "href": "/photography/awards/global-peace-photo-award-2026", "contest": "Global Peace Photo Award 2026" },
+    "npcfk-color": { "href": "/photography/awards/npcfk-competition-color-2025", "contest": "National Photography Competition for Kids, Nov 2025" },
+    "npcfk-home": { "href": "/photography/awards/npcfk-competition-home-2025", "contest": "National Photography Competition for Kids, Dec 2025" },
+    "npcfk-red": { "href": "/photography/awards/npcfk-competition-life-in-red-2026", "contest": "National Photography Competition for Kids, Mar 2026" },
+    "no-frames": { "href": "/photography/awards/no-frames-2026", "contest": "No Frames International Youth Photo Contest 2026" }
+  },
+  "photos": {
+    "portfolio-32.jpg": [{ "in": "tpoty", "result": "Runner-Up", "detail": "Places collection" }],
+    "portfolio-60.jpg": [{ "in": "tpoty", "result": "Runner-Up", "detail": "Places collection" }],
+    "portfolio-75.jpg": [{ "in": "tpoty", "result": "Runner-Up", "detail": "Places collection" }],
+    "portfolio-76.jpg": [{ "in": "tpoty", "result": "Runner-Up", "detail": "Places collection" }],
+    "portfolio-59.jpg": [{ "in": "tpoty", "result": "Shortlisted", "detail": "People collection" }],
+    "portfolio-62.jpg": [
+      { "in": "tpoty", "result": "Shortlisted", "detail": "People collection" },
+      { "in": "npcfk-color", "result": "Notable Entry", "detail": "“I Spy Something – Color”" }
+    ],
+    "portfolio-65.jpg": [
+      { "in": "tpoty", "result": "Shortlisted", "detail": "People collection" },
+      { "in": "gppa", "result": "Shortlisted", "detail": "“Contentment,” series “Faces of Peace”" }
+    ],
+    "portfolio-70.jpg": [{ "in": "tpoty", "result": "Shortlisted", "detail": "People collection" }],
+    "portfolio-42.jpg": [{ "in": "peninsula", "result": "Honorable Mention", "detail": "“Cinderello”" }],
+    "portfolio-64.jpg": [
+      { "in": "npcfk-home", "result": "Winner", "detail": "“Home is Where the Heart Is”" },
+      { "in": "gppa", "result": "Shortlisted", "detail": "“The Sound of Peace,” series “Faces of Peace”" }
+    ],
+    "portfolio-55.jpg": [{ "in": "gppa", "result": "Shortlisted", "detail": "“Thumbs up for Peace,” series “Faces of Peace”" }],
+    "portfolio-72.jpg": [
+      { "in": "npcfk-red", "result": "Winner", "detail": "“Life in Red”" },
+      { "in": "gppa", "result": "Shortlisted", "detail": "“La Paz,” series “Faces of Peace”" }
+    ],
+    "portfolio-73.jpg": [{ "in": "no-frames", "result": "Honorable Mention", "detail": "“ColonyPanorama,” Nature" }],
+    "portfolio-74.jpg": [{ "in": "gppa", "result": "Shortlisted", "detail": "“March Towards Peace,” series “Faces of Peace”" }]
+  }
+}
