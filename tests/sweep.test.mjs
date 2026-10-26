@@ -6,10 +6,7 @@ import { resolveDist, serveDist, launch } from './helpers.mjs';
 
 // Pre-existing broken links found on `main` before this redesign. List them here with a
 // comment (rather than fixing them in this branch) and report them to the user.
-const KNOWN_BROKEN = new Set([
-  // Pre-existing on main: masonry gallery CSV row lists "portfolio-32.jpg" without its "portfolio/" folder.
-  '/images/portfolio-32.jpg',
-]);
+const KNOWN_BROKEN = new Set([]);
 
 function* htmlFiles(dir) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
