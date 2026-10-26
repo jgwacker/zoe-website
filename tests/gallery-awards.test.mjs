@@ -19,6 +19,8 @@ const AWARDED = {
   'portfolio-74.jpg': ['global-peace-photo-award-2026'],
   'portfolio-75.jpg': ['tpoy-competition-2025'],
   'portfolio-76.jpg': ['tpoy-competition-2025'],
+  'portfolio-77.jpg': ['npcfk-competition-shelter-2026', 'petange-youth-photo-contest-2026', 'global-peace-photo-award-2026'],
+  'portfolio-78.jpg': ['global-peace-photo-award-2026'],
 };
 
 function galleryItems() {
