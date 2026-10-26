@@ -13,6 +13,10 @@ Personal portfolio website for Zoe Wacker built with Astro. Showcases travel, ph
 - `npm run preview` - Preview production build
 - `npm run thumbnails` - Regenerate portfolio thumbnails (run after adding new portfolio images)
 
+### Deploys
+
+Netlify deploys `main` on every push, and each production deploy costs 15 credits (Personal plan: 1,000/month). `netlify.toml` skips the build when a push changes nothing under `src`, `public`, `data` or the build config, so commits touching only tests, docs, design or scripts are free. Batch site changes into fewer pushes.
+
 ## Architecture
 
 ### Path Aliases
