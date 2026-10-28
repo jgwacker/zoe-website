@@ -1,0 +1,45 @@
+---
+import Layout from '@layouts/Page.astro';
+import LinkList from '@components/LinkList.astro';
+import series from '/src/data/series.json';
+import { galleryInfo } from '/src/lib/gallery.mjs';
+
+export function getStaticPaths() {
+  return series.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props;
+const info = galleryInfo();
+const links = series.map((x) => ({ href: `/photography/series/${x.slug}`, label: x.title }));
+const photos = s.photos.map((n) => ({ n, ...(info[n] ?? {}) }));
+---
+<Layout title={s.title}>
+  <LinkList slot="sidebar" items={[{ href: '/photography/series', label: 'All series' }, ...links]} orientation="vertical" />
+
+  <figure class="overview">
+    <img src={s.overview} alt={`The ten photos of ${s.title} together`} />
+  </figure>
+
+  <p class="intro">{s.statement}</p>
+
+  <div class="photos">
+    {photos.map((p) => (
+      <figure>
+        <a href={`/images/portfolio/portfolio-${p.n}.jpg`} target="_blank" rel="noopener">
+          <img src={`/images/portfolio/thumbs/portfolio-${p.n}.jpg`} alt={p.title || `${s.title}, photo from ${p.location}`} loading="lazy" decoding="async" />
+        </a>
+        <figcaption>{[p.title, p.location, p.date].filter(Boolean).join(' · ')}</figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <style>
+    .overview { margin: 0 0 1.5rem; }
+    .overview img { display: block; width: 100%; height: auto; }
+    .photos { column-gap: 1rem; column-count: 1; margin-top: 1.5rem; }
+    @media (min-width: 560px) { .photos { column-count: 2; } }
+    @media (min-width: 900px) { .photos { column-count: 3; } }
+    .photos figure { break-inside: avoid; margin: 0 0 1rem; }
+    .photos img { display: block; width: 100%; height: auto; }
+  </style>
+</Layout>

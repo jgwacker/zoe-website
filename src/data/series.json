@@ -1,0 +1,78 @@
+[
+  {
+    "slug": "quiet-geometry",
+    "title": "Quiet Geometry",
+    "statement": "It is the intent of this portfolio to find order in places as different as a Cairo mosque, a Patagonian glacier and a rainy San Francisco street. Without colour, each scene becomes lines, repetition and light: lattice, stairs, cables and reflections. Made on three journeys in 2025 and 2026, these images ask the viewer to slow down and notice the structure hidden in ordinary and extraordinary places.",
+    "draft": true,
+    "photos": [
+      35,
+      22,
+      107,
+      12,
+      95,
+      13,
+      109,
+      112,
+      79,
+      36
+    ],
+    "overview": "/images/series/overview-quiet-geometry.jpg"
+  },
+  {
+    "slug": "thresholds",
+    "title": "Thresholds",
+    "statement": "It is the intent of this portfolio to show doors and windows as portraits of the places they belong to. From weathered wood in Santiago and Valparaíso to painted Nubian walls beside the Nile, each opening reflects the people who built, painted and still pass through it. Colour, texture and light frame the line between public and private life.",
+    "draft": true,
+    "photos": [
+      1,
+      53,
+      2,
+      96,
+      61,
+      62,
+      48,
+      51,
+      87,
+      3
+    ],
+    "overview": "/images/series/overview-thresholds.jpg"
+  },
+  {
+    "slug": "faces-of-the-nile",
+    "title": "Faces of the Nile",
+    "statement": "It is the intent of this portfolio to honour the warmth of the people I met along the Nile, from Cairo's markets to the Nubian villages of Gozor Awad and West Khazan. Each portrait was made with permission and in natural light, showing pride, humour and welcome in the places where these people live and work.",
+    "draft": true,
+    "photos": [
+      55,
+      65,
+      59,
+      64,
+      97,
+      70,
+      62,
+      57,
+      71,
+      56
+    ],
+    "overview": "/images/series/overview-faces-of-the-nile.jpg"
+  },
+  {
+    "slug": "where-land-meets-water",
+    "title": "Where Land Meets Water",
+    "statement": "It is the intent of this portfolio to explore the restless line where land meets water. Wind-whipped Patagonian lakes, sculpted shoreline rocks, a Pacific surf break and a quiet redwood creek share the same moment of contact, each shaped by weather and time. Made on journeys from Tierra del Fuego to the California coast, these images celebrate motion, texture and colour at the water's edge.",
+    "draft": true,
+    "photos": [
+      11,
+      16,
+      114,
+      80,
+      126,
+      7,
+      120,
+      9,
+      88,
+      15
+    ],
+    "overview": "/images/series/overview-where-land-meets-water.jpg"
+  }
+]

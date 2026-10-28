@@ -30,6 +30,7 @@ export const photographySections = [
   { href: '/photography/masonry', label: 'Overview Gallery' },
   { href: '/photography/awards',    label: 'Awards' },
   { href: '/photography/portfolio', label: 'Portfolio' },
+  { href: '/photography/series',    label: 'Series' },
 ];
 export const photographyAwards: LinkItem[] = [
   { href: '/photography/awards/petange-youth-photo-contest-2026', label: 'Pétange International Youth Photo Contest 2026', note: 'Accepted, Group A (16 and under) · “Two Penguins” · FIAP' },
