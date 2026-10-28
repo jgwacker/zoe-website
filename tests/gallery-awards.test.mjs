@@ -50,8 +50,18 @@ test('gallery: photos without awards show no award line', () => {
 });
 
 test('gallery: new high-res photos are web-sized (≤ 4000 px, ≤ 5 MB)', () => {
-  for (const n of [73, 74, 75, 76]) {
+  for (const n of [73, 74, 75, 76, ...Array.from({ length: 47 }, (_, i) => 80 + i)]) {
     const size = fs.statSync(`public/images/portfolio/portfolio-${n}.jpg`).size;
     assert.ok(size <= 5 * 1024 * 1024, `portfolio-${n}.jpg is ${size} bytes`);
   }
+});
+
+test('gallery: the 47 Pixieset photos (80–126) are in the gallery with a date and place', () => {
+  const items = galleryItems();
+  const csv = fs.readFileSync('data/photography-masonry.csv', 'utf8');
+  for (let n = 80; n <= 126; n++) {
+    assert.ok(items[`portfolio-${n}.jpg`], `portfolio-${n}.jpg is in the gallery`);
+    assert.match(csv, new RegExp(`portfolio-${n}\\.jpg,[^\\n]*,(January|February|March|April|May|June|July|August|September|October|November|December) 20\\d\\d,("[^"]+"|[^,\\r\\n]+)\\r?$`, 'm'), `portfolio-${n} has a date and place`);
+  }
+  assert.doesNotMatch(csv, /Valpairso/);
 });
