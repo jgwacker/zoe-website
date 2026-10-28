@@ -65,3 +65,12 @@ test('gallery: the 47 Pixieset photos (80–126) are in the gallery with a date 
   }
   assert.doesNotMatch(csv, /Valpairso/);
 });
+
+test('gallery: every full-size portfolio image is web-sized (long edge ≤ 4000 px)', async () => {
+  const { default: sharp } = await import('sharp');
+  const dir = 'public/images/portfolio/';
+  for (const f of fs.readdirSync(dir).filter((f) => /^portfolio-\d+\.jpg$/.test(f))) {
+    const { width, height } = await sharp(dir + f).metadata();
+    assert.ok(Math.max(width, height) <= 4000, `${f} is ${width}x${height}`);
+  }
+});
