@@ -67,3 +67,5 @@ Zoe found After Dark too loud (neon glow, huge caps) and preferred Soft Blush; t
 | **7B · Matinee Poster** | After Dark's poster on cream in heavy Fraunces: billing, ticket stubs, programme-style award page | Fraunces, DM Sans, DM Mono | `#FBF3EA` cream, same accents |
 | **7C · Colour Rooms** | Each section its own colour room with tinted title bands and cards | Fraunces, Manrope | Photography `#E2733A`, Travel `#C25E77`, Music `#C98A1E`, Geography `#3F8682`, Guardian Arts `#9A5A80`, Academics `#A85B3E` |
 | **7D · Lineup + Rooms** | 7A's homepage and carousel; lineup names and inner pages in their room colours | Fraunces, Manrope | 7C's room colours on `#F8EBE7` / `#FFFDFB` |
+
+**7B whimsical variants:** same layout and body text as 7B, only the headline font changes. **7B-1** Caprasimo (chunky retro), **7B-2** Fraunces with SOFT 100 and WONK 1 (rounded, quirky letterforms), **7B-3** Corben (rounded, old-cinema; set about 25% smaller because it's wide).
