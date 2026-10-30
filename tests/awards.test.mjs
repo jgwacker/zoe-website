@@ -33,7 +33,7 @@ test('FIAP contest: the label names its FIAP patronage number', () => {
   assert.match(hero, /<dt[^>]*>Recognized by<\/dt>\s*<dd[^>]*>FIAP 2026\/247 · FLPA 230\/26\/01<\/dd>/);
 });
 
-test('award label card is dark with a marigold result', async (t) => {
+test('award label card is paper with a gold result', async (t) => {
   const srv = await serveDist();
   const browser = await launch();
   t.after(async () => { await browser.close(); await srv.close(); });
@@ -43,6 +43,6 @@ test('award label card is dark with a marigold result', async (t) => {
     card: getComputedStyle(document.querySelector('.award-exhibit .label')).backgroundColor,
     badge: getComputedStyle(document.querySelector('.award-exhibit .badge')).color,
   }));
-  assert.equal(s.card, 'rgb(42, 28, 51)');
-  assert.equal(s.badge, 'rgb(255, 177, 59)');
+  assert.equal(s.card, 'rgb(255, 251, 246)');
+  assert.equal(s.badge, 'rgb(142, 98, 16)');
 });
