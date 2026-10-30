@@ -7,8 +7,10 @@ const EXT = new Set(['.astro', '.css', '.ts', '.mjs', '.js', '.md', '.mdx']);
 const BANNED = [
   /#2337ff/i, /var\(--accent\b/, /--gray/, /gray-gradient/, /Atkinson/, /var\(--box-shadow\)/,
   /var\(--black\)/, /--theme-text-light/, /--color-text-dim/, /--theme-bg-offset/,
-  /Fraunces/, /Manrope/, /#F8EBE7/i, /\/Exhibit\.astro/,
-  /var\(--(white|wall|wall-deep|ink|muted|hair|orange|orange-text|rose-text|serif|mat-shadow)\)/,
+  /Manrope/, /\/Exhibit\.astro/, /Anton/,
+  /var\(--(night|night-2|night-3|mist|coral|marigold|line|display|neon|glow-coral|glow-rose|glow-gold)\)/,
+  /#1E1424/i, /#FF6F59/i, /#FF4F8B/i, /#FFB13B/i, /rgba\(30,\s*20,\s*36/, /rgba\(251,\s*239,\s*227/,
+  /rgba\(255,\s*(111|79|177),/,
 ];
 
 function* walk(dir) {
@@ -32,12 +34,13 @@ test('legacy alias block is gone from global.css', () => {
   assert.doesNotMatch(fs.readFileSync('src/styles/global.css', 'utf8'), /--accent\s*:/);
 });
 
-test('global.css gives figures rounded glowing photos and mono captions', () => {
+test('global.css gives figures rounded photos with cycling halos and mono captions', () => {
   const css = fs.readFileSync('src/styles/global.css', 'utf8');
-  assert.match(css, /figure > img,\s*figure > video\s*{[^}]*border-radius:\s*6px/);
-  assert.match(css, /figure:nth-of-type\(3n\+1\) > img[^{]*{[^}]*var\(--glow-coral\)/);
-  assert.match(css, /figure:nth-of-type\(3n\+2\) > img[^{]*{[^}]*var\(--glow-rose\)/);
-  assert.match(css, /figure:nth-of-type\(3n\) > img[^{]*{[^}]*var\(--glow-gold\)/);
+  assert.match(css, /figure > img,\s*figure > video\s*{[^}]*border-radius:\s*8px/);
+  assert.match(css, /figure:nth-of-type\(3n\+1\) > img[^{]*{[^}]*var\(--halo-orange\)/);
+  assert.match(css, /figure:nth-of-type\(3n\+2\) > img[^{]*{[^}]*var\(--halo-rose\)/);
+  assert.match(css, /figure:nth-of-type\(3n\) > img[^{]*{[^}]*var\(--halo-gold\)/);
+  assert.match(css, /figure:nth-of-type\(3n\+1\):hover > img[^{]*{[^}]*var\(--halo-orange-hover\)/);
   assert.match(css, /figcaption\s*{[^}]*font-family:\s*var\(--mono\)/);
 });
 
