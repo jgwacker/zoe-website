@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoe Wacker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF3EA; --blush:#F8EBE7; --paper:#FFFBF6;
+    --orange:#E2733A; --rose:#C25E77; --marigold:#C98A1E;
+    --ink:#2A1E1E; --muted:#7A6560; --hair:rgba(42,30,30,.14);
+    --serif:'Fraunces',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif; --mono:'DM Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  em,i,cite{font-style:normal}
+  body{
+    background:var(--cream);
+    background-image:
+      radial-gradient(1000px 520px at 12% -8%, rgba(194,94,119,.10), transparent 62%),
+      radial-gradient(900px 520px at 92% 4%, rgba(226,115,58,.10), transparent 62%);
+    color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .mono{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:10;background:rgba(251,243,234,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:66px;position:relative}
+  .mark{font-family:var(--serif);font-variation-settings:"opsz" 72;font-weight:600;font-size:24px;letter-spacing:-.01em}
+  .mark span{color:var(--orange)}
+  .nav ul{display:flex;gap:22px;list-style:none;flex-wrap:wrap}
+  .nav li a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}
+  .nav li a:hover,.nav li a.on{color:var(--ink)}
+  .nav li a.on{box-shadow:inset 0 -2px 0 var(--orange)}
+  .menu{display:none}
+  .menu summary{list-style:none;cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--hair);border-radius:999px}
+  .menu summary::-webkit-details-marker{display:none}
+  .drop{display:none;position:absolute;left:-16px;right:-16px;top:66px;background:var(--paper);border-bottom:1px solid var(--hair);flex-direction:column;padding:10px 16px 20px;box-shadow:0 24px 40px -24px rgba(122,60,40,.35)}
+  .menu[open] .drop{display:flex}
+  .drop a{font-family:var(--serif);font-weight:500;font-size:24px;padding:8px 0;border-bottom:1px solid var(--hair)}
+  .drop a:hover{color:var(--orange)}
+
+  /* poster */
+  .poster{padding:76px 0 30px;text-align:center}
+  .presents{color:var(--rose)}
+  .presents b{color:var(--ink);font-weight:500}
+  .rule{display:flex;align-items:center;justify-content:center;gap:14px;margin:22px auto 0;max-width:520px;color:var(--marigold)}
+  .rule::before,.rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--marigold))}
+  .rule::after{transform:scaleX(-1)}
+  .rule i{width:7px;height:7px;background:var(--marigold);transform:rotate(45deg)}
+  h1{
+    font-family:var(--serif);font-weight:700;font-variation-settings:"opsz" 144,"SOFT" 30;
+    font-size:clamp(66px,12.6vw,196px);line-height:.92;letter-spacing:-.035em;margin:14px 0 6px;color:var(--ink);
+  }
+  h1 span{color:var(--orange)}
+  .tagline{font-size:clamp(16px,1.9vw,20px);color:var(--muted);max-width:620px;margin:16px auto 0}
+  .tagline em{color:var(--rose);font-weight:500}
+
+  .bill{margin:48px auto 0;max-width:1080px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:30px 0 30px;position:relative}
+  .bill::before,.bill::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--hair)}
+  .bill::before{top:4px}.bill::after{bottom:4px}
+  .row{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:24px;row-gap:2px;font-family:var(--serif);line-height:1.12}
+  .row a{transition:color .25s}
+  .row .dot{width:7px;height:7px;transform:rotate(45deg);background:var(--marigold);display:inline-block;align-self:center}
+  .r1{font-size:clamp(38px,5.6vw,76px);font-weight:600;font-variation-settings:"opsz" 144;letter-spacing:-.02em;color:var(--orange)}
+  .r1 a:hover{color:var(--rose)}
+  .r2{font-size:clamp(26px,3.3vw,44px);font-weight:500;font-variation-settings:"opsz" 96;letter-spacing:-.01em;color:var(--ink);margin-top:8px}
+  .r2 a:hover{color:var(--orange)}
+  .r2 .dot{width:6px;height:6px;background:var(--rose)}
+  .r3{font-size:clamp(19px,2.1vw,26px);font-weight:600;font-variant-caps:all-small-caps;letter-spacing:.08em;color:var(--rose);margin-top:12px}
+  .r3 a:hover{color:var(--orange)}
+  .r3 .dot{width:5px;height:5px}
+  .support{margin-top:22px;color:var(--muted)}
+  .support b{color:var(--ink);font-weight:500}
+
+  /* ticket stubs */
+  .stubs-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin:56px 0 18px}
+  .stubs-head .mono{color:var(--muted)}
+  .stubs-head .mono b{color:var(--orange);font-weight:500}
+  .stubs{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .stub{
+    --c:var(--orange);
+    position:relative;display:grid;grid-template-columns:1fr 46px;background:var(--paper);
+    border-radius:10px;box-shadow:0 1px 0 rgba(42,30,30,.05),0 14px 30px -18px rgba(122,60,40,.35);
+    transition:transform .3s ease,box-shadow .3s ease;
+  }
+  .stub:hover{transform:translateY(-4px);box-shadow:0 1px 0 rgba(42,30,30,.05),0 24px 40px -18px rgba(194,94,119,.45)}
+  .stub.rose{--c:var(--rose)}.stub.gold{--c:var(--marigold)}
+  .stub .main{padding:18px 18px 18px 20px;border-left:4px solid var(--c);border-radius:10px 0 0 10px}
+  .stub .kind{color:var(--c);font-size:11px}
+  .stub .name{display:block;font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 48;font-size:21px;line-height:1.15;margin:8px 0 6px;letter-spacing:-.01em}
+  .stub .det{display:block;font-size:14px;color:var(--muted);line-height:1.45}
+  .stub .tear{position:relative;border-left:2px dashed var(--hair);display:flex;align-items:center;justify-content:center}
+  .stub .tear span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--c)}
+  .stub .tear::before,.stub .tear::after{content:"";position:absolute;left:-9px;width:16px;height:16px;border-radius:50%;background:var(--cream)}
+  .stub .tear::before{top:-8px}.stub .tear::after{bottom:-8px}
+
+  /* photos */
+  .strip{display:grid;grid-template-columns:1.3fr .8fr 1fr;gap:30px;align-items:start;padding:84px 0 10px}
+  figure{position:relative}
+  .shot{border-radius:8px;overflow:hidden;background:var(--blush)}
+  .shot img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+  figure:hover .shot img{transform:scale(1.025)}
+  .t-orange{box-shadow:0 2px 0 rgba(255,255,255,.6) inset,0 26px 50px -22px rgba(226,115,58,.55),0 10px 22px -14px rgba(42,30,30,.25)}
+  .t-rose{box-shadow:0 26px 50px -22px rgba(194,94,119,.55),0 10px 22px -14px rgba(42,30,30,.25)}
+  .t-gold{box-shadow:0 26px 50px -22px rgba(201,138,30,.5),0 10px 22px -14px rgba(42,30,30,.25)}
+  figcaption{margin-top:14px;display:flex;justify-content:space-between;gap:12px;color:var(--muted)}
+  figcaption span:first-child{color:var(--ink)}
+  .p1 .shot{aspect-ratio:3/2}
+  .p2{margin-top:70px}.p2 .shot{aspect-ratio:3/4.6}
+  .p3{margin-top:24px}.p3 .shot{aspect-ratio:4/5}
+
+  /* sections */
+  section{padding:104px 0 0}
+  .kicker{color:var(--rose);margin-bottom:14px;display:flex;align-items:center;gap:12px}
+  .kicker::before{content:"";width:28px;height:1px;background:var(--rose)}
+  h2{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 144;font-size:clamp(40px,5vw,68px);line-height:1;letter-spacing:-.025em}
+  h2 em{color:var(--orange)}
+
+  /* awards programme */
+  .two{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:start}
+  .awardcard{display:block;margin-top:36px}
+  .awardcard .shot{aspect-ratio:3/2}
+  .awardcard .cap{margin-top:20px}
+  .awardcard .cap b{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 72;font-size:30px;display:block;letter-spacing:-.01em}
+  .awardcard .cap p{color:var(--muted);font-size:15px;margin-top:4px}
+  .btn{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--cream);font-weight:500;font-size:15px;transition:transform .25s,background .25s}
+  .awardcard:hover .btn{transform:translateY(-2px);background:var(--orange)}
+  .programme{list-style:none;border-top:1px solid var(--ink)}
+  .programme li{border-bottom:1px solid var(--hair)}
+  .programme a{display:grid;grid-template-columns:56px 1fr auto;gap:16px;align-items:baseline;padding:22px 6px;transition:background .25s,padding .25s}
+  .programme a:hover{background:linear-gradient(90deg,rgba(226,115,58,.08),transparent);padding-left:12px}
+  .programme .n{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 72;font-size:28px;color:var(--marigold);line-height:1}
+  .programme .t{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 36;font-size:20px;line-height:1.25}
+  .programme .d{display:block;font-family:var(--sans);font-weight:400;font-size:15px;color:var(--muted);margin-top:4px}
+  .programme .feat .t{color:var(--orange)}
+  .programme .arrow{color:var(--rose);transition:transform .25s}
+  .programme a:hover .arrow{transform:translateX(4px)}
+
+  /* travel */
+  .tour{margin-top:36px;border-top:1px solid var(--ink)}
+  .date{display:grid;grid-template-columns:100px 1fr 2fr 132px;gap:24px;align-items:center;padding:20px 0;border-bottom:1px solid var(--hair)}
+  .date .yr{font-family:var(--mono);font-size:14px;letter-spacing:.14em;color:var(--marigold)}
+  .date .place{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 96;font-size:36px;line-height:1;letter-spacing:-.02em;transition:color .25s}
+  .date .stops{color:var(--muted)}
+  .date .thumb{width:132px;height:84px;border-radius:6px;overflow:hidden;box-shadow:0 14px 24px -14px rgba(194,94,119,.5);transition:transform .3s}
+  .date .thumb img{width:100%;height:100%;object-fit:cover}
+  .date:hover .place{color:var(--orange)}
+  .date:hover .thumb{transform:translateY(-3px) rotate(-1.5deg)}
+
+  /* music */
+  .music{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;background:var(--blush);border-radius:18px;padding:64px}
+  blockquote{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 144;font-size:clamp(32px,3.8vw,52px);line-height:1.08;letter-spacing:-.02em}
+  blockquote em{color:var(--rose)}
+  .who{margin-top:20px;color:var(--muted)}
+  .gigs{list-style:none;columns:2;column-gap:32px;margin-top:8px}
+  .gigs li{break-inside:avoid;padding:12px 0;border-bottom:1px solid var(--hair);display:flex;justify-content:space-between;gap:12px}
+  .gigs li b{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 24;font-size:18px}
+  .gigs li span{color:var(--marigold);font-family:var(--mono);font-size:13px}
+  .cello{margin-top:28px;padding:20px 22px;background:var(--paper);border-radius:10px;border-left:4px solid var(--marigold)}
+  .cello .mono{color:var(--marigold)}
+  .cello p{margin-top:6px}
+
+  /* about */
+  .about{display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:center}
+  .about .shot{aspect-ratio:1/1;border-radius:50%}
+  .about p.voice{font-size:20px;line-height:1.6;margin-top:22px;max-width:640px}
+  .interests{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .interests span{padding:7px 14px;background:var(--paper);border:1px solid var(--hair);border-radius:999px;font-size:14px;color:var(--muted)}
+
+  footer{margin-top:120px;border-top:1px solid var(--hair);padding:44px 0 64px}
+  .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  .foot .big{font-family:var(--serif);font-weight:700;font-variation-settings:"opsz" 144;font-size:clamp(44px,7vw,96px);line-height:.9;letter-spacing:-.03em;color:rgba(42,30,30,.12)}
+  .foot .mono{color:var(--muted)}
+
+  .tag{position:fixed;right:14px;bottom:14px;z-index:50;background:var(--ink);color:var(--cream);font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:6px 10px;border-radius:4px}
+
+  /* gentle reveal */
+  .js .rv{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
+  .js .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none !important;animation:none !important}
+    .js .rv{opacity:1;transform:none}
+  }
+
+  @media (max-width:1060px){
+    .stubs{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:900px){
+    .nav ul{display:none}
+    .menu{display:block}
+    .strip{grid-template-columns:1fr 1fr;gap:18px}
+    .strip .p1{grid-column:1/-1}
+    .p2,.p3{margin-top:0}
+    .two,.music,.about{grid-template-columns:1fr;gap:40px}
+    .music{padding:40px 28px}
+    .about .shot{max-width:240px}
+    .date{grid-template-columns:70px 1fr;gap:4px 16px}
+    .date .stops{grid-column:2}
+    .date .thumb{display:none}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 16px}
+    .poster{padding-top:48px}
+    h1{font-size:clamp(56px,17vw,80px)}
+    .bill{margin-top:34px;padding:24px 0}
+    .row{column-gap:14px}
+    .support{line-height:1.9}
+    .stubs-head{flex-direction:column;gap:4px;margin-top:44px}
+    .stubs{grid-template-columns:1fr;gap:14px}
+    .strip{padding-top:60px}
+    .strip figcaption{flex-direction:column;gap:2px}
+    .gigs{columns:1}
+    .music{padding:32px 20px;border-radius:14px}
+    .date .place{font-size:28px}
+    .programme a{grid-template-columns:38px 1fr}
+    .programme .arrow{display:none}
+    .programme .n{font-size:22px}
+    section{padding-top:76px}
+    .tag{right:8px;bottom:8px;font-size:10px}
+  }
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="mark" href="index.html">Zoe Wacker<span>.</span></a>
+    <ul>
+      <li><a class="on" href="index.html">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#tour">Travel</a></li>
+      <li><a href="#photography">Photography</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#">Geography</a></li>
+      <li><a href="#">Guardian Arts</a></li>
+      <li><a href="#">Academics</a></li>
+    </ul>
+    <details class="menu">
+      <summary>Menu</summary>
+      <nav class="drop">
+        <a href="index.html">Home</a><a href="#about">About</a><a href="#tour">Travel</a><a href="#photography">Photography</a><a href="#music">Music</a><a href="#">Geography</a><a href="#">Guardian Arts</a><a href="#">Academics</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="poster">
+    <p class="mono presents">Menlo Park, CA &nbsp;<b>presents</b>&nbsp; the 2025&ndash;26 season</p>
+    <div class="rule"><i></i></div>
+    <h1>Zoe Wacker<span>.</span></h1>
+    <p class="tagline">Photographer, cellist, map nerd. A highlight reel of <em>experiments, adventures and &ldquo;aha!&rdquo; moments.</em></p>
+
+    <div class="bill">
+      <div class="row r1">
+        <a href="#photography">Photography</a><i class="dot"></i>
+        <a href="#tour">Travel</a><i class="dot"></i>
+        <a href="#music">Music</a>
+      </div>
+      <div class="row r2">
+        <a href="#">Geography</a><i class="dot"></i>
+        <a href="#">Guardian Arts</a><i class="dot"></i>
+        <a href="#">Academics</a>
+      </div>
+      <div class="row r3">
+        <a href="#about">About Zoe</a><i class="dot"></i>
+        <a href="award.html">Awards</a><i class="dot"></i>
+        <a href="#music">Concerts</a>
+      </div>
+      <p class="mono support">On location in <b>Egypt</b> &middot; <b>Chile</b> &middot; <b>London</b> &middot; <b>Rome</b> &middot; <b>Paris</b></p>
+    </div>
+  </div>
+
+  <div class="stubs-head">
+    <p class="mono"><b>Now showing</b> &middot; recent dates</p>
+    <p class="mono">Admit one</p>
+  </div>
+  <div class="stubs">
+    <a class="stub rv" href="award.html">
+      <span class="main"><span class="mono kind">Award &middot; 2025</span><span class="name">&ldquo;Cinderello&rdquo;</span><span class="det">Honorable Mention, Six Fifty Peninsula Photo Contest</span></span>
+      <span class="tear"><span>No. 01</span></span>
+    </a>
+    <a class="stub rose rv" href="#">
+      <span class="main"><span class="mono kind">Award &middot; 2025</span><span class="name">Young TPOTY Runner-Up</span><span class="det">Travel Photographer of the Year, 14 &amp; under</span></span>
+      <span class="tear"><span>No. 02</span></span>
+    </a>
+    <a class="stub gold rv" href="#tour">
+      <span class="main"><span class="mono kind">Trip &middot; 2025</span><span class="name">Egypt</span><span class="det">Cairo &middot; Giza &middot; Aswan &middot; Kom Ombo &middot; Nubia</span></span>
+      <span class="tear"><span>No. 03</span></span>
+    </a>
+    <a class="stub rv" href="#music">
+      <span class="main"><span class="mono kind">Concert &middot; 2026</span><span class="name">Outside Lands</span><span class="det">Golden Gate Park, San Francisco</span></span>
+      <span class="tear"><span>No. 04</span></span>
+    </a>
+  </div>
+
+  <div class="strip" id="photography">
+    <figure class="p1 rv">
+      <div class="shot t-orange"><img src="../../../public/images/portfolio/portfolio-64.jpg" alt="Nubian woman laughing and playing a frame drum against an ochre wall"></div>
+      <figcaption class="mono"><span>Frame drum</span><span>Aswan, Egypt</span></figcaption>
+    </figure>
+    <figure class="p2 rv">
+      <div class="shot t-rose"><img src="../../../public/images/portfolio/portfolio-72.jpg" alt="Day of the Dead portrait in a red dress with calavera face paint"></div>
+      <figcaption class="mono"><span>Life in red</span><span>Mission, SF</span></figcaption>
+    </figure>
+    <figure class="p3 rv">
+      <div class="shot t-gold"><img src="../../../public/images/portfolio/portfolio-53.jpg" alt="Bright red Nubian house with a blue arched door"></div>
+      <figcaption class="mono"><span>Blue door</span><span>Nubia</span></figcaption>
+    </figure>
+  </div>
+
+  <section>
+    <div class="two">
+      <div class="rv">
+        <p class="mono kicker">The programme</p>
+        <h2>Photo awards <em>2025&ndash;26</em></h2>
+        <a class="awardcard" href="award.html">
+          <div class="shot t-rose"><img src="../../../public/images/photography_awards/cinderello.jpg" alt="Cinderello: a caretaker sweeping red carpets in the Mosque-Madrasa of Sultan Hasan, Cairo"></div>
+          <div class="cap">
+            <b>&ldquo;Cinderello&rdquo;</b>
+            <p>Honorable Mention, Six Fifty Peninsula Photo Contest 2025. Exhibited at the Palo Alto Art Center.</p>
+            <span class="btn">Read the story &rarr;</span>
+          </div>
+        </a>
+      </div>
+      <ol class="programme rv">
+        <li><a href="#"><span class="n">I</span><span class="t">Travel Photographer of the Year 2025<span class="d">Young TPOTY (14 &amp; under) Runner-Up. Places collection exhibited internationally in 2026.</span></span><span class="arrow">&rarr;</span></a></li>
+        <li class="feat"><a href="award.html"><span class="n">II</span><span class="t">Six Fifty Peninsula Photo Contest 2025<span class="d">Honorable Mention, Youth &ldquo;Moments&rdquo; &mdash; &ldquo;Cinderello&rdquo;</span></span><span class="arrow">&rarr;</span></a></li>
+        <li><a href="#"><span class="n">III</span><span class="t">National Photography Competition for Kids<span class="d">Winner, &ldquo;Home is Where the Heart Is&rdquo; (Dec 2025, Visionary Voyager). Winner, &ldquo;Life in Red&rdquo; (Mar 2026, Dream Snapper). Notable Entries Nov 2025 &amp; Jun 2026.</span></span><span class="arrow">&rarr;</span></a></li>
+        <li><a href="#"><span class="n">IV</span><span class="t">No Frames International Youth Photo Contest 2026<span class="d">Honorable Mention, under-14 Nature. 13 photos accepted.</span></span><span class="arrow">&rarr;</span></a></li>
+        <li><a href="#"><span class="n">V</span><span class="t">Global Peace Photo Award 2026<span class="d">Shortlisted, Children&rsquo;s Peace Image of the Year &mdash; &ldquo;Faces of Peace&rdquo;</span></span><span class="arrow">&rarr;</span></a></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="tour">
+    <p class="mono kicker">On location</p>
+    <h2>Travel <em>dates</em></h2>
+    <div class="tour">
+      <a class="date rv" href="#"><span class="yr">2025</span><span class="place">Egypt</span><span class="stops">Cairo &middot; Giza &middot; Aswan &middot; Kom Ombo &middot; Nubia</span><span class="thumb"><img src="../../../public/images/trips/egypt_2025/nile_cruise_egypt_2025.jpg" alt=""></span></a>
+      <a class="date rv" href="#"><span class="yr">2025</span><span class="place">Chile</span><span class="stops">Santiago &middot; Valpara&iacute;so &middot; Torres del Paine &middot; Tierra del Fuego</span><span class="thumb"><img src="../../../public/images/trips/chile_2025/tierra_del_fuego_chile_2025.jpg" alt=""></span></a>
+      <a class="date rv" href="#"><span class="yr">2024</span><span class="place">London</span><span class="stops">England</span><span class="thumb"><img src="../../../public/images/trips/london_2024/london_eye_london_2024.jpg" alt=""></span></a>
+      <a class="date rv" href="#"><span class="yr">2024</span><span class="place">Rome</span><span class="stops">Italy</span><span class="thumb"><img src="../../../public/images/trips/rome_2024/colluseum_rome_2024.jpeg" alt=""></span></a>
+      <a class="date rv" href="#"><span class="yr">2023</span><span class="place">Paris</span><span class="stops">France</span><span class="thumb"><img src="../../../public/images/trips/paris_2023/champs_paris_2023.jpg" alt=""></span></a>
+    </div>
+  </section>
+
+  <section id="music">
+    <div class="music rv">
+      <div>
+        <p class="mono kicker">Music</p>
+        <blockquote>&ldquo;Concerts are my favorite because you don&rsquo;t just hear the music &mdash; <em>you feel it in your chest.</em>&rdquo;</blockquote>
+        <p class="mono who">Music makes everything in my day feel more colorful.</p>
+      </div>
+      <div>
+        <p class="mono" style="color:var(--muted)">From the crowd</p>
+        <ul class="gigs">
+          <li><b>Outside Lands</b><span>2026</span></li>
+          <li><b>Ariana Grande</b><span>2026</span></li>
+          <li><b>Molly Tuttle</b><span>2025</span></li>
+          <li><b>Billie Eilish</b><span>2025</span></li>
+          <li><b>Laufey</b><span>2025 / 24</span></li>
+          <li><b>Sabrina Carpenter</b><span>2024</span></li>
+        </ul>
+        <div class="cello">
+          <p class="mono">On stage &middot; Cello</p>
+          <p>Played with the school orchestra on Main Street at Disneyland, May 2026.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about rv">
+      <div class="shot t-orange"><img src="../../../public/images/home/about.jpg" alt="Zoe"></div>
+      <div>
+        <p class="mono kicker">Meet the headliner</p>
+        <h2>Hi! I&rsquo;m Zoe.</h2>
+        <p class="voice">A middle schooler who&rsquo;s always juggling a bunch of different interests. I started this site to keep track of the things I&rsquo;m working on, the ideas I&rsquo;m excited about, and the projects that don&rsquo;t always fit neatly into a school folder.</p>
+        <div class="interests"><span>Geography</span><span>Travel</span><span>Cello</span><span>Parkour</span><span>Mixed martial arts</span><span>History</span><span>Photos that tell little stories</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="big">Zoe Wacker</div>
+    <p class="mono">Menlo Park, California &middot; &copy; 2026</p>
+  </div>
+</footer>
+
+<div class="tag">Mockup 7B &middot; Matinee Poster</div>
+
+<script>
+  (function(){
+    var els=document.querySelectorAll('.rv');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){var t=en.target;t.classList.add('in');io.unobserve(t);
+        setTimeout(function(){t.classList.remove('rv','in');t.style.transitionDelay='';},1300);}});
+    },{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e,i){e.style.transitionDelay=(i%4)*70+'ms';io.observe(e);});
+  })();
+</script>
+</body>
+</html>

@@ -55,3 +55,15 @@ All on-wall text was checked against WCAG AA contrast (4.5:1 or better).
 - **3D-1a · No italics:** accent words upright, marked by color only.
 - **3D-1b · Classic italic:** accent words in Instrument Serif italic, calmer than Fraunces.
 - **3D-1c · Marker underline:** upright accent words with a translucent orange highlighter swipe.
+
+
+## Round 7: light, elegant, toned-down dynamic (October 30, 2026)
+
+Zoe found After Dark too loud (neon glow, huge caps) and preferred Soft Blush; the parent found Soft Blush too plain. These four keep a light background and Fraunces serif (upright) and carry some of After Dark's energy in calmer forms.
+
+| Theme | Idea | Fonts | Colors |
+|---|---|---|---|
+| **7A · Gallery Lineup** | Soft Blush with a serif lineup of sections, soft photo halos, the one-photo carousel, hover lifts and scroll fade-ins | Fraunces, Manrope | `#F8EBE7` wall, `#E2733A` orange, `#C25E77` rose, `#C98A1E` gold |
+| **7B · Matinee Poster** | After Dark's poster on cream in heavy Fraunces: billing, ticket stubs, programme-style award page | Fraunces, DM Sans, DM Mono | `#FBF3EA` cream, same accents |
+| **7C · Colour Rooms** | Each section its own colour room with tinted title bands and cards | Fraunces, Manrope | Photography `#E2733A`, Travel `#C25E77`, Music `#C98A1E`, Geography `#3F8682`, Guardian Arts `#9A5A80`, Academics `#A85B3E` |
+| **7D · Lineup + Rooms** | 7A's homepage and carousel; lineup names and inner pages in their room colours | Fraunces, Manrope | 7C's room colours on `#F8EBE7` / `#FFFDFB` |

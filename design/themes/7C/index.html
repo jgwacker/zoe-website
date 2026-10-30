@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoe Wacker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add("js")</script>
+<style>
+  :root{
+    --wall:#F8EBE7;
+    --white:#FFFDFB;
+    --ink:#2A1E1E;
+    --muted:#76625D;
+    --hair:#EAD8D1;
+    /* rooms */
+    --photo:#E2733A;   --photo-ink:#B4521C;
+    --travel:#C25E77;  --travel-ink:#A6455E;
+    --music:#C98A1E;   --music-ink:#93620C;
+    --geo:#3F8682;     --geo-ink:#2F6C68;
+    --arts:#9A5A80;    --arts-ink:#81446A;
+    --acad:#A85B3E;    --acad-ink:#8C4529;
+    --about:#D9806A;   --about-ink:#B05D48;
+    --serif:"Fraunces", Georgia, serif;
+    --sans:"Manrope", system-ui, sans-serif;
+    --here:var(--photo);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;font-synthesis:none}
+  body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+  em,i,cite{font-style:normal}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .sc{font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+
+  /* room helpers: each element sets --c / --ci */
+  .r-photo{--c:var(--photo);--ci:var(--photo-ink)}
+  .r-travel{--c:var(--travel);--ci:var(--travel-ink)}
+  .r-music{--c:var(--music);--ci:var(--music-ink)}
+  .r-geo{--c:var(--geo);--ci:var(--geo-ink)}
+  .r-arts{--c:var(--arts);--ci:var(--arts-ink)}
+  .r-acad{--c:var(--acad);--ci:var(--acad-ink)}
+  .r-about{--c:var(--about);--ci:var(--about-ink)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--white) 92%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .bar{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 48px;flex-wrap:wrap}
+  header::after{content:"";display:block;height:2px;background:var(--here);opacity:.85;transition:background .8s ease}
+  .mark{font-family:var(--serif);font-size:26px;font-weight:400;line-height:1;letter-spacing:-.005em}
+  .mark span{color:var(--photo)}
+  nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 22px;font-size:13.5px;font-weight:500;color:var(--muted)}
+  nav a{display:inline-flex;align-items:center;gap:7px;padding:4px 0;transition:color .25s}
+  nav a::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c,var(--ink));opacity:.55;transition:opacity .25s,transform .25s}
+  nav a:hover,nav a[aria-current]{color:var(--ci,var(--ink))}
+  nav a:hover::before,nav a[aria-current]::before{opacity:1;transform:scale(1.25)}
+  nav a[aria-current]{color:var(--ink)}
+
+  /* hero / foyer */
+  .foyer{background:var(--wall);position:relative;overflow:hidden}
+  .foyer-in{max-width:1280px;margin:0 auto;padding:88px 48px 96px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:64px;align-items:center}
+  .foyer .sc{color:var(--muted);display:flex;align-items:center;gap:10px}
+  .swatches{display:inline-flex;gap:4px}
+  .swatches i{width:9px;height:9px;border-radius:50%;display:block}
+  h1{font-family:var(--serif);font-weight:300;font-size:clamp(48px,6.4vw,92px);line-height:.98;letter-spacing:-.02em;margin:18px 0 26px;font-variation-settings:"opsz" 144}
+  h1 span{color:var(--photo-ink)}
+  .voice{font-family:var(--serif);font-weight:300;font-size:clamp(19px,1.6vw,23px);line-height:1.5;max-width:560px;font-variation-settings:"opsz" 24}
+  .voice b{font-weight:400}
+  .voice .t{color:var(--travel-ink)} .voice .m{color:var(--music-ink)} .voice .p{color:var(--photo-ink)} .voice .g{color:var(--geo-ink)}
+  .sig{margin-top:22px;font-size:13.5px;color:var(--muted)}
+  .sig b{color:var(--ink);font-weight:600}
+
+  .trio{position:relative;height:540px;margin-bottom:24px}
+  .trio figure{position:absolute;margin:0}
+  .trio img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+  .trio .a{left:0;top:40px;width:72%;height:330px;box-shadow:0 30px 60px -28px color-mix(in srgb,var(--photo) 75%,transparent),0 0 0 8px var(--white)}
+  .trio .b{right:0;top:0;width:34%;height:250px;box-shadow:0 26px 50px -24px color-mix(in srgb,var(--travel) 75%,transparent),0 0 0 8px var(--white)}
+  .trio .c{right:6%;bottom:0;width:46%;height:210px;box-shadow:0 26px 50px -24px color-mix(in srgb,var(--music) 80%,transparent),0 0 0 8px var(--white)}
+  .trio figure{border-radius:10px}
+  .trio figcaption{position:absolute;left:12px;bottom:-34px;font-size:12px;color:var(--muted);white-space:nowrap}
+  .trio .b figcaption{left:auto;right:0}
+  .trio .c figcaption{left:auto;right:0}
+  .trio .a figcaption{bottom:-30px}
+
+  /* doors */
+  .doors{max-width:1280px;margin:0 auto;padding:96px 48px 40px}
+  .section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+  .section-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,3.4vw,46px);line-height:1.05;letter-spacing:-.01em}
+  .section-head p{color:var(--muted);font-size:14.5px;max-width:420px}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+  .door{--t:10%;position:relative;display:flex;flex-direction:column;background:color-mix(in srgb,var(--c) var(--t),var(--white));border-radius:16px;padding:22px 22px 26px;border-top:2px solid var(--c);transition:transform .45s cubic-bezier(.2,.7,.2,1),background .45s ease,box-shadow .45s ease}
+  .door:hover,.door:focus-visible{--t:17%;transform:translateY(-6px);box-shadow:0 24px 44px -30px color-mix(in srgb,var(--c) 90%,transparent)}
+  .door:focus-visible{outline:2px solid var(--ci);outline-offset:3px}
+  .door .ph{border-radius:10px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 18px 36px -18px color-mix(in srgb,var(--c) 70%,transparent),0 0 0 6px var(--white);transition:box-shadow .45s ease}
+  .door:hover .ph{box-shadow:0 22px 44px -16px color-mix(in srgb,var(--c) 85%,transparent),0 0 0 6px var(--white)}
+  .door .ph img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+  .door:hover .ph img{transform:scale(1.03)}
+  .door .lab{margin-top:24px;color:var(--ci);display:flex;align-items:center;gap:9px}
+  .door .lab::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c)}
+  .door h3{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.1;margin:8px 0 8px;letter-spacing:-.01em}
+  .door p{font-size:14.5px;color:var(--muted);line-height:1.55}
+  .door .more{margin-top:auto;padding-top:18px;font-size:13px;font-weight:600;color:var(--ci);display:flex;align-items:center;gap:8px}
+  .door .more::after{content:"\2192";transition:transform .35s ease}
+  .door:hover .more::after{transform:translateX(4px)}
+  .door q{display:block;margin-top:12px;font-family:var(--serif);font-size:17px;line-height:1.4;color:var(--ink);quotes:"\201C" "\201D"}
+
+  .door.wide{grid-column:span 2;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px;align-items:stretch}
+  .door.wide .ph{aspect-ratio:auto;min-height:340px}
+  .door.wide .txt{display:flex;flex-direction:column}
+  .door.wide .lab{margin-top:4px}
+  .door.wide h3{font-size:42px}
+  .door.wide ul{list-style:none;margin-top:14px;border-top:1px solid color-mix(in srgb,var(--c) 30%,transparent)}
+  .door.wide li{font-size:13.5px;padding:9px 0;border-bottom:1px solid color-mix(in srgb,var(--c) 22%,transparent);display:flex;justify-content:space-between;gap:12px}
+  .door.wide li span:last-child{color:var(--ci);font-weight:600;text-align:right}
+
+  /* recent */
+  .recent{max-width:1280px;margin:0 auto;padding:64px 48px 110px}
+  .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+  .col{border-top:2px solid var(--c);padding-top:18px}
+  .col .sc{color:var(--ci);display:flex;align-items:center;gap:9px}
+  .col .sc::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c)}
+  .col ol{list-style:none;margin-top:14px}
+  .col li{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--hair);font-size:14.5px}
+  .col li b{font-family:var(--serif);font-weight:400;font-size:18px;line-height:1.3}
+  .col li span{color:var(--muted);font-size:13px;white-space:nowrap;padding-top:3px}
+  .col li a{transition:color .25s}
+  .col li a:hover{color:var(--ci)}
+
+  footer{background:var(--wall);border-top:1px solid var(--hair)}
+  .foot{max-width:1280px;margin:0 auto;padding:28px 48px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+  .foot .swatches i{width:8px;height:8px}
+
+  .mock{position:fixed;right:14px;bottom:14px;z-index:30;background:var(--ink);color:var(--white);font-size:11px;letter-spacing:.06em;padding:7px 11px;font-weight:600;border-radius:4px}
+
+  /* gentle reveal */
+  .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:1040px){
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .door.wide{grid-column:span 2}
+  }
+  @media (max-width:860px){
+    .bar{padding:14px 16px;gap:10px}
+    nav ul{gap:2px 14px;font-size:12.5px}
+    .foyer-in{grid-template-columns:minmax(0,1fr);padding:48px 16px 64px;gap:48px}
+    .trio{height:400px}
+    .trio .a{height:230px;width:78%;top:30px}
+    .trio .b{height:180px;width:36%}
+    .trio .c{height:150px;width:52%;right:2%}
+    .doors{padding:64px 16px 24px}
+    .grid{grid-template-columns:minmax(0,1fr);gap:22px}
+    .door.wide{grid-column:auto;grid-template-columns:minmax(0,1fr);gap:0}
+    .door.wide .ph{min-height:0;aspect-ratio:4/3}
+    .door.wide .lab{margin-top:24px}
+    .door.wide h3,.door h3{font-size:30px}
+    .recent{padding:48px 16px 80px}
+    .cols{grid-template-columns:minmax(0,1fr);gap:36px}
+    .foot{padding:24px 16px 64px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none !important;animation:none !important}
+    .js .reveal{opacity:1;transform:none}
+    .door:hover{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <a class="mark" href="index.html">Zoe Wacker<span>.</span></a>
+    <nav aria-label="Site">
+      <ul>
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li class="r-about"><a href="#">About</a></li>
+        <li class="r-travel"><a href="#">Travel</a></li>
+        <li class="r-photo"><a href="award.html">Photography</a></li>
+        <li class="r-music"><a href="#">Music</a></li>
+        <li class="r-geo"><a href="#">Geography</a></li>
+        <li class="r-arts"><a href="#">Guardian Arts</a></li>
+        <li class="r-acad"><a href="#">Academics</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="foyer" data-room="var(--about)">
+  <div class="foyer-in">
+    <div class="reveal">
+      <div class="sc">
+        <span class="swatches" aria-hidden="true"><i style="background:var(--photo)"></i><i style="background:var(--travel)"></i><i style="background:var(--music)"></i><i style="background:var(--geo)"></i></span>
+        Menlo Park, California
+      </div>
+      <h1>Zoe <span>Wacker</span></h1>
+      <p class="voice">Hi! I’m Zoe, a middle schooler who’s always juggling a bunch of different interests. Right now, I’m into <b class="g">geography</b> and <b class="t">travel</b>, playing <b class="m">cello and music</b>, and parkour with mixed-martial arts. I also love discovering new places, digging into history, and <b class="p">snapping photos that tell little stories.</b></p>
+      <p class="sig"><b>Basically, it’s my highlight reel</b> of experiments, adventures, and “aha!” moments.</p>
+    </div>
+    <div class="trio reveal" aria-label="Three recent photographs">
+      <figure class="a"><img src="../../../public/images/portfolio/portfolio-64.jpg" alt="A Nubian woman laughing while playing a frame drum against an ochre wall"><figcaption>Frame drum · Aswan, 2025</figcaption></figure>
+      <figure class="b"><img src="../../../public/images/portfolio/portfolio-53.jpg" alt="A bright red Nubian house with a blue arched door"><figcaption>Blue door · Aswan</figcaption></figure>
+      <figure class="c"><img src="../../../public/images/portfolio/portfolio-21.jpg" alt="Two king penguins standing on grass"><figcaption>Two kings · Tierra del Fuego</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="doors" aria-label="Sections">
+  <div class="section-head reveal">
+    <h2>Step into a room</h2>
+    <p>Every part of the site has its own colour, so you always know where you are.</p>
+  </div>
+
+  <div class="grid">
+    <a class="door wide r-photo reveal" href="award.html" data-room="var(--photo)">
+      <div class="ph"><img src="../../../public/images/photography_awards/cinderello.jpg" alt="Cinderello: a caretaker sweeps red carpets in the vast Mosque–Madrasa of Sultan Hasan, Cairo"></div>
+      <div class="txt">
+        <div class="lab sc">Photography</div>
+        <h3>Portfolio &amp; awards</h3>
+        <p>Photos that tell little stories, from Cairo’s mosques to Patagonia’s penguins.</p>
+        <ul>
+          <li><span>Young TPOTY 2025</span><span>Runner-Up</span></li>
+          <li><span>Peninsula Photo Contest 2025</span><span>Honorable Mention</span></li>
+          <li><span>National Photography Competition for Kids</span><span>Winner, twice</span></li>
+          <li><span>Global Peace Photo Award 2026</span><span>Shortlisted</span></li>
+        </ul>
+        <span class="more">See “Cinderello”</span>
+      </div>
+    </a>
+
+    <a class="door r-travel reveal" href="#" data-room="var(--travel)">
+      <div class="ph"><img src="../../../public/images/trips/egypt_2025/nile_cruise_egypt_2025.jpg" alt="Along the Nile in Egypt"></div>
+      <div class="lab sc">Travel</div>
+      <h3>Travel</h3>
+      <p>Egypt and Chile 2025 · London and Rome 2024 · Paris 2023</p>
+      <span class="more">Five trips</span>
+    </a>
+
+    <a class="door r-music reveal" href="#" data-room="var(--music)">
+      <div class="ph"><img src="../../../public/images/home/music.jpg" alt="Music"></div>
+      <div class="lab sc">Music</div>
+      <h3>Music</h3>
+      <p>Cello, orchestra, and concerts from Laufey to Outside Lands.</p>
+      <q>Music makes everything in my day feel more colorful.</q>
+      <span class="more">Concerts &amp; cello</span>
+    </a>
+
+    <a class="door r-geo reveal" href="#" data-room="var(--geo)">
+      <div class="ph"><img src="../../../public/images/home/geography.jpg" alt="Geography"></div>
+      <div class="lab sc">Geography</div>
+      <h3>Geography</h3>
+      <p>Maps, places, and the history behind them.</p>
+      <span class="more">Explore</span>
+    </a>
+
+    <a class="door r-arts reveal" href="#" data-room="var(--arts)">
+      <div class="ph"><img src="../../../public/images/home/photography.jpg" alt="Guardian Arts"></div>
+      <div class="lab sc">Guardian Arts</div>
+      <h3>Guardian Arts</h3>
+      <p>Arts projects and programs.</p>
+      <span class="more">Explore</span>
+    </a>
+
+    <a class="door r-acad reveal" href="#" data-room="var(--acad)">
+      <div class="ph"><img src="../../../public/images/home/academics.jpg" alt="Academics"></div>
+      <div class="lab sc">Academics</div>
+      <h3>Academics</h3>
+      <p>Projects that don’t always fit neatly into a school folder.</p>
+      <span class="more">Explore</span>
+    </a>
+
+    <a class="door wide r-about reveal" href="#" data-room="var(--about)">
+      <div class="ph"><img src="../../../public/images/home/about.jpg" alt="About Zoe"></div>
+      <div class="txt">
+        <div class="lab sc">About</div>
+        <h3>About me</h3>
+        <p>Photographer, cellist, map enthusiast. Who I am and what I’m into right now.</p>
+        <ul>
+          <li><span>Home</span><span>Menlo Park, CA</span></li>
+          <li><span>Plays</span><span>Cello</span></li>
+          <li><span>Trains</span><span>Parkour &amp; mixed-martial arts</span></li>
+          <li><span>Loves</span><span>New places &amp; history</span></li>
+        </ul>
+        <span class="more">Say hi</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<section class="recent" aria-label="Latest">
+  <div class="section-head reveal">
+    <h2>Newest on the walls</h2>
+  </div>
+  <div class="cols">
+    <div class="col r-photo reveal" data-room="var(--photo)">
+      <div class="sc">Awards</div>
+      <ol>
+        <li><a href="#"><b>Global Peace Photo Award</b></a><span>2026</span></li>
+        <li><a href="#"><b>No Frames Youth Photo Contest</b></a><span>2026</span></li>
+        <li><a href="#"><b>National Photography Competition for Kids · “Life in Red”</b></a><span>Mar 2026</span></li>
+        <li><a href="award.html"><b>Peninsula Photo Contest</b></a><span>2025</span></li>
+      </ol>
+    </div>
+    <div class="col r-travel reveal" data-room="var(--travel)">
+      <div class="sc">Trips</div>
+      <ol>
+        <li><a href="#"><b>Chile &amp; Patagonia</b></a><span>2025</span></li>
+        <li><a href="#"><b>Egypt</b></a><span>2025</span></li>
+        <li><a href="#"><b>Rome</b></a><span>2024</span></li>
+        <li><a href="#"><b>London</b></a><span>2024</span></li>
+      </ol>
+    </div>
+    <div class="col r-music reveal" data-room="var(--music)">
+      <div class="sc">Music</div>
+      <ol>
+        <li><a href="#"><b>Outside Lands</b></a><span>2026</span></li>
+        <li><a href="#"><b>Ariana Grande, Oakland</b></a><span>2026</span></li>
+        <li><a href="#"><b>Cello on Main Street, Disneyland</b></a><span>May 2026</span></li>
+        <li><a href="#"><b>Billie Eilish</b></a><span>2025</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <span>© 2026 Zoe Wacker · Menlo Park, CA</span>
+    <span class="swatches" aria-hidden="true"><i style="background:var(--photo)"></i><i style="background:var(--travel)"></i><i style="background:var(--music)"></i><i style="background:var(--geo)"></i><i style="background:var(--arts)"></i><i style="background:var(--acad)"></i><i style="background:var(--about)"></i></span>
+    <span>All photographs by Zoe Wacker</span>
+  </div>
+</footer>
+
+<div class="mock">Mockup 7C · Colour Rooms</div>
+
+<script>
+  (function(){
+    var root = document.documentElement;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var items = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window) || reduce) {
+      items.forEach(function(el){ el.classList.add("in"); });
+    } else {
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, {rootMargin:"0px 0px -8% 0px"});
+      items.forEach(function(el){ io.observe(el); });
+    }
+    /* header rule takes on the colour of the room you're looking at */
+    var rooms = document.querySelectorAll("[data-room]");
+    if ("IntersectionObserver" in window) {
+      var ro = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting){ root.style.setProperty("--here", e.target.getAttribute("data-room")); } });
+      }, {rootMargin:"-45% 0px -45% 0px"});
+      rooms.forEach(function(el){ ro.observe(el); });
+    }
+  })();
+</script>
+</body>
+</html>

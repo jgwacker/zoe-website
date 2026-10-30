@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinderello · Zoe Wacker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFDFB;
+    --wall:#F8EBE7;
+    --wall-deep:#F1DDD7;
+    --ink:#2A1E1E;
+    --muted:#7A6863;
+    --hair:#E8D5CE;
+    --orange:#E2733A;
+    --rose:#C25E77;
+    --gold:#C98A1E;
+    --halo-o:rgba(226,115,58,.34);
+    --halo-r:rgba(194,94,119,.32);
+    --halo-g:rgba(201,138,30,.32);
+    --serif:"Fraunces", Georgia, serif;
+    --sans:"Manrope", system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+  em,i,cite,blockquote,q,address{font-style:normal}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 48px}
+  .label-sc{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+  header{background:var(--white);border-bottom:1px solid var(--hair);position:relative;z-index:5}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:24px;padding-bottom:24px}
+  .mark{font-family:var(--serif);font-size:26px;line-height:1;font-weight:400}
+  .mark span{color:var(--orange)}
+  .nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 26px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .nav ul a{padding-bottom:3px;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+  .nav ul a:hover,.nav ul a[aria-current]{color:var(--ink);border-color:var(--orange)}
+  .menu{display:none;position:relative}
+  .menu summary{list-style:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--ink);border-radius:999px;padding:7px 16px}
+  .menu summary::-webkit-details-marker{display:none}
+  .menu nav{position:absolute;right:0;top:calc(100% + 10px);background:var(--white);border:1px solid var(--hair);box-shadow:0 18px 40px -20px rgba(90,40,30,.35);padding:10px 0;min-width:200px}
+  .menu nav a{display:block;padding:9px 20px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .menu nav a:hover{color:var(--ink);background:var(--wall)}
+
+  .crumb{padding:18px 0;font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 10px}
+  .crumb a:hover{color:var(--ink)}
+  .crumb span{color:var(--orange)}
+
+  /* hero */
+  .room{background:linear-gradient(180deg,var(--wall) 0%,var(--wall) 84%,var(--wall-deep) 84%);padding:64px 0 96px;position:relative;overflow:hidden}
+  .room::before{content:"";position:absolute;inset:0;background:radial-gradient(45% 55% at 35% 45%,rgba(194,94,119,.10),transparent 70%),radial-gradient(30% 40% at 80% 30%,rgba(226,115,58,.08),transparent 70%);pointer-events:none}
+  .exhibit{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:56px;align-items:center}
+  .hung img{width:100%;background:#fff;padding:16px;box-shadow:0 1px 0 rgba(0,0,0,.04),0 40px 90px -34px var(--halo-r),0 22px 50px -40px var(--halo-o),0 10px 24px -14px rgba(90,40,30,.22)}
+  .wall-label{background:var(--white);padding:26px 24px 22px;box-shadow:0 14px 30px -18px rgba(90,40,30,.38);border-top:3px solid var(--orange);font-size:13.5px;line-height:1.5}
+  .badge{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange)}
+  .badge::before{content:"";width:7px;height:7px;transform:rotate(45deg);background:currentColor}
+  .wall-label h1{font-family:var(--serif);font-weight:400;font-variation-settings:"opsz" 144;font-size:44px;line-height:1;letter-spacing:-.015em;margin:12px 0 6px}
+  .wall-label .by{color:var(--muted)}
+  .wall-label dl{margin-top:18px;border-top:1px solid var(--hair)}
+  .wall-label dt{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);margin-top:12px}
+  .wall-label dd{margin-top:2px}
+
+  /* text */
+  .text{display:grid;grid-template-columns:340px minmax(0,1fr);gap:72px;padding:104px 0 40px}
+  .text .eyebrow{color:var(--rose)}
+  .text h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3vw,40px);line-height:1.12;letter-spacing:-.01em;margin-top:10px}
+  .text h2 .o{color:var(--orange)}
+  .text h2 .sub{display:block;font-size:.62em;color:var(--muted);margin-top:12px;line-height:1.3}
+  .body{max-width:700px}
+  .body p{margin-bottom:20px;font-size:17px;line-height:1.75}
+  .body .lede{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.2vw,28px);line-height:1.45;margin-bottom:28px}
+  .body .lede em{color:var(--rose);font-weight:400}
+  .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:36px}
+  .facts div{background:var(--wall);padding:18px 20px;border-top:2px solid var(--orange)}
+  .facts div:nth-child(2){border-color:var(--rose)}
+  .facts div:nth-child(3){border-color:var(--gold)}
+  .facts b{display:block;font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1}
+  .facts span{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+  .moment{display:grid;grid-template-columns:340px minmax(0,1fr);gap:72px;padding:40px 0 104px;align-items:end}
+  .moment figure{max-width:420px}
+  .moment img{width:100%;aspect-ratio:3/4;object-fit:cover;background:#fff;padding:12px;box-shadow:0 30px 64px -28px var(--halo-g),0 10px 22px -14px rgba(90,40,30,.22)}
+  figcaption{margin-top:14px;font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:12px}
+  figcaption b{font-family:var(--serif);font-weight:400;font-size:19px;color:var(--ink)}
+  .moment .side p{font-family:var(--serif);font-weight:300;font-size:22px;line-height:1.4;color:var(--muted)}
+  .moment .side p em{color:var(--ink);font-weight:400}
+
+  /* others */
+  .others{background:var(--wall);padding:96px 0 104px}
+  .others h3{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1.1;margin:8px 0 40px}
+  .others h3 em{color:var(--rose)}
+  .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+  .card{display:block;background:var(--white);padding:24px 24px 22px;border-top:3px solid var(--hair);box-shadow:0 12px 26px -20px rgba(90,40,30,.42);transition:transform .25s ease, box-shadow .25s ease, border-color .25s}
+  .card:hover{transform:translateY(-3px);box-shadow:0 22px 40px -24px var(--h,var(--halo-o))}
+  .card.h-o{--h:var(--halo-o)} .card.h-r{--h:var(--halo-r)} .card.h-g{--h:var(--halo-g)}
+  .card:hover.h-o{border-color:var(--orange)} .card:hover.h-r{border-color:var(--rose)} .card:hover.h-g{border-color:var(--gold)}
+  .card .yr{font-size:10.5px;font-weight:700;letter-spacing:.2em;color:var(--muted)}
+  .card h4{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.2;margin:8px 0 10px}
+  .card .res{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);margin-bottom:6px}
+  .card p{font-size:13.5px;color:var(--muted);line-height:1.5}
+  .card.current{border-top-color:var(--orange);background:linear-gradient(var(--white),var(--white)) padding-box}
+  .card.current .res{color:var(--orange)}
+  .card .here{display:inline-block;margin-top:12px;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--orange)}
+
+  footer{border-top:1px solid var(--hair);padding:40px 0 56px}
+  .foot{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+  .foot a.back{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--orange);padding-bottom:3px}
+
+  .mock{position:fixed;right:14px;bottom:14px;z-index:50;background:var(--ink);color:var(--white);font-size:11px;font-weight:600;letter-spacing:.06em;padding:7px 12px;border-radius:3px}
+
+  .js .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.in{opacity:1;transform:none}
+  .js .reveal.d1{transition-delay:.12s} .js .reveal.d2{transition-delay:.24s}
+  .js .card.in{transition:transform .25s ease, box-shadow .25s ease, border-color .25s, opacity .9s ease;transition-delay:0s}
+  .js .card.in:hover{transform:translateY(-3px)}
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{transition:none !important;animation:none !important}
+    .js .reveal{opacity:1;transform:none}
+    .card:hover,.js .card.in:hover{transform:none}
+  }
+
+  @media (max-width:960px){
+    .nav ul{display:none}
+    .menu{display:block}
+    .exhibit,.text,.moment{grid-template-columns:1fr;gap:32px}
+    .cards{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 20px}
+    .nav{padding-top:18px;padding-bottom:18px}
+    .room{padding:36px 0 64px}
+    .hung img{padding:8px}
+    .wall-label h1{font-size:36px}
+    .text{padding:64px 0 24px}
+    .body p{font-size:16px}
+    .facts{grid-template-columns:1fr;gap:10px}
+    .facts b{font-size:26px}
+    .moment{padding:24px 0 72px}
+    .others{padding:64px 0 72px}
+    .cards{grid-template-columns:1fr}
+    .mock{font-size:10px;right:8px;bottom:8px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="mark" href="index.html">Zoe Wacker<span>.</span></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#travel">Travel</a></li>
+      <li><a href="award.html" aria-current="page">Photography</a></li>
+      <li><a href="index.html#music">Music</a></li>
+      <li><a href="#">Geography</a></li>
+      <li><a href="#">Guardian Arts</a></li>
+      <li><a href="#">Academics</a></li>
+    </ul>
+    <details class="menu">
+      <summary>Menu</summary>
+      <nav aria-label="Site">
+        <a href="index.html">Home</a><a href="index.html#about">About</a><a href="index.html#travel">Travel</a><a href="award.html">Photography</a><a href="index.html#music">Music</a><a href="#">Geography</a><a href="#">Guardian Arts</a><a href="#">Academics</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<section class="room" aria-label="Cinderello">
+  <div class="wrap">
+    <div class="crumb" style="padding-top:0;margin-bottom:28px;position:relative"><a href="index.html">Home</a><span>&#9670;</span><a href="#">Photography</a><span>&#9670;</span><a href="index.html#awards">Awards</a><span>&#9670;</span>Peninsula 2025</div>
+    <div class="exhibit">
+      <div class="hung reveal">
+        <img src="../../../public/images/photography_awards/cinderello.jpg" alt="Cinderello: a caretaker in a gray galabeya sweeps the red carpets of the vast Mosque–Madrasa of Sultan Hasan in Cairo, hanging lamps above him">
+      </div>
+      <aside class="wall-label reveal d1">
+        <span class="badge">Honorable Mention</span>
+        <h1>Cinderello</h1>
+        <p class="by">Zoe Wacker, 2025</p>
+        <dl>
+          <dt>Place</dt><dd>Mosque&ndash;Madrasa of Sultan Ḥasan, Historic Cairo</dd>
+          <dt>Contest</dt><dd>Six Fifty Peninsula Photo Contest 2025</dd>
+          <dt>Division</dt><dd>Youth &middot; &ldquo;Moments&rdquo;</dd>
+          <dt>Shown</dt><dd>Palo Alto Art Center, Sept&ndash;Dec 2025</dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="text">
+    <div class="reveal">
+      <p class="label-sc eyebrow">Exhibit text</p>
+      <h2>Peninsula Photo Contest 2025<span class="sub"><span class="o">Honorable Mention</span>, Youth Division &mdash; &ldquo;Moments&rdquo;</span></h2>
+    </div>
+    <div class="body reveal d1">
+      <p class="lede">My winning photo, Cinderello, was taken at the Mosque&ndash;Madrasa of Sultan Ḥasan in Historic Cairo. A man was sweeping the carpets, and the light caught the dust just right&mdash;<em>he looked like he needed a fairy godmother, which made me think of Cinderella.</em></p>
+      <p>I tried to frame the scale of the space against a single everyday gesture, so the scene feels both grand and human.</p>
+      <p>The Six Fifty Peninsula Photo Contest is presented by the Palo Alto Weekly and the Palo Alto Art Center and is open to photographers who live, work, or attend school in the 650 area code. There were over 1,200 entries across six categories.</p>
+      <p>The photograph was exhibited at the Palo Alto Art Center from September&ndash;December 2025. I was the youngest winner; the other Youth Division awardees were mostly juniors and seniors. It was exciting (and a little intimidating!) to be shown alongside older students whose work I admire.</p>
+      <div class="facts">
+        <div><b>1,200+</b><span>entries</span></div>
+        <div><b>6</b><span>categories</span></div>
+        <div><b>Sept&ndash;Dec</b><span>on the wall, 2025</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="moment">
+    <div class="side reveal">
+      <p>&ldquo;It was exciting <em>(and a little intimidating!)</em> to be shown alongside older students whose work I admire.&rdquo;</p>
+    </div>
+    <figure class="reveal d1">
+      <img src="../../../public/images/photography_awards/650_award_2025.jpg" alt="Zoe accepting the Peninsula Photo Contest award">
+      <figcaption><b>Accepting the award</b><span>Palo Alto &middot; 2025</span></figcaption>
+    </figure>
+  </section>
+</div>
+
+<section class="others" aria-label="All awards">
+  <div class="wrap">
+    <p class="label-sc" style="color:var(--rose)">The awards wall</p>
+    <h3>More <em>awards</em>, 2025&ndash;26</h3>
+    <div class="cards">
+      <a class="card current h-o reveal" href="award.html">
+        <div class="yr">2025</div>
+        <h4>Six Fifty Peninsula Photo Contest</h4>
+        <p class="res">Honorable Mention</p>
+        <p>Youth &ldquo;Moments&rdquo; &mdash; &ldquo;Cinderello&rdquo;</p>
+        <span class="here">You are here</span>
+      </a>
+      <a class="card h-r reveal d1" href="#">
+        <div class="yr">2025</div>
+        <h4>Travel Photographer of the Year</h4>
+        <p class="res">Young TPOTY Runner-Up</p>
+        <p>14 &amp; under &middot; Places collection exhibited internationally in 2026</p>
+      </a>
+      <a class="card h-g reveal d2" href="#">
+        <div class="yr">2025 &ndash; 2026</div>
+        <h4>National Photography Competition for Kids</h4>
+        <p class="res">Winner, twice</p>
+        <p>&ldquo;Home is Where the Heart Is&rdquo; (Dec 2025, Visionary Voyager) &middot; &ldquo;Life in Red&rdquo; (Mar 2026, Dream Snapper) &middot; Notable Entries, Nov 2025 &amp; Jun 2026</p>
+      </a>
+      <a class="card h-o reveal" href="#">
+        <div class="yr">2026</div>
+        <h4>No Frames International Youth Photo Contest</h4>
+        <p class="res">Honorable Mention</p>
+        <p>Under-14, Nature &middot; 13 photos accepted</p>
+      </a>
+      <a class="card h-r reveal d1" href="#">
+        <div class="yr">2026</div>
+        <h4>Global Peace Photo Award</h4>
+        <p class="res">Shortlisted</p>
+        <p>Children&rsquo;s Peace Image of the Year &mdash; &ldquo;Faces of Peace&rdquo;</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>&copy; 2026 Zoe Wacker &middot; Menlo Park, CA</span>
+    <a class="back" href="index.html">&larr; Back to the gallery</a>
+  </div>
+</footer>
+
+<div class="mock">Mockup 7A &middot; Gallery Lineup</div>
+
+<script>
+  document.documentElement.classList.add("js");
+  var els = document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, {rootMargin:"0px 0px -8% 0px", threshold:.08});
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add("in"); }); }
+</script>
+</body>
+</html>
