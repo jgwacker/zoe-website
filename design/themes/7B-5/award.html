@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peninsula Photo Contest 2025 · Zoe Wacker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,100..900,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF3EA; --blush:#F8EBE7; --paper:#FFFBF6;
+    --orange:#E2733A; --rose:#C25E77; --marigold:#C98A1E;
+    --ink:#2A1E1E; --muted:#7A6560; --hair:rgba(42,30,30,.14);
+    --serif:'Fraunces',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif; --mono:'DM Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  em,i,cite{font-style:normal}
+  body{
+    background:var(--cream);
+    background-image:
+      radial-gradient(1000px 520px at 12% -8%, rgba(194,94,119,.10), transparent 62%),
+      radial-gradient(900px 520px at 92% 4%, rgba(226,115,58,.10), transparent 62%);
+    color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .mono{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:10;background:rgba(251,243,234,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:66px;position:relative}
+  .mark{font-family:var(--serif);font-variation-settings:"opsz" 72;font-weight:600;font-size:24px;letter-spacing:-.01em}
+  .mark span{color:var(--orange)}
+  .nav ul{display:flex;gap:22px;list-style:none;flex-wrap:wrap}
+  .nav li a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}
+  .nav li a:hover,.nav li a.on{color:var(--ink)}
+  .nav li a.on{box-shadow:inset 0 -2px 0 var(--orange)}
+  .menu{display:none}
+  .menu summary{list-style:none;cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--hair);border-radius:999px}
+  .menu summary::-webkit-details-marker{display:none}
+  .drop{display:none;position:absolute;left:-16px;right:-16px;top:66px;background:var(--paper);border-bottom:1px solid var(--hair);flex-direction:column;padding:10px 16px 20px;box-shadow:0 24px 40px -24px rgba(122,60,40,.35)}
+  .menu[open] .drop{display:flex}
+  .drop a{font-family:var(--serif);font-weight:500;font-size:24px;padding:8px 0;border-bottom:1px solid var(--hair)}
+  .drop a:hover{color:var(--orange)}
+
+  
+  /* programme title */
+  .titleblock{text-align:center;padding:64px 0 40px}
+  .crumbs{color:var(--muted)}
+  .crumbs a:hover{color:var(--orange)}
+  .crumbs b{color:var(--ink);font-weight:500}
+  .rule{display:flex;align-items:center;justify-content:center;gap:14px;margin:22px auto 0;max-width:420px}
+  .rule::before,.rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--marigold))}
+  .rule::after{transform:scaleX(-1)}
+  .rule i{width:7px;height:7px;background:var(--marigold);transform:rotate(45deg)}
+  .billing{margin-top:22px;color:var(--rose)}
+  h1{font-family:var(--serif);font-weight:700;font-variation-settings:"opsz" 144,"SOFT" 30;font-size:clamp(46px,7.4vw,112px);line-height:.98;letter-spacing:-.03em;margin:12px auto 0;max-width:1100px}
+  h1 span{color:var(--orange)}
+  .sub{margin-top:18px;font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 36;font-size:clamp(19px,2vw,24px);color:var(--muted)}
+  .sub b{color:var(--ink);font-weight:600}
+
+  /* hero */
+  .hero .shot{aspect-ratio:3/2;border-radius:10px;overflow:hidden;box-shadow:0 40px 70px -34px rgba(194,94,119,.6),0 16px 30px -18px rgba(42,30,30,.3)}
+  .hero .shot img{width:100%;height:100%;object-fit:cover}
+  figcaption{margin-top:14px;display:flex;justify-content:space-between;gap:12px;color:var(--muted)}
+  figcaption b{color:var(--ink);font-weight:500}
+
+  /* credits strip */
+  .credits{display:grid;grid-template-columns:repeat(4,1fr);margin:56px 0 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+  .credits div{padding:20px 20px 22px;border-left:1px solid var(--hair)}
+  .credits div:first-child{border-left:0;padding-left:0}
+  .credits .mono{color:var(--rose);font-size:11px}
+  .credits p{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 36;font-size:19px;line-height:1.3;margin-top:6px}
+
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:80px;margin-top:64px;align-items:start}
+  article{max-width:680px}
+  article p{font-size:18px;line-height:1.75;margin-bottom:22px}
+  .lede{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 36;font-size:23px !important;line-height:1.5 !important;color:var(--ink)}
+  .lede::first-letter{float:left;font-weight:700;font-variation-settings:"opsz" 144;font-size:80px;line-height:.82;margin:6px 12px 0 0;color:var(--orange)}
+  .act{display:flex;align-items:baseline;gap:16px;margin:44px 0 16px}
+  .act .mono{color:var(--marigold)}
+  h2{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 96;font-size:38px;line-height:1;letter-spacing:-.02em}
+  h2 span{color:var(--rose)}
+  .pull{margin:40px 0;padding:30px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);text-align:center;font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 144;font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.02em}
+  .pull em{color:var(--orange)}
+  .accept{margin-top:36px;max-width:440px}
+  .accept .shot{border-radius:10px;overflow:hidden;box-shadow:0 30px 50px -26px rgba(226,115,58,.55),0 12px 22px -16px rgba(42,30,30,.3)}
+  .accept .shot img{width:100%}
+
+  aside{position:sticky;top:96px}
+  .more{background:var(--paper);border-radius:14px;padding:28px 26px 14px;box-shadow:0 22px 44px -28px rgba(122,60,40,.4)}
+  .more .mono{color:var(--rose)}
+  .more h3{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 72;font-size:28px;letter-spacing:-.015em;margin-top:6px}
+  .more ol{list-style:none;margin-top:16px;border-top:1px solid var(--ink)}
+  .more li{border-bottom:1px solid var(--hair)}
+  .more li:last-child{border-bottom:0}
+  .more a{display:grid;grid-template-columns:36px 1fr;gap:10px;padding:16px 0;transition:transform .25s}
+  .more a:hover{transform:translateX(4px)}
+  .more .n{font-family:var(--serif);font-weight:500;font-size:20px;color:var(--marigold);line-height:1.2}
+  .more .t{font-family:var(--serif);font-weight:600;font-variation-settings:"opsz" 24;font-size:17px;line-height:1.3}
+  .more .d{display:block;font-family:var(--sans);font-weight:400;font-size:14px;color:var(--muted);margin-top:3px}
+  .more .on{position:relative}
+  .more .on .t{color:var(--orange)}
+  .more .on::before{content:"";position:absolute;left:-26px;top:16px;bottom:16px;width:3px;background:var(--orange);border-radius:0 3px 3px 0}
+  .back{display:inline-flex;margin-top:22px;padding:12px 22px;border-radius:999px;background:var(--ink);color:var(--cream);font-size:15px;font-weight:500;transition:transform .25s,background .25s}
+  .back:hover{transform:translateY(-2px);background:var(--orange)}
+
+  footer{margin-top:120px;border-top:1px solid var(--hair);padding:44px 0 64px}
+  .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  .foot .big{font-family:var(--serif);font-weight:700;font-variation-settings:"opsz" 144;font-size:clamp(44px,7vw,96px);line-height:.9;letter-spacing:-.03em;color:rgba(42,30,30,.12)}
+  .foot .mono{color:var(--muted)}
+
+  .tag{position:fixed;right:14px;bottom:14px;z-index:50;background:var(--ink);color:var(--cream);font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:6px 10px;border-radius:4px}
+
+  .js .rv{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
+  .js .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none !important;animation:none !important}
+    .js .rv{opacity:1;transform:none}
+  }
+  @media (max-width:1000px){
+    .layout{grid-template-columns:1fr;gap:56px}
+    aside{position:static}
+    .credits{grid-template-columns:1fr 1fr}
+    .credits div:nth-child(3){border-left:0;padding-left:0}
+    .credits div:nth-child(n+3){border-top:1px solid var(--hair)}
+  }
+  @media (max-width:900px){
+    .nav ul{display:none}
+    .menu{display:block}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 16px}
+    .titleblock{padding:44px 0 30px}
+    h1{font-size:clamp(40px,12vw,56px)}
+    figcaption{flex-direction:column;gap:2px}
+    .credits{grid-template-columns:1fr}
+    .credits div{border-left:0;padding-left:0}
+    .credits div+div{border-top:1px solid var(--hair)}
+    article p{font-size:17px}
+    .lede{font-size:20px !important}
+    .lede::first-letter{font-size:64px}
+    h2{font-size:30px}
+    .more{padding:24px 18px 10px}
+    .more .on::before{left:-18px}
+    .tag{right:8px;bottom:8px;font-size:10px}
+  }
+  /* 7B-2: whimsical display font */
+  h1,.r1,.r2,h2,.pull,.foot .big,.mark,.stub .name,.awardcard .cap b,.more h3,.programme .n,.drop a{font-variation-settings:"opsz" 144,"SOFT" 100,"WONK" 1 !important}
+  .lede::first-letter{font-variation-settings:"opsz" 144,"SOFT" 100,"WONK" 1}
+  /* 7B-5: cursive name and headings, lighter serif lineup */
+  .r1{font-weight:500 !important} .r2{font-weight:400 !important}
+  h2,.mark,.stub .name,.awardcard .cap b,.more h3,.programme .n,.drop a,.pull{font-weight:500 !important}
+  h1,h2,.foot .big{font-family:'Sacramento',cursive !important;font-weight:400 !important;font-variation-settings:normal !important;letter-spacing:0 !important;line-height:1.05 !important}
+  h1{font-size:clamp(62px,8.0vw,128px) !important;padding:.08em 0 .12em}
+  h2{font-size:clamp(56px,7.0vw,94px) !important}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="mark" href="index.html">Zoe Wacker<span>.</span></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#tour">Travel</a></li>
+      <li><a class="on" href="index.html#photography">Photography</a></li>
+      <li><a href="index.html#music">Music</a></li>
+      <li><a href="#">Geography</a></li>
+      <li><a href="#">Guardian Arts</a></li>
+      <li><a href="#">Academics</a></li>
+    </ul>
+    <details class="menu">
+      <summary>Menu</summary>
+      <nav class="drop">
+        <a href="index.html">Home</a><a href="index.html#about">About</a><a href="index.html#tour">Travel</a><a href="index.html#photography">Photography</a><a href="index.html#music">Music</a><a href="#">Geography</a><a href="#">Guardian Arts</a><a href="#">Academics</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="titleblock">
+    <p class="mono crumbs"><a href="index.html">Home</a> / <a href="index.html#photography">Photography</a> / <b>Awards</b></p>
+    <div class="rule"><i></i></div>
+    <p class="mono billing">Honorable Mention &middot; Youth Division, &ldquo;Moments&rdquo;</p>
+    <h1>Peninsula Photo Contest <span>2025</span></h1>
+    <p class="sub">Starring <b>&ldquo;Cinderello&rdquo;</b> &middot; a photograph by Zoe Wacker</p>
+  </div>
+
+  <figure class="hero rv">
+    <div class="shot"><img src="../../../public/images/photography_awards/cinderello.jpg" alt="A caretaker in a gray galabeya sweeps the red carpets of the vast Mosque-Madrasa of Sultan Hasan, under hanging lamps"></div>
+    <figcaption class="mono"><span><b>Cinderello</b> &middot; Zoe Wacker</span><span>Mosque&ndash;Madrasa of Sultan &#7716;asan, Historic Cairo</span></figcaption>
+  </figure>
+
+  <div class="credits rv">
+    <div><span class="mono">Presented by</span><p>Palo Alto Weekly &amp; Palo Alto Art Center</p></div>
+    <div><span class="mono">The field</span><p>Over 1,200 entries in six categories</p></div>
+    <div><span class="mono">Billing</span><p>Honorable Mention, Youth &ldquo;Moments&rdquo;</p></div>
+    <div><span class="mono">Exhibited</span><p>Palo Alto Art Center, Sept&ndash;Dec 2025</p></div>
+  </div>
+
+  <div class="layout">
+    <article>
+      <p class="lede rv">The Six Fifty Peninsula Photo Contest is presented by the Palo Alto Weekly and the Palo Alto Art Center and is open to photographers who live, work, or attend school in the 650 area code. There were over 1,200 entries across six categories.</p>
+
+      <div class="act rv"><span class="mono">Act I</span><h2>The <span>photo</span></h2></div>
+      <p class="rv">My winning photo, Cinderello, was taken at the Mosque&ndash;Madrasa of Sultan &#7716;asan in Historic Cairo. A man was sweeping the carpets, and the light caught the dust just right&mdash;he looked like he needed a fairy godmother, which made me think of Cinderella. I tried to frame the scale of the space against a single everyday gesture, so the scene feels both grand and human.</p>
+
+      <blockquote class="pull rv">&ldquo;The scene feels both <em>grand and human.</em>&rdquo;</blockquote>
+
+      <div class="act rv"><span class="mono">Act II</span><h2>The <span>show</span></h2></div>
+      <p class="rv">The photograph was exhibited at the Palo Alto Art Center from September&ndash;December 2025. I was the youngest winner; the other Youth Division awardees were mostly juniors and seniors. It was exciting (and a little intimidating!) to be shown alongside older students whose work I admire.</p>
+
+      <figure class="accept rv">
+        <div class="shot"><img src="../../../public/images/photography_awards/650_award_2025.jpg" alt="Zoe accepting the Peninsula Photo Contest award"></div>
+        <figcaption class="mono"><span>Accepting the award</span></figcaption>
+      </figure>
+    </article>
+
+    <aside>
+      <nav class="more" aria-label="Photo awards">
+        <span class="mono">The programme</span>
+        <h3>All photo awards</h3>
+        <ol>
+          <li><a href="#"><span class="n">I</span><span class="t">Travel Photographer of the Year 2025<span class="d">Young TPOTY Runner-Up, 14 &amp; under</span></span></a></li>
+          <li class="on"><a href="award.html" aria-current="page"><span class="n">II</span><span class="t">Six Fifty Peninsula Photo Contest 2025<span class="d">Honorable Mention &middot; now showing</span></span></a></li>
+          <li><a href="#"><span class="n">III</span><span class="t">National Photography Competition for Kids<span class="d">Two wins, 2025&ndash;26</span></span></a></li>
+          <li><a href="#"><span class="n">IV</span><span class="t">No Frames International Youth Photo Contest 2026<span class="d">Honorable Mention, under-14 Nature</span></span></a></li>
+          <li><a href="#"><span class="n">V</span><span class="t">Global Peace Photo Award 2026<span class="d">Shortlisted, &ldquo;Faces of Peace&rdquo;</span></span></a></li>
+        </ol>
+      </nav>
+      <a class="back" href="index.html">&larr; Back to the poster</a>
+    </aside>
+  </div>
+</main>
+
+
+<footer>
+  <div class="wrap foot">
+    <div class="big">Zoe Wacker</div>
+    <p class="mono">Menlo Park, California &middot; &copy; 2026</p>
+  </div>
+</footer>
+
+<div class="tag">Mockup 7B-5 &middot; Matinee · Sacramento</div>
+
+<script>
+  (function(){
+    var els=document.querySelectorAll('.rv');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){var t=en.target;t.classList.add('in');io.unobserve(t);
+        setTimeout(function(){t.classList.remove('rv','in');t.style.transitionDelay='';},1300);}});
+    },{rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e,i){e.style.transitionDelay=(i%4)*70+'ms';io.observe(e);});
+  })();
+</script>
+</body>
+</html>

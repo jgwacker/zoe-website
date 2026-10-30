@@ -69,3 +69,5 @@ Zoe found After Dark too loud (neon glow, huge caps) and preferred Soft Blush; t
 | **7D · Lineup + Rooms** | 7A's homepage and carousel; lineup names and inner pages in their room colours | Fraunces, Manrope | 7C's room colours on `#F8EBE7` / `#FFFDFB` |
 
 **7B whimsical variants:** same layout and body text as 7B, only the headline font changes. **7B-1** Caprasimo (chunky retro), **7B-2** Fraunces with SOFT 100 and WONK 1 (rounded, quirky letterforms), **7B-3** Corben (rounded, old-cinema; set about 25% smaller because it's wide).
+
+**7B cursive variants:** Zoe found the ultra-bold headlines too much and likes cursive. These lower the lineup and heading weights (Soft & Wonky Fraunces at 400–500) and set the name and section headings in a script: **7B-4** Pinyon Script (formal copperplate), **7B-5** Sacramento (light hand lettering), **7B-6** Gwendolyn (calligraphic, most legible). Note: Zoe disliked Fraunces' italics on Soft Blush; scripts are a different look, so check that she likes them.
