@@ -22,7 +22,7 @@ test('sidebar is a numbered list with the current page marked', () => {
 
 test('footer reads "Menlo Park, California · © <year>" under a decorative outlined name', () => {
   const html = readDist('/about/');
-  assert.match(html, /<div[^>]*class="big"[^>]*aria-hidden="true"[^>]*>ZOE WACKER<\/div>/);
+  assert.match(html, /<div[^>]*class="big script"[^>]*aria-hidden="true"[^>]*>Zoe Wacker<\/div>/);
   assert.match(html, /Menlo Park, California · © \d{4}/);
 });
 
@@ -38,22 +38,25 @@ test('long page title does not cause sideways scroll at 390px', async (t) => {
 
 const SHELTER = '/photography/awards/npcfk-competition-shelter-2026/';
 
-test('titles over 40 characters get the long-title size', () => {
+test('short titles are script; titles over 40 characters switch to the serif long-title', () => {
   assert.match(readDist(SHELTER), /<h1[^>]*class="post-title long-title"/);
-  assert.match(readDist('/about/'), /<h1[^>]*class="post-title"(?! long-title)/);
+  assert.match(readDist('/about/'), /<h1[^>]*class="post-title script"/);
 });
 
-test('long neon title fits its box at 390px', async (t) => {
+test('long title fits its box at 360px and 390px', async (t) => {
   const srv = await serveDist();
   const browser = await launch();
   t.after(async () => { await browser.close(); await srv.close(); });
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  await page.goto(srv.url + SHELTER, { waitUntil: 'domcontentloaded' });
-  const { sw, cw } = await page.evaluate(() => {
-    const h = document.querySelector('.post-title');
-    return { sw: h.scrollWidth, cw: h.clientWidth };
-  });
-  assert.ok(sw <= cw, `title scrollWidth ${sw} > clientWidth ${cw}`);
+  for (const width of [360, 390]) {
+    const page = await browser.newPage({ viewport: { width, height: 844 } });
+    await page.goto(srv.url + SHELTER, { waitUntil: 'domcontentloaded' });
+    const { sw, cw } = await page.evaluate(() => {
+      const h = document.querySelector('.post-title');
+      return { sw: h.scrollWidth, cw: h.clientWidth };
+    });
+    assert.ok(sw <= cw, `${width}px: title scrollWidth ${sw} > clientWidth ${cw}`);
+    await page.close();
+  }
 });
 
 test('printing a page gives a white background and dark text', async (t) => {
@@ -68,5 +71,5 @@ test('printing a page gives a white background and dark text', async (t) => {
     return { bg: b.backgroundColor, fg: getComputedStyle(document.querySelector('.content p')).color };
   });
   assert.equal(s.bg, 'rgb(255, 255, 255)');
-  assert.equal(s.fg, 'rgb(30, 20, 36)');
+  assert.equal(s.fg, 'rgb(42, 30, 30)');
 });

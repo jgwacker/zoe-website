@@ -3,13 +3,15 @@ import FullBleed from '@layouts/FullBleed.astro';
 import exhibit from '../data/exhibit.json';
 import { photographyAwards, travelTrips, musicConcerts, celloPerformances } from '@links/registry';
 import { displayPath, listDrafts, missingDisplayFiles, homepageImages } from '../lib/exhibit.mjs';
-import { splitYear, latest, featuredAward, seasonLabel } from '../lib/registry-meta.mjs';
+import { splitYear, latest, featuredAward, seasonLabel, recentStubs, roman } from '../lib/registry-meta.mjs';
 
 const photos = exhibit.items.slice(0, 3);
 const award = featuredAward(photographyAwards);
 const trips = latest(travelTrips, 5).map((t) => ({ ...t, ...splitYear(t.label) }));
 const gigs = latest(musicConcerts, 6).map((c) => ({ ...c, ...splitYear(c.label) }));
 const cello = celloPerformances[0];
+const stubs = recentStubs({ awards: photographyAwards, trips: travelTrips, concerts: musicConcerts });
+const season = seasonLabel(new Date());
 
 const missing = missingDisplayFiles(
   homepageImages({ items: exhibit.items, award, trips }).map(([src, kind]) => displayPath(src, kind)), 'public');
@@ -21,40 +23,57 @@ if (drafts.length) {
   console.warn(`[exhibit] ${drafts.length} draft caption(s) for Zoe to edit in src/data/exhibit.json: ${drafts.join('; ')}`);
 }
 
-const num = (i) => String(i + 1).padStart(2, '0');
 const BILL = [
   [['/photography', 'Photography'], ['/travel', 'Travel'], ['/music', 'Music']],
   [['/geography', 'Geography'], ['/guardian-arts', 'Guardian Arts'], ['/academics', 'Academics']],
-  [['/about', 'About'], ['/photography/awards', 'Awards'], ['/music/concerts', 'Concerts']],
+  [['/about', 'About Zoe'], ['/photography/awards', 'Awards'], ['/music/concerts', 'Concerts']],
 ];
-const GLOW = ['g-coral', 'g-rose', 'g-gold'];
+const HALO = ['h-orange', 'h-rose', 'h-gold'];
 const INTERESTS = ['Geography', 'Travel', 'Cello', 'Parkour', 'Mixed martial arts', 'History', 'Photos that tell little stories'];
+const num = (i) => String(i + 1).padStart(2, '0');
 ---
 
 <FullBleed title="Zoe Wacker">
   <div class="home">
     <section class="poster">
-      <p class="presents">Menlo Park, CA <b>presents</b> the {seasonLabel(new Date())} season</p>
-      <h1 class="headliner">ZOE WACKER</h1>
-      <p class="tagline">A highlight reel of experiments, adventures and <em>“aha!” moments.</em></p>
+      <p class="presents">Menlo Park, CA <b>presents</b> the {season} season</p>
+      <div class="rule" aria-hidden="true"><i></i></div>
+      <h1 class="headliner script">Zoe Wacker<span>.</span></h1>
+      <p class="tagline">Photographer, cellist, map nerd. A highlight reel of <em>experiments, adventures and “aha!” moments.</em></p>
       <nav class="bill" aria-label="Sections">
         {BILL.map((row, r) => (
           <div class={`row r${r + 1}`}>
-            {row.map(([href, label], i) => (
-              <>{i > 0 && <i class="dot" aria-hidden="true"></i>}<a href={href}>{label}</a></>
-            ))}
+            {row.map(([href, label], i) => (<>{i > 0 && <i class="dot" aria-hidden="true"></i>}<a href={href}>{label}</a></>))}
           </div>
         ))}
         <p class="support">On location in {trips.map((t, i) => (<>{i > 0 && ' · '}<b>{t.name}</b></>))}</p>
       </nav>
     </section>
 
-    <section class="glowstrip" aria-label="Featured photos">
+    {stubs.length > 0 && (
+      <section class="recent" aria-label="Recent dates">
+        <div class="stubs-head"><p><b>Now showing</b> · recent dates</p><p aria-hidden="true">Admit one</p></div>
+        <div class="stubs">
+          {stubs.map((s, i) => (
+            <a class={`stub ${s.tone} reveal`} href={s.href}>
+              <span class="main">
+                <span class="kind">{s.kind}{s.year ? ` · ${s.year}` : ''}</span>
+                <span class="name">{s.name}</span>
+                {s.note && <span class="det">{s.note}</span>}
+              </span>
+              <span class="tear" aria-hidden="true"><span>No. {num(i)}</span></span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="strip" aria-label="Featured photos">
       {photos.map((p, i) => (
-        <figure class={`p${i + 1}`}>
+        <figure class={`p${i + 1} reveal`}>
           {p.href
-            ? <a class={`glow ${GLOW[i]}`} href={p.href}><img src={displayPath(p.image)} alt={p.alt} loading={i === 0 ? 'eager' : 'lazy'} /></a>
-            : <div class={`glow ${GLOW[i]}`}><img src={displayPath(p.image)} alt={p.alt} loading={i === 0 ? 'eager' : 'lazy'} /></div>}
+            ? <a class={`shot ${HALO[i]}`} href={p.href}><img src={displayPath(p.image)} alt={p.alt} loading={i === 0 ? 'eager' : 'lazy'} /></a>
+            : <div class={`shot ${HALO[i]}`}><img src={displayPath(p.image)} alt={p.alt} loading={i === 0 ? 'eager' : 'lazy'} /></div>}
           <figcaption><span>{p.title}</span><span>{p.place}</span></figcaption>
         </figure>
       ))}
@@ -62,12 +81,12 @@ const INTERESTS = ['Geography', 'Travel', 'Cello', 'Parkour', 'Mixed martial art
 
     <section class="block" id="awards">
       <div class="two">
-        <div>
-          <p class="eyebrow">The set list</p>
-          <h2>Photo <em>awards</em></h2>
+        <div class="reveal">
+          <p class="eyebrow">The programme</p>
+          <h2 class="script">Photo awards <em>{season}</em></h2>
           {award && (
             <a class="awardcard" href={award.href}>
-              {award.image && <span class="glow g-rose"><img src={displayPath(award.image)} alt="" loading="lazy" /></span>}
+              {award.image && <span class="shot h-orange"><img src={displayPath(award.image)} alt="" loading="lazy" /></span>}
               <span class="cap">
                 <b>{award.label}</b>
                 {award.note && <span class="note">{award.note}</span>}
@@ -76,13 +95,13 @@ const INTERESTS = ['Geography', 'Travel', 'Cello', 'Parkour', 'Mixed martial art
             </a>
           )}
         </div>
-        <ol class="setlist" role="list">
+        <ol class="programme reveal" role="list">
           {photographyAwards.map((a, i) => (
             <li class:list={{ feat: a === award }}>
               <a href={a.href}>
-                <span class="n">{num(i)}</span>
+                <span class="n">{roman(i + 1)}</span>
                 <span class="t">{a.label}{a.note && <span class="d">{a.note}</span>}</span>
-                <span class="y">{splitYear(a.label).year ?? ''}</span>
+                <span class="arrow" aria-hidden="true">→</span>
               </a>
             </li>
           ))}
@@ -91,11 +110,11 @@ const INTERESTS = ['Geography', 'Travel', 'Cello', 'Parkour', 'Mixed martial art
     </section>
 
     <section class="block" id="travel">
-      <p class="eyebrow">World tour</p>
-      <h2>Travel <em>dates</em></h2>
+      <p class="eyebrow">On location</p>
+      <h2 class="script">Travel <em>dates</em></h2>
       <div class="tour">
         {trips.map((t) => (
-          <a class="date" href={t.href}>
+          <a class="date reveal" href={t.href}>
             <span class="yr">{t.year ?? ''}</span>
             <span class="place">{t.name}</span>
             <span class="stops">{t.note ?? ''}</span>
@@ -106,32 +125,34 @@ const INTERESTS = ['Geography', 'Travel', 'Cello', 'Parkour', 'Mixed martial art
       <a class="more" href="/travel">All trips →</a>
     </section>
 
-    <section class="block music" id="music">
-      <div>
-        <p class="eyebrow">Music</p>
-        <blockquote class="pull">“Concerts are my favorite because you don’t just hear the music—<em>you feel it in your chest.</em>”</blockquote>
-        <a class="more" href="/music">More about music →</a>
-      </div>
-      <div>
-        <p class="label">From the crowd</p>
-        <ul class="gigs" role="list">
-          {gigs.map((g) => (<li><a href={g.href}><b>{g.name}</b><span>{g.year ?? ''}</span></a></li>))}
-        </ul>
-        {cello && (
-          <a class="cello" href={cello.href}>
-            <span class="label">On stage · Cello</span>
-            <span class="c-t">{cello.label}</span>
-            {cello.note && <span class="c-n">{cello.note}</span>}
-          </a>
-        )}
+    <section class="block" id="music">
+      <div class="music reveal">
+        <div>
+          <p class="eyebrow">Music</p>
+          <blockquote class="pull">“Concerts are my favorite because you don’t just hear the music—<em>you feel it in your chest.</em>”</blockquote>
+          <a class="more" href="/music">More about music →</a>
+        </div>
+        <div>
+          <p class="label">From the crowd</p>
+          <ul class="gigs" role="list">
+            {gigs.map((g) => (<li><a href={g.href}><b>{g.name}</b><span>{g.year ?? ''}</span></a></li>))}
+          </ul>
+          {cello && (
+            <a class="cello" href={cello.href}>
+              <span class="label">On stage · Cello</span>
+              <span class="c-t">{cello.label}</span>
+              {cello.note && <span class="c-n">{cello.note}</span>}
+            </a>
+          )}
+        </div>
       </div>
     </section>
 
-    <section class="block about" id="meet">
-      <span class="monogram" aria-hidden="true">ZW</span>
+    <section class="block about reveal" id="meet">
+      <span class="monogram script" aria-hidden="true">ZW</span>
       <div>
         <p class="eyebrow">Meet the headliner</p>
-        <h2>Hi! I’m Zoe.</h2>
+        <h2 class="script">Hi! I’m Zoe.</h2>
         <p class="voice">A middle schooler who’s always juggling a bunch of different interests. I started this site to keep track of the things I’m working on, the ideas I’m excited about, and the projects that don’t always fit neatly into a school folder.</p>
         <ul class="interests" role="list">{INTERESTS.map((s) => <li>{s}</li>)}</ul>
         <a class="more" href="/about">More about me →</a>
@@ -142,113 +163,157 @@ const INTERESTS = ['Geography', 'Travel', 'Cello', 'Parkour', 'Mixed martial art
 
 <style>
   .home { width: var(--page-max); max-width: 100%; margin: 0 auto; padding: 0 32px 20px; }
-  .poster { padding: 72px 0 40px; text-align: center; }
-  .presents { margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--marigold); }
-  .presents b { color: var(--cream); font-weight: 500; }
-  .headliner { font-size: clamp(64px, 15.5vw, 224px); line-height: .86; margin: 18px 0 8px; text-shadow: var(--neon); }
-  .tagline { font-size: clamp(16px, 2vw, 20px); color: var(--mist); max-width: 640px; margin: 0 auto; }
-  .tagline em { color: var(--coral); }
-  .bill { margin: 52px auto 0; max-width: 1100px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 30px 0 34px; }
-  .row { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: 22px; row-gap: 4px; font-family: var(--display); text-transform: uppercase; line-height: 1.05; }
-  .row a { color: inherit; text-decoration: none; transition: color .2s, text-shadow .2s; }
-  .row a:hover { color: var(--marigold); text-shadow: 0 0 22px rgba(255, 177, 59, .6); text-decoration: none; }
-  .dot { width: 9px; height: 9px; transform: rotate(45deg); background: var(--rose); display: inline-block; align-self: center; box-shadow: 0 0 12px var(--rose); }
-  .r1 { font-size: clamp(36px, 6.2vw, 84px); color: var(--coral); }
-  .r2 { font-size: clamp(26px, 3.8vw, 50px); color: var(--cream); margin-top: 10px; }
-  .r2 .dot { width: 7px; height: 7px; background: var(--marigold); box-shadow: 0 0 10px var(--marigold); }
-  .r3 { font-size: clamp(20px, 2.3vw, 28px); color: var(--rose); margin-top: 14px; }
+  .poster { padding: 64px 0 24px; text-align: center; }
+  .presents { margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--rose-text); }
+  .presents b { color: var(--ink); font-weight: 500; }
+  .rule { display: flex; align-items: center; gap: 14px; max-width: 520px; margin: 18px auto 0; }
+  .rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+  .rule::after { transform: scaleX(-1); }
+  .rule i { width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
+  .headliner { font-size: clamp(44px, 15.5vw, 236px); line-height: 1.05; white-space: nowrap; margin: 6px 0 0; padding: .08em 0 .12em; }
+  .headliner span { color: var(--orange); }
+  .tagline { font-size: clamp(16px, 1.9vw, 20px); color: var(--muted); max-width: 620px; margin: 8px auto 0; }
+  .tagline em { color: var(--rose-text); font-weight: 500; }
+  .bill { margin: 44px auto 0; max-width: 1080px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 30px 0; position: relative; }
+  .bill::before, .bill::after { content: ""; position: absolute; left: 0; right: 0; height: 1px; background: var(--hair); }
+  .bill::before { top: 4px; } .bill::after { bottom: 4px; }
+  .row { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: 24px; row-gap: 2px; font-family: var(--serif); font-variation-settings: var(--soft); line-height: 1.12; }
+  .row a { position: relative; isolation: isolate; color: inherit; text-decoration: none; transition: color .3s; }
+  .row a::after { content: ""; position: absolute; inset: -.18em -.45em; border-radius: 999px; z-index: -1; opacity: 0; transform: scale(.85);
+    background: radial-gradient(closest-side, rgba(var(--rh), .20), rgba(var(--rh), 0)); transition: opacity .4s ease, transform .4s ease; }
+  .row a:hover, .row a:focus-visible { text-decoration: none; }
+  .row a:hover::after, .row a:focus-visible::after { opacity: 1; transform: scale(1); }
+  .dot { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); display: inline-block; align-self: center; }
+  .r1 { --rh: var(--h-orange); font-size: clamp(32px, 5.6vw, 76px); font-weight: 500; color: var(--orange); }
+  .r1 a:hover { color: var(--orange); }
+  .r2 { --rh: var(--h-rose); font-size: clamp(24px, 3.3vw, 44px); font-weight: 400; color: var(--ink); margin-top: 8px; }
+  .r2 a:hover { color: var(--rose); }
+  .r2 .dot { width: 6px; height: 6px; background: var(--rose); }
+  .r3 { --rh: var(--h-rose); font-size: clamp(19px, 2.1vw, 26px); font-weight: 500; font-variant-caps: all-small-caps; letter-spacing: .08em; color: var(--rose-text); margin-top: 12px; }
   .r3 .dot { width: 5px; height: 5px; }
-  .support { margin: 20px 0 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--mist); }
-  .support b { color: var(--cream); font-weight: 500; }
+  .support { margin: 22px 0 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .support b { color: var(--ink); font-weight: 500; }
 
-  .glowstrip { display: grid; grid-template-columns: 1.25fr .8fr 1fr; gap: 28px; align-items: end; padding: 70px 0 20px; }
-  .glowstrip figure { margin: 0; }
-  .glow { display: block; border-radius: 6px; overflow: hidden; }
-  .glow img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
-  .g-coral { box-shadow: var(--glow-coral); }
-  .g-rose { box-shadow: var(--glow-rose); }
-  .g-gold { box-shadow: var(--glow-gold); }
-  .p1 .glow { aspect-ratio: 3 / 2; }
-  .p2 .glow { aspect-ratio: 3 / 5; }
-  .p3 .glow { aspect-ratio: 4 / 5; }
-  .glowstrip figcaption { max-width: none; margin: 14px 0 0; display: flex; justify-content: space-between; gap: 12px; }
-  .glowstrip figcaption span:first-child { color: var(--cream); }
+  .stubs-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: 56px 0 18px; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .stubs-head p { margin: 0; }
+  .stubs-head b { color: var(--orange-text); font-weight: 500; }
+  .stubs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+  .stub { --c: var(--orange); --ct: var(--orange-text); --hh: var(--h-orange); position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 46px; background: var(--paper); border-radius: 10px; color: var(--ink); text-decoration: none;
+    box-shadow: 0 1px 0 rgba(42, 30, 30, .05), 0 14px 30px -18px rgba(122, 60, 40, .35); transition: transform .3s ease, box-shadow .4s ease; }
+  .stub:visited, .stub:hover { color: var(--ink); text-decoration: none; }
+  .stub:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(var(--h-rose), .22), 0 22px 48px -16px rgba(var(--h-rose), .5), 0 0 90px -24px rgba(var(--h-rose), .4); }
+  .stub.rose { --c: var(--rose); --ct: var(--rose-text); }
+  .stub.gold { --c: var(--gold); --ct: var(--gold-text); }
+  .stub .main { padding: 18px 18px 18px 20px; border-left: 4px solid var(--c); border-radius: 10px 0 0 10px; min-width: 0; }
+  .stub .kind { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ct); }
+  .stub .name { display: block; font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 21px; line-height: 1.15; margin: 8px 0 6px; }
+  .stub .det { display: block; font-size: 14px; color: var(--muted); line-height: 1.45; }
+  .stub .tear { position: relative; border-left: 2px dashed var(--hair); display: flex; align-items: center; justify-content: center; }
+  .stub .tear span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ct); }
+  .stub .tear::before, .stub .tear::after { content: ""; position: absolute; left: -9px; width: 16px; height: 16px; border-radius: 50%; background: var(--cream); }
+  .stub .tear::before { top: -8px; } .stub .tear::after { bottom: -8px; }
 
-  .block { padding-top: 96px; }
-  .block h2 { margin-top: 0; font-size: clamp(40px, 5.4vw, 72px); line-height: .95; }
-  .block .eyebrow { margin-bottom: 14px; }
+  .strip { display: grid; grid-template-columns: 1.3fr .8fr 1fr; gap: 30px; align-items: start; padding: 84px 0 10px; }
+  .strip figure { margin: 0; }
+  .shot { display: block; border-radius: 8px; overflow: hidden; background: var(--blush); transition: box-shadow .5s ease; }
+  .shot img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 0; transition: transform .8s ease; }
+  .h-orange { box-shadow: var(--halo-orange); } .h-rose { box-shadow: var(--halo-rose); } .h-gold { box-shadow: var(--halo-gold); }
+  figure:hover .h-orange, .awardcard:hover .h-orange { box-shadow: var(--halo-orange-hover); }
+  figure:hover .h-rose { box-shadow: var(--halo-rose-hover); }
+  figure:hover .h-gold { box-shadow: var(--halo-gold-hover); }
+  figure:hover .shot img, .awardcard:hover .shot img { transform: scale(1.025); }
+  .strip figcaption { max-width: none; margin: 14px 0 0; display: flex; justify-content: space-between; gap: 12px; }
+  .strip figcaption span:first-child { color: var(--ink); }
+  .p1 .shot { aspect-ratio: 3 / 2; }
+  .p2 { margin-top: 70px; } .p2 .shot { aspect-ratio: 3 / 4.6; }
+  .p3 { margin-top: 24px; } .p3 .shot { aspect-ratio: 4 / 5; }
+
+  .block { padding-top: 104px; }
+  .home h2 { margin: 0; font-size: clamp(44px, 5.2vw, 80px); line-height: 1.05; white-space: nowrap; padding-bottom: .06em; }
+  .home h2 em { color: var(--orange); }
+  .block .eyebrow { margin-bottom: 10px; }
   .two { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
-  .awardcard { display: block; margin-top: 36px; color: var(--cream); text-decoration: none; }
-  .awardcard:hover, .awardcard:visited { color: var(--cream); text-decoration: none; }
-  .awardcard .glow { aspect-ratio: 3 / 2; }
-  .awardcard .cap { display: block; margin-top: 18px; }
-  .awardcard b { display: block; font-family: var(--display); font-weight: 400; font-size: 30px; line-height: 1.05; text-transform: uppercase; }
-  .awardcard .note { display: block; color: var(--mist); font-size: 15px; margin-top: 6px; }
-  .btn { display: inline-flex; margin-top: 18px; padding: 12px 20px; border-radius: 999px; background: var(--coral); color: var(--night); font-weight: 700; font-size: 15px; box-shadow: 0 0 30px rgba(255, 111, 89, .45); transition: transform .2s, box-shadow .2s; }
-  .awardcard:hover .btn { transform: translateY(-2px); box-shadow: 0 0 44px rgba(255, 111, 89, .7); }
-  .setlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-  .setlist li { border-bottom: 1px solid var(--line); }
-  .setlist a { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 20px 4px; color: var(--cream); text-decoration: none; transition: background .2s; }
-  .setlist a:visited { color: var(--cream); }
-  .setlist a:hover { background: linear-gradient(90deg, rgba(255, 79, 139, .10), transparent); color: var(--cream); text-decoration: none; }
-  .setlist .n { font-family: var(--display); font-size: 26px; line-height: 1; color: var(--rose); }
-  .setlist .t { font-weight: 700; font-size: 18px; line-height: 1.3; }
-  .setlist .d { display: block; font-weight: 400; font-size: 15px; color: var(--mist); margin-top: 3px; }
-  .setlist .y { font-family: var(--mono); font-size: 13px; color: var(--marigold); }
-  .setlist .feat .t { color: var(--coral); }
+  .awardcard { display: block; margin-top: 30px; color: var(--ink); text-decoration: none; }
+  .awardcard:hover, .awardcard:visited { color: var(--ink); text-decoration: none; }
+  .awardcard .shot { aspect-ratio: 3 / 2; }
+  .awardcard .cap { display: block; margin-top: 20px; }
+  .awardcard b { display: block; font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 28px; line-height: 1.15; }
+  .awardcard .note { display: block; color: var(--muted); font-size: 15px; margin-top: 4px; }
+  .btn { display: inline-flex; margin-top: 18px; padding: 12px 22px; border-radius: 999px; background: var(--ink); color: var(--cream); font-weight: 500; font-size: 15px; transition: transform .25s, background .25s; }
+  .awardcard:hover .btn { transform: translateY(-2px); background: var(--deep-rose); }
+  .programme { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+  .programme li { border-bottom: 1px solid var(--hair); }
+  .programme a { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 22px 6px; color: var(--ink); text-decoration: none; transition: background .25s, padding .25s; }
+  .programme a:visited { color: var(--ink); }
+  .programme a:hover { background: linear-gradient(90deg, rgba(226, 115, 58, .08), transparent); padding-left: 12px; text-decoration: none; color: var(--ink); }
+  .programme .n { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 500; font-size: 28px; line-height: 1; color: var(--gold-text); }
+  .programme .t { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 20px; line-height: 1.25; }
+  .programme .d { display: block; font-family: var(--sans); font-weight: 400; font-size: 15px; color: var(--muted); margin-top: 4px; }
+  .programme .feat .t { color: var(--orange-text); }
+  .programme .arrow { color: var(--rose-text); transition: transform .25s; }
+  .programme a:hover .arrow { transform: translateX(4px); }
 
-  .tour { margin-top: 36px; border-top: 2px solid var(--cream); }
-  .date { display: grid; grid-template-columns: 110px minmax(0, 1.1fr) minmax(0, 2fr) 120px; gap: 24px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--line); color: var(--cream); text-decoration: none; }
-  .date:hover, .date:visited { color: var(--cream); text-decoration: none; }
-  .date .yr { font-family: var(--display); font-size: 30px; color: var(--marigold); }
-  .date .place { font-family: var(--display); font-size: 34px; text-transform: uppercase; line-height: 1; }
-  .date:hover .place { color: var(--coral); }
-  .date .stops { color: var(--mist); }
-  .date .thumb { width: 120px; height: 72px; border-radius: 4px; overflow: hidden; }
+  .tour { margin-top: 36px; border-top: 1px solid var(--ink); }
+  .date { display: grid; grid-template-columns: 100px minmax(0, 1fr) minmax(0, 2fr) 132px; gap: 24px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--hair); color: var(--ink); text-decoration: none; }
+  .date:hover, .date:visited { color: var(--ink); text-decoration: none; }
+  .date .yr { font-family: var(--mono); font-size: 14px; letter-spacing: .14em; color: var(--gold-text); }
+  .date .place { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 34px; line-height: 1; transition: color .25s; }
+  .date:hover .place { color: var(--orange); }
+  .date .stops { color: var(--muted); }
+  .date .thumb { width: 132px; height: 84px; border-radius: 6px; overflow: hidden; box-shadow: var(--halo-rose); transition: transform .3s, box-shadow .5s; }
+  .date:hover .thumb { transform: translateY(-3px) rotate(-1.5deg); box-shadow: var(--halo-rose-hover); }
   .date .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
   .more { display: inline-block; margin-top: 22px; font-weight: 700; }
 
-  .music { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-  .pull { border: 0; padding: 0; font-family: var(--display); text-transform: uppercase; font-size: clamp(34px, 4.2vw, 58px); line-height: 1.02; max-width: none; }
-  .pull em { color: var(--rose); text-shadow: 0 0 30px rgba(255, 79, 139, .6); }
-  .label { display: block; margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--mist); }
+  .music { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; background: var(--blush); border-radius: 18px; padding: 64px; }
+  .pull { border: 0; padding: 0; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.1; max-width: none; }
+  .pull em { color: var(--rose-text); }
+  .label { display: block; margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
   .gigs { list-style: none; margin: 8px 0 0; padding: 0; columns: 2; column-gap: 32px; }
-  .gigs li { break-inside: avoid; border-bottom: 1px solid var(--line); }
-  .gigs a { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; color: var(--cream); text-decoration: none; }
-  .gigs a:hover b { color: var(--coral); }
-  .gigs span { color: var(--marigold); font-family: var(--mono); font-size: 13px; }
-  .cello { display: block; margin-top: 28px; padding: 22px 24px; border: 1px solid rgba(255, 177, 59, .4); border-radius: 6px; background: rgba(255, 177, 59, .06); color: var(--cream); text-decoration: none; }
-  .cello:hover, .cello:visited { color: var(--cream); text-decoration: none; }
-  .cello .label { color: var(--marigold); }
+  .gigs li { break-inside: avoid; border-bottom: 1px solid var(--hair); }
+  .gigs a { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; color: var(--ink); text-decoration: none; }
+  .gigs a:hover, .gigs a:visited { color: var(--ink); text-decoration: none; }
+  .gigs a:hover b { color: var(--orange-text); }
+  .gigs b { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; }
+  .gigs span { color: var(--gold-text); font-family: var(--mono); font-size: 13px; }
+  .cello { display: block; margin-top: 28px; padding: 20px 22px; background: var(--paper); border-radius: 10px; border-left: 4px solid var(--gold); color: var(--ink); text-decoration: none; transition: transform .25s; }
+  .cello:hover, .cello:visited { color: var(--ink); text-decoration: none; }
+  .cello:hover { transform: translateY(-2px); }
+  .cello .label { color: var(--gold-text); }
   .cello .c-t { display: block; margin-top: 6px; font-weight: 700; }
-  .cello .c-n { display: block; color: var(--mist); font-size: 15px; }
+  .cello .c-n { display: block; color: var(--muted); font-size: 15px; }
 
   .about { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 64px; align-items: center; }
-  .monogram { width: 240px; height: 240px; border-radius: 50%; display: grid; place-items: center; background: var(--night-2); box-shadow: var(--glow-coral); font-family: var(--display); font-size: 96px; letter-spacing: .04em; color: var(--cream); }
-  .voice { font-size: 21px; line-height: 1.55; margin: 22px 0 0; max-width: 640px; }
+  .monogram { width: 240px; height: 240px; border-radius: 50%; display: grid; place-items: center; background: var(--paper); box-shadow: var(--halo-gold); font-size: 104px; line-height: 1; transition: box-shadow .5s; }
+  .monogram:hover { box-shadow: var(--halo-gold-hover); }
+  .voice { font-size: 20px; line-height: 1.6; margin: 22px 0 0; max-width: 640px; }
   .interests { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-  .interests li { padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 14px; color: var(--mist); }
+  .interests li { padding: 7px 14px; background: var(--paper); border: 1px solid var(--hair); border-radius: 999px; font-size: 14px; color: var(--muted); }
 
+  @media (max-width: 1060px) { .stubs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 900px) {
-    .glowstrip { grid-template-columns: 1fr 1fr; gap: 18px; }
-    .glowstrip .p1 { grid-column: 1 / -1; }
+    .strip { grid-template-columns: 1fr 1fr; gap: 18px; }
+    .strip .p1 { grid-column: 1 / -1; }
+    .p2, .p3 { margin-top: 0; }
     .two, .music, .about { grid-template-columns: minmax(0, 1fr); gap: 40px; }
-    .monogram { width: 160px; height: 160px; font-size: 64px; }
-    .date { grid-template-columns: 70px minmax(0, 1fr); gap: 6px 16px; }
+    .music { padding: 40px 28px; }
+    .monogram { width: 160px; height: 160px; font-size: 68px; }
+    .date { grid-template-columns: 70px minmax(0, 1fr); gap: 4px 16px; }
     .date .stops { grid-column: 2; }
     .date .thumb { display: none; }
   }
+  @media (max-width: 699px) { .home h2 { font-size: clamp(28px, 8.4vw, 58px); } }
   @media (max-width: 560px) {
     .home { padding: 0 16px 20px; }
-    .poster { padding-top: 48px; }
-    .bill { margin-top: 36px; }
+    .poster { padding-top: 44px; }
+    .bill { margin-top: 32px; }
     .row { column-gap: 14px; }
-    .glowstrip figcaption { flex-direction: column; gap: 2px; }
+    .stubs { grid-template-columns: minmax(0, 1fr); }
+    .strip figcaption { flex-direction: column; gap: 2px; }
     .gigs { columns: 1; }
-    .date .yr { font-size: 24px; }
     .date .place { font-size: 28px; }
-    .setlist a { grid-template-columns: 34px minmax(0, 1fr); }
-    .setlist .y { grid-column: 2; }
+    .programme a { grid-template-columns: 40px minmax(0, 1fr); }
+    .programme .arrow { display: none; }
     .block { padding-top: 72px; }
   }
 </style>

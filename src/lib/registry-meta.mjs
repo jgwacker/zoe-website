@@ -19,3 +19,24 @@ export function seasonLabel(date) {
   const start = date.getMonth() >= 7 ? date.getFullYear() : date.getFullYear() - 1;
   return `${start}–${String(start + 1).slice(2)}`;
 }
+
+/** Homepage ticket stubs: the two newest awards, the newest trip and the newest concert. */
+export function recentStubs({ awards = [], trips = [], concerts = [] }) {
+  const pick = [
+    [awards[0], 'Award', 'orange'],
+    [awards[1], 'Award', 'rose'],
+    [trips[0], 'Trip', 'gold'],
+    [concerts[0], 'Concert', 'orange'],
+  ];
+  return pick.filter(([item]) => item).map(([item, kind, tone]) => ({
+    kind, tone, href: item.href, note: item.note ?? '', ...splitYear(item.label),
+  }));
+}
+
+/** 1 -> "I", 14 -> "XIV" (numbers up to 39, plenty for the awards list). */
+export function roman(n) {
+  const parts = [[10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']];
+  let out = '';
+  for (const [v, s] of parts) while (n >= v) { out += s; n -= v; }
+  return out;
+}

@@ -2,7 +2,7 @@
 
 Seven design directions (plus eight variations of 3D) for warming up Zoe's site, explored October 2026. Each one has a homepage (`index.html`) and the Peninsula Photo Contest award page (`award.html`), built with her real photos and words. They're static mockups, not part of the Astro build, and nothing in `design/` is deployed.
 
-**Live theme:** 5B · After Dark (since October 22, 2026). Soft Blush (3D-1a) was live October 18–22, 2026.
+**Live theme:** 7B-5 · Matinee (since October 31, 2026). After Dark (5B) was live October 22–31, 2026, and Soft Blush (3D-1a) October 18–22, 2026.
 
 **To view:** open `design/themes/index.html` in a browser (e.g. `open -a Safari design/themes/index.html`). It links to every theme. Screenshots of each page are in `previews/`.
 
