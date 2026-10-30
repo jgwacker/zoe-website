@@ -67,15 +67,17 @@ Reference images in pages as `/images/section/filename.jpg`.
 - `FullBleed.astro` - Full-width layout without sidebar (used for homepage)
 - `BlogPost.astro` - Blog post layout with date/metadata
 
-### Theme (After Dark)
+### Theme (Matinee)
 
-- Dark "lineup poster" look from mockup `design/themes/5B`. Colors and fonts are CSS variables in `src/styles/global.css` (`--night`, `--cream`, `--mist`, `--coral`, `--rose`, `--marigold`, `--display` = Anton, `--sans` = DM Sans, `--mono` = DM Mono). No italics anywhere. Printing switches to dark text on white.
-- Every `<figure>` image automatically gets rounded corners and a coral/rose/marigold glow, with a mono `<figcaption>`. No per-page styling is needed.
+- Light cream "matinee poster" look from mockup `design/themes/7B-5`. Colors and fonts are CSS variables in `src/styles/global.css`: `--cream`, `--blush`, `--paper` backgrounds; `--ink` text; `--deep-rose` for the cursive name and titles; `--orange`, `--rose`, `--gold` only for text 24px and up or decoration, with `--orange-text`, `--rose-text`, `--gold-text` for small text (all pass WCAG AA). Fonts: Sacramento (`.script` class), Fraunces soft & wonky (`--serif` with `font-variation-settings: var(--soft)`), DM Sans, DM Mono. No italics anywhere. Printing switches to dark text on white.
+- Page titles are cursive; titles over 40 characters switch to the serif. In-page headings are serif.
+- Every `<figure>` image automatically gets rounded corners and a soft halo cycling orange/rose/gold that brightens on hover, with a mono `<figcaption>`. No per-page styling is needed.
+- Add `class="reveal"` to fade an element in on scroll. It's visible without JavaScript and under reduced motion.
 - Award pages put `<AwardExhibit slot="hero" … />` (in `src/components/`) at the top.
-- The homepage poster is generated from `src/links/registry.ts`: awards (with `note`, and one `featured: true` with an `image`), the five newest trips (`note` = stops, `image` = thumbnail), the six newest concerts and the newest cello performance. Add new entries at the top of each list. After adding an `image`, run `npm run thumbnails`.
-- The three glow-strip photos are the first three items in `src/data/exhibit.json`. Entries with `"draft": true` are placeholder captions for Zoe to rewrite, and the build prints a warning until they're gone.
+- The homepage is generated from `src/links/registry.ts`: the ticket stubs (two newest awards, newest trip, newest concert), awards (with `note`, and one `featured: true` with an `image`), the five newest trips (`note` = stops, `image` = thumbnail), the six newest concerts and the newest cello performance. Add new entries at the top of each list. After adding an `image`, run `npm run thumbnails`.
+- The three strip photos are the first three items in `src/data/exhibit.json`. Entries with `"draft": true` are placeholder captions for Zoe to rewrite, and the build prints a warning until they're gone.
 - `npm test` builds the site and runs the checks in `tests/`. They need Google Chrome installed.
 
 ### Design Themes
 
-`design/themes/` archives static HTML mockups of candidate site redesigns (warm pink/orange directions), with a README summarizing each. They are not part of the Astro build or deployment. Open `design/themes/index.html` to browse them. 5B (After Dark) is the live theme; 3D-1a (Soft Blush) was live before it.
+`design/themes/` archives static HTML mockups of candidate site redesigns (warm pink/orange directions), with a README summarizing each. They are not part of the Astro build or deployment. Open `design/themes/index.html` to browse them. 7B-5 (Matinee) is the live theme; 5B (After Dark) and 3D-1a (Soft Blush) were live before it.
