@@ -237,6 +237,8 @@
   h1,h2,.foot .big{font-family:'Sacramento',cursive !important;font-weight:400 !important;font-variation-settings:normal !important;letter-spacing:0 !important;line-height:1.05 !important}
   h1{font-size:clamp(81px,17.0vw,256px) !important;padding:.08em 0 .12em}
   h2{font-size:clamp(56px,7.0vw,94px) !important}
+  /* Sacramento has one thin weight: thicken it to a regular pen line */
+  h1,h2,.foot .big{-webkit-text-stroke:.011em currentColor;paint-order:stroke fill}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
