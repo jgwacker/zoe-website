@@ -239,6 +239,10 @@
   h2{font-size:clamp(56px,7.0vw,94px) !important}
   /* Sacramento has one thin weight: thicken it to a regular pen line */
   h1,h2,.foot .big{-webkit-text-stroke:.011em currentColor;paint-order:stroke fill}
+  /* dark rose for the cursive name and headings (7:1+ on cream) */
+  :root{--deeprose:#87314D}
+  h1,h2,.mark{color:var(--deeprose) !important}
+  h1 span,.mark span{color:var(--orange) !important}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
