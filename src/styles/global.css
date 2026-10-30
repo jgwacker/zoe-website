@@ -150,6 +150,14 @@ figure:nth-of-type(3n) > img, figure:nth-of-type(3n) > video { box-shadow: var(-
 figure:nth-of-type(3n+1):hover > img, figure:nth-of-type(3n+1):hover > video { box-shadow: var(--halo-orange-hover); }
 figure:nth-of-type(3n+2):hover > img, figure:nth-of-type(3n+2):hover > video { box-shadow: var(--halo-rose-hover); }
 figure:nth-of-type(3n):hover > img, figure:nth-of-type(3n):hover > video { box-shadow: var(--halo-gold-hover); }
+/* Linked photos (figure > a > img, e.g. the masonry gallery and series pages) get the same halos, plus a slight zoom. */
+figure > a > img { display: block; border-radius: 8px; transition: box-shadow .5s ease, transform .3s ease; }
+figure:nth-of-type(3n+1) > a > img { box-shadow: var(--halo-orange); }
+figure:nth-of-type(3n+2) > a > img { box-shadow: var(--halo-rose); }
+figure:nth-of-type(3n) > a > img { box-shadow: var(--halo-gold); }
+figure:nth-of-type(3n+1):hover > a > img { box-shadow: var(--halo-orange-hover); transform: scale(1.02); }
+figure:nth-of-type(3n+2):hover > a > img { box-shadow: var(--halo-rose-hover); transform: scale(1.02); }
+figure:nth-of-type(3n):hover > a > img { box-shadow: var(--halo-gold-hover); transform: scale(1.02); }
 figcaption {
 	max-width: 40rem;
 	margin: 14px auto 0;

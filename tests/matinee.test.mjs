@@ -71,9 +71,13 @@ const screenContrastProbe = () => {
     if (!own || !el.getClientRects().length) continue;
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || Number(cs.opacity) === 0) continue;
-    const fg = rgb(cs.color);
+    let fg = rgb(cs.color);
     if (fg.length > 3 && fg[3] < 0.5) continue;
-    const [a, b] = [lum(fg), lum(bgOf(el))].sort((x, y) => y - x);
+    let alpha = 1;
+    for (let e = el; e; e = e.parentElement) alpha *= Number(getComputedStyle(e).opacity);
+    const bg = bgOf(el);
+    fg = fg.slice(0, 3).map((c, i) => bg[i] + (c - bg[i]) * alpha);
+    const [a, b] = [lum(fg), lum(bg)].sort((x, y) => y - x);
     const ratio = (a + 0.05) / (b + 0.05);
     const size = parseFloat(cs.fontSize), large = size >= 24 || (size >= 18.66 && Number(cs.fontWeight) >= 700);
     if (ratio < (large ? 3 : 4.5)) bad.push(`${el.tagName}.${el.className} "${el.textContent.trim().slice(0, 30)}" ${ratio.toFixed(2)}`);
@@ -87,8 +91,33 @@ test('on screen, every visible text run meets WCAG AA against its background', a
   t.after(async () => { await browser.close(); await srv.close(); });
   const ctx = await browser.newContext({ reducedMotion: 'reduce', viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
-  for (const route of ['/', '/about/', '/photography/awards/peninsula-photo-competition-2025/', '/travel/trips/egypt-2025/', '/photography/portfolio/']) {
+  for (const route of ['/', '/about/', '/photography/awards/peninsula-photo-competition-2025/', '/travel/trips/egypt-2025/', '/photography/portfolio/', '/photography/masonry/', '/photography/series/', '/photography/series/quiet-geometry/', '/music/', '/academics/']) {
     await page.goto(srv.url + route, { waitUntil: 'load' });
     assert.deepEqual((await page.evaluate(screenContrastProbe)).slice(0, 10), [], route);
+  }
+});
+
+test('portfolio lightbox title and caption stay readable on the dark overlay', async (t) => {
+  const srv = await serveDist();
+  const browser = await launch();
+  t.after(async () => { await browser.close(); await srv.close(); });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await page.goto(srv.url + '/photography/portfolio/', { waitUntil: 'load' });
+  await page.locator('.slide-img').first().click();
+  await page.waitForTimeout(400);
+  const c = await page.evaluate(() => ({ title: getComputedStyle(document.querySelector('.lb-title')).color, cap: getComputedStyle(document.querySelector('.lb-caption')).color }));
+  const lum = (s) => s.match(/[\d.]+/g).slice(0, 3).map((x) => x / 255).map((x) => (x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4)).reduce((a, x, i) => a + x * [0.2126, 0.7152, 0.0722][i], 0);
+  for (const [k, v] of Object.entries(c)) assert.ok((lum(v) + 0.05) / 0.05 >= 7, `${k} ${v} on black`);
+});
+
+test('linked gallery photos (figure > a > img) get the halo too', async (t) => {
+  const srv = await serveDist();
+  const browser = await launch();
+  t.after(async () => { await browser.close(); await srv.close(); });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  for (const route of ['/photography/masonry/', '/photography/series/quiet-geometry/']) {
+    await page.goto(srv.url + route, { waitUntil: 'load' });
+    const shadow = await page.evaluate(() => getComputedStyle(document.querySelector('figure > a > img')).boxShadow);
+    assert.notEqual(shadow, 'none', route);
   }
 });
