@@ -4,6 +4,7 @@ const path = Astro.url.pathname;
 ---
 
 <header class="site-header" data-header>
+	<a class="skip" href="#main">Skip to content</a>
 	<div class="bar">
 		<a class="mark" href="/" aria-label="Zoe Wacker, home">Zoe Wacker<span aria-hidden="true">.</span></a>
 		<button type="button" class="menu-toggle" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>Menu</button>
@@ -46,6 +47,9 @@ const path = Astro.url.pathname;
 		backdrop-filter: blur(10px);
 		border-bottom: 1px solid var(--hair);
 	}
+	/* Skip link: off-canvas until it takes keyboard focus, then an ink pill at the top left. */
+	.skip { position: absolute; top: -100px; left: 16px; z-index: 30; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: var(--cream); font: 500 15px/1.35 var(--sans); text-decoration: none; }
+	.skip:focus-visible { top: 12px; outline: 2px solid var(--deep-rose); outline-offset: 3px; border-radius: 999px; }
 	.bar {
 		width: var(--page-max);
 		max-width: calc(100% - 32px);

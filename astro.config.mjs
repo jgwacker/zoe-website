@@ -6,7 +6,7 @@ import { defineConfig } from 'astro/config';
 import { fileURLToPath } from 'url';
 
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://zoewacker.com',
   integrations: [mdx(), sitemap()],
   vite: {
     resolve: {

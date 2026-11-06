@@ -31,9 +31,10 @@ const BILL = [
 const HALO = ['h-orange', 'h-rose', 'h-gold'];
 const INTERESTS = ['Geography', 'Travel', 'Cello', 'Parkour', 'Mixed martial arts', 'History', 'Photos that tell little stories'];
 const num = (i) => String(i + 1).padStart(2, '0');
+const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, CA. A highlight reel of experiments, adventures and “aha!” moments: photo awards, travel, concerts and cello.';
 ---
 
-<FullBleed title="Zoe Wacker">
+<FullBleed title="Zoe Wacker" description={DESCRIPTION} image={displayPath(photos[0].image)}>
   <div class="home">
     <section class="poster">
       <p class="presents">Menlo Park, CA <b>presents</b> the {season} season</p>
@@ -46,12 +47,13 @@ const num = (i) => String(i + 1).padStart(2, '0');
             {row.map(([href, label], i) => (<>{i > 0 && <i class="dot" aria-hidden="true"></i>}<a href={href}>{label}</a></>))}
           </div>
         ))}
-        <p class="support">On location in {trips.map((t, i) => (<>{i > 0 && ' · '}<b>{t.name}</b></>))}</p>
+        {trips.length > 0 && <p class="support">On location in {trips.map((t, i) => (<>{i > 0 && ' · '}<b>{t.name}</b></>))}</p>}
       </nav>
     </section>
 
     {stubs.length > 0 && (
       <section class="recent" aria-label="Recent dates">
+        <h2 class="sr-only">Now showing</h2>
         <div class="stubs-head"><p><b>Now showing</b> · recent dates</p><p aria-hidden="true">Admit one</p></div>
         <div class="stubs">
           {stubs.map((s, i) => (
@@ -69,12 +71,13 @@ const num = (i) => String(i + 1).padStart(2, '0');
     )}
 
     <section class="strip" aria-label="Featured photos">
+      <h2 class="sr-only">Featured photos</h2>
       {photos.map((p, i) => (
         <figure class={`p${i + 1} reveal`}>
           {p.href
             ? <a class={`shot ${HALO[i]}`} href={p.href}><img src={displayPath(p.image)} alt={p.alt} loading={i === 0 ? 'eager' : 'lazy'} /></a>
             : <div class={`shot ${HALO[i]}`}><img src={displayPath(p.image)} alt={p.alt} loading={i === 0 ? 'eager' : 'lazy'} /></div>}
-          <figcaption><span>{p.title}</span><span>{p.place}</span></figcaption>
+          <figcaption><span>{p.title}</span><span class="sr-only">, </span><span>{p.place}</span></figcaption>
         </figure>
       ))}
     </section>
@@ -99,7 +102,7 @@ const num = (i) => String(i + 1).padStart(2, '0');
           {photographyAwards.map((a, i) => (
             <li class:list={{ feat: a === award }}>
               <a href={a.href}>
-                <span class="n">{roman(i + 1)}</span>
+                <span class="n" aria-hidden="true">{roman(i + 1)}</span>
                 <span class="t">{a.label}{a.note && <span class="d">{a.note}</span>}</span>
                 <span class="arrow" aria-hidden="true">→</span>
               </a>
@@ -126,17 +129,20 @@ const num = (i) => String(i + 1).padStart(2, '0');
     </section>
 
     <section class="block" id="music">
+      <h2 class="sr-only">Music</h2>
       <div class="music reveal">
         <div>
-          <p class="eyebrow">Music</p>
+          <p class="eyebrow" aria-hidden="true">Music</p>
           <blockquote class="pull">“Concerts are my favorite because you don’t just hear the music—<em>you feel it in your chest.</em>”</blockquote>
           <a class="more" href="/music">More about music →</a>
         </div>
         <div>
+          {gigs.length > 0 && (<>
           <p class="label">From the crowd</p>
           <ul class="gigs" role="list">
             {gigs.map((g) => (<li><a href={g.href}><b>{g.name}</b><span>{g.year ?? ''}</span></a></li>))}
           </ul>
+          </>)}
           {cello && (
             <a class="cello" href={cello.href}>
               <span class="label">On stage · Cello</span>
@@ -206,7 +212,7 @@ const num = (i) => String(i + 1).padStart(2, '0');
   .stub.gold { --c: var(--gold); --ct: var(--gold-text); }
   .stub .main { padding: 18px 18px 18px 20px; border-left: 4px solid var(--c); border-radius: 10px 0 0 10px; min-width: 0; }
   .stub .kind { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ct); }
-  .stub .name { display: block; font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 21px; line-height: 1.15; margin: 8px 0 6px; }
+  .stub .name { display: block; font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 21px; line-height: 1.15; margin: 8px 0 6px; overflow-wrap: anywhere; }
   .stub .det { display: block; font-size: 14px; color: var(--muted); line-height: 1.45; }
   .stub .tear { position: relative; border-left: 2px dashed var(--hair); display: flex; align-items: center; justify-content: center; }
   .stub .tear span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--mono); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ct); }
@@ -247,7 +253,7 @@ const num = (i) => String(i + 1).padStart(2, '0');
   .programme a:visited { color: var(--ink); }
   .programme a:hover { background: linear-gradient(90deg, rgba(226, 115, 58, .08), transparent); padding-left: 12px; text-decoration: none; color: var(--ink); }
   .programme .n { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 500; font-size: 28px; line-height: 1; color: var(--gold-text); }
-  .programme .t { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 20px; line-height: 1.25; }
+  .programme .t { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 20px; line-height: 1.25; overflow-wrap: anywhere; }
   .programme .d { display: block; font-family: var(--sans); font-weight: 400; font-size: 15px; color: var(--muted); margin-top: 4px; }
   .programme .feat .t { color: var(--orange-text); }
   .programme .arrow { color: var(--rose-text); transition: transform .25s; }
@@ -257,7 +263,7 @@ const num = (i) => String(i + 1).padStart(2, '0');
   .date { display: grid; grid-template-columns: 100px minmax(0, 1fr) minmax(0, 2fr) 132px; gap: 24px; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--hair); color: var(--ink); text-decoration: none; }
   .date:hover, .date:visited { color: var(--ink); text-decoration: none; }
   .date .yr { font-family: var(--mono); font-size: 14px; letter-spacing: .14em; color: var(--gold-text); }
-  .date .place { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 34px; line-height: 1; transition: color .25s; }
+  .date .place { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 34px; line-height: 1; transition: color .25s; overflow-wrap: anywhere; }
   .date:hover .place { color: var(--orange); }
   .date .stops { color: var(--muted); }
   .date .thumb { width: 132px; height: 84px; border-radius: 6px; overflow: hidden; box-shadow: var(--halo-rose); transition: transform .3s, box-shadow .5s; }
