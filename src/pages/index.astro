@@ -45,7 +45,10 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
         {key.href
           ? <a class="shot h-orange" href={key.href}><img src={displayPath(key.image)} alt={key.alt} loading="eager" fetchpriority="high" /></a>
           : <div class="shot h-orange"><img src={displayPath(key.image)} alt={key.alt} loading="eager" fetchpriority="high" /></div>}
-        <figcaption><span>{key.title}</span><span class="sep" aria-hidden="true">·</span><span class="sr-only">, </span><span>{key.place}</span></figcaption>
+        <figcaption>
+          {key.note && !key.draft && <span class="say">“{key.note}”</span>}
+          <span class="meta"><span>{key.title}</span><span class="sep" aria-hidden="true">·</span><span class="sr-only">, </span><span>{key.place}</span>{key.year && <><span class="sep" aria-hidden="true">·</span><span class="sr-only">, </span><span>{key.year}</span></>}</span>
+        </figcaption>
       </figure>
       <nav class="bill" aria-label="Sections">
         {BILL.map((row, r) => (
@@ -86,6 +89,17 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
           <figcaption>{p.draft ? <span>{p.place}</span> : <><span>{p.title}</span><span class="sr-only">, </span><span>{p.place}</span></>}</figcaption>
         </figure>
       ))}
+    </section>
+
+    <section class="block about reveal" id="meet">
+      <span class="monogram script" aria-hidden="true">ZW</span>
+      <div>
+        <p class="eyebrow">Meet the headliner</p>
+        <h2 class="script">Hi! I’m Zoe.</h2>
+        <p class="voice">A middle schooler who’s always juggling a bunch of different interests. I started this site to keep track of the things I’m working on, the ideas I’m excited about, and the projects that don’t always fit neatly into a school folder.</p>
+        <ul class="interests" role="list">{INTERESTS.map((s) => <li>{s}</li>)}</ul>
+        <a class="more" href="/about">More about me →</a>
+      </div>
     </section>
 
     <section class="block" id="awards">
@@ -163,37 +177,30 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
       </div>
     </section>
 
-    <section class="block about reveal" id="meet">
-      <span class="monogram script" aria-hidden="true">ZW</span>
-      <div>
-        <p class="eyebrow">Meet the headliner</p>
-        <h2 class="script">Hi! I’m Zoe.</h2>
-        <p class="voice">A middle schooler who’s always juggling a bunch of different interests. I started this site to keep track of the things I’m working on, the ideas I’m excited about, and the projects that don’t always fit neatly into a school folder.</p>
-        <ul class="interests" role="list">{INTERESTS.map((s) => <li>{s}</li>)}</ul>
-        <a class="more" href="/about">More about me →</a>
-      </div>
-    </section>
   </div>
 </FullBleed>
 
 <style>
   .home { width: var(--page-max); max-width: 100%; margin: 0 auto; padding: 0 32px 20px; }
-  .poster { padding: 48px 0 24px; text-align: center; }
+  .poster { padding: 40px 0 24px; text-align: center; }
   .presents { margin: 0; text-wrap: balance; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--rose-text); }
   .presents b { color: var(--ink); font-weight: 500; }
   .rule { display: flex; align-items: center; gap: 14px; max-width: 520px; margin: 18px auto 0; }
   .rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
   .rule::after { transform: scaleX(-1); }
   .rule i { width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
-  .headliner { font-size: clamp(44px, 15.5vw, 236px); line-height: 1.05; white-space: nowrap; margin: 6px 0 0; padding: .08em 0 .12em; }
+  .headliner { font-size: clamp(44px, 15.5vw, 236px); line-height: 1.05; white-space: nowrap; margin: 6px 0 0; padding: .08em 0 .09em; }
   .headliner span { color: var(--orange); }
   .tagline { font-size: clamp(16px, 1.9vw, 20px); color: var(--muted); max-width: 620px; margin: 8px auto 0; text-wrap: balance; }
   /* Key photo: the poster's art, a wide letterbox on desktop and the photo's own 3:2 on phone. */
-  .key { margin: 28px auto 0; max-width: 960px; }
-  .key .shot { aspect-ratio: 2.75 / 1; }
+  .key { margin: 22px auto 0; max-width: 960px; }
+  .key .shot { aspect-ratio: 3 / 1; }
   .key .shot img { object-position: 50% 64%; }
-  .key figcaption { max-width: none; margin: 14px auto 0; text-align: center; }
-  .key figcaption span:first-child { color: var(--ink); }
+  .key figcaption { max-width: none; margin: 16px auto 0; text-align: center; }
+  /* Her own line about the photo, set like a programme note by the performer. */
+  .key .say { display: block; max-width: 34ch; margin: 0 auto 10px; font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 500; font-size: clamp(19px, 1.7vw, 24px); line-height: 1.35; letter-spacing: -.01em; text-transform: none; color: var(--ink); text-wrap: balance; }
+  .key .meta { display: block; }
+  .key .meta span:first-child { color: var(--ink); }
   .key .sep { color: var(--gold); margin: 0 10px; }
   .tagline em { color: var(--rose-text); font-weight: 500; }
   .bill { margin: 36px auto 0; max-width: 1080px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 30px 0; position: relative; }

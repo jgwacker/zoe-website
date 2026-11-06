@@ -34,6 +34,8 @@ test('the first exhibit photo is the poster key art, the next three are the stri
   assert.ok(keyImg?.endsWith('/cinderello.jpg'), `key photo is ${keyImg}`);
   assert.ok(poster.includes(data.items[0].title));
   assert.ok(poster.indexOf('class="key"') < poster.indexOf('class="bill"'), 'key photo sits above the bill');
+  if (data.items[0].note && !data.items[0].draft) assert.ok(poster.includes(`“${data.items[0].note}”`), 'her note is under the key photo');
+  if (data.items[0].year) assert.match(poster, new RegExp(`<span[^>]*>${data.items[0].year}<\\/span>`), 'year in the key caption');
   for (const it of data.items.slice(1, 4)) {
     assert.ok(html.includes(it.place), `missing ${it.place}`);
     if (it.draft) assert.ok(!html.includes(`<span>${it.title}</span>`), `draft title "${it.title}" shipped as a caption`);
@@ -58,8 +60,9 @@ test('travel dates show the five newest trips; concerts the six newest; the newe
   assert.match(html, new RegExp(`<a[^>]*class="cello"[^>]*href="${celloPerformances[0].href}"`));
 });
 
-test('about: script ZW monogram and no photo of Zoe', () => {
+test('about: script ZW monogram and no photo of Zoe, placed right after the strip', () => {
   assert.match(html, /class="monogram script"[^>]*>ZW</);
+  assert.ok(html.indexOf('id="meet"') > html.indexOf('class="strip"') && html.indexOf('id="meet"') < html.indexOf('id="awards"'), 'meet block sits between the strip and the awards');
   assert.ok(html.includes('Hi! I’m Zoe.'));
   for (const p of ['/images/home/about.jpg', '650_award_2025', 'zoe_']) assert.ok(!html.includes(p), `photo of Zoe: ${p}`);
 });

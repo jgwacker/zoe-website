@@ -36,7 +36,7 @@ test('homepage heading outline names every section', () => {
 test('programme numerals are decorative and strip captions separate title from place', () => {
   assert.match(home, /<span class="n" aria-hidden="true"[^>]*>I<\/span>/);
   assert.doesNotMatch(home, /<span class="n"(?: data-astro-cid-\w+)?>IX<\/span>/);
-  assert.match(home, /<figcaption[^>]*><span[^>]*>Cinderello<\/span><span class="sep"[^>]*>·<\/span><span class="sr-only"[^>]*>, <\/span><span[^>]*>[^<]+<\/span><\/figcaption>/);
+  assert.match(home, /<span class="meta"[^>]*><span[^>]*>Cinderello<\/span><span class="sep"[^>]*>·<\/span><span class="sr-only"[^>]*>, <\/span><span[^>]*>[^<]+<\/span>/);
 });
 
 test('404 page exists, uses the layout, and links back to the bill', () => {
