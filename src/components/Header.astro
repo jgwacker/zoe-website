@@ -1,9 +1,11 @@
 ---
 import { NAV, isActive } from '../lib/site-nav.mjs';
 const path = Astro.url.pathname;
+/** `slim`: wordmark and a Menu toggle at every width (the homepage, where the poster's bill is the navigation). */
+const { slim = false } = Astro.props;
 ---
 
-<header class="site-header" data-header>
+<header class:list={['site-header', { slim }]} data-header>
 	<a class="skip" href="#main">Skip to content</a>
 	<div class="bar">
 		<a class="mark" href="/" aria-label="Zoe Wacker, home">Zoe Wacker<span aria-hidden="true">.</span></a>
@@ -83,6 +85,16 @@ const path = Astro.url.pathname;
 		padding: 0 16px;
 		cursor: pointer;
 	}
+	/* Slim header (homepage): the phone treatment at every width, so the bill below is the one navigation. */
+	.site-header.slim .bar { padding: 10px 0; }
+	.site-header.slim nav { flex-basis: 100%; }
+	.site-header.slim nav ul { flex-direction: column; gap: 0; max-width: 480px; }
+	.site-header.slim nav li a { display: block; padding: 8px 0; border-bottom: 1px solid var(--hair); font-family: var(--serif); font-variation-settings: var(--soft); font-size: 24px; font-weight: 500; color: var(--ink); }
+	.site-header.slim nav li a[aria-current='page'] { color: var(--deep-rose); box-shadow: none; }
+	.site-header.slim:not(.js) { position: static; }
+	.site-header.slim.js .menu-toggle { display: inline-flex; }
+	.site-header.slim.js nav { display: none; }
+	.site-header.slim.js.open nav { display: block; padding-bottom: 16px; max-height: calc(100dvh - 80px); overflow-y: auto; background: var(--paper); }
 	@media (max-width: 900px) {
 		.bar { padding: 10px 0; }
 		nav { flex-basis: 100%; }

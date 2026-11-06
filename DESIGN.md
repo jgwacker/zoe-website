@@ -268,6 +268,7 @@ Printed and tactile: pieces of a programme on paper stock, with hairlines, perfo
 
 ### Navigation
 - **Header:** Sticky, 64px, translucent cream with blur and a hairline bottom edge. The wordmark is Fraunces 600 at 22px in deep rose with an apricot period. Links are DM Sans 500 at 15px in muted, turning ink on hover (`.2s`), and the current page is ink with a 2px apricot inset underline.
+- **Slim (homepage only):** The wordmark and the "Menu" pill at every width, so the poster's bill is the one navigation. The opened panel is the mobile treatment, capped at 480px wide.
 - **Mobile (under 900px):** A "Menu" ghost pill toggles a paper panel. Links become Fraunces 500 at 24px in ink, one per line, separated by hairlines, the current page in deep rose. Escape closes it. Without JavaScript the nav is simply visible and the header is not sticky.
 - **Sidebar set list:** A hairline-ruled list. Each item is a zero-padded number in Fraunces 500 at 20px in rose text, then the label in DM Sans 600 at 15px in ink, 14px by 4px padding. Hover slides the item 6px right on a rose-to-transparent gradient over `.25s`. The current page carries a 3px apricot inset bar on the left and its label turns deep rose.
 

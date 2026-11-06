@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { readDist, serveDist, launch } from './helpers.mjs';
 import { photographyAwards, travelTrips, musicConcerts, celloPerformances } from '../src/links/registry.ts';
-import { recentStubs, latest } from '../src/lib/registry-meta.mjs';
+import { recentStubs, after } from '../src/lib/registry-meta.mjs';
 
 const html = readDist('/');
 const data = JSON.parse(fs.readFileSync('src/data/exhibit.json', 'utf8'));
@@ -18,8 +18,8 @@ test('poster: script headliner with an orange period, season line, tagline and b
   const rows = [...bill.matchAll(/<div[^>]*class="row[^"]*"[^>]*>([\s\S]*?)<\/div>/g)].map((m) => m[1]).join('');
   assert.deepEqual(hrefs(rows), ['/photography', '/travel', '/music', '/geography', '/guardian-arts', '/academics']);
   assert.doesNotMatch(bill, /class="row r3"/);
-  const support = bill.match(/<p[^>]*class="support"[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? '';
-  assert.deepEqual(hrefs(support), travelTrips.slice(0, 5).map((t) => t.href), 'location names link to their trips');
+  assert.doesNotMatch(bill, /class="support"/, 'no location line duplicating the tour');
+  assert.match(html, /<header[^>]*class="site-header slim"/, 'homepage header is slim');
 });
 
 test('ticket stubs: two newest awards, newest trip, newest concert, in order', () => {
@@ -45,7 +45,7 @@ test('the first exhibit photo is the poster key art, the next three are the stri
 });
 
 test('programme lists the four newest awards with Roman numerals, an All awards link, and the featured card', () => {
-  assert.deepEqual(hrefs(section('programme')), latest(photographyAwards, 4).map((a) => a.href));
+  assert.deepEqual(hrefs(section('programme')), after(photographyAwards, 2, 4).map((a) => a.href), 'programme starts after the two stub awards');
   assert.match(section('programme'), /<span[^>]*class="n"[^>]*>I<\/span>/);
   assert.match(html, /<a[^>]*class="more"[^>]*href="\/photography\/awards"[^>]*>All awards →<\/a>/);
   assert.match(html, /<a[^>]*class="awardcard"[^>]*href="\/photography\/awards\/global-peace-photo-award-2026"/);
@@ -55,8 +55,8 @@ test('programme lists the four newest awards with Roman numerals, an All awards 
 });
 
 test('travel dates show the five newest trips; concerts the six newest; the newest cello performance', () => {
-  assert.deepEqual(hrefs(section('tour')), travelTrips.slice(0, 5).map((t) => t.href));
-  assert.deepEqual(hrefs(section('gigs')), musicConcerts.slice(0, 6).map((c) => c.href));
+  assert.deepEqual(hrefs(section('tour')), after(travelTrips, 1, 5).map((t) => t.href), 'tour starts after the stub trip');
+  assert.deepEqual(hrefs(section('gigs')), after(musicConcerts, 1, 6).map((c) => c.href), 'crowd list starts after the stub concert');
   assert.match(html, new RegExp(`<a[^>]*class="cello"[^>]*href="${celloPerformances[0].href}"`));
 });
 
@@ -69,7 +69,7 @@ test('about: script ZW monogram and no photo of Zoe, placed right after the stri
 
 test('homepage uses resized images only, with no undefined/null text', () => {
   const srcs = [...html.matchAll(/<img[^>]*src="([^"]*)"/g)].map((m) => m[1]);
-  const tripThumbs = travelTrips.slice(0, 5).filter((t) => t.image).length;
+  const tripThumbs = after(travelTrips, 1, 5).filter((t) => t.image).length;
   assert.equal(srcs.length, 4 + 1 + tripThumbs);
   for (const s of srcs) assert.match(s, /^\/images\/display\//);
   assert.doesNotMatch(html, />\s*(undefined|null)\s*</);
@@ -96,4 +96,26 @@ test('homepage: no sideways scroll, and the name and section headings stay on on
     for (const [txt, n] of r.h2) assert.equal(n, 1, `${width}px: "${txt}" wraps`);
     await page.close();
   }
+});
+
+test('homepage header is slim at every width: Menu toggle, nav hidden until opened, visible without JS', async (t) => {
+  const srv = await serveDist();
+  const browser = await launch();
+  t.after(async () => { await browser.close(); await srv.close(); });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await page.goto(srv.url + '/', { waitUntil: 'domcontentloaded' });
+  const toggle = page.locator('[data-menu-toggle]');
+  const firstLink = page.locator('#site-nav a').first();
+  await toggle.waitFor({ state: 'visible' });
+  assert.equal(await firstLink.isVisible(), false);
+  await toggle.click();
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'true');
+  assert.equal(await firstLink.isVisible(), true);
+  await page.keyboard.press('Escape');
+  assert.equal(await firstLink.isVisible(), false);
+  const ctx = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1440, height: 900 } });
+  const noJs = await ctx.newPage();
+  await noJs.goto(srv.url + '/', { waitUntil: 'domcontentloaded' });
+  assert.equal(await noJs.locator('#site-nav a').first().isVisible(), true);
+  await ctx.close();
 });

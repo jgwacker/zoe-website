@@ -11,6 +11,9 @@ export function splitYear(label) {
 /** The first `n` entries of a newest-first list. */
 export const latest = (items, n) => items.slice(0, n);
 
+/** The `n` entries after the first `skip`: what a block shows once the ticket stubs have shown the newest. */
+export const after = (items, skip, n) => items.slice(skip, skip + n);
+
 /** The award flagged `featured: true`, or else the first award. */
 export const featuredAward = (items) => items.find((i) => i.featured) ?? items[0];
 

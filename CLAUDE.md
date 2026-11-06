@@ -74,7 +74,7 @@ Reference images in pages as `/images/section/filename.jpg`.
 - Every `<figure>` image automatically gets rounded corners and a soft halo cycling orange/rose/gold that brightens on hover, with a mono `<figcaption>`. No per-page styling is needed.
 - Add `class="reveal"` to fade an element in on scroll. It's visible without JavaScript and under reduced motion.
 - Award pages put `<AwardExhibit slot="hero" … />` (in `src/components/`) at the top.
-- The homepage is generated from `src/links/registry.ts`: the ticket stubs (two newest awards, newest trip, newest concert), the four newest awards (each with a `note`) beside one `featured: true` award with an `image`, the five newest trips (`note` = stops, `image` = thumbnail), the six newest concerts and the newest cello performance. Add new entries at the top of each list. After adding an `image`, run `npm run thumbnails`.
+- The homepage is generated from `src/links/registry.ts`: the ticket stubs (two newest awards, newest trip, newest concert); then, starting after what the stubs showed, the next four awards (each with a `note`) beside one `featured: true` award with an `image`, the next five trips (`note` = stops, `image` = thumbnail), the next six concerts, and the newest cello performance. The homepage header is slim (wordmark and Menu); the poster's bill is its navigation. Add new entries at the top of each list. After adding an `image`, run `npm run thumbnails`.
 - The poster's key photo is the first item in `src/data/exhibit.json`, and the three strip photos are the next three. Entries with `"draft": true` are placeholder captions for Zoe to rewrite, and the build prints a warning until they're gone.
 - `npm test` builds the site and runs the checks in `tests/`. They need Google Chrome installed.
 

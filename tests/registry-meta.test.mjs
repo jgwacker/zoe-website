@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { splitYear, latest, featuredAward, seasonLabel, recentStubs, roman } from '../src/lib/registry-meta.mjs';
+import { splitYear, latest, featuredAward, seasonLabel, recentStubs, roman, after } from '../src/lib/registry-meta.mjs';
 import { photographyAwards, travelTrips, celloPerformances } from '../src/links/registry.ts';
 
 test('splitYear takes the last 4-digit year out of a label', () => {
@@ -11,6 +11,12 @@ test('splitYear takes the last 4-digit year out of a label', () => {
   assert.deepEqual(splitYear('The Shelter: National Photography Competition for Kids June 2026'),
     { name: 'The Shelter: National Photography Competition for Kids June', year: 2026 });
   assert.deepEqual(splitYear('Favorites'), { name: 'Favorites', year: null });
+});
+
+test('after returns the n entries following the first skip (what the stubs already show)', () => {
+  assert.deepEqual(after(['a', 'b', 'c', 'd', 'e'], 2, 2), ['c', 'd']);
+  assert.deepEqual(after(['a', 'b'], 1, 5), ['b']);
+  assert.deepEqual(after([], 2, 4), []);
 });
 
 test('latest returns the first n entries (the registry is newest-first)', () => {
