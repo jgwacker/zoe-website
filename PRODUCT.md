@@ -34,7 +34,8 @@ A dated, first-person, verifiable record of a specific person over several years
 
 ## Capabilities and Constraints
 
-- **Sections live today:** Travel (10 trips, 2019–2026), Photography (awards, portfolio, series, overview gallery), Music (cello, concerts, favorites), Academics (summer programs, school years), About, Blog, RSS. Geography and Guardian Arts have index pages but their link lists in the registry are still empty placeholders.
+- **Sections live today:** Travel (10 trips, 2019–2026), Photography (awards, portfolio, series, overview gallery), Music (cello, concerts, favorites), Academics (summer programs, school years), About, Geography and Guardian Arts (each a single page in Zoe's voice; their registry link lists are empty until sub-pages exist).
+- **Blog: not live.** `src/content/blog/` holds the Astro starter's five Lorem ipsum posts. The routes are hidden from the build (`src/pages/_blog/`, decided 2026-11-06) and the RSS feed is empty until Zoe writes a first post. Do not link to `/blog` until then.
 - **Dated records.** Every trip, concert, award and program page is tied to a year. Pages should capture date, role, time commitment and outcomes, and link to official sources.
 - **Own voice.** Pages are written in Zoe's voice. Any caption or blurb drafted for her is marked `"draft": true` in `src/data/exhibit.json` and the build warns until she rewrites it. Factual copy must not be replaced or claims added without asking.
 - **Local place names.** Use the local name over the English translation (for example "Gozor Awad", not "Awad Island").
