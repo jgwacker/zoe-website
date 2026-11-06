@@ -40,7 +40,7 @@ export const photographyAwards: LinkItem[] = [
   { href: '/photography/awards/npcfk-competition-life-in-red-2026', label: 'Life in Red: National Photography Competition for Kids March 2026', note: 'Winner, Dream Snapper · Rising Photographers (ages 12–14)' },
   { href: '/photography/awards/npcfk-competition-home-2025', label: 'Home is Where the Heart Is: National Photography Competition for Kids December 2025', note: 'Winner, Visionary Voyager · Rising Photographers (ages 12–14)' },
   { href: '/photography/awards/tpoy-competition-2025', label: 'Travel Photographer of the Year Competition 2025', note: 'Runner-Up, Young TPOTY (14 & under) · Places collection' },
-  { href: '/photography/awards/npcfk-competition-color-2025', label: 'I Spy Something-“Color” : National Photography Competition for Kids November 2025', note: 'Notable Entry, Rising Photographers (ages 12–14)' },
+  { href: '/photography/awards/npcfk-competition-color-2025', label: 'I Spy Something-“Color”: National Photography Competition for Kids November 2025', note: 'Notable Entry, Rising Photographers (ages 12–14)' },
   { href: '/photography/awards/peninsula-photo-competition-2025', label: 'Peninsula Photo Competition 2025', note: 'Honorable Mention, Youth “Moments” · “Cinderello”', image: '/images/photography_awards/cinderello.jpg' },
 ];
 

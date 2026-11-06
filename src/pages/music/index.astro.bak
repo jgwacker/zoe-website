@@ -1,6 +1,0 @@
----
-import Layout from '../../layouts/Site.astro';
----
-<Layout title="Music">
-  <p>This is a stub page for Music. Replace this text with real content.</p>
-</Layout>

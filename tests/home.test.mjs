@@ -15,8 +15,11 @@ test('poster: script headliner with an orange period, season line, tagline and b
   assert.match(html, /presents<\/b> the \d{4}–\d{2} season/);
   assert.ok(html.includes('“aha!” moments.'));
   const bill = html.match(/<nav[^>]*class="bill"[^>]*>([\s\S]*?)<\/nav>/)?.[1] ?? '';
-  assert.deepEqual(hrefs(bill), ['/photography', '/travel', '/music', '/geography', '/guardian-arts', '/academics']);
+  const rows = [...bill.matchAll(/<div[^>]*class="row[^"]*"[^>]*>([\s\S]*?)<\/div>/g)].map((m) => m[1]).join('');
+  assert.deepEqual(hrefs(rows), ['/photography', '/travel', '/music', '/geography', '/guardian-arts', '/academics']);
   assert.doesNotMatch(bill, /class="row r3"/);
+  const support = bill.match(/<p[^>]*class="support"[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? '';
+  assert.deepEqual(hrefs(support), travelTrips.slice(0, 5).map((t) => t.href), 'location names link to their trips');
 });
 
 test('ticket stubs: two newest awards, newest trip, newest concert, in order', () => {
@@ -31,8 +34,12 @@ test('the first exhibit photo is the poster key art, the next three are the stri
   assert.ok(keyImg?.endsWith('/cinderello.jpg'), `key photo is ${keyImg}`);
   assert.ok(poster.includes(data.items[0].title));
   assert.ok(poster.indexOf('class="key"') < poster.indexOf('class="bill"'), 'key photo sits above the bill');
-  for (const it of data.items.slice(1, 4)) assert.ok(html.includes(it.title), `missing ${it.title}`);
-  assert.ok(!html.includes(data.items[4].title), 'only four photos');
+  for (const it of data.items.slice(1, 4)) {
+    assert.ok(html.includes(it.place), `missing ${it.place}`);
+    if (it.draft) assert.ok(!html.includes(`<span>${it.title}</span>`), `draft title "${it.title}" shipped as a caption`);
+    else assert.ok(html.includes(it.title), `missing ${it.title}`);
+  }
+  assert.equal((html.match(/<figure[^>]*class="p\d/g) || []).length, 3, 'three strip photos');
 });
 
 test('programme lists the four newest awards with Roman numerals, an All awards link, and the featured card', () => {

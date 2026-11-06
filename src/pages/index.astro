@@ -53,7 +53,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
             {row.map(([href, label], i) => (<>{i > 0 && <i class="dot" aria-hidden="true"></i>}<a href={href}>{label}</a></>))}
           </div>
         ))}
-        {trips.length > 0 && <p class="support">On location in {trips.map((t, i) => (<>{i > 0 && ' · '}<b>{t.name}</b></>))}</p>}
+        {trips.length > 0 && <p class="support">On location in {trips.map((t, i) => (<>{i > 0 && ' · '}<a href={t.href}>{t.name}</a></>))}</p>}
       </nav>
     </section>
 
@@ -83,7 +83,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
           {p.href
             ? <a class={`shot ${HALO[i]}`} href={p.href}><img src={displayPath(p.image)} alt={p.alt} loading={i === 0 ? 'eager' : 'lazy'} /></a>
             : <div class={`shot ${HALO[i]}`}><img src={displayPath(p.image)} alt={p.alt} loading={i === 0 ? 'eager' : 'lazy'} /></div>}
-          <figcaption><span>{p.title}</span><span class="sr-only">, </span><span>{p.place}</span></figcaption>
+          <figcaption>{p.draft ? <span>{p.place}</span> : <><span>{p.title}</span><span class="sr-only">, </span><span>{p.place}</span></>}</figcaption>
         </figure>
       ))}
     </section>
@@ -212,7 +212,8 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .r2 a:hover { color: var(--rose); }
   .r2 .dot { width: 6px; height: 6px; background: var(--rose); }
   .support { margin: 22px 0 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-  .support b { color: var(--ink); font-weight: 500; }
+  .support a { color: var(--ink); font-weight: 500; }
+  .support a:hover { color: var(--orange-text); }
 
   .stubs-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin: 56px 0 18px; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
   .stubs-head p { margin: 0; }
@@ -221,6 +222,8 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .stub { --c: var(--orange); --ct: var(--orange-text); --hh: var(--h-orange); position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 46px; background: var(--paper); border-radius: 10px; color: var(--ink); text-decoration: none;
     box-shadow: 0 1px 0 rgba(42, 30, 30, .05), 0 14px 30px -18px rgba(122, 60, 40, .35); transition: transform .3s ease, box-shadow .4s ease; }
   .stub:visited, .stub:hover { color: var(--ink); text-decoration: none; }
+  .stub:focus-visible, .cello:focus-visible { border-radius: 10px; }
+  a.shot:focus-visible { border-radius: 8px; }
   .stub:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(var(--h-rose), .22), 0 22px 48px -16px rgba(var(--h-rose), .5), 0 0 90px -24px rgba(var(--h-rose), .4); }
   .stub.rose { --c: var(--rose); --ct: var(--rose-text); }
   .stub.gold { --c: var(--gold); --ct: var(--gold-text); }
@@ -289,8 +292,8 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .pull { border: 0; padding: 0; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.1; max-width: none; }
   .pull em { color: var(--rose-text); }
   .label { display: block; margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-  .gigs { list-style: none; margin: 8px 0 0; padding: 0; columns: 2; column-gap: 32px; }
-  .gigs li { break-inside: avoid; border-bottom: 1px solid var(--hair); }
+  .gigs { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; }
+  .gigs li { border-bottom: 1px solid var(--hair); }
   .gigs a { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; color: var(--ink); text-decoration: none; }
   .gigs a:hover, .gigs a:visited { color: var(--ink); text-decoration: none; }
   .gigs a:hover b { color: var(--orange-text); }
@@ -332,7 +335,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
     .row { column-gap: 14px; }
     .stubs { grid-template-columns: minmax(0, 1fr); }
     .strip figcaption { flex-direction: column; gap: 2px; }
-    .gigs { columns: 1; }
+    .gigs { grid-template-columns: 1fr; }
     .date .place { font-size: 28px; }
     .programme a { grid-template-columns: 56px minmax(0, 1fr); }
     .programme .arrow { display: none; }
