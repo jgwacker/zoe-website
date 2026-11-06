@@ -86,7 +86,8 @@ components:
     textColor: "{colors.ink}"
     typography: "{typography.label}"
     rounded: "{rounded.pill}"
-    padding: "10px 16px"
+    padding: "0 16px"
+    height: "44px"
   chip:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.muted}"
@@ -209,7 +210,7 @@ A warm cream ground with three rotating warm accents and a deep rose for the han
 
 A single centered column of 1240px (`--page-max`) with a 16px gutter each side, 48px above the content and 32px below (32px and 24px under 560px). Standard pages open with a title band (56px top, 32px bottom, 36px and 24px under 900px) that holds the kicker and the title, closed by a hairline. An optional hero band follows (48px top, 24px bottom), used by award pages. Below that, a two-column grid: a sticky sidebar at `minmax(200px, 260px)` pinned 88px from the top, a 56px gap, and the content at `minmax(0, 1fr)`. Under 900px the sidebar goes static and stacks above the content with a 32px gap. Pages without a sidebar collapse to one column.
 
-The homepage runs on the full-bleed layout with its own 32px gutters (16px under 560px). Sections are separated by 104px (72px under 560px). The poster is centered. The ticket stubs are a four-column grid with 18px gaps, two columns under 1060px, one under 560px. The photo strip is `1.3fr .8fr 1fr` with 30px gaps and staggered tops (70px and 24px), becoming two columns under 900px with the first photo spanning both. Two-column blocks (awards, music, about) use `5fr 7fr`, `1fr 1fr` and `240px 1fr` respectively with 64px gaps, all stacking under 900px.
+The homepage runs on the full-bleed layout with its own 32px gutters (16px under 560px). Sections are separated by 104px (72px under 560px). The poster is centered: name, tagline, then the key photo (960px max, a 2.75:1 letterbox on desktop, 2:1 under 1060px, 3:2 under 560px), then the two-row bill. The ticket stubs are a four-column grid with 18px gaps, two columns under 1060px, one under 560px. The photo strip is `1.3fr .8fr 1fr` with 30px gaps and staggered tops (70px and 24px), becoming two columns under 900px with the first photo spanning both. Two-column blocks (awards, music, about) use `5fr 7fr`, `1fr 1fr` and `240px 1fr` respectively with 64px gaps, all stacking under 900px.
 
 Breakpoints, from the code: 1060px (stubs), 900px (sidebar, header menu, two-column blocks), 700px (homepage heading size), 560px (gutters, body size, single-column stubs).
 
@@ -248,7 +249,7 @@ Printed and tactile: pieces of a programme on paper stock, with hairlines, perfo
 - **Shape:** Full pill (999px).
 - **Primary:** Ink fill, cream text, DM Sans 500 at 15px, 12px by 22px padding. Used for "Read the story →" on the featured award card.
 - **Hover / Focus:** Fill shifts to deep rose and the button lifts 2px over `.25s`. Focus is the global ring: 2px deep rose outline, 3px offset, 2px radius.
-- **Ghost:** The mobile menu toggle. Transparent fill, hairline border, DM Mono 12px uppercase at 0.16em, 10px by 16px padding, ink text. Only shown under 900px once JavaScript has run.
+- **Ghost:** The mobile menu toggle. Transparent fill, hairline border, DM Mono 12px uppercase at 0.16em, 44px tall with 16px side padding, ink text. Only shown under 900px once JavaScript has run.
 - **Text links:** Apricot text, no underline at rest, underline with a 3px offset on hover, visited identical. "More" links are bold.
 
 ### Chips

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-06T22:42:31Z",
+  "generatedAt": "2026-11-06T23:07:39Z",
   "title": "Design System: Zoe Wacker",
   "extensions": {
     "colorMeta": {
@@ -342,7 +342,7 @@
       "refersTo": "button-ghost",
       "description": "Ghost pill with a hairline border and mono uppercase label; the mobile nav toggle.",
       "html": "<button type=\"button\" class=\"ds-btn-ghost\" aria-expanded=\"false\">Menu</button>",
-      "css": ".ds-btn-ghost { display: inline-flex; font: 500 12px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); background: transparent; border: 1px solid var(--hair); border-radius: 999px; padding: 10px 16px; cursor: pointer; transition: color .2s, border-color .2s; } .ds-btn-ghost:hover { border-color: var(--ink); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; }"
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; min-height: 44px; font: 500 12px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); background: transparent; border: 1px solid var(--hair); border-radius: 999px; padding: 0 16px; cursor: pointer; transition: color .2s, border-color .2s; } .ds-btn-ghost:hover { border-color: var(--ink); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; }"
     },
     {
       "name": "Header Nav",

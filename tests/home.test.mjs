@@ -14,10 +14,9 @@ test('poster: script headliner with an orange period, season line, tagline and b
   assert.match(html, /<h1[^>]*class="headliner script"[^>]*>Zoe Wacker<span[^>]*>\.<\/span><\/h1>/);
   assert.match(html, /presents<\/b> the \d{4}–\d{2} season/);
   assert.ok(html.includes('“aha!” moments.'));
-  for (const h of ['/photography', '/travel', '/music', '/geography', '/guardian-arts', '/academics', '/about', '/photography/awards', '/music/concerts']) {
-    assert.match(html, new RegExp(`<a[^>]*href="${h}"`), `bill links ${h}`);
-  }
-  assert.match(html, />About Zoe</);
+  const bill = html.match(/<nav[^>]*class="bill"[^>]*>([\s\S]*?)<\/nav>/)?.[1] ?? '';
+  assert.deepEqual(hrefs(bill), ['/photography', '/travel', '/music', '/geography', '/guardian-arts', '/academics']);
+  assert.doesNotMatch(bill, /class="row r3"/);
 });
 
 test('ticket stubs: two newest awards, newest trip, newest concert, in order', () => {
@@ -26,9 +25,14 @@ test('ticket stubs: two newest awards, newest trip, newest concert, in order', (
   assert.equal(want.length, 4);
 });
 
-test('photo strip shows the first three exhibit photos', () => {
-  for (const it of data.items.slice(0, 3)) assert.ok(html.includes(it.title), `missing ${it.title}`);
-  assert.ok(!html.includes(data.items[3].title), 'only three photos');
+test('the first exhibit photo is the poster key art, the next three are the strip', () => {
+  const poster = html.match(/<section[^>]*class="poster"[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? '';
+  const keyImg = poster.match(/<figure[^>]*class="key"[^>]*>[\s\S]*?<img[^>]*src="([^"]+)"/)?.[1];
+  assert.ok(keyImg?.endsWith('/cinderello.jpg'), `key photo is ${keyImg}`);
+  assert.ok(poster.includes(data.items[0].title));
+  assert.ok(poster.indexOf('class="key"') < poster.indexOf('class="bill"'), 'key photo sits above the bill');
+  for (const it of data.items.slice(1, 4)) assert.ok(html.includes(it.title), `missing ${it.title}`);
+  assert.ok(!html.includes(data.items[4].title), 'only four photos');
 });
 
 test('programme links every registry award with Roman numerals, plus the featured card', () => {
@@ -53,7 +57,7 @@ test('about: script ZW monogram and no photo of Zoe', () => {
 test('homepage uses resized images only, with no undefined/null text', () => {
   const srcs = [...html.matchAll(/<img[^>]*src="([^"]*)"/g)].map((m) => m[1]);
   const tripThumbs = travelTrips.slice(0, 5).filter((t) => t.image).length;
-  assert.equal(srcs.length, 3 + 1 + tripThumbs);
+  assert.equal(srcs.length, 4 + 1 + tripThumbs);
   for (const s of srcs) assert.match(s, /^\/images\/display\//);
   assert.doesNotMatch(html, />\s*(undefined|null)\s*</);
 });

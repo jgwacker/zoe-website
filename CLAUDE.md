@@ -75,7 +75,7 @@ Reference images in pages as `/images/section/filename.jpg`.
 - Add `class="reveal"` to fade an element in on scroll. It's visible without JavaScript and under reduced motion.
 - Award pages put `<AwardExhibit slot="hero" … />` (in `src/components/`) at the top.
 - The homepage is generated from `src/links/registry.ts`: the ticket stubs (two newest awards, newest trip, newest concert), awards (with `note`, and one `featured: true` with an `image`), the five newest trips (`note` = stops, `image` = thumbnail), the six newest concerts and the newest cello performance. Add new entries at the top of each list. After adding an `image`, run `npm run thumbnails`.
-- The three strip photos are the first three items in `src/data/exhibit.json`. Entries with `"draft": true` are placeholder captions for Zoe to rewrite, and the build prints a warning until they're gone.
+- The poster's key photo is the first item in `src/data/exhibit.json`, and the three strip photos are the next three. Entries with `"draft": true` are placeholder captions for Zoe to rewrite, and the build prints a warning until they're gone.
 - `npm test` builds the site and runs the checks in `tests/`. They need Google Chrome installed.
 
 ### Design Themes

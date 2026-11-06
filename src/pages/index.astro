@@ -5,7 +5,8 @@ import { photographyAwards, travelTrips, musicConcerts, celloPerformances } from
 import { displayPath, listDrafts, missingDisplayFiles, homepageImages } from '../lib/exhibit.mjs';
 import { splitYear, latest, featuredAward, seasonLabel, recentStubs, roman } from '../lib/registry-meta.mjs';
 
-const photos = exhibit.items.slice(0, 3);
+const key = exhibit.items[0];
+const photos = exhibit.items.slice(1, 4);
 const award = featuredAward(photographyAwards);
 const trips = latest(travelTrips, 5).map((t) => ({ ...t, ...splitYear(t.label) }));
 const gigs = latest(musicConcerts, 6).map((c) => ({ ...c, ...splitYear(c.label) }));
@@ -26,7 +27,6 @@ if (drafts.length) {
 const BILL = [
   [['/photography', 'Photography'], ['/travel', 'Travel'], ['/music', 'Music']],
   [['/geography', 'Geography'], ['/guardian-arts', 'Guardian Arts'], ['/academics', 'Academics']],
-  [['/about', 'About Zoe'], ['/photography/awards', 'Awards'], ['/music/concerts', 'Concerts']],
 ];
 const HALO = ['h-orange', 'h-rose', 'h-gold'];
 const INTERESTS = ['Geography', 'Travel', 'Cello', 'Parkour', 'Mixed martial arts', 'History', 'Photos that tell little stories'];
@@ -34,13 +34,19 @@ const num = (i) => String(i + 1).padStart(2, '0');
 const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, CA. A highlight reel of experiments, adventures and “aha!” moments: photo awards, travel, concerts and cello.';
 ---
 
-<FullBleed title="Zoe Wacker" description={DESCRIPTION} image={displayPath(photos[0].image)}>
+<FullBleed title="Zoe Wacker" description={DESCRIPTION} image={displayPath(key.image)}>
   <div class="home">
     <section class="poster">
       <p class="presents">Menlo Park, CA <b>presents</b> the {season} season</p>
       <div class="rule" aria-hidden="true"><i></i></div>
       <h1 class="headliner script">Zoe Wacker<span>.</span></h1>
       <p class="tagline">Photographer, cellist, map nerd. A highlight reel of <em>experiments, adventures and “aha!” moments.</em></p>
+      <figure class="key">
+        {key.href
+          ? <a class="shot h-orange" href={key.href}><img src={displayPath(key.image)} alt={key.alt} loading="eager" fetchpriority="high" /></a>
+          : <div class="shot h-orange"><img src={displayPath(key.image)} alt={key.alt} loading="eager" fetchpriority="high" /></div>}
+        <figcaption><span>{key.title}</span><span class="sep" aria-hidden="true">·</span><span class="sr-only">, </span><span>{key.place}</span></figcaption>
+      </figure>
       <nav class="bill" aria-label="Sections">
         {BILL.map((row, r) => (
           <div class={`row r${r + 1}`}>
@@ -169,8 +175,8 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
 
 <style>
   .home { width: var(--page-max); max-width: 100%; margin: 0 auto; padding: 0 32px 20px; }
-  .poster { padding: 64px 0 24px; text-align: center; }
-  .presents { margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--rose-text); }
+  .poster { padding: 48px 0 24px; text-align: center; }
+  .presents { margin: 0; text-wrap: balance; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--rose-text); }
   .presents b { color: var(--ink); font-weight: 500; }
   .rule { display: flex; align-items: center; gap: 14px; max-width: 520px; margin: 18px auto 0; }
   .rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
@@ -178,25 +184,30 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .rule i { width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
   .headliner { font-size: clamp(44px, 15.5vw, 236px); line-height: 1.05; white-space: nowrap; margin: 6px 0 0; padding: .08em 0 .12em; }
   .headliner span { color: var(--orange); }
-  .tagline { font-size: clamp(16px, 1.9vw, 20px); color: var(--muted); max-width: 620px; margin: 8px auto 0; }
+  .tagline { font-size: clamp(16px, 1.9vw, 20px); color: var(--muted); max-width: 620px; margin: 8px auto 0; text-wrap: balance; }
+  /* Key photo: the poster's art, a wide letterbox on desktop and the photo's own 3:2 on phone. */
+  .key { margin: 28px auto 0; max-width: 960px; }
+  .key .shot { aspect-ratio: 2.75 / 1; }
+  .key .shot img { object-position: 50% 64%; }
+  .key figcaption { max-width: none; margin: 14px auto 0; text-align: center; }
+  .key figcaption span:first-child { color: var(--ink); }
+  .key .sep { color: var(--gold); margin: 0 10px; }
   .tagline em { color: var(--rose-text); font-weight: 500; }
-  .bill { margin: 44px auto 0; max-width: 1080px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 30px 0; position: relative; }
+  .bill { margin: 36px auto 0; max-width: 1080px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 30px 0; position: relative; }
   .bill::before, .bill::after { content: ""; position: absolute; left: 0; right: 0; height: 1px; background: var(--hair); }
   .bill::before { top: 4px; } .bill::after { bottom: 4px; }
   .row { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: 24px; row-gap: 2px; font-family: var(--serif); font-variation-settings: var(--soft); line-height: 1.12; }
-  .row a { position: relative; isolation: isolate; color: inherit; text-decoration: none; transition: color .3s; }
+  .row a { position: relative; isolation: isolate; display: inline-block; padding-block: var(--tap); margin-block: calc(-1 * var(--tap)); color: inherit; text-decoration: none; transition: color .3s; }
   .row a::after { content: ""; position: absolute; inset: -.18em -.45em; border-radius: 999px; z-index: -1; opacity: 0; transform: scale(.85);
     background: radial-gradient(closest-side, rgba(var(--rh), .20), rgba(var(--rh), 0)); transition: opacity .4s ease, transform .4s ease; }
   .row a:hover, .row a:focus-visible { text-decoration: none; }
   .row a:hover::after, .row a:focus-visible::after { opacity: 1; transform: scale(1); }
   .dot { width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); display: inline-block; align-self: center; }
-  .r1 { --rh: var(--h-orange); font-size: clamp(32px, 5.6vw, 76px); font-weight: 500; color: var(--orange); }
+  .r1 { --rh: var(--h-orange); --tap: 5px; font-size: clamp(32px, 5.6vw, 76px); font-weight: 500; color: var(--orange); }
   .r1 a:hover { color: var(--orange); }
-  .r2 { --rh: var(--h-rose); font-size: clamp(24px, 3.3vw, 44px); font-weight: 400; color: var(--ink); margin-top: 8px; }
+  .r2 { --rh: var(--h-rose); --tap: 9px; font-size: clamp(24px, 3.3vw, 44px); font-weight: 400; color: var(--ink); margin-top: 8px; }
   .r2 a:hover { color: var(--rose); }
   .r2 .dot { width: 6px; height: 6px; background: var(--rose); }
-  .r3 { --rh: var(--h-rose); font-size: clamp(19px, 2.1vw, 26px); font-weight: 500; font-variant-caps: all-small-caps; letter-spacing: .08em; color: var(--rose-text); margin-top: 12px; }
-  .r3 .dot { width: 5px; height: 5px; }
   .support { margin: 22px 0 0; font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
   .support b { color: var(--ink); font-weight: 500; }
 
@@ -269,7 +280,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .date .thumb { width: 132px; height: 84px; border-radius: 6px; overflow: hidden; box-shadow: var(--halo-rose); transition: transform .3s, box-shadow .5s; }
   .date:hover .thumb { transform: translateY(-3px) rotate(-1.5deg); box-shadow: var(--halo-rose-hover); }
   .date .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
-  .more { display: inline-block; margin-top: 22px; font-weight: 700; }
+  .more { display: inline-block; margin-top: 14px; padding: 8px 0; font-weight: 700; }
 
   .music { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; background: var(--blush); border-radius: 18px; padding: 64px; }
   .pull { border: 0; padding: 0; font-size: clamp(30px, 3.6vw, 48px); line-height: 1.1; max-width: none; }
@@ -296,7 +307,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .interests { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
   .interests li { padding: 7px 14px; background: var(--paper); border: 1px solid var(--hair); border-radius: 999px; font-size: 14px; color: var(--muted); }
 
-  @media (max-width: 1060px) { .stubs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 1060px) { .stubs { grid-template-columns: repeat(2, minmax(0, 1fr)); } .key .shot { aspect-ratio: 2 / 1; } }
   @media (max-width: 900px) {
     .strip { grid-template-columns: 1fr 1fr; gap: 18px; }
     .strip .p1 { grid-column: 1 / -1; }
@@ -304,15 +315,17 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
     .two, .music, .about { grid-template-columns: minmax(0, 1fr); gap: 40px; }
     .music { padding: 40px 28px; }
     .monogram { width: 160px; height: 160px; font-size: 68px; }
-    .date { grid-template-columns: 70px minmax(0, 1fr); gap: 4px 16px; }
+    .date { grid-template-columns: 70px minmax(0, 1fr) 84px; gap: 4px 16px; }
     .date .stops { grid-column: 2; }
-    .date .thumb { display: none; }
+    .date .thumb { width: 84px; height: 56px; grid-column: 3; grid-row: 1 / 3; align-self: center; }
   }
   @media (max-width: 699px) { .home h2 { font-size: clamp(28px, 8.4vw, 58px); } }
   @media (max-width: 560px) {
     .home { padding: 0 16px 20px; }
-    .poster { padding-top: 44px; }
-    .bill { margin-top: 32px; }
+    .poster { padding-top: 36px; }
+    .key { margin-top: 22px; }
+    .key .shot { aspect-ratio: 3 / 2; }
+    .bill { margin-top: 28px; }
     .row { column-gap: 14px; }
     .stubs { grid-template-columns: minmax(0, 1fr); }
     .strip figcaption { flex-direction: column; gap: 2px; }

@@ -9,8 +9,8 @@ import { photographyAwards, travelTrips } from '../src/links/registry.ts';
 
 const data = JSON.parse(fs.readFileSync('src/data/exhibit.json', 'utf8'));
 
-test('at least three exhibit items, each complete; no section blurbs', () => {
-  assert.ok(data.items.length >= 3);
+test('at least four exhibit items (key photo plus strip), each complete; no section blurbs', () => {
+  assert.ok(data.items.length >= 4);
   for (const it of data.items) {
     for (const k of ['image', 'alt', 'title', 'place']) assert.ok(it[k], `${it.title || it.image} missing ${k}`);
     assert.ok(fs.existsSync(path.join('public', it.image)), `original missing: ${it.image}`);
@@ -24,18 +24,18 @@ test('displayPath maps originals to resized jpgs', () => {
   assert.equal(displayPath('/images/trips/rome_2024/colluseum_rome_2024.jpeg', 'row'), '/images/display/row-colluseum_rome_2024.jpg');
 });
 
-test('listDrafts names drafts among the first three photos only', () => {
-  const items = [{ title: 'A', draft: true }, { title: 'B' }, { title: 'C', draft: true }, { title: 'D', draft: true }];
-  assert.deepEqual(listDrafts(items), ['photo: A', 'photo: C']);
+test('listDrafts names drafts among the first four photos only (key photo plus strip)', () => {
+  const items = [{ title: 'A', draft: true }, { title: 'B' }, { title: 'C', draft: true }, { title: 'D', draft: true }, { title: 'E', draft: true }];
+  assert.deepEqual(listDrafts(items), ['photo: A', 'photo: C', 'photo: D']);
 });
 
-test('homepageImages: three strip photos and the featured award full-size, trip thumbnails row-size, skipping entries without images', () => {
+test('homepageImages: key photo, three strip photos and the featured award full-size, trip thumbnails row-size, skipping entries without images', () => {
   const imgs = homepageImages({
-    items: [{ image: '/a.jpg' }, { image: '/b.jpg' }, { image: '/c.jpg' }, { image: '/d.jpg' }],
+    items: [{ image: '/a.jpg' }, { image: '/b.jpg' }, { image: '/c.jpg' }, { image: '/d.jpg' }, { image: '/e.jpg' }],
     award: { image: '/award.jpg' },
     trips: [{ image: '/t1.jpg' }, {}, { image: '/t2.jpg' }],
   });
-  assert.deepEqual(imgs, [['/a.jpg', 'full'], ['/b.jpg', 'full'], ['/c.jpg', 'full'], ['/award.jpg', 'full'], ['/t1.jpg', 'row'], ['/t2.jpg', 'row']]);
+  assert.deepEqual(imgs, [['/a.jpg', 'full'], ['/b.jpg', 'full'], ['/c.jpg', 'full'], ['/d.jpg', 'full'], ['/award.jpg', 'full'], ['/t1.jpg', 'row'], ['/t2.jpg', 'row']]);
 });
 
 test('missingDisplayFiles reports display paths that do not exist', () => {
