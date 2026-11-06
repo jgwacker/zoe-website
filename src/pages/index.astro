@@ -92,7 +92,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
       <div class="two">
         <div class="reveal">
           <p class="eyebrow">The programme</p>
-          <h2 class="script">Photo awards <em>{season}</em></h2>
+          <h2 class="script">Photo <em>awards</em></h2>
           {award && (
             <a class="awardcard" href={award.href}>
               {award.image && <span class="shot h-orange"><img src={displayPath(award.image)} alt="" loading="lazy" /></span>}
@@ -104,17 +104,20 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
             </a>
           )}
         </div>
-        <ol class="programme reveal" role="list">
-          {photographyAwards.map((a, i) => (
-            <li class:list={{ feat: a === award }}>
-              <a href={a.href}>
-                <span class="n" aria-hidden="true">{roman(i + 1)}</span>
-                <span class="t">{a.label}{a.note && <span class="d">{a.note}</span>}</span>
-                <span class="arrow" aria-hidden="true">→</span>
-              </a>
-            </li>
-          ))}
-        </ol>
+        <div class="reveal">
+          <ol class="programme" role="list">
+            {latest(photographyAwards, 4).map((a, i) => (
+              <li>
+                <a href={a.href}>
+                  <span class="n" aria-hidden="true">{roman(i + 1)}</span>
+                  <span class="t">{a.label}{a.note && <span class="d">{a.note}</span>}</span>
+                  <span class="arrow" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+          <a class="more" href="/photography/awards">All awards →</a>
+        </div>
       </div>
     </section>
 
@@ -253,6 +256,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .awardcard { display: block; margin-top: 30px; color: var(--ink); text-decoration: none; }
   .awardcard:hover, .awardcard:visited { color: var(--ink); text-decoration: none; }
   .awardcard .shot { aspect-ratio: 3 / 2; }
+  .awardcard .shot img { object-position: 50% 30%; }
   .awardcard .cap { display: block; margin-top: 20px; }
   .awardcard b { display: block; font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 28px; line-height: 1.15; }
   .awardcard .note { display: block; color: var(--muted); font-size: 15px; margin-top: 4px; }
@@ -265,8 +269,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .programme a:hover { background: linear-gradient(90deg, rgba(226, 115, 58, .08), transparent); padding-left: 12px; text-decoration: none; color: var(--ink); }
   .programme .n { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 500; font-size: 28px; line-height: 1; color: var(--gold-text); }
   .programme .t { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 20px; line-height: 1.25; overflow-wrap: anywhere; }
-  .programme .d { display: block; font-family: var(--sans); font-weight: 400; font-size: 15px; color: var(--muted); margin-top: 4px; }
-  .programme .feat .t { color: var(--orange-text); }
+  .programme .d { display: block; font-family: var(--sans); font-weight: 400; font-size: 15px; line-height: 1.45; color: var(--muted); margin-top: 4px; }
   .programme .arrow { color: var(--rose-text); transition: transform .25s; }
   .programme a:hover .arrow { transform: translateX(4px); }
 
@@ -331,7 +334,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
     .strip figcaption { flex-direction: column; gap: 2px; }
     .gigs { columns: 1; }
     .date .place { font-size: 28px; }
-    .programme a { grid-template-columns: 40px minmax(0, 1fr); }
+    .programme a { grid-template-columns: 56px minmax(0, 1fr); }
     .programme .arrow { display: none; }
     .block { padding-top: 72px; }
   }

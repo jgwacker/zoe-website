@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { readDist, serveDist, launch } from './helpers.mjs';
 import { photographyAwards, travelTrips, musicConcerts, celloPerformances } from '../src/links/registry.ts';
-import { recentStubs } from '../src/lib/registry-meta.mjs';
+import { recentStubs, latest } from '../src/lib/registry-meta.mjs';
 
 const html = readDist('/');
 const data = JSON.parse(fs.readFileSync('src/data/exhibit.json', 'utf8'));
@@ -35,11 +35,14 @@ test('the first exhibit photo is the poster key art, the next three are the stri
   assert.ok(!html.includes(data.items[4].title), 'only four photos');
 });
 
-test('programme links every registry award with Roman numerals, plus the featured card', () => {
-  assert.deepEqual(hrefs(section('programme')), photographyAwards.map((a) => a.href));
+test('programme lists the four newest awards with Roman numerals, an All awards link, and the featured card', () => {
+  assert.deepEqual(hrefs(section('programme')), latest(photographyAwards, 4).map((a) => a.href));
   assert.match(section('programme'), /<span[^>]*class="n"[^>]*>I<\/span>/);
-  assert.match(html, /<a[^>]*class="awardcard"[^>]*href="\/photography\/awards\/peninsula-photo-competition-2025"/);
+  assert.match(html, /<a[^>]*class="more"[^>]*href="\/photography\/awards"[^>]*>All awards →<\/a>/);
+  assert.match(html, /<a[^>]*class="awardcard"[^>]*href="\/photography\/awards\/global-peace-photo-award-2026"/);
+  assert.match(html, /class="awardcard"[\s\S]*?<img[^>]*src="\/images\/display\/gppa-2026-5\.jpg"/);
   assert.ok(html.includes('Read the story →'));
+  assert.match(html, /<h2[^>]*class="script"[^>]*>Photo <em[^>]*>awards<\/em><\/h2>/);
 });
 
 test('travel dates show the five newest trips; concerts the six newest; the newest cello performance', () => {

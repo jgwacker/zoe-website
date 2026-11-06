@@ -34,10 +34,10 @@ test('seasonLabel switches on August 1', () => {
   assert.equal(seasonLabel(new Date(2026, 7, 1)), '2026–27');
 });
 
-test('registry: every award has a note, Peninsula is featured with an image, newest trips have stops', () => {
+test('registry: every award has a note, Global Peace is featured with an image, newest trips have stops', () => {
   for (const a of photographyAwards) assert.ok(a.note, `${a.label} has no note`);
   const f = featuredAward(photographyAwards);
-  assert.equal(f.href, '/photography/awards/peninsula-photo-competition-2025');
+  assert.equal(f.href, '/photography/awards/global-peace-photo-award-2026');
   assert.ok(f.image);
   for (const t of latest(travelTrips, 5)) assert.ok(t.note, `${t.label} has no stops`);
   assert.ok(celloPerformances[0].note);
