@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-06T22:42:31Z",
+  "title": "Design System: Zoe Wacker",
+  "extensions": {
+    "colorMeta": {
+      "cream": {
+        "role": "neutral",
+        "displayName": "Cream",
+        "canonical": "oklch(96.8% 0.015 70.9)",
+        "hex": "#FBF3EA",
+        "tonalRamp": [
+          "#0E0A07",
+          "#2A241D",
+          "#484138",
+          "#696055",
+          "#8A8176",
+          "#ADA399",
+          "#CFC8BF",
+          "#F3EDE8"
+        ]
+      },
+      "blush": {
+        "role": "neutral",
+        "displayName": "Blush",
+        "canonical": "oklch(94.9% 0.015 37.9)",
+        "hex": "#F8EBE7",
+        "tonalRamp": [
+          "#0F0A08",
+          "#2C2320",
+          "#4B3F3B",
+          "#6C5E59",
+          "#8E7F7A",
+          "#B0A19D",
+          "#D2C6C2",
+          "#F5ECEA"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(99.0% 0.008 73.7)",
+        "hex": "#FFFBF6",
+        "tonalRamp": [
+          "#0E0B07",
+          "#29241D",
+          "#484138",
+          "#686055",
+          "#8A8176",
+          "#ACA499",
+          "#CFC8BF",
+          "#F2EEE7"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(25.0% 0.019 18.5)",
+        "hex": "#2A1E1E",
+        "tonalRamp": [
+          "#0F0A0A",
+          "#2C2222",
+          "#4B3E3E",
+          "#6C5D5D",
+          "#8E7E7E",
+          "#B0A1A1",
+          "#D3C6C5",
+          "#F5ECEC"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "oklch(51.9% 0.016 67.5)",
+        "hex": "#6F675F",
+        "tonalRamp": [
+          "#0E0A07",
+          "#2A241D",
+          "#494038",
+          "#695F55",
+          "#8B8076",
+          "#ADA399",
+          "#D0C8BF",
+          "#F3EDE8"
+        ]
+      },
+      "deep-rose": {
+        "role": "primary",
+        "displayName": "Deep Rose",
+        "canonical": "oklch(44.4% 0.120 3.2)",
+        "hex": "#87314D",
+        "tonalRamp": [
+          "#1D0009",
+          "#450B21",
+          "#6E233C",
+          "#96405A",
+          "#BC617B",
+          "#DE879E",
+          "#FBB1C3",
+          "#FFDFEA"
+        ]
+      },
+      "orange": {
+        "role": "secondary",
+        "displayName": "Apricot",
+        "canonical": "oklch(62.9% 0.154 45.3)",
+        "hex": "#D2652C",
+        "tonalRamp": [
+          "#210000",
+          "#4D0300",
+          "#791C00",
+          "#A33B00",
+          "#CA5F25",
+          "#EC8656",
+          "#FFB18A",
+          "#FFE0C5"
+        ]
+      },
+      "rose": {
+        "role": "secondary",
+        "displayName": "Rose",
+        "canonical": "oklch(60.9% 0.130 5.9)",
+        "hex": "#C25E77",
+        "tonalRamp": [
+          "#1E0007",
+          "#48061E",
+          "#721E38",
+          "#9B3C56",
+          "#C15E77",
+          "#E3849A",
+          "#FFAFC0",
+          "#FFDEE8"
+        ]
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "Marigold",
+        "canonical": "oklch(61.0% 0.117 79.8)",
+        "hex": "#A87A1C",
+        "tonalRamp": [
+          "#170700",
+          "#3A1E00",
+          "#5F3900",
+          "#835800",
+          "#A7791D",
+          "#C89D52",
+          "#E7C388",
+          "#FFEBC4"
+        ]
+      },
+      "orange-text": {
+        "role": "tertiary",
+        "displayName": "Apricot Text",
+        "canonical": "oklch(50.6% 0.123 46.4)",
+        "hex": "#9C4A1C",
+        "tonalRamp": [
+          "#1E0200",
+          "#461000",
+          "#6F2900",
+          "#974719",
+          "#BD693E",
+          "#DF8E67",
+          "#FBB797",
+          "#FFE3CD"
+        ]
+      },
+      "rose-text": {
+        "role": "tertiary",
+        "displayName": "Rose Text",
+        "canonical": "oklch(53.4% 0.129 5.6)",
+        "hex": "#A84862",
+        "tonalRamp": [
+          "#1E0007",
+          "#47071E",
+          "#711F39",
+          "#9A3C57",
+          "#C05E77",
+          "#E2859A",
+          "#FFAFC0",
+          "#FFDEE8"
+        ]
+      },
+      "gold-text": {
+        "role": "tertiary",
+        "displayName": "Marigold Text",
+        "canonical": "oklch(53.0% 0.106 76.3)",
+        "hex": "#8E6210",
+        "tonalRamp": [
+          "#170700",
+          "#3A1E00",
+          "#5E3900",
+          "#825800",
+          "#A67930",
+          "#C79D5E",
+          "#E7C390",
+          "#FFEBC9"
+        ]
+      },
+      "hair": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgba(42, 30, 30, 0.14)",
+        "tonalRamp": []
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page titles and the homepage name, in Sacramento and deep rose."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "In-content h2 to h4 in soft wonky Fraunces, and long page titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card, stub, list and programme titles in Fraunces 600."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraphs and list items in DM Sans, 68ch measure."
+      },
+      "ui": {
+        "displayName": "UI",
+        "purpose": "Nav, sidebar labels, buttons and card notes in DM Sans 500."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Mono uppercase kickers, captions, badges, years and the footer line."
+      }
+    },
+    "shadows": [
+      {
+        "name": "halo-orange",
+        "value": "0 0 0 1px rgba(226, 115, 58, .16), 0 18px 46px -16px rgba(226, 115, 58, .40), 0 0 80px -24px rgba(226, 115, 58, .34)",
+        "purpose": "First halo in the rotation. Also the featured award card."
+      },
+      {
+        "name": "halo-rose",
+        "value": "0 0 0 1px rgba(194, 94, 119, .16), 0 18px 46px -16px rgba(194, 94, 119, .40), 0 0 80px -24px rgba(194, 94, 119, .34)",
+        "purpose": "Second halo. Also award hero photos, tour thumbnails and blog heroes."
+      },
+      {
+        "name": "halo-gold",
+        "value": "0 0 0 1px rgba(201, 138, 30, .16), 0 18px 46px -16px rgba(201, 138, 30, .40), 0 0 80px -24px rgba(201, 138, 30, .34)",
+        "purpose": "Third halo. Also the ZW monogram."
+      },
+      {
+        "name": "halo-orange-hover",
+        "value": "0 0 0 1px rgba(226, 115, 58, .30), 0 24px 60px -12px rgba(226, 115, 58, .58), 0 0 120px -18px rgba(226, 115, 58, .48)",
+        "purpose": "Brightened apricot halo on hover, .5s ease."
+      },
+      {
+        "name": "halo-rose-hover",
+        "value": "0 0 0 1px rgba(194, 94, 119, .30), 0 24px 60px -12px rgba(194, 94, 119, .58), 0 0 120px -18px rgba(194, 94, 119, .48)",
+        "purpose": "Brightened rose halo on hover, .5s ease."
+      },
+      {
+        "name": "halo-gold-hover",
+        "value": "0 0 0 1px rgba(201, 138, 30, .30), 0 24px 60px -12px rgba(201, 138, 30, .58), 0 0 120px -18px rgba(201, 138, 30, .48)",
+        "purpose": "Brightened marigold halo on hover, .5s ease."
+      },
+      {
+        "name": "stub-rest",
+        "value": "0 1px 0 rgba(42, 30, 30, .05), 0 14px 30px -18px rgba(122, 60, 40, .35)",
+        "purpose": "The only warm-grey shadow, under ticket stubs at rest."
+      },
+      {
+        "name": "stub-hover",
+        "value": "0 0 0 1px rgba(194, 94, 119, .22), 0 22px 48px -16px rgba(194, 94, 119, .5), 0 0 90px -24px rgba(194, 94, 119, .4)",
+        "purpose": "Rose halo a ticket stub gains on hover, with a 4px lift."
+      }
+    ],
+    "motion": [
+      {
+        "name": "halo",
+        "value": "box-shadow .5s ease",
+        "purpose": "Halo brightening on photos, cards and the monogram."
+      },
+      {
+        "name": "lift",
+        "value": "transform .3s ease",
+        "purpose": "Hover lift of 2 to 4px on stubs, cards and thumbnails (.25s on buttons and cello card)."
+      },
+      {
+        "name": "zoom",
+        "value": "transform .8s ease",
+        "purpose": "Slow 1.025 zoom of a photo inside its frame on hover (.3s to 1.02 on linked figures)."
+      },
+      {
+        "name": "slide",
+        "value": "background .25s, padding .25s",
+        "purpose": "List rows sliding 6px right on a tinted gradient."
+      },
+      {
+        "name": "bloom",
+        "value": "opacity .4s ease, transform .4s ease",
+        "purpose": "Radial halo blooming behind a bill word from scale .85."
+      },
+      {
+        "name": "reveal",
+        "value": "opacity .9s ease, transform .9s ease",
+        "purpose": "Scroll fade-in from 12px below; only once html has the js class; off under reduced motion."
+      },
+      {
+        "name": "color",
+        "value": "color .2s",
+        "purpose": "Nav link colour shift (.25s to .3s on headings and bill words)."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stubs-two-col",
+        "value": "1060px"
+      },
+      {
+        "name": "stack",
+        "value": "900px"
+      },
+      {
+        "name": "home-heading",
+        "value": "700px"
+      },
+      {
+        "name": "phone",
+        "value": "560px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ink pill used for \"Read the story\" on the featured award card; deep rose and a 2px lift on hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Read the story →</a>",
+      "css": ".ds-btn-primary { display: inline-flex; padding: 12px 22px; border-radius: 999px; background: var(--ink); color: var(--cream); font-family: var(--sans); font-weight: 500; font-size: 15px; line-height: 1.35; text-decoration: none; transition: transform .25s, background .25s; } .ds-btn-primary:hover { transform: translateY(-2px); background: var(--deep-rose); color: var(--cream); } .ds-btn-primary:focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; border-radius: 999px; }"
+    },
+    {
+      "name": "Menu Toggle",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Ghost pill with a hairline border and mono uppercase label; the mobile nav toggle.",
+      "html": "<button type=\"button\" class=\"ds-btn-ghost\" aria-expanded=\"false\">Menu</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; font: 500 12px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); background: transparent; border: 1px solid var(--hair); border-radius: 999px; padding: 10px 16px; cursor: pointer; transition: color .2s, border-color .2s; } .ds-btn-ghost:hover { border-color: var(--ink); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; }"
+    },
+    {
+      "name": "Header Nav",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Sticky translucent cream bar: Fraunces wordmark with an apricot period and muted sans links, current page underlined in apricot.",
+      "html": "<header class=\"ds-header\"><a class=\"ds-mark\" href=\"#\">Zoe Wacker<span>.</span></a><nav><ul><li><a href=\"#\">Travel</a></li><li><a href=\"#\" aria-current=\"page\">Photography</a></li><li><a href=\"#\">Music</a></li><li><a href=\"#\">Academics</a></li></ul></nav></header>",
+      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 64px; padding: 0 16px; background: rgba(251, 243, 234, .88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--hair); } .ds-mark { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 22px; letter-spacing: -.01em; line-height: 1; color: var(--deep-rose); text-decoration: none; } .ds-mark span { color: var(--orange); } .ds-header ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; } .ds-header nav a { font-family: var(--sans); font-size: 15px; font-weight: 500; color: var(--muted); text-decoration: none; padding-bottom: 4px; transition: color .2s; } .ds-header nav a:hover { color: var(--ink); } .ds-header nav a[aria-current=\"page\"] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--orange); } .ds-header a:focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Sidebar Set List",
+      "kind": "nav",
+      "refersTo": "sidebar-item",
+      "description": "Numbered hairline list in the page sidebar; hover slides right on a rose gradient, current item gets an apricot bar.",
+      "html": "<ol class=\"ds-vlist\"><li><a href=\"#\"><span class=\"n\">01</span><span class=\"t\">San Francisco 2026</span></a></li><li><a href=\"#\" aria-current=\"page\"><span class=\"n\">02</span><span class=\"t\">Amsterdam 2025</span></a></li><li><a href=\"#\"><span class=\"n\">03</span><span class=\"t\">Egypt 2025</span></a></li></ol>",
+      "css": ".ds-vlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); max-width: 260px; } .ds-vlist a { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 14px 4px; border-bottom: 1px solid var(--hair); color: var(--ink); font-family: var(--sans); font-size: 15px; font-weight: 600; line-height: 1.35; text-decoration: none; transition: background .25s, padding .25s; } .ds-vlist a:hover { background: linear-gradient(90deg, rgba(194, 94, 119, .10), transparent); padding-left: 10px; } .ds-vlist .n { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 500; font-size: 20px; line-height: 1; color: var(--rose-text); } .ds-vlist a[aria-current=\"page\"] { box-shadow: inset 3px 0 0 var(--orange); padding-left: 12px; } .ds-vlist a[aria-current=\"page\"] .t { color: var(--deep-rose); } .ds-vlist a:focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; border-radius: 2px; }"
+    },
+    {
+      "name": "Ticket Stub",
+      "kind": "card",
+      "refersTo": "ticket-stub",
+      "description": "Paper card with a 4px accent edge and a perforated tear-off numbered \"No. 01\"; lifts 4px with a rose halo on hover.",
+      "html": "<a class=\"ds-stub\" href=\"#\"><span class=\"main\"><span class=\"kind\">Award · 2026</span><span class=\"name\">Pétange International Youth Photo Contest</span><span class=\"det\">Accepted, Group A · “Two Penguins” · FIAP</span></span><span class=\"tear\" aria-hidden=\"true\"><span>No. 01</span></span></a>",
+      "css": ".ds-stub { --c: var(--orange); --ct: var(--orange-text); position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 46px; max-width: 300px; background: var(--paper); border-radius: 10px; color: var(--ink); text-decoration: none; font-family: var(--sans); box-shadow: 0 1px 0 rgba(42, 30, 30, .05), 0 14px 30px -18px rgba(122, 60, 40, .35); transition: transform .3s ease, box-shadow .4s ease; } .ds-stub:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(194, 94, 119, .22), 0 22px 48px -16px rgba(194, 94, 119, .5), 0 0 90px -24px rgba(194, 94, 119, .4); } .ds-stub:focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; } .ds-stub .main { padding: 18px 18px 18px 20px; border-left: 4px solid var(--c); border-radius: 10px 0 0 10px; min-width: 0; } .ds-stub .kind { font-family: var(--mono); text-transform: uppercase; font-size: 11px; letter-spacing: .16em; color: var(--ct); } .ds-stub .name { display: block; font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 21px; line-height: 1.15; margin: 8px 0 6px; } .ds-stub .det { display: block; font-size: 14px; color: var(--muted); line-height: 1.45; } .ds-stub .tear { position: relative; border-left: 2px dashed var(--hair); display: flex; align-items: center; justify-content: center; } .ds-stub .tear span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--mono); text-transform: uppercase; font-size: 11px; letter-spacing: .2em; color: var(--ct); } .ds-stub .tear::before, .ds-stub .tear::after { content: \"\"; position: absolute; left: -9px; width: 16px; height: 16px; border-radius: 50%; background: var(--cream); } .ds-stub .tear::before { top: -8px; } .ds-stub .tear::after { bottom: -8px; }"
+    },
+    {
+      "name": "Award Label Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The museum-label card beside an award photo: paper, hairline border, 3px apricot top rule, marigold badge, mono definition list.",
+      "html": "<aside class=\"ds-label\"><p class=\"badge\">Honorable Mention</p><h2>Cinderello</h2><p class=\"by\">Zoe Wacker, 2025</p><dl><dt>Place</dt><dd>Mosque–Madrasa of Sultan Ḥasan, Cairo</dd><dt>Contest</dt><dd>Peninsula Photo Competition 2025</dd><dt>Division</dt><dd>Youth “Moments”</dd></dl></aside>",
+      "css": ".ds-label { max-width: 320px; background: var(--paper); border: 1px solid var(--hair); border-top: 3px solid var(--orange); border-radius: 10px; padding: 24px; font-family: var(--sans); font-size: 15px; line-height: 1.5; color: var(--ink); } .ds-label p { margin: 0; } .ds-label .badge { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); text-transform: uppercase; font-size: 12px; letter-spacing: .14em; color: var(--gold-text); } .ds-label .badge::before { content: \"\"; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); flex: none; } .ds-label h2 { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 500; font-size: 30px; line-height: 1.1; margin: 14px 0 6px; color: var(--ink); letter-spacing: -.01em; } .ds-label .by { color: var(--muted); } .ds-label dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--hair); } .ds-label dt { font-family: var(--mono); text-transform: uppercase; font-size: 11px; letter-spacing: .14em; color: var(--muted); padding-top: 3px; } .ds-label dd { margin: 0; color: var(--ink); }"
+    },
+    {
+      "name": "Interest Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Static paper pill with a hairline border listing an interest; not interactive.",
+      "html": "<ul class=\"ds-chips\"><li>Geography</li><li>Travel</li><li>Cello</li><li>Parkour</li></ul>",
+      "css": ".ds-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; } .ds-chips li { padding: 7px 14px; background: var(--paper); border: 1px solid var(--hair); border-radius: 999px; font-family: var(--sans); font-size: 14px; color: var(--muted); }"
+    },
+    {
+      "name": "Kicker",
+      "kind": "custom",
+      "refersTo": "eyebrow",
+      "description": "Mono uppercase section label in rose text with a marigold diamond; opens every title band and homepage section.",
+      "html": "<p class=\"ds-eyebrow\">The programme</p>",
+      "css": ".ds-eyebrow { margin: 0; display: flex; align-items: center; gap: 12px; font-family: var(--mono); text-transform: uppercase; font-size: 12px; font-weight: 500; letter-spacing: .16em; color: var(--rose-text); } .ds-eyebrow::before { content: \"\"; flex: none; width: 7px; height: 7px; transform: rotate(45deg); background: var(--gold); }"
+    },
+    {
+      "name": "Photo with Halo",
+      "kind": "custom",
+      "refersTo": "photo",
+      "description": "A figure with 8px corners and a soft apricot halo that brightens on hover, captioned in mono uppercase.",
+      "html": "<figure class=\"ds-photo\"><div class=\"shot\"></div><figcaption><span>Cinderello</span><span>Cairo</span></figcaption></figure>",
+      "css": ".ds-photo { margin: 24px 0; max-width: 360px; } .ds-photo .shot { aspect-ratio: 3 / 2; border-radius: 8px; background: linear-gradient(135deg, var(--blush), var(--cream)); box-shadow: 0 0 0 1px rgba(226, 115, 58, .16), 0 18px 46px -16px rgba(226, 115, 58, .40), 0 0 80px -24px rgba(226, 115, 58, .34); transition: box-shadow .5s ease, transform .3s ease; } .ds-photo:hover .shot { box-shadow: 0 0 0 1px rgba(226, 115, 58, .30), 0 24px 60px -12px rgba(226, 115, 58, .58), 0 0 120px -18px rgba(226, 115, 58, .48); transform: scale(1.02); } .ds-photo figcaption { display: flex; justify-content: space-between; gap: 12px; margin: 14px 0 0; font-family: var(--mono); text-transform: uppercase; font-size: 12px; letter-spacing: .12em; line-height: 1.6; color: var(--muted); } .ds-photo figcaption span:first-child { color: var(--ink); }"
+    },
+    {
+      "name": "Programme Row",
+      "kind": "custom",
+      "refersTo": "sidebar-item",
+      "description": "Roman-numbered award row under a solid ink rule; slides right on an apricot gradient with a rose arrow.",
+      "html": "<ol class=\"ds-programme\"><li><a href=\"#\"><span class=\"n\">I</span><span class=\"t\">Pétange International Youth Photo Contest 2026<span class=\"d\">Accepted, Group A · “Two Penguins”</span></span><span class=\"arrow\" aria-hidden=\"true\">→</span></a></li><li><a href=\"#\"><span class=\"n\">II</span><span class=\"t\">Global Peace Photo Award 2026<span class=\"d\">Shortlisted, Children’s Peace Image of the Year</span></span><span class=\"arrow\" aria-hidden=\"true\">→</span></a></li></ol>",
+      "css": ".ds-programme { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); max-width: 560px; } .ds-programme li { border-bottom: 1px solid var(--hair); } .ds-programme a { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 22px 6px; color: var(--ink); text-decoration: none; transition: background .25s, padding .25s; } .ds-programme a:hover { background: linear-gradient(90deg, rgba(226, 115, 58, .08), transparent); padding-left: 12px; } .ds-programme a:focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; border-radius: 2px; } .ds-programme .n { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 500; font-size: 28px; line-height: 1; color: var(--gold-text); } .ds-programme .t { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 20px; line-height: 1.25; } .ds-programme .d { display: block; font-family: var(--sans); font-weight: 400; font-size: 15px; color: var(--muted); margin-top: 4px; } .ds-programme .arrow { color: var(--rose-text); transition: transform .25s; } .ds-programme a:hover .arrow { transform: translateX(4px); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Matinee Poster",
+    "overview": "A lineup poster for a daytime show, printed on warm cream stock. The name is hand-lettered in deep rose across the top. The sections are billed beneath it like acts, in a soft and slightly wonky serif. The recent dates are ticket stubs with a perforated edge, and the awards are a numbered programme. Every other page is a leaf torn from the same programme: a mono kicker naming the section, a cursive title, hairline rules, and photographs hung with a soft coloured light behind them.\n\nThe mood is warm, elegant and a little theatrical, playful without being juvenile. Colour is sparing and always warm. Apricot, rose and marigold take turns as the accent on large type, rules, diamonds and halos, while small text stays in ink, muted taupe, or the darker text variants of the three accents. Density is low and reading is comfortable: 18px body copy at a 1.7 line height on a 68-character measure, generous section gaps, and long titles that step down from cursive to serif so they stay legible.\n\nConfirmed rejections: the earlier After Dark theme (dark aubergine pages, Anton condensed caps, neon text glow) was too loud, and the earlier Soft Blush theme was too plain. Italics are banned throughout. Candy pink and anything bubblegum are out.",
+    "keyCharacteristics": [
+      "Cream page with two faint fixed radial washes, rose at the top left and apricot at the top right.",
+      "One cursive face for the name and titles, one soft wonky serif for billing and card titles, one sans for reading, one mono for labels.",
+      "Accents rotate apricot, rose, marigold in sequence rather than committing to one brand colour.",
+      "Photos carry a soft coloured halo that brightens on hover, never a grey drop shadow.",
+      "Hairlines, gold diamonds and perforations do the structural work; borders are rare and never heavy.",
+      "Motion is gentle (lifts of 2 to 4px, 0.9s reveals) and fully off under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The Big Type Rule",
+        "body": "Apricot, Rose and Marigold appear as text only at 24px and larger. Below that, use their Text variants, which pass 4.5:1 on cream, blush and paper.",
+        "section": "colors"
+      },
+      {
+        "name": "The Rotation Rule",
+        "body": "The three accents cycle in order, apricot then rose then marigold, across sibling photos, stubs and strip items. Do not assign one colour to one section.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink Rule",
+        "body": "Body copy is ink and secondary copy is muted. Colour never carries a paragraph.",
+        "section": "colors"
+      },
+      {
+        "name": "The Forty-Character Rule",
+        "body": "A page title over 40 characters switches from Sacramento to Fraunces. Cursive does not survive long titles.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Italics Rule",
+        "body": "`em` and `i` render upright everywhere. Emphasis is colour: apricot text inside headings, rose text inside quotes.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Line Rule",
+        "body": "\"Zoe Wacker\" and the homepage section headings never wrap. Their clamps are tuned so `white-space: nowrap` fits at 360px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Coloured Light Rule",
+        "body": "A shadow is always tinted with the element's accent. Grey shadows do not exist here, and the halo RGB triplets (`226,115,58`, `194,94,119`, `201,138,30`) are brighter than the text colours on purpose, because they are light rather than ink.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Rest Lift Rule",
+        "body": "Surfaces are flat at rest. Hover lifts a card 2px, a stub or tour thumbnail 3 to 4px (the thumbnail also tilts 1.5 degrees), and brightens its halo. Nothing lifts without being a link.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do set every page title in Sacramento and deep rose, and let titles over 40 characters fall back to Fraunces at `clamp(32px, 4.4vw, 56px)`.",
+      "Do keep Fraunces on its soft and wonky axes (`\"opsz\" 144, \"SOFT\" 100, \"WONK\" 1`) at weights 400 to 600.",
+      "Do put photos in a `<figure>` and let the global halo rotation style them.",
+      "Do use Apricot Text, Rose Text and Marigold Text for any coloured text under 24px.",
+      "Do open a section list with a solid 1px ink rule and separate items with hairlines.",
+      "Do use the ZW monogram on marigold-haloed paper where a portrait would otherwise go.",
+      "Do add `class=\"reveal\"` for a scroll fade-in; it stays visible without JavaScript and under reduced motion.",
+      "Do keep body copy at 18px, line height 1.7, and a 68ch measure."
+    ],
+    "donts": [
+      "Don't use italics anywhere; `em` and `i` render upright and carry colour instead.",
+      "Don't set Apricot, Rose or Marigold on text smaller than 24px.",
+      "Don't use grey or neutral drop shadows; depth is a tinted halo or a paper-on-cream layer.",
+      "Don't bring back dark page backgrounds, condensed caps (Anton) or neon text glow.",
+      "Don't give one section one colour; accents rotate apricot, rose, marigold across siblings.",
+      "Don't let \"Zoe Wacker\" or a homepage section heading wrap.",
+      "Don't add candy pink, bubblegum, or anything that reads as juvenile.",
+      "Don't add motion that persists under `prefers-reduced-motion`, or content that only appears once JavaScript runs."
+    ]
+  }
+}
