@@ -53,7 +53,7 @@ A dated, first-person, verifiable record of a specific person over several years
 - Voice: first person, casual, curious, specific. Tagline: "Photographer, cellist, map nerd."
 - The site should not feel juvenile or bubblegum. Zoe likes pink and orange, and the parent found the stock Astro theme "too cold."
 - The live theme is "Matinee" (mockup `design/themes/7B-5`), documented in `CLAUDE.md` and `src/styles/global.css`. Earlier themes 5B After Dark and 3D-1a Soft Blush were live before it; rejected directions are listed in `design/themes/README.md` and should not be regenerated.
-- Domain: zoewacker.com (confirmed 2026-11-06). `astro.config.mjs` still lists `https://example.com` as the site URL and needs updating for the sitemap and RSS.
+- Domain: zoewacker.com (confirmed 2026-11-06; set as `site` in `astro.config.mjs` the same day, so the canonical, sitemap, share image and RSS links use it).
 
 ## Evidence on Hand
 

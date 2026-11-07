@@ -64,7 +64,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
     {stubs.length > 0 && (
       <section class="recent" aria-label="Recent dates">
         <h2 class="sr-only">Now showing</h2>
-        <div class="stubs-head"><p><b>Now showing</b> · recent dates</p><p aria-hidden="true">Admit one</p></div>
+        <div class="stubs-head" aria-hidden="true"><p><b>Now showing</b> · recent dates</p><p>Admit one</p></div>
         <div class="stubs">
           {stubs.map((s, i) => (
             <a class={`stub ${s.tone} reveal`} href={s.href}>
@@ -164,7 +164,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
           {gigs.length > 0 && (<>
           <p class="label">From the crowd</p>
           <ul class="gigs" role="list">
-            {gigs.map((g) => (<li><a href={g.href}><b>{g.name}</b><span>{g.year ?? ''}</span></a></li>))}
+            {gigs.map((g) => (<li><a href={g.href}><b>{g.name}</b><span class="sr-only">, </span><span>{g.year ?? ''}</span></a></li>))}
           </ul>
           </>)}
           {cello && (
@@ -230,9 +230,9 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .stub:visited, .stub:hover { color: var(--ink); text-decoration: none; }
   .stub:focus-visible, .cello:focus-visible { border-radius: 10px; }
   a.shot:focus-visible { border-radius: 8px; }
-  .stub:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(var(--h-rose), .22), 0 22px 48px -16px rgba(var(--h-rose), .5), 0 0 90px -24px rgba(var(--h-rose), .4); }
-  .stub.rose { --c: var(--rose); --ct: var(--rose-text); }
-  .stub.gold { --c: var(--gold); --ct: var(--gold-text); }
+  .stub:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(var(--hh), .22), 0 22px 48px -16px rgba(var(--hh), .5), 0 0 90px -24px rgba(var(--hh), .4); }
+  .stub.rose { --c: var(--rose); --ct: var(--rose-text); --hh: var(--h-rose); }
+  .stub.gold { --c: var(--gold); --ct: var(--gold-text); --hh: var(--h-gold); }
   .stub .main { padding: 18px 18px 18px 20px; border-left: 4px solid var(--c); border-radius: 10px 0 0 10px; min-width: 0; }
   .stub .kind { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ct); }
   .stub .name { display: block; font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 21px; line-height: 1.15; margin: 8px 0 6px; overflow-wrap: anywhere; }
@@ -316,9 +316,8 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .cello .c-n { display: block; color: var(--muted); font-size: 15px; }
 
   .about { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 64px; align-items: center; }
-  .monogram { width: 240px; height: 240px; border-radius: 50%; display: grid; place-items: center; background: var(--paper); box-shadow: var(--halo-gold); font-size: 104px; line-height: 1; transition: box-shadow .5s; }
-  .monogram:hover { box-shadow: var(--halo-gold-hover); }
-  .voice { font-size: 20px; line-height: 1.6; margin: 22px 0 0; max-width: 640px; }
+  .monogram { width: 240px; height: 240px; border-radius: 50%; display: grid; place-items: center; background: var(--paper); box-shadow: var(--halo-gold); font-size: 104px; line-height: 1; }
+  .voice { font-size: 20px; line-height: 1.6; margin: 22px 0 0; max-width: 640px; text-wrap: pretty; }
   .interests { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
   .interests li { padding: 7px 14px; background: var(--paper); border: 1px solid var(--hair); border-radius: 999px; font-size: 14px; color: var(--muted); }
 

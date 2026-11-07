@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-06T23:07:39Z",
+  "generatedAt": "2026-11-07T00:46:18Z",
   "title": "Design System: Zoe Wacker",
   "extensions": {
     "colorMeta": {
@@ -267,8 +267,8 @@
       },
       {
         "name": "stub-hover",
-        "value": "0 0 0 1px rgba(194, 94, 119, .22), 0 22px 48px -16px rgba(194, 94, 119, .5), 0 0 90px -24px rgba(194, 94, 119, .4)",
-        "purpose": "Rose halo a ticket stub gains on hover, with a 4px lift."
+        "value": "0 0 0 1px rgba(h, .22), 0 22px 48px -16px rgba(h, .5), 0 0 90px -24px rgba(h, .4)",
+        "purpose": "Halo a ticket stub gains on hover in its own accent (h = that accent RGB triplet), with a 4px lift."
       }
     ],
     "motion": [
@@ -366,7 +366,7 @@
       "refersTo": "ticket-stub",
       "description": "Paper card with a 4px accent edge and a perforated tear-off numbered \"No. 01\"; lifts 4px with a rose halo on hover.",
       "html": "<a class=\"ds-stub\" href=\"#\"><span class=\"main\"><span class=\"kind\">Award · 2026</span><span class=\"name\">Pétange International Youth Photo Contest</span><span class=\"det\">Accepted, Group A · “Two Penguins” · FIAP</span></span><span class=\"tear\" aria-hidden=\"true\"><span>No. 01</span></span></a>",
-      "css": ".ds-stub { --c: var(--orange); --ct: var(--orange-text); position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 46px; max-width: 300px; background: var(--paper); border-radius: 10px; color: var(--ink); text-decoration: none; font-family: var(--sans); box-shadow: 0 1px 0 rgba(42, 30, 30, .05), 0 14px 30px -18px rgba(122, 60, 40, .35); transition: transform .3s ease, box-shadow .4s ease; } .ds-stub:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(194, 94, 119, .22), 0 22px 48px -16px rgba(194, 94, 119, .5), 0 0 90px -24px rgba(194, 94, 119, .4); } .ds-stub:focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; } .ds-stub .main { padding: 18px 18px 18px 20px; border-left: 4px solid var(--c); border-radius: 10px 0 0 10px; min-width: 0; } .ds-stub .kind { font-family: var(--mono); text-transform: uppercase; font-size: 11px; letter-spacing: .16em; color: var(--ct); } .ds-stub .name { display: block; font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 21px; line-height: 1.15; margin: 8px 0 6px; } .ds-stub .det { display: block; font-size: 14px; color: var(--muted); line-height: 1.45; } .ds-stub .tear { position: relative; border-left: 2px dashed var(--hair); display: flex; align-items: center; justify-content: center; } .ds-stub .tear span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--mono); text-transform: uppercase; font-size: 11px; letter-spacing: .2em; color: var(--ct); } .ds-stub .tear::before, .ds-stub .tear::after { content: \"\"; position: absolute; left: -9px; width: 16px; height: 16px; border-radius: 50%; background: var(--cream); } .ds-stub .tear::before { top: -8px; } .ds-stub .tear::after { bottom: -8px; }"
+      "css": ".ds-stub { --c: var(--orange); --ct: var(--orange-text); position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 46px; max-width: 300px; background: var(--paper); border-radius: 10px; color: var(--ink); text-decoration: none; font-family: var(--sans); box-shadow: 0 1px 0 rgba(42, 30, 30, .05), 0 14px 30px -18px rgba(122, 60, 40, .35); transition: transform .3s ease, box-shadow .4s ease; } .ds-stub:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(226, 115, 58, .22), 0 22px 48px -16px rgba(226, 115, 58, .5), 0 0 90px -24px rgba(226, 115, 58, .4); } .ds-stub:focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; } .ds-stub .main { padding: 18px 18px 18px 20px; border-left: 4px solid var(--c); border-radius: 10px 0 0 10px; min-width: 0; } .ds-stub .kind { font-family: var(--mono); text-transform: uppercase; font-size: 11px; letter-spacing: .16em; color: var(--ct); } .ds-stub .name { display: block; font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 21px; line-height: 1.15; margin: 8px 0 6px; } .ds-stub .det { display: block; font-size: 14px; color: var(--muted); line-height: 1.45; } .ds-stub .tear { position: relative; border-left: 2px dashed var(--hair); display: flex; align-items: center; justify-content: center; } .ds-stub .tear span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--mono); text-transform: uppercase; font-size: 11px; letter-spacing: .2em; color: var(--ct); } .ds-stub .tear::before, .ds-stub .tear::after { content: \"\"; position: absolute; left: -9px; width: 16px; height: 16px; border-radius: 50%; background: var(--cream); } .ds-stub .tear::before { top: -8px; } .ds-stub .tear::after { bottom: -8px; }"
     },
     {
       "name": "Award Label Card",
@@ -458,7 +458,7 @@
       },
       {
         "name": "The Rest Lift Rule",
-        "body": "Surfaces are flat at rest. Hover lifts a card 2px, a stub or tour thumbnail 3 to 4px (the thumbnail also tilts 1.5 degrees), and brightens its halo. Nothing lifts without being a link.",
+        "body": "Surfaces are flat at rest. Hover lifts a card 2px, a stub or tour thumbnail 3 to 4px (the thumbnail also tilts 1.5 degrees), and brightens its halo. Nothing lifts or brightens without being a link; the ZW monogram does not respond to hover.",
         "section": "elevation"
       }
     ],

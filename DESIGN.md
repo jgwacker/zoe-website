@@ -231,7 +231,7 @@ Depth is coloured light, not shadow. Photographs sit on the page with a soft hal
 ### Named Rules
 **The Coloured Light Rule.** A shadow is always tinted with the element's accent. Grey shadows do not exist here, and the halo RGB triplets (`226,115,58`, `194,94,119`, `201,138,30`) are brighter than the text colours on purpose, because they are light rather than ink.
 
-**The Rest Lift Rule.** Surfaces are flat at rest. Hover lifts a card 2px, a stub or tour thumbnail 3 to 4px (the thumbnail also tilts 1.5 degrees), and brightens its halo. Nothing lifts without being a link.
+**The Rest Lift Rule.** Surfaces are flat at rest. Hover lifts a card 2px, a stub or tour thumbnail 3 to 4px (the thumbnail also tilts 1.5 degrees), and brightens its halo. Nothing lifts or brightens without being a link; the ZW monogram does not respond to hover.
 
 ## Shapes
 
@@ -273,7 +273,7 @@ Printed and tactile: pieces of a programme on paper stock, with hairlines, perfo
 - **Sidebar set list:** A hairline-ruled list. Each item is a zero-padded number in Fraunces 500 at 20px in rose text, then the label in DM Sans 600 at 15px in ink, 14px by 4px padding. Hover slides the item 6px right on a rose-to-transparent gradient over `.25s`. The current page carries a 3px apricot inset bar on the left and its label turns deep rose.
 
 ### Ticket Stub
-The homepage's "Now showing" cards. A paper rectangle with 10px corners split into a main panel and a 46px tear-off. The main panel has a 4px left edge in the stub's accent, a mono kind-and-year line in that accent's text colour, the name in Fraunces 600 at 21px, and a muted 14px detail. The tear-off is a 2px dashed hairline with cream circles punched top and bottom and a vertical mono "No. 01" in the accent text colour. Rest shadow is the faint warm one; hover lifts 4px and brings the rose halo over `.3s` and `.4s`.
+The homepage's "Now showing" cards. A paper rectangle with 10px corners split into a main panel and a 46px tear-off. The main panel has a 4px left edge in the stub's accent, a mono kind-and-year line in that accent's text colour, the name in Fraunces 600 at 21px, and a muted 14px detail. The tear-off is a 2px dashed hairline with cream circles punched top and bottom and a vertical mono "No. 01" in the accent text colour. Rest shadow is the faint warm one; hover lifts 4px and brings the stub's own accent halo over `.3s` and `.4s`.
 
 ### Photo with Halo
 Every `figure > img`, `figure > video` and `figure > a > img` gets 8px corners and a halo in rotation by `nth-of-type(3n+1)`, `3n+2`, `3n`. Hover brightens the halo over `.5s`, and linked photos also scale to 1.02 over `.3s`. The caption is DM Mono 12px uppercase at 0.12em in muted, left-aligned, 14px below, capped at 40rem. On the homepage strip, the caption is split into title (ink) and place (muted) at the two ends of the line. No per-page styling is needed; the global stylesheet does it.

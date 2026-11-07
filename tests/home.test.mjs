@@ -102,6 +102,20 @@ test('homepage: no sideways scroll, and the name and section headings stay on on
   }
 });
 
+test('stub hover halo follows the stub accent; the monogram does not react to hover', async (t) => {
+  const srv = await serveDist();
+  const browser = await launch();
+  t.after(async () => { await browser.close(); await srv.close(); });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  await page.goto(srv.url + '/', { waitUntil: 'load' });
+  await page.evaluate(() => document.querySelectorAll('.reveal').forEach((e) => e.classList.add('in')));
+  const shadowAfterHover = async (sel) => { await page.hover(sel); await page.waitForTimeout(700); return page.evaluate((s) => getComputedStyle(document.querySelector(s)).boxShadow, sel); };
+  assert.match(await shadowAfterHover('.stub.gold'), /201, 138, 30/, 'gold stub hovers with a marigold halo');
+  assert.match(await shadowAfterHover('.stub.orange'), /226, 115, 58/, 'orange stub hovers with an apricot halo');
+  const rest = await page.evaluate(() => getComputedStyle(document.querySelector('.monogram')).boxShadow);
+  assert.equal(await shadowAfterHover('.monogram'), rest, 'monogram halo is unchanged on hover');
+});
+
 test('homepage header is slim at every width: Menu toggle, nav hidden until opened, visible without JS', async (t) => {
   const srv = await serveDist();
   const browser = await launch();
