@@ -96,6 +96,12 @@ const { slim = false } = Astro.props;
 	.site-header.slim.js .menu-toggle { display: inline-flex; }
 	.site-header.slim.js nav { display: none; }
 	.site-header.slim.js.open nav { display: block; padding-bottom: 16px; max-height: calc(100dvh - 80px); overflow-y: auto; background: var(--paper); }
+	/* On wide screens the slim panel drops under the toggle as a paper card; the poster does not move. */
+	@media (min-width: 901px) {
+		.site-header.slim .bar { position: relative; }
+		.site-header.slim.js.open nav { position: absolute; right: 0; top: calc(100% - 2px); width: 320px; padding: 4px 20px 10px; border: 1px solid var(--hair); border-radius: 10px; box-shadow: 0 1px 0 rgba(42, 30, 30, .05), 0 14px 30px -18px rgba(122, 60, 40, .35); max-height: calc(100dvh - 96px); }
+		.site-header.slim.js.open nav li:last-child a { border-bottom: 0; }
+	}
 	@media (max-width: 900px) {
 		.bar { padding: 10px 0; }
 		nav { flex-basis: 100%; }

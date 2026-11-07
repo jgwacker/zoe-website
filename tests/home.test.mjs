@@ -110,9 +110,14 @@ test('homepage header is slim at every width: Menu toggle, nav hidden until open
   const firstLink = page.locator('#site-nav a').first();
   await toggle.waitFor({ state: 'visible' });
   assert.equal(await firstLink.isVisible(), false);
+  const posterBefore = await page.evaluate(() => document.querySelector('.poster').getBoundingClientRect().top);
   await toggle.click();
   assert.equal(await toggle.getAttribute('aria-expanded'), 'true');
   assert.equal(await firstLink.isVisible(), true);
+  const open = await page.evaluate(() => { const n = document.querySelector('#site-nav'); const r = n.getBoundingClientRect(); return { pos: getComputedStyle(n).position, w: r.width, posterTop: document.querySelector('.poster').getBoundingClientRect().top }; });
+  assert.equal(open.pos, 'absolute', 'desktop panel drops under the toggle');
+  assert.ok(open.w <= 360, `panel is ${open.w}px wide`);
+  assert.equal(open.posterTop, posterBefore, 'opening the menu does not move the poster');
   await page.keyboard.press('Escape');
   assert.equal(await firstLink.isVisible(), false);
   const ctx = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1440, height: 900 } });
