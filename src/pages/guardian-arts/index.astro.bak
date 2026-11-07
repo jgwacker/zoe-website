@@ -1,6 +1,0 @@
----
-import Layout from '../../layouts/Site.astro';
----
-<Layout title="Guardian Arts">
-  <p>This is a stub page for Guardian Arts. Replace this text with real content.</p>
-</Layout>

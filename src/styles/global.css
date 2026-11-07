@@ -86,6 +86,8 @@ a { color: var(--orange-text); text-decoration: none; }
 a:hover { color: var(--orange-text); text-decoration: underline; text-underline-offset: 3px; }
 a:visited { color: var(--orange-text); }
 :focus-visible { outline: 2px solid var(--deep-rose); outline-offset: 3px; border-radius: 2px; }
+/* The skip link lands focus on <main>; the landmark itself needs no ring. */
+main:focus, main:focus-visible { outline: none; }
 [id] { scroll-margin-top: 80px; }
 p { margin: 0 0 1em; }
 .content p, .content li, .content blockquote { max-width: 68ch; }

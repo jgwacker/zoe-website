@@ -1,0 +1,20 @@
+---
+import Layout from '@layouts/Page.astro';
+import { sections } from '@links/registry';
+const bill = [{ href: '/', label: 'Home' }, ...sections.filter((s) => s.href !== '/photography/gallery'), { href: '/about', label: 'About Zoe' }];
+---
+
+<Layout title="Nothing showing here" description="That page isn’t on the bill. Pick a section to find what you were looking for.">
+  <p class="lead">That page isn’t on the bill. It may have moved, or the link had a typo.</p>
+  <p>Try one of these instead:</p>
+  <ul class="bill" role="list">
+    {bill.map((b) => (<li><a href={b.href}>{b.label}</a></li>))}
+  </ul>
+</Layout>
+
+<style>
+  .lead { font-family: var(--serif); font-variation-settings: var(--soft); font-size: 1.25em; line-height: 1.45; max-width: 36ch; }
+  .bill { list-style: none; margin: .5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .bill a { display: inline-flex; align-items: center; min-height: 44px; padding: 7px 16px; background: var(--paper); border: 1px solid var(--hair); border-radius: 999px; color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none; transition: background .25s, color .25s; }
+  .bill a:hover { background: var(--ink); color: var(--cream); text-decoration: none; }
+</style>

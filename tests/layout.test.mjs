@@ -9,7 +9,7 @@ test('title band shows the section eyebrow and page title', () => {
   const html = readDist(AWARD);
   assert.match(html, /<section[^>]*class="title-band"[\s\S]*?<p[^>]*class="eyebrow"[^>]*>Photography<\/p>[\s\S]*?<h1[^>]*class="post-title[^"]*"/);
   assert.match(readDist('/about/'), /<p[^>]*class="eyebrow"[^>]*>About<\/p>/);
-  assert.doesNotMatch(readDist('/blog/'), /<p[^>]*class="eyebrow"[^>]*><\/p>/, 'no empty eyebrow');
+  assert.doesNotMatch(readDist('/404.html'), /<p[^>]*class="eyebrow"[^>]*><\/p>/, 'no empty eyebrow on a page outside every section');
 });
 
 test('sidebar is a numbered list with the current page marked', () => {

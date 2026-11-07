@@ -4,7 +4,7 @@ const norm = (h) => h.replace(/\/+$/, '') || '/';
 const here = norm(Astro.url.pathname);
 const num = (i) => String(i + 1).padStart(2, '0');
 ---
-{orientation === 'vertical' ? (
+{items.length === 0 ? null : orientation === 'vertical' ? (
   <ol class="vlist" role="list">
     {items.map((it, i) => (
       <li>

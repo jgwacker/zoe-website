@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { splitYear, latest, featuredAward, seasonLabel, recentStubs, roman } from '../src/lib/registry-meta.mjs';
+import { splitYear, latest, featuredAward, seasonLabel, recentStubs, roman, after } from '../src/lib/registry-meta.mjs';
 import { photographyAwards, travelTrips, celloPerformances } from '../src/links/registry.ts';
 
 test('splitYear takes the last 4-digit year out of a label', () => {
@@ -11,6 +11,12 @@ test('splitYear takes the last 4-digit year out of a label', () => {
   assert.deepEqual(splitYear('The Shelter: National Photography Competition for Kids June 2026'),
     { name: 'The Shelter: National Photography Competition for Kids June', year: 2026 });
   assert.deepEqual(splitYear('Favorites'), { name: 'Favorites', year: null });
+});
+
+test('after returns the n entries following the first skip (what the stubs already show)', () => {
+  assert.deepEqual(after(['a', 'b', 'c', 'd', 'e'], 2, 2), ['c', 'd']);
+  assert.deepEqual(after(['a', 'b'], 1, 5), ['b']);
+  assert.deepEqual(after([], 2, 4), []);
 });
 
 test('latest returns the first n entries (the registry is newest-first)', () => {
@@ -34,10 +40,10 @@ test('seasonLabel switches on August 1', () => {
   assert.equal(seasonLabel(new Date(2026, 7, 1)), '2026–27');
 });
 
-test('registry: every award has a note, Peninsula is featured with an image, newest trips have stops', () => {
-  for (const a of photographyAwards) assert.ok(a.note, `${a.label} has no note`);
+test('registry: every award has a result and a note, Global Peace is featured with an image, newest trips have stops', () => {
+  for (const a of photographyAwards) { assert.ok(a.result, `${a.label} has no result`); assert.ok(a.note, `${a.label} has no note`); assert.doesNotMatch(a.note, /^(Winner|Runner-Up|Shortlisted|Accepted|Honorable Mention|Notable Entry)/, `${a.label} repeats the result in its note`); }
   const f = featuredAward(photographyAwards);
-  assert.equal(f.href, '/photography/awards/peninsula-photo-competition-2025');
+  assert.equal(f.href, '/photography/awards/global-peace-photo-award-2026');
   assert.ok(f.image);
   for (const t of latest(travelTrips, 5)) assert.ok(t.note, `${t.label} has no stops`);
   assert.ok(celloPerformances[0].note);
@@ -48,7 +54,7 @@ test('registry: every award has a note, Peninsula is featured with an image, new
 
 test('recentStubs: two newest awards, newest trip, newest concert, with tones', () => {
   const s = recentStubs({
-    awards: [{ href: '/a1', label: 'Alpha Prize 2026', note: 'Winner' }, { href: '/a2', label: 'Beta Salon 2025' }],
+    awards: [{ href: '/a1', label: 'Alpha Prize 2026', result: 'Winner', note: 'Open class' }, { href: '/a2', label: 'Beta Salon 2025' }],
     trips: [{ href: '/t1', label: 'Egypt 2025', note: 'Cairo · Giza' }],
     concerts: [{ href: '/c1', label: 'Outside Lands 2026' }],
   });
@@ -58,6 +64,7 @@ test('recentStubs: two newest awards, newest trip, newest concert, with tones', 
     ['Trip', 'Egypt', 2025, 'gold', '/t1'],
     ['Concert', 'Outside Lands', 2026, 'orange', '/c1'],
   ]);
+  assert.equal(s[0].note, 'Winner · Open class');
   assert.equal(s[1].note, '');
 });
 

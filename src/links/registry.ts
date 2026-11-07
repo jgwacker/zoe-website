@@ -1,4 +1,4 @@
-export type LinkItem = { href: string; label: string; note?: string; image?: string; featured?: boolean; desc?: string };
+export type LinkItem = { href: string; label: string; result?: string; note?: string; image?: string; featured?: boolean; desc?: string };
 
 // Top-level sections (optional, if you want to reuse elsewhere)
 export const sections = [
@@ -33,15 +33,15 @@ export const photographySections = [
   { href: '/photography/series',    label: 'Series' },
 ];
 export const photographyAwards: LinkItem[] = [
-  { href: '/photography/awards/petange-youth-photo-contest-2026', label: 'Pétange International Youth Photo Contest 2026', note: 'Accepted, Group A (16 and under) · “Two Penguins” · FIAP' },
-  { href: '/photography/awards/global-peace-photo-award-2026', label: 'Global Peace Photo Award 2026', note: 'Shortlisted, Children’s Peace Image of the Year · “Faces of Peace”' },
-  { href: '/photography/awards/npcfk-competition-shelter-2026', label: 'The Shelter: National Photography Competition for Kids June 2026', note: 'Notable Entry, Rising Photographers (ages 12–14)' },
-  { href: '/photography/awards/no-frames-2026', label: 'No Frames International Youth Photo Contest 2026', note: 'Honorable Mention, Nature (under 14)' },
-  { href: '/photography/awards/npcfk-competition-life-in-red-2026', label: 'Life in Red: National Photography Competition for Kids March 2026', note: 'Winner, Dream Snapper · Rising Photographers (ages 12–14)' },
-  { href: '/photography/awards/npcfk-competition-home-2025', label: 'Home is Where the Heart Is: National Photography Competition for Kids December 2025', note: 'Winner, Visionary Voyager · Rising Photographers (ages 12–14)' },
-  { href: '/photography/awards/tpoy-competition-2025', label: 'Travel Photographer of the Year Competition 2025', note: 'Runner-Up, Young TPOTY (14 & under) · Places collection' },
-  { href: '/photography/awards/npcfk-competition-color-2025', label: 'I Spy Something-“Color” : National Photography Competition for Kids November 2025', note: 'Notable Entry, Rising Photographers (ages 12–14)' },
-  { href: '/photography/awards/peninsula-photo-competition-2025', label: 'Peninsula Photo Competition 2025', note: 'Honorable Mention, Youth “Moments” · “Cinderello”', image: '/images/photography_awards/cinderello.jpg', featured: true },
+  { href: '/photography/awards/petange-youth-photo-contest-2026', label: 'Pétange International Youth Photo Contest 2026', result: 'Accepted', note: 'Group A (16 and under) · “Two Penguins” · FIAP' },
+  { href: '/photography/awards/global-peace-photo-award-2026', label: 'Global Peace Photo Award 2026', result: 'Shortlisted', note: 'Children’s Peace Image of the Year · “Faces of Peace”', image: '/images/photography_awards/gppa-2026-5.jpg', featured: true },
+  { href: '/photography/awards/npcfk-competition-shelter-2026', label: 'The Shelter: National Photography Competition for Kids June 2026', result: 'Notable Entry', note: 'Rising Photographers (ages 12–14)' },
+  { href: '/photography/awards/no-frames-2026', label: 'No Frames International Youth Photo Contest 2026', result: 'Honorable Mention', note: 'Nature (under 14)' },
+  { href: '/photography/awards/npcfk-competition-life-in-red-2026', label: 'Life in Red: National Photography Competition for Kids March 2026', result: 'Winner · Dream Snapper', note: 'Rising Photographers (ages 12–14)' },
+  { href: '/photography/awards/npcfk-competition-home-2025', label: 'Home is Where the Heart Is: National Photography Competition for Kids December 2025', result: 'Winner · Visionary Voyager', note: 'Rising Photographers (ages 12–14)' },
+  { href: '/photography/awards/tpoy-competition-2025', label: 'Travel Photographer of the Year Competition 2025', result: 'Runner-Up', note: 'Young TPOTY (14 & under) · Places collection' },
+  { href: '/photography/awards/npcfk-competition-color-2025', label: 'I Spy Something-“Color”: National Photography Competition for Kids November 2025', result: 'Notable Entry', note: 'Rising Photographers (ages 12–14)' },
+  { href: '/photography/awards/peninsula-photo-competition-2025', label: 'Peninsula Photo Competition 2025', result: 'Honorable Mention', note: 'Youth “Moments” · “Cinderello”', image: '/images/photography_awards/cinderello.jpg' },
 ];
 
 // Music

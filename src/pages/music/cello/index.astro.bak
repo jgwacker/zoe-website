@@ -1,6 +1,0 @@
----
-import Layout from '../../../layouts/Site.astro';
----
-<Layout title="Cello">
-  <p>Practice logs, repertoire, performances.</p>
-</Layout>

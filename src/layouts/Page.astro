@@ -7,7 +7,9 @@ import { sectionLabel } from '../lib/site-nav.mjs';
 const { title = 'Untitled', description = '' } = Astro.props;
 const eyebrow = sectionLabel(Astro.url.pathname);
 const hasHero = Astro.slots.has('hero');
-const hasSidebar = Astro.slots.has('sidebar');
+// A sidebar slot that renders to nothing (e.g. a LinkList with no items yet) counts as no sidebar.
+const sidebar = Astro.slots.has('sidebar') ? (await Astro.slots.render('sidebar')).trim() : '';
+const hasSidebar = sidebar.length > 0;
 const longTitle = String(title).length > 40;
 ---
 <html lang="en">
@@ -27,11 +29,11 @@ const longTitle = String(title).length > 40;
         <slot name="hero" />
       </div>
     )}
-    <main class="container">
+    <main id="main" tabindex="-1" class="container">
       <div class:list={['layout', { 'no-sidebar': !hasSidebar }]}>
         {hasSidebar && (
           <aside class="sidebar">
-            <slot name="sidebar" />
+            <Fragment set:html={sidebar} />
           </aside>
         )}
         <section class="content">
