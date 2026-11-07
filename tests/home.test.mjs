@@ -47,6 +47,8 @@ test('the first exhibit photo is the poster key art, the next three are the stri
 test('programme lists the four newest awards with Roman numerals, an All awards link, and the featured card', () => {
   assert.deepEqual(hrefs(section('programme')), after(photographyAwards, 2, 4).map((a) => a.href), 'programme starts after the two stub awards');
   assert.match(section('programme'), /<span[^>]*class="n"[^>]*>I<\/span>/);
+  const results = [...section('programme').matchAll(/<span[^>]*class="t"[^>]*>([^<]+)<span/g)].map((m) => m[1]);
+  assert.deepEqual(results, after(photographyAwards, 2, 4).map((a) => a.result), 'each row leads with its result');
   assert.match(html, /<a[^>]*class="more"[^>]*href="\/photography\/awards"[^>]*>All awards →<\/a>/);
   assert.match(html, /<a[^>]*class="awardcard"[^>]*href="\/photography\/awards\/global-peace-photo-award-2026"/);
   assert.match(html, /class="awardcard"[\s\S]*?<img[^>]*src="\/images\/display\/gppa-2026-5\.jpg"/);

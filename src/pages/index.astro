@@ -113,7 +113,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
               {award.image && <span class="shot h-orange"><img src={displayPath(award.image)} alt="" loading="lazy" /></span>}
               <span class="cap">
                 <b>{award.label}</b>
-                {award.note && <span class="note">{award.note}</span>}
+                {(award.result || award.note) && <span class="note">{[award.result, award.note].filter(Boolean).join(' · ')}</span>}
                 <span class="btn">Read the story →</span>
               </span>
             </a>
@@ -125,7 +125,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
               <li>
                 <a href={a.href}>
                   <span class="n" aria-hidden="true">{roman(i + 1)}</span>
-                  <span class="t">{a.label}{a.note && <span class="d">{a.note}</span>}</span>
+                  <span class="t">{a.result ?? a.label}<span class="d">{a.result ? [a.label, a.note].filter(Boolean).join(' · ') : a.note}</span></span>
                   <span class="arrow" aria-hidden="true">→</span>
                 </a>
               </li>
@@ -277,7 +277,8 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .programme a:visited { color: var(--ink); }
   .programme a:hover { background: linear-gradient(90deg, rgba(226, 115, 58, .08), transparent); padding-left: 12px; text-decoration: none; color: var(--ink); }
   .programme .n { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 500; font-size: 28px; line-height: 1; color: var(--gold-text); }
-  .programme .t { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 20px; line-height: 1.25; overflow-wrap: anywhere; }
+  /* Result first, in marigold text; the contest and category follow in the note role. */
+  .programme .t { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 20px; line-height: 1.3; color: var(--gold-text); overflow-wrap: anywhere; }
   .programme .d { display: block; font-family: var(--sans); font-weight: 400; font-size: 15px; line-height: 1.45; color: var(--muted); margin-top: 4px; }
   .programme .arrow { color: var(--rose-text); transition: transform .25s; }
   .programme a:hover .arrow { transform: translateX(4px); }

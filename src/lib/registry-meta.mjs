@@ -32,7 +32,7 @@ export function recentStubs({ awards = [], trips = [], concerts = [] }) {
     [concerts[0], 'Concert', 'orange'],
   ];
   return pick.filter(([item]) => item).map(([item, kind, tone]) => ({
-    kind, tone, href: item.href, note: item.note ?? '', ...splitYear(item.label),
+    kind, tone, href: item.href, note: [item.result, item.note].filter(Boolean).join(' · '), ...splitYear(item.label),
   }));
 }
 
