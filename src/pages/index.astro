@@ -55,7 +55,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
       <nav class="bill" aria-label="Sections">
         {BILL.map((row, r) => (
           <div class={`row r${r + 1}`}>
-            {row.map(([href, label], i) => (<>{i > 0 && <i class="dot" aria-hidden="true"></i>}<a href={href}>{label}</a></>))}
+            {row.map(([href, label], i) => (<span class="act">{i > 0 && <i class="dot" aria-hidden="true"></i>}<a href={href}>{label}</a></span>))}
           </div>
         ))}
       </nav>
@@ -139,13 +139,13 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
     <section class="block" id="travel">
       <p class="eyebrow">On location</p>
       <h2 class="script">Travel <em>dates</em></h2>
-      <div class="tour">
+      <div class:list={['tour', { 'no-thumbs': !tour.every((t) => t.image) }]}>
         {tour.map((t) => (
           <a class="date reveal" href={t.href}>
             <span class="yr">{t.year ?? ''}</span>
             <span class="place">{t.name}</span>
             <span class="stops">{t.note ?? ''}</span>
-            {t.image && <span class="thumb"><img src={displayPath(t.image, 'row')} alt="" loading="lazy" /></span>}
+            {t.image && tour.every((x) => x.image) && <span class="thumb"><img src={displayPath(t.image, 'row')} alt="" loading="lazy" /></span>}
           </a>
         ))}
       </div>
@@ -208,6 +208,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .bill::before, .bill::after { content: ""; position: absolute; left: 0; right: 0; height: 1px; background: var(--hair); }
   .bill::before { top: 4px; } .bill::after { bottom: 4px; }
   .row { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: 24px; row-gap: 2px; font-family: var(--serif); font-variation-settings: var(--soft); line-height: 1.12; }
+  .act { display: inline-flex; align-items: baseline; gap: inherit; white-space: nowrap; }
   .row a { position: relative; isolation: isolate; display: inline-block; padding-block: var(--tap); margin-block: calc(-1 * var(--tap)); color: inherit; text-decoration: none; transition: color .3s; }
   .row a::after { content: ""; position: absolute; inset: -.18em -.45em; border-radius: 999px; z-index: -1; opacity: 0; transform: scale(.85);
     background: radial-gradient(closest-side, rgba(var(--rh), .20), rgba(var(--rh), 0)); transition: opacity .4s ease, transform .4s ease; }
@@ -246,10 +247,10 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .shot { display: block; border-radius: 8px; overflow: hidden; background: var(--blush); transition: box-shadow .5s ease; }
   .shot img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 0; transition: transform .8s ease; }
   .h-orange { box-shadow: var(--halo-orange); } .h-rose { box-shadow: var(--halo-rose); } .h-gold { box-shadow: var(--halo-gold); }
-  figure:hover .h-orange, .awardcard:hover .h-orange { box-shadow: var(--halo-orange-hover); }
-  figure:hover .h-rose { box-shadow: var(--halo-rose-hover); }
-  figure:hover .h-gold { box-shadow: var(--halo-gold-hover); }
-  figure:hover .shot img, .awardcard:hover .shot img { transform: scale(1.025); }
+  figure:hover a.h-orange, .awardcard:hover .h-orange { box-shadow: var(--halo-orange-hover); }
+  figure:hover a.h-rose { box-shadow: var(--halo-rose-hover); }
+  figure:hover a.h-gold { box-shadow: var(--halo-gold-hover); }
+  figure:hover a.shot img, .awardcard:hover .shot img { transform: scale(1.025); }
   .strip figcaption { max-width: none; margin: 14px 0 0; display: flex; justify-content: space-between; gap: 12px; }
   .strip figcaption span:first-child { color: var(--ink); }
   .p1 .shot { aspect-ratio: 3 / 2; }
@@ -288,6 +289,8 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
   .date .place { font-family: var(--serif); font-variation-settings: var(--soft); font-weight: 600; font-size: 34px; line-height: 1; transition: color .25s; overflow-wrap: anywhere; }
   .date:hover .place { color: var(--orange); }
   .date .stops { color: var(--muted); }
+  /* Thumbnails show only when every listed trip has one; a ragged column reads as a loading failure. */
+  .tour.no-thumbs .date { grid-template-columns: 100px minmax(0, 1fr) minmax(0, 2fr); }
   .date .thumb { width: 132px; height: 84px; border-radius: 6px; overflow: hidden; box-shadow: var(--halo-rose); transition: transform .3s, box-shadow .5s; }
   .date:hover .thumb { transform: translateY(-3px) rotate(-1.5deg); box-shadow: var(--halo-rose-hover); }
   .date .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
@@ -329,6 +332,7 @@ const DESCRIPTION = 'Zoe Wacker: photographer, cellist, map nerd in Menlo Park, 
     .date { grid-template-columns: 70px minmax(0, 1fr) 84px; gap: 4px 16px; }
     .date .stops { grid-column: 2; }
     .date .thumb { width: 84px; height: 56px; grid-column: 3; grid-row: 1 / 3; align-self: center; }
+    .tour.no-thumbs .date { grid-template-columns: 70px minmax(0, 1fr); }
   }
   @media (max-width: 699px) { .home h2 { font-size: clamp(28px, 8.4vw, 58px); } }
   @media (max-width: 560px) {

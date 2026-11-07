@@ -28,6 +28,7 @@ const { slim = false } = Astro.props;
 		const setOpen = (open) => {
 			header.classList.toggle('open', open);
 			toggle.setAttribute('aria-expanded', String(open));
+			toggle.textContent = open ? 'Close' : 'Menu';
 		};
 		toggle.addEventListener('click', () => setOpen(!header.classList.contains('open')));
 		document.addEventListener('keydown', (e) => {

@@ -69,8 +69,10 @@ test('about: script ZW monogram and no photo of Zoe, placed right after the stri
 
 test('homepage uses resized images only, with no undefined/null text', () => {
   const srcs = [...html.matchAll(/<img[^>]*src="([^"]*)"/g)].map((m) => m[1]);
-  const tripThumbs = after(travelTrips, 1, 5).filter((t) => t.image).length;
+  const shown = after(travelTrips, 1, 5);
+  const tripThumbs = shown.every((t) => t.image) ? shown.length : 0; // all or nothing
   assert.equal(srcs.length, 4 + 1 + tripThumbs);
+  if (!tripThumbs) assert.match(html, /class="tour no-thumbs"/);
   for (const s of srcs) assert.match(s, /^\/images\/display\//);
   assert.doesNotMatch(html, />\s*(undefined|null)\s*</);
 });
